@@ -39,11 +39,11 @@ function MainApp() {
           width: '56px',
           height: '56px',
           borderRadius: '16px',
-          background: 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)',
+          background: 'linear-gradient(135deg, #E8622C 0%, #F5A623 100%)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          boxShadow: '0 8px 24px rgba(99, 102, 241, 0.4)',
+          boxShadow: '0 8px 24px rgba(232, 98, 44, 0.4)',
           marginBottom: '1rem',
           animation: 'pulse 1.5s infinite'
         }}>
@@ -71,7 +71,7 @@ function MainApp() {
   const renderContent = () => {
     switch (currentTab) {
       case 'dashboard':
-        return <Dashboard />;
+        return <Dashboard {...sharedProps} />;
       case 'wizard':
         return (
           <CampaignWizard

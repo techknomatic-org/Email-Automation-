@@ -435,14 +435,14 @@ export default function Campaigns({ setCurrentTab, activeCampaignId, setActiveCa
           display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 9999, padding: '1rem'
         }}>
           <div style={{
-            backgroundColor: '#0f172a', border: '1.5px solid rgba(99, 102, 241, 0.4)',
+            backgroundColor: 'var(--bg-card)', border: '1px solid var(--border)',
             borderRadius: '12px', width: '100%', maxWidth: '580px', padding: '1.5rem',
-            boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5)'
+            boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05)'
           }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.2rem', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '0.75rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.2rem', borderBottom: '1px solid var(--border)', paddingBottom: '0.75rem' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <Edit3 size={18} style={{ color: '#818cf8' }} />
-                <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#fff', margin: 0 }}>
+                <Edit3 size={18} style={{ color: 'var(--accent)' }} />
+                <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--text-main)', margin: 0 }}>
                   Edit Campaign #{editingCampaign.id}
                 </h3>
               </div>
@@ -567,15 +567,15 @@ export default function Campaigns({ setCurrentTab, activeCampaignId, setActiveCa
           padding: '1.5rem'
         }}>
           <div style={{
-            backgroundColor: '#0f172a',
-            border: '1px solid rgba(99, 102, 241, 0.3)',
+            backgroundColor: 'var(--bg-card)',
+            border: '1px solid var(--border)',
             borderRadius: '16px',
             width: '100%',
             maxWidth: '900px',
             maxHeight: '90vh',
             overflowY: 'auto',
             padding: '2rem',
-            boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
+            boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.1)',
             position: 'relative'
           }}>
             <button

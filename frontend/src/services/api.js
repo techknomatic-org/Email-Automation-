@@ -175,6 +175,8 @@ export const getDealEvents       = async (dealId) =>
   (await api.get(`/pipeline/deals/${dealId}/events`)).data;
 export const getABMetrics        = async () => (await api.get('/pipeline/ab-metrics')).data;
 export const getPipelineAnalytics = async () => (await api.get('/pipeline/analytics')).data;
+export const getDashboardAnalytics = async (params = {}) =>
+  (await api.get('/pipeline/dashboard-analytics', { params })).data;
 export const getCampaignExecution = async (campaignId) =>
   (await api.get(`/pipeline/campaigns/${campaignId}/execution`)).data;
 export const getDealExecution    = async (dealId) =>

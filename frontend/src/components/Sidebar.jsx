@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import {
   LayoutDashboard, Target, Users, Mail, Settings, Send,
-  Database, BarChart3, Wand2, Play, Zap, Info, LogOut
+  Database, BarChart3, Wand2, Play, Zap, Info, LogOut,
+  ChevronLeft, ChevronRight, PanelLeftClose, PanelLeftOpen
 } from 'lucide-react';
 import { getSiteConfig } from '../services/api';
 import { useAuth } from '../context/AuthContext';
@@ -23,6 +24,14 @@ const MENU_ITEMS = [
 export default function Sidebar({ currentTab, setCurrentTab }) {
   const [systemMode, setSystemMode] = useState('REAL');
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(() => {
+    try {
+      return localStorage.getItem('sidebar_collapsed') === 'true';
+    } catch {
+      return false;
+    }
+  });
+
   const { user, logout } = useAuth();
 
   useEffect(() => {
@@ -32,6 +41,16 @@ export default function Sidebar({ currentTab, setCurrentTab }) {
   }, []);
 
   const isReal = systemMode === 'REAL';
+
+  const toggleCollapse = () => {
+    setIsCollapsed(prev => {
+      const next = !prev;
+      try {
+        localStorage.setItem('sidebar_collapsed', String(next));
+      } catch {}
+      return next;
+    });
+  };
 
   const getUserInitials = () => {
     if (!user?.full_name) return 'U';
@@ -46,28 +65,67 @@ export default function Sidebar({ currentTab, setCurrentTab }) {
   };
 
   return (
-    <div className="sidebar" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-      {/* ── Logo ─────────────────────────────────────────────── */}
+    <div
+      className={`sidebar ${isCollapsed ? 'collapsed' : ''}`}
+      style={{ display: 'flex', flexDirection: 'column', height: '100%' }}
+    >
+      {/* ── Logo & Minimize Toggle ─────────────────────────────── */}
       <div className="sidebar-logo">
         <div className="sidebar-logo-title">
-          <div className="sidebar-logo-icon">
-            <Zap size={16} />
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', minWidth: 0 }}>
+            <div
+              className="sidebar-logo-icon"
+              onClick={isCollapsed ? toggleCollapse : undefined}
+              style={{ cursor: isCollapsed ? 'pointer' : 'default' }}
+              title={isCollapsed ? "Click to expand sidebar" : undefined}
+            >
+              <Zap size={16} />
+            </div>
+            {!isCollapsed && (
+              <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                OpenOutreach
+              </span>
+            )}
           </div>
-          <span>OpenOutreach</span>
+
+          {/* Minimize / Expand Toggle Button at Header */}
+          <button
+            type="button"
+            className="sidebar-toggle-btn"
+            onClick={toggleCollapse}
+            aria-label={isCollapsed ? "Expand Sidebar" : "Minimize Sidebar"}
+            title={isCollapsed ? "Expand Sidebar" : "Minimize Sidebar"}
+          >
+            {isCollapsed ? <ChevronRight size={15} /> : <ChevronLeft size={15} />}
+          </button>
         </div>
 
         {/* Mode badge */}
-        <div
-          className="sidebar-mode-badge"
-          style={{
-            backgroundColor: isReal ? 'rgba(16,185,129,0.12)' : 'rgba(245,158,11,0.12)',
-            color:           isReal ? '#34d399' : '#fbbf24',
-            border: `1px solid ${isReal ? 'rgba(16,185,129,0.3)' : 'rgba(245,158,11,0.3)'}`,
-          }}
-        >
-          <span style={{ fontSize: '0.55rem' }}>{isReal ? '🟢' : '🛠'}</span>
-          {isReal ? 'Live Mode' : 'Demo Mode'}
-        </div>
+        {!isCollapsed ? (
+          <div
+            className="sidebar-mode-badge"
+            style={{
+              backgroundColor: isReal ? 'rgba(16,185,129,0.12)' : 'rgba(245,158,11,0.12)',
+              color:           isReal ? '#059669' : '#d97706',
+              border: `1px solid ${isReal ? 'rgba(16,185,129,0.25)' : 'rgba(245,158,11,0.25)'}`,
+            }}
+          >
+            <span style={{ fontSize: '0.55rem' }}>{isReal ? '🟢' : '🛠'}</span>
+            {isReal ? 'Live Mode' : 'Demo Mode'}
+          </div>
+        ) : (
+          <div
+            title={isReal ? "Live Mode" : "Demo Mode"}
+            style={{
+              width: 8,
+              height: 8,
+              borderRadius: '50%',
+              backgroundColor: isReal ? '#10b981' : '#f5a623',
+              boxShadow: `0 0 6px ${isReal ? '#10b981' : '#f5a623'}`,
+              margin: '2px auto 0 auto'
+            }}
+          />
+        )}
       </div>
 
       {/* ── Navigation ───────────────────────────────────────── */}
@@ -83,9 +141,10 @@ export default function Sidebar({ currentTab, setCurrentTab }) {
             onKeyDown={e => e.key === 'Enter' && setCurrentTab(id)}
             aria-label={label}
             aria-current={currentTab === id ? 'page' : undefined}
+            title={isCollapsed ? label : undefined}
           >
             <Icon size={17} />
-            <span>{label}</span>
+            {!isCollapsed && <span>{label}</span>}
           </div>
         ))}
       </nav>
@@ -93,22 +152,34 @@ export default function Sidebar({ currentTab, setCurrentTab }) {
       {/* ── User Profile & Logout Card ────────────────────────── */}
       {user && (
         <div style={{
-          padding: '0.75rem',
-          margin: '0.5rem 0.75rem',
-          backgroundColor: 'rgba(30, 41, 59, 0.7)',
-          border: '1px solid rgba(255, 255, 255, 0.08)',
+          padding: isCollapsed ? '0.5rem 0.25rem' : '0.75rem',
+          margin: isCollapsed ? '0.5rem 0' : '0.5rem 0.75rem',
+          backgroundColor: 'var(--bg-main)',
+          border: '1px solid var(--border)',
           borderRadius: '10px',
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'space-between',
+          justifyContent: isCollapsed ? 'center' : 'space-between',
           gap: '8px'
         }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', minWidth: 0, flex: 1 }}>
+          <div
+            onClick={isCollapsed ? () => setShowLogoutConfirm(true) : undefined}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: isCollapsed ? 'center' : 'flex-start',
+              gap: '8px',
+              minWidth: 0,
+              flex: 1,
+              cursor: isCollapsed ? 'pointer' : 'default'
+            }}
+            title={isCollapsed ? `${user.full_name || user.email} (Click to sign out)` : undefined}
+          >
             <div style={{
               width: '32px',
               height: '32px',
               borderRadius: '50%',
-              background: 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)',
+              background: 'linear-gradient(135deg, #E8622C 0%, #F5A623 100%)',
               color: '#ffffff',
               display: 'flex',
               alignItems: 'center',
@@ -119,56 +190,84 @@ export default function Sidebar({ currentTab, setCurrentTab }) {
             }}>
               {getUserInitials()}
             </div>
-            <div style={{ minWidth: 0, flex: 1 }}>
-              <div style={{
-                fontSize: '0.82rem',
-                fontWeight: 600,
-                color: '#f1f5f9',
-                whiteSpace: 'nowrap',
-                overflow: 'hidden',
-                textOverflow: 'ellipsis'
-              }}>
-                {user.full_name || user.email?.split('@')[0]}
+            {!isCollapsed && (
+              <div style={{ minWidth: 0, flex: 1 }}>
+                <div style={{
+                  fontSize: '0.82rem',
+                  fontWeight: 600,
+                  color: 'var(--text-main)',
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis'
+                }}>
+                  {user.full_name || user.email?.split('@')[0]}
+                </div>
+                <div style={{
+                  fontSize: '0.7rem',
+                  color: 'var(--text-muted)',
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis'
+                }}>
+                  {user.role || 'Member'}
+                </div>
               </div>
-              <div style={{
-                fontSize: '0.7rem',
-                color: '#94a3b8',
-                whiteSpace: 'nowrap',
-                overflow: 'hidden',
-                textOverflow: 'ellipsis'
-              }}>
-                {user.role || 'Member'}
-              </div>
-            </div>
+            )}
           </div>
 
-          <button
-            type="button"
-            onClick={() => setShowLogoutConfirm(true)}
-            title="Log Out"
-            style={{
-              background: 'rgba(239, 68, 68, 0.12)',
-              border: '1px solid rgba(239, 68, 68, 0.25)',
-              color: '#f87171',
-              padding: '6px',
-              borderRadius: '6px',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              transition: 'background 0.2s ease',
-              flexShrink: 0
-            }}
-          >
-            <LogOut size={14} />
-          </button>
+          {!isCollapsed && (
+            <button
+              type="button"
+              onClick={() => setShowLogoutConfirm(true)}
+              title="Log Out"
+              style={{
+                background: 'rgba(239, 68, 68, 0.12)',
+                border: '1px solid rgba(239, 68, 68, 0.25)',
+                color: '#dc2626',
+                padding: '6px',
+                borderRadius: '6px',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                transition: 'background 0.2s ease',
+                flexShrink: 0
+              }}
+            >
+              <LogOut size={14} />
+            </button>
+          )}
         </div>
       )}
 
       {/* ── Footer ───────────────────────────────────────────── */}
       <div className="sidebar-footer">
-        <Info size={13} />
-        <span>v1.0 · FastAPI + React</span>
+        {!isCollapsed ? (
+          <>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+              <Info size={13} />
+              <span>v1.0 · OpenOutreach</span>
+            </div>
+            <button
+              type="button"
+              className="sidebar-toggle-btn"
+              onClick={toggleCollapse}
+              title="Minimize sidebar"
+              style={{ width: 22, height: 22 }}
+            >
+              <ChevronLeft size={13} />
+            </button>
+          </>
+        ) : (
+          <button
+            type="button"
+            className="sidebar-toggle-btn"
+            onClick={toggleCollapse}
+            title="Expand sidebar"
+          >
+            <ChevronRight size={14} />
+          </button>
+        )}
       </div>
 
       {/* ── Logout Confirmation Modal ────────────────────────── */}
@@ -189,19 +288,19 @@ export default function Sidebar({ currentTab, setCurrentTab }) {
           <div style={{
             width: '90%',
             maxWidth: '400px',
-            backgroundColor: '#0f172a',
-            border: '1px solid rgba(255, 255, 255, 0.12)',
+            backgroundColor: 'var(--bg-card)',
+            border: '1px solid var(--border)',
             borderRadius: '14px',
             padding: '1.5rem',
-            boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.5)',
+            boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05)',
             textAlign: 'center'
           }}>
             <div style={{
               width: '48px',
               height: '48px',
               borderRadius: '50%',
-              backgroundColor: 'rgba(239, 68, 68, 0.15)',
-              color: '#f87171',
+              backgroundColor: 'rgba(239, 68, 68, 0.12)',
+              color: '#dc2626',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -210,10 +309,10 @@ export default function Sidebar({ currentTab, setCurrentTab }) {
               <LogOut size={22} />
             </div>
 
-            <h3 style={{ margin: '0 0 0.5rem 0', color: '#f8fafc', fontSize: '1.15rem' }}>
+            <h3 style={{ margin: '0 0 0.5rem 0', color: 'var(--text-main)', fontSize: '1.15rem', fontWeight: 700 }}>
               Confirm Sign Out
             </h3>
-            <p style={{ color: '#94a3b8', fontSize: '0.85rem', lineHeight: 1.5, margin: '0 0 1.5rem 0' }}>
+            <p style={{ color: 'var(--text-sub)', fontSize: '0.85rem', lineHeight: 1.5, margin: '0 0 1.5rem 0' }}>
               Are you sure you want to log out of OpenOutreach? You will need to sign in again to access your campaigns.
             </p>
 
@@ -224,9 +323,9 @@ export default function Sidebar({ currentTab, setCurrentTab }) {
                 style={{
                   flex: 1,
                   padding: '9px 16px',
-                  backgroundColor: 'rgba(255, 255, 255, 0.08)',
-                  color: '#e2e8f0',
-                  border: '1px solid rgba(255, 255, 255, 0.12)',
+                  backgroundColor: 'var(--bg-main)',
+                  color: 'var(--text-main)',
+                  border: '1px solid var(--border)',
                   borderRadius: '8px',
                   fontWeight: 600,
                   fontSize: '0.85rem',

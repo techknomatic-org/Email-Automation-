@@ -35,10 +35,10 @@ export default function ConfirmModal({
         style={{
           width: '100%',
           maxWidth: '440px',
-          background: '#0f172a',
-          border: `1px solid ${isDanger ? 'rgba(239, 68, 68, 0.35)' : 'rgba(99, 102, 241, 0.35)'}`,
+          background: 'var(--bg-card)',
+          border: `1px solid var(--border)`,
           borderRadius: '16px',
-          boxShadow: `0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px ${isDanger ? 'rgba(239, 68, 68, 0.15)' : 'rgba(99, 102, 241, 0.15)'}`,
+          boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05)',
           padding: '1.75rem',
           position: 'relative',
           animation: 'slideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
@@ -72,26 +72,26 @@ export default function ConfirmModal({
               width: '44px',
               height: '44px',
               borderRadius: '12px',
-              background: isDanger ? 'rgba(239, 68, 68, 0.15)' : 'rgba(99, 102, 241, 0.15)',
-              border: `1px solid ${isDanger ? 'rgba(239, 68, 68, 0.3)' : 'rgba(99, 102, 241, 0.3)'}`,
+              background: isDanger ? 'rgba(239, 68, 68, 0.12)' : 'rgba(232, 98, 44, 0.12)',
+              border: `1px solid ${isDanger ? 'rgba(239, 68, 68, 0.25)' : 'rgba(232, 98, 44, 0.25)'}`,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               flexShrink: 0,
             }}
           >
-            {isDanger ? <Trash2 size={22} color="#ef4444" /> : <AlertTriangle size={22} color="#818cf8" />}
+            {isDanger ? <Trash2 size={22} color="#ef4444" /> : <AlertTriangle size={22} color="#E8622C" />}
           </div>
 
           <div>
-            <h3 style={{ margin: 0, fontSize: '1.15rem', fontWeight: 700, color: '#f8fafc', letterSpacing: '-0.01em' }}>
+            <h3 style={{ margin: 0, fontSize: '1.15rem', fontWeight: 700, color: 'var(--text-main)', letterSpacing: '-0.01em' }}>
               {title}
             </h3>
           </div>
         </div>
 
         {/* Message body */}
-        <p style={{ margin: '0 0 1.5rem 0', color: '#94a3b8', fontSize: '0.88rem', lineHeight: 1.55 }}>
+        <p style={{ margin: '0 0 1.5rem 0', color: 'var(--text-sub)', fontSize: '0.88rem', lineHeight: 1.55 }}>
           {message}
         </p>
 

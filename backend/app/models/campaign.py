@@ -15,6 +15,7 @@ class Campaign(Base):
     booking_link = Column(String(500), default="")
     is_freemium = Column(Boolean, default=False)
     country_code = Column(String(2), default="")
+    industry = Column(String(500), default="", nullable=True)  # Optional industry field for campaign targeting
     headcount_min = Column(Integer, default=1)
     headcount_max = Column(Integer, default=10000)
     anchor_profiles = Column(JSON, default=list)

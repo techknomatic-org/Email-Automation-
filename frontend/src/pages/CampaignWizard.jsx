@@ -48,6 +48,7 @@ export default function CampaignWizard({ onComplete }) {
 
   const [name, setName] = useState('');
   const [objective, setObjective] = useState('');
+  const [industryField, setIndustryField] = useState('');  // Optional campaign-level industry field
   const [seniorities, setSeniorities] = useState([]);
   const [departments, setDepartments] = useState([]);
   const [industries, setIndustries] = useState([]);
@@ -250,16 +251,26 @@ export default function CampaignWizard({ onComplete }) {
         targetDesc += ` (Keywords: ${keywords.join(', ')})`;
       }
 
+      // Merge industryField into industries list for campaign_targeting
+      const mergedIndustries = [...industries];
+      if (industryField.trim()) {
+        const fieldInds = industryField.split(',').map(v => v.trim()).filter(Boolean);
+        fieldInds.forEach(fi => {
+          if (!mergedIndustries.includes(fi)) mergedIndustries.push(fi);
+        });
+      }
+
       const campaignPayload = {
         name: campaignName,
         product_docs: productDocs,
         campaign_target: targetDesc,
         booking_link: '',
+        industry: industryField.trim(),  // Dedicated campaign-level industry field
         campaign_targeting: {
           job_titles: seniorities,
           seniority_levels: seniorities,
           departments: departments,
-          industries: industries,
+          industries: mergedIndustries,
           keywords: keywords,
           csv_filename: attachedCsv ? attachedCsv.filename : null
         }
@@ -407,6 +418,42 @@ export default function CampaignWizard({ onComplete }) {
                 />
                 <div style={{ display: 'flex', justifyContent: 'flex-end', fontSize: '0.72rem', color: 'var(--text-muted)', marginTop: '0.3rem' }}>
                   {targetPrompt.length} / 500 chars
+                </div>
+              </div>
+            </div>
+
+            {/* SECTION 02B: INDUSTRY (OPTIONAL) */}
+            <div style={{ marginBottom: '1.75rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.5rem' }}>
+                <span style={{ fontSize: '0.75rem', fontWeight: 800, padding: '2px 8px', borderRadius: '4px', background: 'rgba(168,85,247,0.2)', color: '#c084fc', letterSpacing: '0.5px' }}>02B</span>
+                <h3 style={{ fontSize: '0.92rem', fontWeight: 700, margin: 0, color: '#e0e7ff', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                  INDUSTRY
+                </h3>
+                <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontStyle: 'italic' }}>(Optional)</span>
+              </div>
+              <label style={{ fontSize: '0.82rem', fontWeight: 600, color: 'var(--text-muted)', display: 'block', marginBottom: '0.4rem' }}>
+                Target Industry for this campaign
+              </label>
+              <div>
+                <input
+                  type="text"
+                  className="form-control"
+                  value={industryField}
+                  onChange={(e) => setIndustryField(e.target.value)}
+                  placeholder="e.g. Healthcare, BFSI, SaaS, Manufacturing..."
+                  style={{
+                    width: '100%',
+                    backgroundColor: 'rgba(15, 23, 42, 0.6)',
+                    border: '1px solid rgba(255, 255, 255, 0.12)',
+                    borderRadius: '8px',
+                    padding: '0.75rem 1rem',
+                    color: '#f8fafc',
+                    fontSize: '0.88rem',
+                    lineHeight: '1.5'
+                  }}
+                />
+                <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', marginTop: '0.3rem' }}>
+                  💡 If specified, profiles will be filtered by this industry along with department during lead discovery.
                 </div>
               </div>
             </div>
@@ -1078,6 +1125,7 @@ export default function CampaignWizard({ onComplete }) {
               <h4 style={{ color: '#34d399', marginBottom: '0.75rem' }}>✓ Campaign Approved for Launch</h4>
               <div style={{ fontSize: '0.85rem', lineHeight: '1.8' }}>
                 <div><strong>Campaign Name:</strong> {name}</div>
+                {industryField.trim() && <div><strong>Campaign Industry:</strong> {industryField}</div>}
                 <div><strong>Target Industries:</strong> {industries.join(', ') || 'Any Industry'}</div>
                 <div><strong>Target Departments:</strong> {departments.join(', ') || 'Any Department'}</div>
                 <div><strong>Target Personas / Seniorities:</strong> {seniorities.join(', ') || 'Default'}</div>

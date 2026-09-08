@@ -9,6 +9,7 @@ class CampaignBase(BaseModel):
     booking_link: Optional[str] = ""
     is_freemium: Optional[bool] = False
     country_code: Optional[str] = ""
+    industry: Optional[str] = ""
     headcount_min: Optional[int] = 1
     headcount_max: Optional[int] = 10000
     sequence_interval_minutes: Optional[int] = 10
@@ -26,6 +27,7 @@ class CampaignUpdate(BaseModel):
     booking_link: Optional[str] = None
     is_freemium: Optional[bool] = None
     country_code: Optional[str] = None
+    industry: Optional[str] = None
     sequence_interval_minutes: Optional[int] = None
     sequence_interval_seconds: Optional[int] = None
     sequence_interval_unit: Optional[str] = None

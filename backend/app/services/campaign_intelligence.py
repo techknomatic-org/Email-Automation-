@@ -241,6 +241,11 @@ class CampaignIntelligenceService:
             extracted_depts = [parsed["interpreted_department"]]
 
         extracted_industries = parsed.get("inferred_industries", [])
+        # Merge explicit industry field from campaign (comma-separated or single value)
+        if getattr(campaign, "industry", None) and campaign.industry.strip():
+            for ind_val in [v.strip() for v in campaign.industry.split(",") if v.strip()]:
+                if ind_val not in extracted_industries:
+                    extracted_industries.append(ind_val)
         extracted_seniorities = parsed.get("inferred_seniorities", [])
         extracted_roles = parsed.get("inferred_roles", [])
         extracted_countries = parsed.get("inferred_locations", [])

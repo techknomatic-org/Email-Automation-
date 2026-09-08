@@ -1,16 +1,16 @@
 # Graph Report - OpenOutreach-main  (2026-09-08)
 
 ## Corpus Check
-- 324 files · ~563,980 words
+- 324 files · ~570,973 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 3381 nodes · 7292 edges · 254 communities (160 shown, 57 thin omitted)
-- Extraction: 93% EXTRACTED · 7% INFERRED · 0% AMBIGUOUS · INFERRED: 533 edges (avg confidence: 0.92)
+- 3385 nodes · 7303 edges · 244 communities (148 shown, 59 thin omitted)
+- Extraction: 93% EXTRACTED · 7% INFERRED · 0% AMBIGUOUS · INFERRED: 541 edges (avg confidence: 0.92)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `a161b5ea`
+- Built from commit: `18674378`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -19,7 +19,7 @@
 - logging.py
 - promote_to_ready
 - database.py
-- Campaign
+- campaigns.py
 - test_warmth.py
 - Deal
 - ._box
@@ -27,31 +27,31 @@
 - classify
 - FakeIMAP
 - emails/models/mailbox.py
-- lead_discovery_service.py
-- parsing.py
+- Campaign
+- sync.py
 - _box
 - _campaign
-- test_discovery.py
+- icp.py
 - onboarding.py
 - Campaign
-- parse_csv_metadata
+- reply.py
 - ndarray
 - discover
-- unanswered_replies
+- OutreachDecision
 - test_lookup.py
 - Lead
 - auth.py
 - LeadFactory
 - BayesianQualifier
-- test_version.py
-- test_unsubscribe.py
+- version.py
+- sender.py
 - reconcile_history
 - api.js
 - test_email_attachments.py
 - test_classify.py
 - package.json
-- version.py
-- TestAliasOptOut
+- business_days_between
+- test_unsubscribe.py
 - App.jsx
 - cycle.py
 - llm.py
@@ -59,74 +59,74 @@
 - ensure_anchors
 - Deals.jsx
 - _replied_deal
-- test_qualifier.py
+- TestDescribeFilters
 - _in_rome
-- .parse_natural_prompt
+- ._sent_body
 - Lead
 - CampaignWizard.jsx
 - Leads.jsx
 - test_summaries.py
-- DealFactory
+- suppress_email
 - rundaemon.py
-- WebSearchLeadProvider
+- outreach.py
 - summaries.py
-- .search
+- _zone_for_country
 - bettercontact.py
 - test_bettercontact.py
-- test_mail_pass.py
+- _emailed
 - factories.py
-- outreach.py
-- run_qualification
+- DealFactory
+- qualifier.py
 - OpenOutreach AI — Master User Guide & Platform Handbook
-- sync.py
+- _ensure_frontier
 - check_lookup
 - api/deals.py
-- ai_copilot.py
+- _local_midnight
 - classify.py
 - LeadProvider
 - TERMS AND CONDITIONS
 - conf.py
 - top_up.py
-- QueryNode
+- select.py
 - test_geo.py
-- Keyword
-- CampaignRunner
+- QueryNode
+- TestSentBodyLogging
 - reconcile_facts
-- LabelStore
-- TestAnchors
+- sending_window.py
+- ErrorBoundary
 - Settings
 - ManualProfileModal.jsx
-- create_freemium_deal
+- _finalize_account
 - 🚀 OpenOutreach: Advanced Feature Proposal & Roadmap
-- Any
+- outbound
 - Demo:
 - KnowledgeBase.jsx
 - Command
-- Any
-- threads.py
+- _legal_notice_sections
+- generate_anchors
 - README.md
 - Architecture
 - verify_auth
 - _sent_message
 - Outreach Agent
 - RAGService
-- _read_head_sha
+- _set_key
 - extract_db_path
 - update_chat_summary
 - fetch_kit
-- reclaim_lookup
+- test_mailbox.py
 - Dashboard.jsx
-- .import_file
+- TestProfileTextFor
 - Implementation Plan: CSV Data Upload & AI Campaign Copilot Integration
 - LeadVerificationService
 - 0003_chatmessage_deal_fk.py
-- run_agent_sync
+- stored_anchors
 - test_mail_log_backfill.py
 - Build from Source (Docker Compose)
 - Privacy Notice — OpenOutreach Contacts Store
 - TestColdPhaseAcquisition
-- ._read_excel_data
-- OutreachDecision
+- embed_profile
+- test_send.py
 - 0003_siteconfig.py
 - 0011_collapse_prescreen_empties.py
 - ._retire_anchors
@@ -201,45 +201,35 @@
 - 0008_drop_connect_weekly_limit.py
 - 0010_move_engine_models_to_core.py
 - 0011_pivot_drop_channel_models.py
-- outreach_agent.py
+- .search
 - OpenOutreach AI — Growth & Demand Gen Manager Guide
 - LEGAL NOTICE – OpenOutreach
-- _AnchorProfiles
-- health.py
-- _register
 - configuration.md
 - 📡 REST API Endpoint Reference
 - OpenOutreach AI — Sales Operations & System Admin Guide
-- MockLeadProvider
 - Discovery / ICP Keywords
 - The Mail Log
 - CLAUDE.md
-- materialize_profile_summary_if_missing
-- app/models/__init__.py
+- api/knowledge.py
 - The Cycle
 - Testing
 - upload_attachment
 - Command
-- embed_profile
-- test_project.py
-- OnboardingCancelled
-- SequenceStep
+- discover.py
+- test_mail_pass.py
+- app/models/__init__.py
 - rules/graphify.md
 - workflows/graphify.md
-- db_session
-- OpenRouterService
-- Mailboxes.jsx
-- _isolated
-- qualifier.py
+- _rank_by_score
 - SiteConfig
 
 ## God Nodes (most connected - your core abstractions)
 1. `BayesianQualifier` - 88 edges
 2. `LeadFactory` - 71 edges
-3. `Lead` - 60 edges
-4. `Deal` - 58 edges
+3. `Lead` - 61 edges
+4. `Deal` - 59 edges
 5. `FakeIMAP` - 57 edges
-6. `Campaign` - 53 edges
+6. `Campaign` - 54 edges
 7. `message()` - 53 edges
 8. `SiteConfig` - 49 edges
 9. `DealFactory` - 37 edges
@@ -260,39 +250,39 @@
 ## Import Cycles
 - None detected.
 
-## Communities (254 total, 57 thin omitted)
+## Communities (244 total, 59 thin omitted)
 
 ### Community 0 - "mailboxes.py"
 Cohesion: 0.15
 Nodes (23): create_mailbox(), delete_mailbox(), disconnect_mailbox(), get_google_config(), gmail_oauth_callback(), gmail_oauth_login(), list_mailboxes(), OAuthConfigRequest (+15 more)
 
 ### Community 1 - "logging.py"
-Cohesion: 0.10
-Nodes (30): _deals_at_state(), get_qualified_profiles(), get_ready_to_find_email_profiles(), DealState, QUALIFIED deals awaiting the rank gate. The single find-email-pool chokepoint:…, Return profile dicts for all Deals at the given state in this campaign., Move the Deal to the corresponding state. Campaign-scoped: only finds Deals in…, set_profile_state() (+22 more)
+Cohesion: 0.09
+Nodes (34): _deals_at_state(), get_qualified_profiles(), get_ready_to_find_email_profiles(), DealState, QUALIFIED deals awaiting the rank gate. The single find-email-pool chokepoint:…, Return profile dicts for all Deals at the given state in this campaign., Move the Deal to the corresponding state. Campaign-scoped: only finds Deals in…, set_profile_state() (+26 more)
 
 ### Community 2 - "promote_to_ready"
-Cohesion: 0.12
-Nodes (13): Qualifier, Common interface for all qualifier implementations. ``rank_profiles`` returns…, promote_to_ready(), Promote QUALIFIED profiles at or above the GP confidence gate to…, Protocol, _fitted_kit_model(), _make_qualified(), django_db (+5 more)
+Cohesion: 0.11
+Nodes (15): Qualifier, Common interface for all qualifier implementations. ``rank_profiles`` returns…, find_ready_candidate(), promote_to_ready(), Promote QUALIFIED profiles at or above the GP confidence gate to…, Return the top-ranked READY_TO_FIND_EMAIL profile, or None., Protocol, _fitted_kit_model() (+7 more)
 
 ### Community 3 - "database.py"
-Cohesion: 0.09
-Nodes (31): get_site_config(), get, put, Session, update_site_config(), backfill_lead_fields(), create_db_engine(), get_db() (+23 more)
+Cohesion: 0.04
+Nodes (66): classify_reply(), CopilotPlanRequest, DatasetAccuracyRequest, generate_campaign_plan(), get_dataset_accuracy_endpoint(), get_lead_360(), BaseModel, get (+58 more)
 
-### Community 4 - "Campaign"
-Cohesion: 0.06
-Nodes (65): accept_all_campaign_leads(), accept_campaign_lead(), accept_campaign_leads_batch(), _calculate_total_seconds(), control_campaign(), create_campaign(), delete_campaign(), generate_lead_pool_endpoint() (+57 more)
+### Community 4 - "campaigns.py"
+Cohesion: 0.05
+Nodes (63): anyio, accept_campaign_leads_batch(), _calculate_total_seconds(), control_campaign(), delete_campaign(), generate_lead_pool_endpoint(), get_campaign(), get_campaign_leads() (+55 more)
 
 ### Community 5 - "test_warmth.py"
 Cohesion: 0.06
-Nodes (45): date, Re-measure every mailbox's warm capacity, once a day. Costs an IMAP round trip…, refresh_capacities_if_due(), capacity_from(), _count_by_day(), _header_date(), _is_bouncing(), _logout() (+37 more)
+Nodes (44): Re-measure every mailbox's warm capacity, once a day. Costs an IMAP round trip…, refresh_capacities_if_due(), capacity_from(), _count_by_day(), _header_date(), _is_bouncing(), _logout(), mark_measured() (+36 more)
 
 ### Community 6 - "Deal"
-Cohesion: 0.07
-Nodes (77): anyio, ai_assist_composer(), AiAssistComposerRequest, execute_deal_action(), ExecuteActionPayload, format_iso_utc(), get_ab_metrics(), get_campaign_execution() (+69 more)
+Cohesion: 0.08
+Nodes (62): generate_subject_options(), Generates 3-4 diverse, high-converting AI subject line options based on…, accept_all_campaign_leads(), accept_campaign_lead(), Accept a lead from the Lead Pool into the Deals & Pipeline section., Accept all discovered leads from Lead Pool into Deals & Pipeline., ai_assist_composer(), AiAssistComposerRequest (+54 more)
 
 ### Community 7 - "._box"
-Cohesion: 0.06
-Nodes (29): get_emailable_deals(), The email pool — Deals queued for their single Layer-1 email, oldest first.…, django_db, The 3-minute floor between two cold emails, per box., Out of hours nothing opens a conversation, however much headroom is left., The message text is logged for the operator's own campaigns, never freemium., Signature, opt-out and attribution are the same on every send — noise here., The default stays metadata-only, so a new call site cannot leak by omission. (+21 more)
+Cohesion: 0.09
+Nodes (21): get_emailable_deals(), The email pool — Deals queued for their single Layer-1 email, oldest first.…, django_db, The 3-minute floor between two cold emails, per box., Out of hours nothing opens a conversation, however much headroom is left., A deal queued for its Layer-1 email (READY_TO_EMAIL, address resolved)., One record, not two: the deal borrows the log's thread rather than keeping its…, Nobody is chased, so a sent deal carries no schedule at all. (+13 more)
 
 ### Community 8 - "QueryNodeAdmin"
 Cohesion: 0.15
@@ -300,7 +290,7 @@ Nodes (10): CampaignAdmin, KeywordAdmin, display, QueryNodeAdmin, Cold (still pa
 
 ### Community 9 - "classify"
 Cohesion: 0.05
-Nodes (48): classify(), _detail(), _enhanced_status(), _from_code(), Policy, policy_for(), Exception, _queue_id() (+40 more)
+Nodes (46): classify(), _detail(), _enhanced_status(), _from_code(), Policy, policy_for(), Exception, _queue_id() (+38 more)
 
 ### Community 10 - "FakeIMAP"
 Cohesion: 0.10
@@ -308,15 +298,15 @@ Nodes (23): FakeIMAP, message(), One inbox message, as ``(uid, raw bytes)``., An
 
 ### Community 11 - "emails/models/mailbox.py"
 Cohesion: 0.09
-Nodes (24): Mailbox, MailboxManager, Meta, One SMTP inbox, connected field-by-field at onboarding. A row exists only once…, Pool-level send pacing — the daily-cap accounting the task and planner share., Total sends left across the pool today (Σ per-box headroom). 0 when no boxes…, DeliveryEvent, Direction (+16 more)
+Nodes (25): DeliveryEventInline, What the world said about this send, in the order it said it., Mailbox, MailboxManager, Meta, One SMTP inbox, connected field-by-field at onboarding. A row exists only once…, Pool-level send pacing — the daily-cap accounting the task and planner share., Total sends left across the pool today (Σ per-box headroom). 0 when no boxes… (+17 more)
 
-### Community 12 - "lead_discovery_service.py"
-Cohesion: 0.10
-Nodes (21): CampaignIntelligenceService, Data-Driven AI Campaign Intelligence System. Dynamically converts natural…, Multi-Model OpenRouter API Call for Data-Driven Campaign Criteria Extraction., Derive data-driven campaign criteria directly from prompt text without…, Synchronous wrapper for campaign strategy derivation with cached targeting…, Extract non-stopword search tokens from campaign text., Construct multiple targeted web search queries from strategy parameters., CsvExcelImporter (+13 more)
+### Community 12 - "Campaign"
+Cohesion: 0.05
+Nodes (61): create_campaign(), get_lead_pool_status(), Get generation metrics for the specified campaign's lead pool., Campaign, CampaignIntelligenceService, CampaignSearchStrategy, Any, BaseModel (+53 more)
 
-### Community 13 - "parsing.py"
-Cohesion: 0.09
-Nodes (37): addressed_to(), body_text(), _decode(), _first_text_plain(), in_reply_to(), message_id_of(), normalize_id(), parse() (+29 more)
+### Community 13 - "sync.py"
+Cohesion: 0.07
+Nodes (48): IMAPClient, addressed_to(), body_text(), _decode(), _first_text_plain(), in_reply_to(), message_id_of(), normalize_id() (+40 more)
 
 ### Community 14 - "_box"
 Cohesion: 0.09
@@ -326,61 +316,61 @@ Nodes (22): _box(), _called(), _deal(), django_db, fixture, Mailbox, **The 2026-
 Cohesion: 0.14
 Nodes (14): The campaign's labelled leads, **plus the anchors as positives**. Qualified =…, _campaign(), _labelled(), _node(), parametrize, The cold phase's only positives — see ``LabelStore.load``., A lead with a verdict — the only evidence the walk reads., TestAnchorsAsPositives (+6 more)
 
-### Community 16 - "test_discovery.py"
-Cohesion: 0.07
-Nodes (18): ICPSpec, The ICP as ``(field, token)`` keywords — the vocabulary the walk opens with.…, The LLM's provider-agnostic ICP output — the walk's opening **vocabulary**. Not…, _seed_keywords(), The log rendering of a Lead Finder filter set. Pure (no colour) so the call…, min/max are two keys describing one thing; they read as one., Every family we search is ``lead_*`` (the only ``company_*`` keys are the two…, An all-unset proposal means 'the LLM is dry' — it must not read as a query. (+10 more)
+### Community 16 - "icp.py"
+Cohesion: 0.16
+Nodes (12): _AnchorProfiles, ICPSpec, BaseModel, The ICP as ``(field, token)`` keywords — the vocabulary the walk opens with.…, The LLM's invented ideal leads, each one line in ``profile_text_for``'s shape., The LLM's provider-agnostic ICP output — the walk's opening **vocabulary**. Not…, _seed_keywords(), The ICP becomes a *vocabulary*, not one precise query. (+4 more)
 
 ### Community 17 - "onboarding.py"
-Cohesion: 0.09
-Nodes (36): hyperlink(), Render `text` (default: the URL) as an OSC 8 clickable terminal link. On a non-…, _campaign_done(), _information_notice_markdown(), _legal_notice_sections(), _looks_like_country(), _looks_like_email(), _prompt_mailbox_fields() (+28 more)
+Cohesion: 0.08
+Nodes (38): hyperlink(), Render `text` (default: the URL) as an OSC 8 clickable terminal link. On a non-…, _account_done(), _campaign_done(), _information_notice_markdown(), _looks_like_country(), _looks_like_email(), _mailbox_done() (+30 more)
 
 ### Community 18 - "Campaign"
-Cohesion: 0.11
-Nodes (31): Campaign, _account_done(), missing_keys(), Ask every never-asked box for its sign-off, persisting each as it lands. Keyed…, Done only when an operator exists *with a non-blank email* — the operator's own…, Return the keys of steps that still need attention (empty ⇒ fully onboarded)., _run_signature(), _signature_done() (+23 more)
-
-### Community 19 - "parse_csv_metadata"
 Cohesion: 0.13
-Nodes (21): delete_csv_file(), ensure_csv_dir(), get_dataset_validation_stats(), import_existing_csv_file(), list_csv_files(), parse_csv_metadata(), preview_csv_file(), Any (+13 more)
+Nodes (27): Campaign, Ask every never-asked box for its sign-off, persisting each as it lands. Keyed…, _run_signature(), _signature_done(), _boom(), _box(), django_db, Every NULL box is asked and persisted, including pre-signature boxes. (+19 more)
+
+### Community 19 - "reply.py"
+Cohesion: 0.17
+Nodes (17): The seller's first name as the LLM knows it, with a username fallback., seller_name(), True when *lead* may not be emailed — re-read from the DB at send time. The…, suppressed(), answer_reply(), _fold_new_messages_into_summary(), DealState, Honour a worded unsubscribe: suppress the person account-wide, send nothing.… (+9 more)
 
 ### Community 20 - "ndarray"
 Cohesion: 0.07
-Nodes (25): _binary_entropy(), _explain_score(), _gpr_predict(), _prob_above_half(), ndarray, Transform through all steps except GPR, then predict with return_std. Used by…, Return the raw prediction score for a single embedding., The fitted sklearn Pipeline — serializable via joblib. (+17 more)
+Nodes (26): _binary_entropy(), _explain_score(), _gpr_predict(), KitQualifier, _prob_above_half(), ndarray, Transform through all steps except GPR, then predict with return_std. Used by…, Return the raw prediction score for a single embedding. (+18 more)
 
 ### Community 21 - "discover"
 Cohesion: 0.16
 Nodes (14): NamedTuple, discover(), Fire frontier nodes until one returns leads. Returns the count of new Leads.…, Page, One Lead Finder response: the rows, and the corpus count behind them.…, _campaign(), _labelled(), _node() (+6 more)
 
-### Community 22 - "unanswered_replies"
-Cohesion: 0.14
-Nodes (21): EMAILED deals whose newest inbound turn is newer than our newest outgoing one.…, unanswered_replies(), inbound(), outbound(), Message, One send, as ``sender.py`` writes it: classified, processed, in a thread., One received message, already classified — the state after a mail pass., _box() (+13 more)
+### Community 22 - "OutreachDecision"
+Cohesion: 0.13
+Nodes (21): model_validator, OutreachDecision, BaseModel, A first touch must be a sendable email with its own subject., Structured output from the outreach agent, at either end of the thread., _validate_opener(), EMAILED deals whose newest inbound turn is newer than our newest outgoing one.…, unanswered_replies() (+13 more)
 
 ### Community 23 - "test_lookup.py"
-Cohesion: 0.36
-Nodes (5): buy_address(), Resolve this deal's work email, cheapest source first. Returns the next state., No handle exists to poll, so the next cycle simply tries again., _ready_to_find(), TestBuyAddress
+Cohesion: 0.17
+Nodes (12): buy_address(), DealState, Send a FINDING_EMAIL deal that carries no job handle back to be bought.…, Resolve this deal's work email, cheapest source first. Returns the next state., reclaim_lookup(), django_db, No request_id means no job and no credit spent — the buy step owns it., There is nothing to poll, and polling an empty handle would spend a call to be… (+4 more)
 
 ### Community 24 - "Lead"
-Cohesion: 0.07
-Nodes (54): check_lead_duplicate_api(), create_lead(), delete_lead(), execute_duplicate_action_api(), get_lead(), list_leads(), delete, get (+46 more)
+Cohesion: 0.08
+Nodes (49): check_lead_duplicate_api(), create_lead(), delete_lead(), execute_duplicate_action_api(), get_lead(), list_leads(), delete, get (+41 more)
 
 ### Community 25 - "auth.py"
-Cohesion: 0.11
-Nodes (30): get_current_user(), google_callback(), google_login(), login_user(), logout_user(), delete, get, post (+22 more)
+Cohesion: 0.10
+Nodes (32): get_current_user(), google_callback(), google_login(), login_user(), logout_user(), delete, get, post (+24 more)
 
 ### Community 26 - "LeadFactory"
 Cohesion: 0.18
 Nodes (11): _config(), django_db, An operator inside the EEA/UK/CH does not give back (jurisdiction gate)., The client names its build; the hub decides what that name means., Including resolve, which never reaches a stored row., _resp(), TestBuildReporting, TestContribute (+3 more)
 
 ### Community 27 - "BayesianQualifier"
-Cohesion: 0.10
-Nodes (10): BayesianQualifier, Gaussian Process Regressor for active learning qualification. Uses an sklearn…, Return (n_negatives, n_positives) — anchors counted as positives. The anchors…, How many invented positives are still standing., How many real leads have qualified — the anchors' retirement clock., Whether a real lead has ever qualified. Not the phase test (that is…, Whether any invented positive is still standing — the engine's phase test.…, How many invented positives are still justified — one countdown, no ratios. The… (+2 more)
-
-### Community 28 - "test_version.py"
-Cohesion: 0.15
-Nodes (26): calver(), commit_sha(), The full 40-char commit sha of this checkout, or ``"unknown"``., ``YYYY.MM.DD`` of the commit's authored date, or ``"unknown"``., _checkout(), _git_says(), ``%at``, not ``%ct``: a rebase must not move the version., The image ships no ``git``, and the hub resolves the date from the sha anyway. (+18 more)
-
-### Community 29 - "test_unsubscribe.py"
 Cohesion: 0.06
-Nodes (51): get_active_user(), The Django ``User`` running the daemon (the onboarded operator)., _attribute(), _build_message(), _headers_of(), _list_unsubscribe(), _mint_message_id(), operator_bcc() (+43 more)
+Nodes (24): BayesianQualifier, Gaussian Process Regressor for active learning qualification. Uses an sklearn…, Return (n_negatives, n_positives) — anchors counted as positives. The anchors…, How many invented positives are still standing., How many real leads have qualified — the anchors' retirement clock., Whether a real lead has ever qualified. Not the phase test (that is…, Whether any invented positive is still standing — the engine's phase test.…, How many invented positives are still justified — one countdown, no ratios. The… (+16 more)
+
+### Community 28 - "version.py"
+Cohesion: 0.07
+Nodes (55): _build(), calver(), _commit_date(), commit_sha(), _git(), _git_dir(), is_dirty(), _packed_ref() (+47 more)
+
+### Community 29 - "sender.py"
+Cohesion: 0.10
+Nodes (26): get_active_user(), The Django ``User`` running the daemon (the onboarded operator)., _attribute(), _build_message(), _headers_of(), _list_unsubscribe(), _mint_message_id(), _opt_out() (+18 more)
 
 ### Community 30 - "reconcile_history"
 Cohesion: 0.13
@@ -396,39 +386,39 @@ Nodes (29): attach_default_banner(), attach_user_files(), EmailService, get_defa
 
 ### Community 33 - "test_classify.py"
 Cohesion: 0.17
-Nodes (14): classify_pending(), Classify every message no current-version verdict covers. Returns rows read.…, auto_reply(), A vacation responder: threads like a reply, and nobody wrote it., _box(), _kind_of(), _mirror(), django_db (+6 more)
+Nodes (12): auto_reply(), A vacation responder: threads like a reply, and nobody wrote it., _box(), _kind_of(), _mirror(), django_db, Repairing history, not only future mail: the row goes back to pending., Backfilled history: you cannot re-read what was never kept. (+4 more)
 
 ### Community 34 - "package.json"
 Cohesion: 0.07
 Nodes (26): axios, dependencies, axios, lucide-react, react, react-dom, devDependencies, @types/react (+18 more)
 
-### Community 35 - "version.py"
-Cohesion: 0.16
-Nodes (17): _build(), _commit_date(), _git(), is_dirty(), What build of OpenOutreach is this instance running. There are no releases —…, The commit's authored date as ``YYYY.MM.DD``. Parsed out of the commit object…, ``True`` if tracked files differ from HEAD, ``None`` if ``git`` can't say.…, Run a read-only ``git`` command in the repo; ``None`` on any failure. Failure… (+9 more)
+### Community 35 - "business_days_between"
+Cohesion: 0.20
+Nodes (9): date, business_days_between(), _business_days_in_range(), is_business_day(), datetime, True for Monday–Friday., Whole working days elapsed from ``start`` to ``end`` (weekends excluded).…, Number of Monday–Friday days in the half-open range ``[start, end)``. (+1 more)
 
-### Community 36 - "TestAliasOptOut"
-Cohesion: 0.23
-Nodes (9): _box(), Mailbox, Run one mail pass against *fake*; return the leads suppressed by it., A client's unsubscribe button mints a fresh message with no threading headers…, It is a fact about the box before it is a decision about a person., Re-reading a box must be free — the log is keyed on the Message-ID., A network fault is not evidence that there was no mail to read., _read() (+1 more)
+### Community 36 - "test_unsubscribe.py"
+Cohesion: 0.16
+Nodes (12): The plus-addressed alias a client-generated unsubscribe is sent to. Plus-…, unsubscribe_address(), _box(), Mailbox, Run one mail pass against *fake*; return the leads suppressed by it., A client's unsubscribe button mints a fresh message with no threading headers…, It is a fact about the box before it is a decision about a person., Re-reading a box must be free — the log is keyed on the Message-ID. (+4 more)
 
 ### Community 37 - "App.jsx"
-Cohesion: 0.12
-Nodes (19): App(), MainApp(), ErrorBoundary, MENU_ITEMS, Sidebar(), AuthContext, AuthProvider(), useAuth() (+11 more)
+Cohesion: 0.17
+Nodes (18): App(), MainApp(), MENU_ITEMS, Sidebar(), AuthContext, AuthProvider(), useAuth(), Analytics() (+10 more)
 
 ### Community 38 - "cycle.py"
-Cohesion: 0.09
-Nodes (36): _answer_replies(), _apply(), _buy_addresses(), _check_lookups(), _due(), _import_freemium_campaign(), _log_idle(), _pipeline_summary() (+28 more)
+Cohesion: 0.15
+Nodes (21): _answer_replies(), _apply(), _buy_addresses(), _check_lookups(), _due(), _log_idle(), _pipeline_summary(), _pool_signature() (+13 more)
 
 ### Community 39 - "llm.py"
-Cohesion: 0.09
-Nodes (18): build_llm_model(), get_llm_model(), _ping_model(), LLM model factory + sync boundary for pydantic-ai. Two public entry points: -…, Split a `provider:model` identifier into ``(provider, model)``. A bare model…, Build a pydantic-ai `Model` from explicit credentials. Shared by…, Return a configured pydantic-ai `Model` for the current `SiteConfig`., Send one trivial request to prove the credentials work (or raise). (+10 more)
+Cohesion: 0.07
+Nodes (23): Event, _AgentRunner, build_llm_model(), _get_runner(), _ping_model(), _T, LLM model factory + sync boundary for pydantic-ai. Two public entry points: -…, Split a `provider:model` identifier into ``(provider, model)``. A bare model… (+15 more)
 
 ### Community 40 - "patch"
-Cohesion: 0.14
-Nodes (25): _error(), integer(), multiline(), Ask for a line of text. Returns the stripped value, or ``None`` on cancel.…, Ask for a whole number, re-asking until valid. Returns ``int`` or ``None``., Multi-line text (Enter inserts a newline, Ctrl+D submits). Returns the stripped…, text(), patch (+17 more)
+Cohesion: 0.18
+Nodes (21): _error(), integer(), multiline(), Ask for a line of text. Returns the stripped value, or ``None`` on cancel.…, Ask for a whole number, re-asking until valid. Returns ``int`` or ``None``., Multi-line text (Enter inserts a newline, Ctrl+D submits). Returns the stripped…, text(), patch (+13 more)
 
 ### Community 41 - "ensure_anchors"
-Cohesion: 0.19
-Nodes (15): ensure_anchors(), generate_anchors(), LLM-invent ``count`` ideal-lead profiles. ``[]`` on an outage or empty ICP.…, The campaign's anchor embeddings as ``(N, dim)``, filled up to…, _campaign(), _llm_returns(), A second round must widen the ideal region, not restate it., Stub the whole LLM boundary — model resolution, Agent, and the run. (+7 more)
+Cohesion: 0.25
+Nodes (11): ensure_anchors(), The campaign's anchor embeddings as ``(N, dim)``, filled up to…, _campaign(), _llm_returns(), A second round must widen the ideal region, not restate it., Stub the whole LLM boundary — model resolution, Agent, and the run., Re-inventing them each boot would re-anchor the GP somewhere slightly else., A short first round is filled up to ``ANCHOR_COUNT`` on the next call. (+3 more)
 
 ### Community 42 - "Deals.jsx"
 Cohesion: 0.14
@@ -438,17 +428,17 @@ Nodes (18): Campaigns(), Deals(), FILE_TYPE_CONFIG, GmailStyleComposer(), PIPELI
 Cohesion: 0.18
 Nodes (9): _decision(), django_db, An EMAILED deal with an unanswered reply — what the reply step picks up., A worded unsubscribe threads normally, so the alias scan can never see it — the…, ``suppress_email`` is keyed on the address, the returned state on the deal. A…, The agent runs for seconds — the query that selected this deal is already out…, _replied_deal(), TestSendGuards (+1 more)
 
-### Community 44 - "test_qualifier.py"
-Cohesion: 0.13
-Nodes (7): _make_trained_qualifier(), Predictive entropy cannot exceed ln(2) ~ 0.693., Create a qualifier with both classes so the GPC can fit., TestBaldScores, TestBayesianQualifierPredict, TestExplainProfile, TestRankProfiles
+### Community 44 - "TestDescribeFilters"
+Cohesion: 0.14
+Nodes (6): The log rendering of a Lead Finder filter set. Pure (no colour) so the call…, min/max are two keys describing one thing; they read as one., Every family we search is ``lead_*`` (the only ``company_*`` keys are the two…, An all-unset proposal means 'the LLM is dry' — it must not read as a query., Filters are free-form dicts; a key we don't model must still be visible., TestDescribeFilters
 
 ### Community 45 - "_in_rome"
-Cohesion: 0.06
-Nodes (34): business_days_between(), _business_days_in_range(), is_business_day(), datetime, True for Monday–Friday., Whole working days elapsed from ``start`` to ``end`` (weekends excluded).…, Number of Monday–Friday days in the half-open range ``[start, end)``., operator_timezone() (+26 more)
+Cohesion: 0.25
+Nodes (8): _in_rome(), datetime, Ask the window as an operator sitting in Italy (UTC+1 on this date)., 21:30 UTC is 22:30 in Rome — shut — while 07:30 UTC is 08:30 — open. The whole…, 23:00 UTC Friday is already Saturday in Rome, and stays shut., TestTheWorkingDay, TestWeekends, _utc()
 
-### Community 46 - ".parse_natural_prompt"
-Cohesion: 0.18
-Nodes (9): CampaignCopilotAgent, CampaignPlan, Any, Dynamic parser that uses AI Semantic Prompt Interpretation for informal,…, Executes contextual AI editing actions on the draft email in composer: -…, AI Copilot for generating campaign strategy, target audience, and ICP rules.…, Any, Returns all keyword/phrase synonyms for a given industry string or list of… (+1 more)
+### Community 46 - "._sent_body"
+Cohesion: 0.23
+Nodes (4): A never-asked box (NULL) sends unsigned rather than crashing on None., Threaded replies go through the same assembly, so they carry it too., TestSendEmailAttribution, TestSendEmailSignature
 
 ### Community 47 - "Lead"
 Cohesion: 0.11
@@ -463,60 +453,60 @@ Cohesion: 0.16
 Nodes (17): DatasetValidationPanel(), Lead360Modal(), FitBar(), fitColor(), Leads(), _LEADS_CACHE, acceptAllLeads(), acceptBatchLeads() (+9 more)
 
 ### Community 50 - "test_summaries.py"
-Cohesion: 0.16
-Nodes (12): FunctionModel, _build_identity_binding(), extract_facts(), Return a prompt fragment binding [Me] to the seller's name. Closes the bug…, Extract a flat list of atomic facts from `text`. `seller_name` binds the [Me]…, TestModel, _capturing_function_model(), Tests for core/db/summaries.py — the mem0-style fact-list boundary. (+4 more)
+Cohesion: 0.15
+Nodes (11): FunctionModel, materialize_profile_summary_if_missing(), Build `deal.profile_summary` lazily on first follow-up touch. Extracts facts…, TestModel, _capturing_function_model(), Tests for core/db/summaries.py — the mem0-style fact-list boundary., TestModel that yields *output* as the structured output args., FunctionModel that records the messages it receives, then yields *output*. (+3 more)
 
-### Community 51 - "DealFactory"
-Cohesion: 0.13
-Nodes (15): _closed_states(), Honour an opt-out from *address*: suppress every lead at it, close their deals.…, States an unsubscribe leaves alone — the deal is already over. Overwriting one…, suppress_email(), TestLoadRecentMessages, deal_with_lead(), fixture, ``Lead.email`` has no unique constraint — one address, many rows. (+7 more)
+### Community 51 - "suppress_email"
+Cohesion: 0.16
+Nodes (10): _closed_states(), Honour an opt-out from *address*: suppress every lead at it, close their deals.…, States an unsubscribe leaves alone — the deal is already over. Overwriting one…, suppress_email(), ``Lead.email`` has no unique constraint — one address, many rows., A client echoes back whatever casing it was given., Reachability ended, not the offer — so the ML labeler keeps label=1., An opt-out weeks after a thread ended must not erase how it ended. (+2 more)
 
 ### Community 52 - "rundaemon.py"
-Cohesion: 0.13
-Nodes (13): LogRecord, ColoredFormatter, configure_logging(), print_banner(), Configure root logger with colored output and silence noisy libraries., Print the OpenOutreach startup banner in bold cyan., Compact colored formatter: ``[LVL] message``., Command (+5 more)
+Cohesion: 0.09
+Nodes (23): LogRecord, Run the cycle until the process is stopped or a halting error is raised., Endless round-robin over the operator's campaigns, re-read each lap. Re-reading…, Walk every mailbox's new mail — replies and opt-outs in one pass per box. A…, read_mail_if_due(), _rotate(), run_daemon(), ColoredFormatter (+15 more)
 
-### Community 53 - "WebSearchLeadProvider"
-Cohesion: 0.22
-Nodes (7): Any, Real AI-Driven Web Search Lead Discovery Provider. Integrates Live Public…, Execute web search query via Tavily / SerpAPI / HTTP retrieval., Execute real Web Search for public candidate profiles matching AI Search…, Check Web Search provider availability., OpenRouter / OpenAI LLM Real B2B Candidate Retrieval Grounding Engine.…, WebSearchLeadProvider
+### Community 53 - "outreach.py"
+Cohesion: 0.23
+Nodes (11): _business_days_since_last_outgoing(), _format_recent_messages(), _humanize_age(), _log_chat_facts(), datetime, Render the last few turns as a timestamped transcript., Render `when` as a coarse age relative to `now` (e.g. ``3d ago``)., Whole working days since the most recent outgoing message, or None if there are… (+3 more)
 
 ### Community 54 - "summaries.py"
-Cohesion: 0.15
-Nodes (18): _apply_memory_actions(), FactList, _MemoryAction, _parse_memory_response(), BaseModel, mem0-style fact-list summaries for Deal profile and chat history. Single LLM…, Run mem0's UPDATE prompt and return the parsed event list. Calls the LLM in raw…, Parse mem0's UPDATE prompt response, mirroring upstream's two-step fallback. (+10 more)
+Cohesion: 0.11
+Nodes (24): _apply_memory_actions(), _build_identity_binding(), extract_facts(), FactList, _MemoryAction, _parse_memory_response(), BaseModel, mem0-style fact-list summaries for Deal profile and chat history. Single LLM… (+16 more)
 
-### Community 55 - ".search"
-Cohesion: 0.21
-Nodes (10): HybridSearchEngine, Any, Lead, Session, 3-Stage PostgreSQL + pgvector Hybrid Lead Search & Discovery Engine. Stage A:…, Executes Fact and Dimension based Hybrid Lead Matching: Flow: Campaign Input ->…, Uses OpenRouter multi-model fallback chain to evaluate candidate lead rows…, Auto-seed PostgreSQL database from input CSV/Excel files if database is… (+2 more)
+### Community 55 - "_zone_for_country"
+Cohesion: 0.27
+Nodes (6): First zone ``pytz`` lists for an ISO 3166 alpha-2 code, or UTC if unknown. UTC…, _zone_for_country(), django_db, Onboarding stores the code lowercased; pytz keys it uppercase., TestResolvingTheZone, ZoneInfo
 
 ### Community 56 - "bettercontact.py"
-Cohesion: 0.16
-Nodes (22): One indented step under a block header: glyph · label · message. ``color``…, step_line(), BetterContactQuery, BetterContactResult, BetterContactUnavailable, _enrich_body(), _poll(), poll_once() (+14 more)
+Cohesion: 0.19
+Nodes (20): BetterContactQuery, BetterContactResult, BetterContactUnavailable, _enrich_body(), _poll(), poll_once(), Exception, Poll one in-flight lookup exactly once — no wait, no retry loop. ``running``… (+12 more)
 
 ### Community 57 - "test_bettercontact.py"
 Cohesion: 0.19
 Nodes (8): _fake_session(), _patch_session(), A requests.Session stand-in usable as a context manager., _response(), _terminal(), TestIsConfigured, TestPollOnce, TestSubmit
 
-### Community 58 - "test_mail_pass.py"
-Cohesion: 0.14
-Nodes (18): One full pass over every mailbox. Returns ``(mirrored, classified, projected)``., run_mail_pass(), project_pending(), Act on every classified message nothing has acted on yet. Returns rows handled., mirror(), Fetch this box's unmirrored mail into ``Message`` rows. Returns rows stored.…, _emailed(), _pass() (+10 more)
+### Community 58 - "_emailed"
+Cohesion: 0.19
+Nodes (11): _emailed(), _pass(), django_db, It arrives, it threads, and the agent is never handed it., An outage delays reading the mail, not interpreting it., A deal whose opener has gone out — the state a reply arrives into. Sent the day…, A client that fills only ``In-Reply-To`` points at the newest message, not the…, The operator's own mail stays theirs: it is not our conversation. (+3 more)
 
 ### Community 59 - "factories.py"
-Cohesion: 0.13
-Nodes (18): Command, BaseCommand, setup_crm(), campaign(), _ensure_crm_data(), _mock_embeddings(), _open_sending_window(), operator() (+10 more)
+Cohesion: 0.12
+Nodes (19): Command, BaseCommand, setup_crm(), campaign(), _ensure_crm_data(), _mock_embeddings(), _open_sending_window(), operator() (+11 more)
 
-### Community 60 - "outreach.py"
-Cohesion: 0.13
-Nodes (21): _business_days_since_last_outgoing(), _format_recent_messages(), _humanize_age(), datetime, Render the outreach prompt for whichever end of the thread we're at., Render the last few turns as a timestamped transcript., Render `when` as a coarse age relative to `now` (e.g. ``3d ago``)., Whole working days since the most recent outgoing message, or None if there are… (+13 more)
+### Community 60 - "DealFactory"
+Cohesion: 0.14
+Nodes (17): _load_recent_messages(), Render the outreach prompt for whichever end of the thread we're at., The thread's last `limit` **turns**, in chronological order. The recency window…, _render_system_prompt(), deal_with_summaries(), _msg(), fixture, Tests for the outreach agent's context builder + unified Jinja template. (+9 more)
 
-### Community 61 - "run_qualification"
-Cohesion: 0.21
-Nodes (10): Qualify one unlabelled profile via the LLM. Returns profile_url or None.…, run_qualification(), _axis(), _make_lead(), django_db, ndarray, The degraded path: anchoring failed, so the label set is still single-class and…, A 384-dim vector on a single axis — orthogonal, so distances are exact. (+2 more)
+### Community 61 - "qualifier.py"
+Cohesion: 0.11
+Nodes (21): Drive *coro* on the dedicated LLM runner thread + loop., run_agent_sync(), format_prediction(), BaseModel, QualificationDecision, qualify_with_llm(), Compact one-liner stats string for qualification logging., Structured LLM output for lead qualification. (+13 more)
 
 ### Community 62 - "OpenOutreach AI — Master User Guide & Platform Handbook"
 Cohesion: 0.09
 Nodes (22): 1. Backend Environment Setup (`.env`), 1. Sales Development Reps (SDRs & Account Executives), 2. Global Meeting & Calendar Link Setup, 2. Growth & Demand Generation Managers, 3. Mailbox Connections via Gmail App Passwords, 3. Sales Operations & System Administrators, 4. Developers & Technical Integrators, 📌 Architecture & Codebase Map (+14 more)
 
-### Community 63 - "sync.py"
-Cohesion: 0.16
-Nodes (13): IMAPClient, FolderCoverage, How much of one ``(mailbox, folder)`` we have actually read. A claim about *our…, _connect(), _folder_state(), _new_uids(), The UID to resume above. Three cases: - **Same epoch** — resume above what we…, Persist what we now know we have read. ``synced_at`` moves only on a walk that… (+5 more)
+### Community 63 - "_ensure_frontier"
+Cohesion: 0.22
+Nodes (9): Get-or-create the rows for ``(field, token)`` pairs, in order. Idempotent., _ensure_frontier(), Make sure the campaign has a vocabulary and something to fire. Returns the…, generate_seed(), LLM-generate the campaign's opening vocabulary and size band. The cold start,…, admitted_keywords(), Ensure the closed ``lead_seniority`` vocabulary exists. Returns rows added. The…, Every ``(field, token)`` a query node may be built from, sorted. (+1 more)
 
 ### Community 64 - "check_lookup"
 Cohesion: 0.21
@@ -526,17 +516,17 @@ Nodes (10): PollOutcome, Result of a single poll of an in-flight lookup. ``runni
 Cohesion: 0.21
 Nodes (15): create_deal(), delete_deal(), generate_deal_opener(), list_deals(), delete, get, post, put (+7 more)
 
-### Community 66 - "ai_copilot.py"
-Cohesion: 0.26
-Nodes (12): classify_reply(), CopilotPlanRequest, DatasetAccuracyRequest, generate_campaign_plan(), get_dataset_accuracy_endpoint(), get_lead_360(), BaseModel, get (+4 more)
+### Community 66 - "_local_midnight"
+Cohesion: 0.22
+Nodes (6): _local_midnight(), Start of today where the operator is — the horizon every per-day ledger counts…, True when a receiver verdict has stopped this box for the rest of today. The…, People this box has *first contacted* since local midnight — the cap ledger.…, Sends this box has left today before hitting its measured capacity. Zero once…, Not the server's UTC midnight, which for a US operator falls at 19:00 — inside…
 
 ### Community 67 - "classify.py"
-Cohesion: 0.23
-Nodes (13): classify(), _is_auto_reply(), is_bounce(), _is_opt_out(), _joins_a_thread_we_started(), _kind_of(), Message, The rules, in the order they must be asked. (+5 more)
+Cohesion: 0.12
+Nodes (24): classify(), _is_auto_reply(), is_bounce(), _is_opt_out(), _joins_a_thread_we_started(), _kind_of(), Message, The rules, in the order they must be asked. (+16 more)
 
 ### Community 68 - "LeadProvider"
-Cohesion: 0.27
-Nodes (9): ABC, ApolloLeadProvider, Real B2B Lead Provider for Apollo.io API. Executes dynamic prospect searches…, LeadProvider, Abstract Base Class for B2B Lead Providers., ExcelLeadProvider, B2B Lead Provider that loads prospect data directly from an uploaded Excel file…, get_lead_provider() (+1 more)
+Cohesion: 0.05
+Nodes (38): ABC, health_check(), health_db_check(), lead_provider_health(), get, Session, Check Lead Provider (Apollo / Mock) connection status., ApolloLeadProvider (+30 more)
 
 ### Community 69 - "TERMS AND CONDITIONS"
 Cohesion: 0.09
@@ -547,36 +537,32 @@ Cohesion: 0.21
 Nodes (9): no_embed_mock, embed_text(), embed_texts(), _get_model(), ndarray, Lazy-load fastembed model singleton., Embed a single text string → 384-dim numpy array., Embed multiple texts → (N, 384) numpy array. (+1 more)
 
 ### Community 71 - "top_up.py"
-Cohesion: 0.18
-Nodes (14): find_freemium_candidate(), _pick_best(), Return the top-ranked embedded lead eligible for the paid email lookup.…, Rank leads by qualifier and return the top-1 profile dict., fetch_qualification_candidates(), Embedded, un-dealt Leads awaiting qualification in this campaign, oldest first.…, _advance(), _claim_freemium_lead() (+6 more)
+Cohesion: 0.10
+Nodes (25): _create_deal(), create_disqualified_deal(), create_freemium_deal(), _existing_deal_or_lead(), atomic, Create a FAILED Deal with 'Disqualified' closing reason for an LLM-rejected…, Create a QUALIFIED Deal in the freemium campaign for a candidate lead., Shared Deal creation with common defaults. (+17 more)
 
-### Community 72 - "QueryNode"
-Cohesion: 0.07
-Nodes (44): QueryNode, One node in a campaign's discovery walk — a keyword set, and where it has been…, This node's keywords as sorted ``(field, token)`` pairs., This node as a Lead Finder filter dict — the only thing the provider sees., The query itself, not its row id — a node *is* its keyword set., State, _fetch(), _handle_empty() (+36 more)
+### Community 72 - "select.py"
+Cohesion: 0.08
+Nodes (32): advance(), _beta_params(), _dead_sets(), estimate(), expand(), frontier(), LabelStore, next_node() (+24 more)
 
 ### Community 73 - "test_geo.py"
 Cohesion: 0.22
 Nodes (11): is_eea_located(), is_gdpr_protected(), Check whether *country_code* falls under opt-in email marketing laws. Missing /…, Check whether *country_code* is in the EEA/UK/CH data-collection regime. Gates…, parametrize, test_case_insensitivity(), test_country_code_lookup(), test_eea_located_case_insensitivity() (+3 more)
 
-### Community 74 - "Keyword"
-Cohesion: 0.10
-Nodes (26): Keyword, Meta, One ``(field, token)`` pair — the unit a discovery query is built from. A…, Get-or-create the rows for ``(field, token)`` pairs, in order. Idempotent., _ensure_frontier(), Make sure the campaign has a vocabulary and something to fire. Returns the…, generate_seed(), LLM-generate the campaign's opening vocabulary and size band. The cold start,… (+18 more)
+### Community 74 - "QueryNode"
+Cohesion: 0.14
+Nodes (15): Keyword, Meta, QueryNode, One ``(field, token)`` pair — the unit a discovery query is built from. A…, One node in a campaign's discovery walk — a keyword set, and where it has been…, This node's keywords as sorted ``(field, token)`` pairs., This node as a Lead Finder filter dict — the only thing the provider sees., The query itself, not its row id — a node *is* its keyword set. (+7 more)
 
-### Community 75 - "CampaignRunner"
-Cohesion: 0.19
-Nodes (6): CampaignRunner, Any, Persistent Backend Campaign Automation Engine. Executes campaign-specific timer…, Main decision cycle: Scans active campaigns and processes due timers per…, Evaluates a single deal when its timer expires with concurrency & idempotency…, Deal
+### Community 75 - "TestSentBodyLogging"
+Cohesion: 0.31
+Nodes (4): The message text is logged for the operator's own campaigns, never freemium., Signature, opt-out and attribution are the same on every send — noise here., The default stays metadata-only, so a new call site cannot leak by omission., TestSentBodyLogging
 
 ### Community 76 - "reconcile_facts"
 Cohesion: 0.20
 Nodes (10): Reconcile `new_facts` against `existing` via mem0's UPDATE prompt. The seller…, reconcile_facts(), FunctionModel that returns a fixed text response on every call., reconcile_facts wraps mem0's UPDATE prompt — mock the LLM at the boundary., LLM returns DELETE for the stale fact + ADD for the new one — both applied., LLM hallucinates an id that doesn't exist — log + skip, don't crash., Provider that wraps JSON in ```json ... ``` should still parse via fallback., Reasoning model output with <think> blocks before the JSON parses cleanly. (+2 more)
 
-### Community 77 - "LabelStore"
-Cohesion: 0.17
-Nodes (6): LabelStore, How many labelled profiles were accepted — what expansion has to work from., The level a depth-1 node inherits — what an unfiltered query would qualify at.…, ``(a, b)`` — labelled profiles containing every one of a node's tokens. Field-…, Candidate keywords that appear alongside ``pairs`` in ≥1 *qualified* profile.…, Every labelled profile as a token set plus a verdict — the walk's whole…
-
-### Community 78 - "TestAnchors"
-Cohesion: 0.18
-Nodes (7): Synthetic positives that let a GP fit before any real lead has qualified. The…, The handover is gradual. Dropping every anchor at the first acceptance took the…, Only a positive ends the cold phase — rejections are what it is made of., Safe to call on every daemon boot — a campaign whose real positives have…, ``_balance`` caps the majority at 2x the minority. With 3 synthetic positives…, Boot order is warm_start then anchor, but neither may clobber the other., TestAnchors
+### Community 77 - "sending_window.py"
+Cohesion: 0.32
+Nodes (6): operator_timezone(), datetime, True when a first email may leave right now — Mon–Fri, 08:00–20:00 operator-…, The operator's timezone, from their onboarding country code; UTC if unset., within_sending_window(), The box that may send a first email right now, or None. The clock speaks first…
 
 ### Community 79 - "Settings"
 Cohesion: 0.17
@@ -586,17 +572,17 @@ Nodes (7): Return ordered fallback list of (api_key, model_id) tuples. Rotates b
 Cohesion: 0.23
 Nodes (9): ExistingProfileViewModal(), inputStyle, labelStyle, ManualProfileModal(), checkLeadDuplicate(), createLead(), executeLeadDuplicateAction(), getLead() (+1 more)
 
-### Community 81 - "create_freemium_deal"
-Cohesion: 0.18
-Nodes (13): _create_deal(), create_disqualified_deal(), create_freemium_deal(), _existing_deal_or_lead(), atomic, Create a FAILED Deal with 'Disqualified' closing reason for an LLM-rejected…, Create a QUALIFIED Deal in the freemium campaign for a candidate lead., Shared Deal creation with common defaults. (+5 more)
+### Community 81 - "_finalize_account"
+Cohesion: 0.29
+Nodes (6): _create_operator(), _finalize_account(), Persist country, create the operator ``User`` from their own email, subscribe…, Create the operator Django ``User`` from their email (the human's own inbox)., Subscribe *email* to the OpenOutreach newsletter via the Brevo form. Returns…, subscribe_to_newsletter()
 
 ### Community 82 - "🚀 OpenOutreach: Advanced Feature Proposal & Roadmap"
 Cohesion: 0.10
 Nodes (19): 📬 100% Primary Inbox Deliverability & Anti-Duplicate Sending (✅ COMPLETED), 1. Campaigns Page: Recommended New Features, 2. Project-Wide Advanced Features, 3. AI & Intelligence Enhancements, 4. Infrastructure & Technical Enhancements, 5. Implementation Priority Matrix, 🎯 A/B Testing & Dual Variant Engine (✅ COMPLETED), 🧠 Advanced RAG (Retrieval-Augmented Generation) Knowledge Base (+11 more)
 
-### Community 83 - "Any"
-Cohesion: 0.22
-Nodes (5): Any, Enrich contact via Apollo People Match., Search organizations via Apollo Organization Search., Verify connection and key validity with Apollo API., Execute Apollo People Search mapped dynamically from AI Campaign Search…
+### Community 83 - "outbound"
+Cohesion: 0.33
+Nodes (7): inbound(), outbound(), Message, One send, as ``sender.py`` writes it: classified, processed, in a thread., One received message, already classified — the state after a mail pass., One inbound reply and our answer, both inside an existing thread., _record_reply_exchange()
 
 ### Community 84 - "Demo:"
 Cohesion: 0.11
@@ -610,13 +596,13 @@ Nodes (10): ACCEPTED_EXTENSIONS, DropZone(), FILE_TYPE_META, getExt(), Knowledge
 Cohesion: 0.27
 Nodes (4): Command, BaseCommand, Copy the SQLite file before a destructive reset. No-op on other backends., What the reset would remove, counted before anything is touched.
 
-### Community 87 - "Any"
-Cohesion: 0.22
-Nodes (5): Any, Enrich contact or organization information., Search organizations matching target criteria., Check provider API connection health and key validity., Search candidate people/prospects matching target criteria. Returns: Dict with…
+### Community 87 - "_legal_notice_sections"
+Cohesion: 0.33
+Nodes (6): _legal_notice_sections(), Return the given ``### <n>.`` sections of LEGAL_NOTICE.md as Markdown. Splits…, §4/§6 are lifted verbatim from the authoritative LEGAL_NOTICE.md, and…, A missing notice file degrades to the canonical link, never a crash., test_legal_notice_sections_are_read_verbatim(), test_legal_notice_sections_fall_back_to_url_when_missing()
 
-### Community 88 - "threads.py"
-Cohesion: 0.24
-Nodes (11): assign(), _merge(), atomic, Message, Put *message* in its thread, merging any threads it joins. Returns the thread.…, Messages in the same box that this one answers, or that answer it. Both…, The thread ids among *messages*, ignoring any not yet threaded., Move everything on thread *source_id* onto *target*, then drop the empty… (+3 more)
+### Community 88 - "generate_anchors"
+Cohesion: 0.40
+Nodes (4): generate_anchors(), LLM-invent ``count`` ideal-lead profiles. ``[]`` on an outage or empty ICP.…, Best-effort: an unanchored campaign still runs, just without a fitted GP., TestGenerateAnchors
 
 ### Community 89 - "README.md"
 Cohesion: 0.21
@@ -642,10 +628,6 @@ Nodes (5): Decision, Flow, Outreach Agent, Prompt, Summaries
 Cohesion: 0.31
 Nodes (5): Any, Session, RAGService, Retrieval-Augmented Generation Service backed by FastEmbed + PostgreSQL.…, Search using Python-side cosine similarity over JSON-stored embeddings. Falls…
 
-### Community 95 - "_read_head_sha"
-Cohesion: 0.33
-Nodes (9): _git_dir(), _packed_ref(), Path, HEAD's sha by reading ``.git`` directly — no ``git`` binary required. Handles…, Look ``ref`` up in ``packed-refs`` (where a fresh clone keeps its refs)., File contents, stripped — ``None`` if it isn't there or isn't readable., The real git directory for this checkout. Usually ``<repo>/.git``, but in a…, _read_head_sha() (+1 more)
-
 ### Community 96 - "extract_db_path"
 Cohesion: 0.27
 Nodes (3): extract_db_path(), Strip `--db PATH` / `--db=PATH` out of argv, returning (rest, path_or_None).…, TestExtractDbPath
@@ -655,20 +637,16 @@ Cohesion: 0.21
 Nodes (9): _format_messages_for_extraction(), Render conversation turns as a labeled transcript for fact extraction. Both…, Fold newly-read inbound turns into `deal.chat_summary` incrementally. Existing…, update_chat_summary(), A mail-log turn, as the reply step hands them over., Both sides are sent to extraction with [Me]/[Lead] tags for disambiguation., A one-sided seller-only burst must not pollute chat_summary with our pitch., A second sync routes through reconcile_facts → mem0 UPDATE prompt. (+1 more)
 
 ### Community 98 - "fetch_kit"
-Cohesion: 0.31
-Nodes (9): download_kit(), fetch_kit(), load_kit_config(), load_kit_model(), Path, Lazy-load and cache the kit. Returns {"config": ..., "model": ...} or None., Download campaign kit from HuggingFace Hub to a temp directory. Returns path or…, Parse config.json from kit directory. Returns dict or None. (+1 more)
+Cohesion: 0.14
+Nodes (17): _import_freemium_campaign(), Pull the published kit once at startup and mirror it into a local campaign.…, download_kit(), fetch_kit(), load_kit_config(), load_kit_model(), Path, Lazy-load and cache the kit. Returns {"config": ..., "model": ...} or None. (+9 more)
 
-### Community 99 - "reclaim_lookup"
-Cohesion: 0.25
-Nodes (7): DealState, Send a FINDING_EMAIL deal that carries no job handle back to be bought.…, reclaim_lookup(), django_db, No request_id means no job and no credit spent — the buy step owns it., There is nothing to poll, and polling an empty handle would spend a call to be…, TestReclaimLookup
+### Community 99 - "test_mailbox.py"
+Cohesion: 0.60
+Nodes (4): django_db, test_create_verified_repairs_existing_box_in_place(), test_create_verified_stores_box_when_auth_succeeds(), test_create_verified_stores_nothing_when_auth_rejected()
 
 ### Community 100 - "Dashboard.jsx"
-Cohesion: 0.36
-Nodes (7): Dashboard(), loadAll(), readCache(), writeCache(), checkDbHealth(), checkHealth(), rawApi()
-
-### Community 101 - ".import_file"
-Cohesion: 0.25
-Nodes (4): Any, Session, Import CSV or Excel file into PostgreSQL Lead database., Returns (normalized_title, normalized_seniority, normalized_department).
+Cohesion: 0.22
+Nodes (11): Dashboard(), loadDashboardData(), readCache(), writeCache(), Mailboxes(), checkDbHealth(), checkHealth(), createMailbox() (+3 more)
 
 ### Community 102 - "Implementation Plan: CSV Data Upload & AI Campaign Copilot Integration"
 Cohesion: 0.17
@@ -682,9 +660,9 @@ Nodes (5): LeadVerificationService, Any, Verify raw candidate profile fields aga
 Cohesion: 0.32
 Nodes (7): _clone_into(), delete_legacy_null_urns(), _is_live(), Migration, populate_deal(), Drop the retired send path's NULL-urn rows (stale duplicates of synced msgs)., Materialize a copy of `msg` under another live deal (shared thread). The…
 
-### Community 105 - "run_agent_sync"
-Cohesion: 0.15
-Nodes (11): Event, _AgentRunner, _get_runner(), _T, Owns one persistent asyncio loop on a dedicated daemon thread. Construct lazily…, Submit *coro* to the runner loop; block until it completes., Return the process-wide runner, creating it on first call., Drive *coro* on the dedicated LLM runner thread + loop. (+3 more)
+### Community 105 - "stored_anchors"
+Cohesion: 0.67
+Nodes (3): ndarray, The campaign's persisted anchor embeddings as ``(N, dim)``, or ``None``., stored_anchors()
 
 ### Community 106 - "test_mail_log_backfill.py"
 Cohesion: 0.36
@@ -702,13 +680,13 @@ Nodes (10): Contact, Geographic exclusion (who is _not_ in the store), How data 
 Cohesion: 0.38
 Nodes (3): While the only positives are invented, the axis is exploit — see…, A first acceptance does not end the phase — it retires one anchor. The axis…, TestColdPhaseAcquisition
 
-### Community 110 - "._read_excel_data"
-Cohesion: 0.29
-Nodes (3): Any, Extract contacts from the Excel file and format as Lead dictionaries., DataFrame
+### Community 110 - "embed_profile"
+Cohesion: 0.67
+Nodes (3): embed_profile(), ndarray, 384-dim vector for a lead — its firmographic text plus its retrieving query's…
 
-### Community 111 - "OutreachDecision"
-Cohesion: 0.14
-Nodes (16): model_validator, _load_recent_messages(), _log_chat_facts(), OutreachDecision, BaseModel, A first touch must be a sendable email with its own subject., The thread's last `limit` **turns**, in chronological order. The recency window…, Log the mem0 chat facts the agent is working with. (+8 more)
+### Community 111 - "test_send.py"
+Cohesion: 0.15
+Nodes (14): Decide the next move for ``deal`` — the cold open or the answer to a reply. The…, run_outreach_agent(), operator_bcc(), The address to blind-copy on this campaign's sends, or None for no copy. The…, DealState, Open the conversation with *deal* from *mailbox*. Returns the next state. The…, Set when this box may send its next first email. Fresh jitter every time: a…, send_first_email() (+6 more)
 
 ### Community 112 - "0003_siteconfig.py"
 Cohesion: 0.40
@@ -751,8 +729,8 @@ Cohesion: 0.50
 Nodes (3): erase_legacy_nodes(), Migration, Drop every node. Leads survive (SET_NULL); their labels live on Deal.
 
 ### Community 123 - "service.py"
-Cohesion: 0.21
-Nodes (15): _attach_embedding(), _auth(), _build_fields(), contribute(), _endpoint(), _headers(), Add the cached profile vector to *record*, in place, when it's in hand. The…, POST one record; log + swallow any transport failure. Returns the JSON body on… (+7 more)
+Cohesion: 0.11
+Nodes (24): _attach_embedding(), _auth(), _build_fields(), contribute(), _endpoint(), _headers(), Add the cached profile vector to *record*, in place, when it's in hand. The…, Mint + persist the operator token via the folded first contribution. Keyed to… (+16 more)
 
 ### Community 124 - "0002_rename_description_to_profile_data.py"
 Cohesion: 0.50
@@ -783,7 +761,7 @@ Cohesion: 0.50
 Nodes (3): sha256 of the canonicalized keyword set — the node-identity key. Order-…, token_key(), TestTokenKey
 
 ### Community 134 - "lookup.py"
-Cohesion: 0.29
+Cohesion: 0.28
 Nodes (7): block_header(), The bold ``▶`` header naming one task block; optional ``· meta`` suffix.…, _back_off(), _delay_for(), _human(), Push this deal's next poll out. ``advance`` doubles the interval. A genuine…, A backoff delay at a readable scale — these run from seconds to weeks.
 
 ### Community 138 - "._anchored"
@@ -791,12 +769,12 @@ Cohesion: 0.22
 Nodes (7): Retirement is one countdown: ``ANCHOR_COUNT - n_real_positives``, nothing else., The handover is one-for-one: ground truth displaces the guess a lead at a time,…, The live regression: the budget used to be ``n_neg - n_real_pos``, which is 0…, Rejections are not the clock. A campaign 8 rejections deep with one real…, The countdown is re-applied on every ``set_anchors``, so a stale stored set can…, _rejections(), TestAnchorLifecycle
 
 ### Community 145 - "operator.py"
-Cohesion: 0.32
-Nodes (7): Who is running this daemon. Self-hosted means one operator, so identity is a…, The operator's own identity, synthesized (not scraped). Name comes from the…, The seller's first name as the LLM knows it, with a username fallback., The seller's full name for the prompt's identity binding., self_profile(), seller_full_name(), seller_name()
+Cohesion: 0.25
+Nodes (9): base_context(), _format_facts(), The channel-agnostic prompt variables shared by every outreach entrypoint., Render a `{facts: [...]}` summary blob as a bullet list., Who is running this daemon. Self-hosted means one operator, so identity is a…, The operator's own identity, synthesized (not scraped). Name comes from the…, The seller's full name for the prompt's identity binding., self_profile() (+1 more)
 
-### Community 223 - "outreach_agent.py"
-Cohesion: 0.12
-Nodes (19): EmailDraft, _extract_first_name(), generate_subject_options(), LeadResearchResult, NextBestActionEngine, NextBestActionOutput, OutreachAgent, ProspectResearchAgent (+11 more)
+### Community 223 - ".search"
+Cohesion: 0.05
+Nodes (35): CampaignCopilotAgent, CampaignPlan, EmailDraft, _extract_first_name(), LeadResearchResult, NextBestActionEngine, NextBestActionOutput, OutreachAgent (+27 more)
 
 ### Community 224 - "OpenOutreach AI — Growth & Demand Gen Manager Guide"
 Cohesion: 0.22
@@ -805,18 +783,6 @@ Nodes (8): 1. Creating a New Campaign with Strict Keyword Conjunction, 2. Config
 ### Community 225 - "LEGAL NOTICE – OpenOutreach"
 Cohesion: 0.22
 Nodes (8): 1. No Platform Scraping or Automation, 2. Newsletter Subscription (Asked at Onboarding, Default Set by Jurisdiction), 3. No Warranty – Use at Your Own Risk, 4. How the Project Is Funded (Affiliate + Optional Freemium Promotion), 5. Email Enrichment and Cold Email Outreach, 6. Central Contacts Store (Contribution and Resolution), 7. Your Responsibility, LEGAL NOTICE – OpenOutreach
-
-### Community 226 - "_AnchorProfiles"
-Cohesion: 0.67
-Nodes (3): _AnchorProfiles, BaseModel, The LLM's invented ideal leads, each one line in ``profile_text_for``'s shape.
-
-### Community 227 - "health.py"
-Cohesion: 0.38
-Nodes (6): health_check(), health_db_check(), lead_provider_health(), get, Session, Check Lead Provider (Apollo / Mock) connection status.
-
-### Community 228 - "_register"
-Cohesion: 0.16
-Nodes (11): Mint + persist the operator token via the folded first contribution. Keyed to…, _register(), SiteConfigAdmin, DeliveryEventInline, FolderCoverageAdmin, MailboxAdmin, MessageAdmin, display (+3 more)
 
 ### Community 229 - "configuration.md"
 Cohesion: 0.18
@@ -830,10 +796,6 @@ Nodes (9): 1. User Authentication & Session Management, 2. Site Configuration & 
 Cohesion: 0.22
 Nodes (8): ⚙️ Backend Environment Setup (`.env`), 🧠 Knowledge Base (RAG) Management, ✉️ Mailbox Connections (Gmail App Passwords), 💾 Master Database & Dataset Ingestion Management, OpenOutreach AI — Sales Operations & System Admin Guide, 🎯 Role Overview, 🔒 Security & Data Hygiene Rules, 🔐 User Authentication & Account Administration
 
-### Community 232 - "MockLeadProvider"
-Cohesion: 0.43
-Nodes (3): MockLeadProvider, Any, Mock B2B Lead Provider used ONLY for local development when LEAD_PROVIDER=mock.…
-
 ### Community 233 - "Discovery / ICP Keywords"
 Cohesion: 0.29
 Nodes (6): 1. Job Titles & Roles, 2. Interests & Technologies, 3. Pain Points & Goals, Default Campaign — OpenOutreach ICP, Discovery / ICP Keywords, Ideal Customer Profile: The Indie Hacker
@@ -846,13 +808,9 @@ Nodes (6): An NDR is never a turn, Answering the delivery question, The Mail Log
 Cohesion: 0.33
 Nodes (4): Architecture (quick reference), Commands, Project Overview, Rules
 
-### Community 236 - "materialize_profile_summary_if_missing"
-Cohesion: 0.47
-Nodes (3): materialize_profile_summary_if_missing(), Build `deal.profile_summary` lazily on first follow-up touch. Extracts facts…, TestMaterializeProfileSummary
-
-### Community 237 - "app/models/__init__.py"
-Cohesion: 0.12
-Nodes (31): create_document(), delete_document(), DocumentCreate, list_documents(), BaseModel, delete, get, post (+23 more)
+### Community 237 - "api/knowledge.py"
+Cohesion: 0.19
+Nodes (16): create_document(), delete_document(), DocumentCreate, list_documents(), BaseModel, delete, get, post (+8 more)
 
 ### Community 238 - "The Cycle"
 Cohesion: 0.40
@@ -866,61 +824,45 @@ Nodes (4): Conventions, Layout, Running, Testing
 Cohesion: 0.22
 Nodes (9): get_attachment(), get, post, UploadFile, Sanitize original filename to prevent path traversal security issues., Upload an email attachment with format and size validation. Supported…, Retrieve/download an uploaded attachment file., sanitize_filename() (+1 more)
 
-### Community 242 - "embed_profile"
-Cohesion: 0.18
-Nodes (11): create_lead(), Persist one Lead Finder row as an embedded Lead awaiting qualification. Keyed…, _harvest(), Persist a fetched page as first-touch Leads, keyworded by the retrieving node.…, embed_profile(), profile_text_for(), ndarray, The row's queryable text, kept per field for the vocabulary. Only the fields… (+3 more)
+### Community 242 - "discover.py"
+Cohesion: 0.11
+Nodes (22): create_lead(), Persist one Lead Finder row as an embedded Lead awaiting qualification. Keyed…, One indented step under a block header: glyph · label · message. ``color``…, step_line(), _fetch(), _handle_empty(), _harvest(), Decide what an empty page means, and retire the node if it means anything.… (+14 more)
 
-### Community 243 - "test_project.py"
-Cohesion: 0.15
-Nodes (14): bounce_rate(), Bounces per accepted send over the trailing window; 0.0 with nothing sent.…, bounce(), A non-delivery report from the receiving side's daemon., _box(), _pass(), django_db, The delivery question that was previously answerable only over live IMAP. (+6 more)
-
-### Community 244 - "OnboardingCancelled"
-Cohesion: 0.50
-Nodes (3): OnboardingCancelled, Raised when the operator cancels (Ctrl+C) a step that isn't yet satisfied., SystemExit
-
-### Community 245 - "SequenceStep"
-Cohesion: 0.15
-Nodes (26): add_step_to_campaign(), delete_sequence_step(), get_campaign_sequence(), Any, BaseModel, delete, get, post (+18 more)
-
-### Community 248 - "db_session"
-Cohesion: 0.67
-Nodes (3): db_session(), fixture, Create an in-memory SQLite database session with proper schema for testing.
-
-### Community 250 - "Mailboxes.jsx"
-Cohesion: 0.83
-Nodes (3): Mailboxes(), createMailbox(), getMailboxes()
-
-### Community 251 - "_isolated"
-Cohesion: 0.67
-Nodes (3): _isolated(), fixture, Point the module at a scratch checkout and clear its per-process cache.
-
-### Community 254 - "qualifier.py"
+### Community 243 - "test_mail_pass.py"
 Cohesion: 0.12
-Nodes (17): format_prediction(), KitQualifier, _load_profile_embeddings(), BaseModel, QualificationDecision, qualifier_for(), _rank_by_score(), Load cached embeddings for a list of profile dicts. Returns list of (profile,… (+9 more)
+Nodes (23): classify_pending(), Classify every message no current-version verdict covers. Returns rows read.…, One full pass over every mailbox. Returns ``(mirrored, classified, projected)``., run_mail_pass(), project_pending(), Act on every classified message nothing has acted on yet. Returns rows handled., bounce_rate(), Bounces per accepted send over the trailing window; 0.0 with nothing sent.… (+15 more)
+
+### Community 245 - "app/models/__init__.py"
+Cohesion: 0.10
+Nodes (39): delete_sequence_step(), get_campaign_sequence(), Any, BaseModel, delete, get, post, put (+31 more)
+
+### Community 254 - "_rank_by_score"
+Cohesion: 0.25
+Nodes (6): _load_profile_embeddings(), _rank_by_score(), Load cached embeddings for a list of profile dicts. Returns list of (profile,…, Rank profiles by raw pipeline.predict() score (descending). Works with any…, Rank QUALIFIED profiles by raw GP mean (descending). Returns ``[]`` on cold…, Rank profiles by raw model score (descending), skipping missing embeddings.
 
 ### Community 255 - "SiteConfig"
-Cohesion: 0.11
-Nodes (21): Load `SiteConfig` and assert the required LLM fields are populated., _validated_site_config(), Singleton model for global site configuration (LLM keys, etc.)., SiteConfig, _bettercontact_done(), _create_operator(), _finalize_account(), _llm_done() (+13 more)
+Cohesion: 0.16
+Nodes (15): Load `SiteConfig` and assert the required LLM fields are populated., _validated_site_config(), Singleton model for global site configuration (LLM keys, etc.)., SiteConfig, _bettercontact_done(), _llm_done(), is_configured(), True when the BetterContact paid finder is configured (an API key is set). (+7 more)
 
 ## Knowledge Gaps
 - **280 isolated node(s):** `name`, `private`, `version`, `type`, `dev` (+275 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1361 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **57 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1363 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **59 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `Lead` connect `Lead` to `ai_copilot.py`, `database.py`, `Campaign`, `.import_file`, `Deal`, `lead_discovery_service.py`, `app/models/__init__.py`, `parse_csv_metadata`, `.search`?**
-  _High betweenness centrality (0.053) - this node is a cross-community bridge._
-- **Why does `BayesianQualifier` connect `BayesianQualifier` to `logging.py`, `promote_to_ready`, `top_up.py`, `ensure_anchors`, `._anchored`, `test_qualifier.py`, `TestColdPhaseAcquisition`, `TestAnchors`, `._retire_anchors`, `ndarray`, `run_qualification`, `qualifier.py`?**
-  _High betweenness centrality (0.045) - this node is a cross-community bridge._
-- **Why does `test_campaign_runner_executes_followup_when_timer_expires_no_reply()` connect `Deal` to `Campaign`, `patch`, `CampaignRunner`, `SequenceStep`, `Lead`?**
-  _High betweenness centrality (0.043) - this node is a cross-community bridge._
+- **Why does `Lead` connect `Lead` to `database.py`, `campaigns.py`, `Deal`, `Campaign`, `app/models/__init__.py`, `.search`?**
+  _High betweenness centrality (0.055) - this node is a cross-community bridge._
+- **Why does `BayesianQualifier` connect `BayesianQualifier` to `logging.py`, `promote_to_ready`, `top_up.py`, `ensure_anchors`, `._anchored`, `TestColdPhaseAcquisition`, `._retire_anchors`, `ndarray`, `qualifier.py`, `_rank_by_score`?**
+  _High betweenness centrality (0.048) - this node is a cross-community bridge._
+- **Why does `test_campaign_runner_executes_followup_when_timer_expires_no_reply()` connect `campaigns.py` to `Lead`, `patch`, `Campaign`, `Deal`?**
+  _High betweenness centrality (0.040) - this node is a cross-community bridge._
 - **Are the 114 inferred relationships involving `patch` (e.g. with `_mock_embeddings()` and `_open_sending_window()`) actually correct?**
   _`patch` has 114 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 17 inferred relationships involving `BayesianQualifier` (e.g. with `run_qualification()` and `_save_qualification_result()`) actually correct?**
   _`BayesianQualifier` has 17 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 13 inferred relationships involving `LeadFactory` (e.g. with `deal_with_summaries()` and `TestLoadRecentMessages`) actually correct?**
   _`LeadFactory` has 13 INFERRED edges - model-reasoned connections that need verification._
-- **Are the 30 inferred relationships involving `Lead` (e.g. with `get_lead_360()` and `get_lead_pool_status()`) actually correct?**
-  _`Lead` has 30 INFERRED edges - model-reasoned connections that need verification._
+- **Are the 31 inferred relationships involving `Lead` (e.g. with `get_lead_360()` and `get_lead_pool_status()`) actually correct?**
+  _`Lead` has 31 INFERRED edges - model-reasoned connections that need verification._

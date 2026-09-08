@@ -241,7 +241,18 @@ def generate_lead_pool_for_campaign(
         strategy = CampaignIntelligenceService.derive_heuristic_strategy(campaign)
         progress_steps.append("Derived ICP search criteria from campaign text")
 
-    target_prompt = f"{campaign.name} {campaign.campaign_target} {campaign.objective} {campaign.description}".strip()
+    target_prompt = f"{campaign.name} {campaign.campaign_target} {campaign.objective} {campaign.description} {campaign.industry or ''}".strip()
+
+    # Ensure explicit campaign.industry is merged into strategy industries
+    if campaign.industry and campaign.industry.strip():
+        explicit_inds = [v.strip() for v in campaign.industry.split(",") if v.strip()]
+        for ind_val in explicit_inds:
+            if ind_val not in strategy.industries:
+                strategy.industries.append(ind_val)
+            if ind_val not in strategy.industry_list:
+                strategy.industry_list.append(ind_val)
+        if not strategy.industry:
+            strategy.industry = explicit_inds[0]
 
     # Extract attached dataset filename if specified
     csv_fn = None

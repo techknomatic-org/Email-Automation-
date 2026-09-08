@@ -90,12 +90,27 @@ def init_db():
             except Exception:
                 pass
 
-    Base.metadata.create_all(bind=engine)
+    site_config_columns = [
+        ("lead_discovery_provider", "VARCHAR(100) DEFAULT 'web_search'"),
+        ("web_search_api_key", "VARCHAR(500) DEFAULT ''"),
+        ("apollo_api_key", "VARCHAR(500) DEFAULT ''")
+    ]
+    for col_name, col_def in site_config_columns:
+        try:
+            with engine.connect() as conn:
+                if "sqlite" in str(engine.url):
+                    conn.execute(text(f"ALTER TABLE site_config ADD COLUMN {col_name} {col_def};"))
+                else:
+                    conn.execute(text(f"ALTER TABLE site_config ADD COLUMN IF NOT EXISTS {col_name} {col_def};"))
+                conn.commit()
+        except Exception:
+            pass
 
     campaign_columns = [
         ("sequence_interval_minutes", "INTEGER DEFAULT 10"),
         ("sequence_interval_seconds", "INTEGER DEFAULT 600"),
-        ("sequence_interval_unit", "VARCHAR(20) DEFAULT 'min'")
+        ("sequence_interval_unit", "VARCHAR(20) DEFAULT 'min'"),
+        ("industry", "VARCHAR(500) DEFAULT ''")
     ]
     for col_name, col_def in campaign_columns:
         try:
@@ -250,7 +265,7 @@ def backfill_lead_fields():
     try:
         from backend.app.models.lead import Lead
         db = SessionLocal()
-        unfilled = db.query(Lead).filter(Lead.job_title == None).all()
+        unfilled = db.query(Lead).filter(Lead.job_title.is_(None)).all()
         if unfilled:
             for lead in unfilled:
                 sf = lead.source_fields or {}

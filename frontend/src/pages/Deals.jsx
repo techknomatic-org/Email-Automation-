@@ -425,26 +425,26 @@ function GmailStyleComposer({
   return (
     <div style={{
       position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh',
-      backgroundColor: 'rgba(5, 8, 22, 0.8)', backdropFilter: 'blur(10px)',
+      backgroundColor: 'rgba(15, 23, 42, 0.5)', backdropFilter: 'blur(4px)',
       display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 9999
     }}>
       <div style={{
-        width: '100%', maxWidth: '740px', background: '#0f172a',
-        border: `1.5px solid ${themeColor}`, borderRadius: '16px',
-        boxShadow: `0 20px 50px rgba(0,0,0,0.7), 0 0 30px ${themeColor}22`,
+        width: '100%', maxWidth: '740px', background: 'var(--bg-card)',
+        border: `1px solid var(--border)`, borderRadius: '16px',
+        boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05)',
         padding: '1.25rem', position: 'relative', display: 'flex', flexDirection: 'column', gap: '0.85rem',
         maxHeight: '92vh', overflowY: 'auto'
       }}>
         {/* Header with Title */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '0.75rem' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--border)', paddingBottom: '0.75rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
             <span style={{ fontSize: '0.75rem', fontWeight: 800, padding: '3px 9px', borderRadius: '4px', backgroundColor: themeColor, color: '#fff' }}>
               Option {variantKey} Composer
             </span>
-            <span style={{ fontSize: '0.9rem', fontWeight: 700, color: '#fff' }}>{title}</span>
+            <span style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--text-main)' }}>{title}</span>
           </div>
 
-          <button onClick={onClose} style={{ background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer', padding: '4px' }}>
+          <button onClick={onClose} style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', padding: '4px' }}>
             <X size={18} />
           </button>
         </div>
