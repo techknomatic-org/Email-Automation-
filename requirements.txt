@@ -9,7 +9,9 @@ psycopg[binary]>=3.1.0
 pgvector>=0.2.5
 pydantic>=2.7.0
 pydantic-settings>=2.0.0
-pydantic-ai-slim[openai,anthropic,google,groq]>=0.0.1
+pydantic-ai-slim[openai,anthropic,google,groq,mistral,cohere,bedrock]>=0.0.1
+griffe>=1,<2
+jsonpath-ng
 alembic>=1.13.0
 pandas>=2.2.0
 scikit-learn>=1.4.0
@@ -20,6 +22,13 @@ tenacity>=8.2.0
 python-dotenv>=1.0.0
 openpyxl>=3.1.0
 requests>=2.31.0
+termcolor
+tendo
+pyyaml
+huggingface_hub
+questionary
+rich
+pytz
 Django>=5.0
 pytest>=8.0.0
 pytest-asyncio>=0.23.0
