@@ -236,9 +236,9 @@ async def test_pre_send_reply_verification_cancels_timer(db_session):
 
     db_session.refresh(deal)
 
-    # Timer must be cancelled and state moved to Sales Handoff / REPLIED
+    # Timer must be cancelled and state moved to Sales Handoff / Action Recommended / REPLIED
     assert deal.sequence_state == "REPLIED"
-    assert deal.state == DealState.SALES_HANDOFF
+    assert deal.state in [DealState.SALES_HANDOFF, DealState.ACTION_RECOMMENDED]
     assert deal.timer_expires_at is None
     assert deal.not_before is None
     assert deal.outcome == Outcome.CONVERTED

@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from typing import Optional, Any
 from datetime import datetime
 from backend.app.schemas.lead import LeadResponse
@@ -38,6 +38,5 @@ class DealResponse(DealBase):
     lead: Optional[LeadResponse] = None
     campaign: Optional[CampaignResponse] = None
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 

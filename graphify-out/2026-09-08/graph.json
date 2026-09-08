@@ -42606,7 +42606,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "frontend/src/pages/LiveCampaign.jsx",
-      "source_location": "L1188",
+      "source_location": "L1276",
       "weight": 1.0
     },
     {
@@ -123926,5 +123926,6 @@
       "weight": 0.8
     }
   ],
-  "hyperedges": []
+  "hyperedges": [],
+  "built_at_commit": "24e82ab72e8adb47973d3d8ef7079ab4975f0a73"
 }

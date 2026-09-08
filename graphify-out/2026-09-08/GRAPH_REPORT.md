@@ -1,13 +1,18 @@
 # Graph Report - OpenOutreach-main  (2026-09-08)
 
 ## Corpus Check
-- 324 files · ~563,426 words
+- 324 files · ~563,954 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
 - 3387 nodes · 7298 edges · 254 communities (158 shown, 59 thin omitted)
 - Extraction: 93% EXTRACTED · 7% INFERRED · 0% AMBIGUOUS · INFERRED: 533 edges (avg confidence: 0.92)
 - Token cost: 0 input · 0 output
+
+## Graph Freshness
+- Built from commit: `24e82ab7`
+- Run `git rev-parse HEAD` and compare to check if the graph is stale.
+- Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
 - mailboxes.py

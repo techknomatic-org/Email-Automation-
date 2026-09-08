@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from typing import Optional
 
 class SiteConfigBase(BaseModel):
@@ -20,5 +20,4 @@ class SiteConfigUpdate(SiteConfigBase):
 class SiteConfigResponse(SiteConfigBase):
     id: int
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
