@@ -450,9 +450,9 @@
     "semantic_hash": "b3493cb363ee817a82703b4fdf7d69c7"
   },
   "frontend/src/pages/LiveCampaign.jsx": {
-    "mtime": 1788865919.0132542,
-    "seen": 1788866022.937265,
-    "ast_hash": "d7dd647e668e721a9b1ed6dfe9dbcfcd",
+    "mtime": 1788867691.559049,
+    "seen": 1788867805.9851468,
+    "ast_hash": "1ef1a4e7c28c89b64c97d36d3da7a306",
     "semantic_hash": ""
   },
   "frontend/src/pages/Mailboxes.jsx": {

@@ -1,7 +1,7 @@
 # Graph Report - OpenOutreach-main  (2026-09-08)
 
 ## Corpus Check
-- 324 files · ~563,953 words
+- 324 files · ~563,426 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
