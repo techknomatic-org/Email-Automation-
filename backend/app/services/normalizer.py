@@ -1,5 +1,6 @@
+from __future__ import annotations
 import re
-from typing import Tuple, Optional, List, Dict
+from typing import Tuple, Optional, List, Dict, Any, Union, Set
 
 class DataNormalizer:
     """

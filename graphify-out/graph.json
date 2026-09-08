@@ -508,7 +508,7 @@
       "file_type": "code",
       "norm_label": "datanormalizer",
       "source_file": "backend/app/services/normalizer.py",
-      "source_location": "L4"
+      "source_location": "L5"
     },
     {
       "id": "openoutreach_chat_migrations_0002_add_sync_fields_migration",
@@ -5106,7 +5106,7 @@
       "file_type": "code",
       "norm_label": ".normalize_department()",
       "source_file": "backend/app/services/normalizer.py",
-      "source_location": "L499"
+      "source_location": "L500"
     },
     {
       "id": "backend_app_services_normalizer_datanormalizer_normalize_job_title_and_seniority",
@@ -5118,7 +5118,7 @@
       "file_type": "code",
       "norm_label": ".normalize_job_title_and_seniority()",
       "source_file": "backend/app/services/normalizer.py",
-      "source_location": "L511"
+      "source_location": "L512"
     },
     {
       "id": "backend_app_services_lead_verification_service_leadverificationservice_filter_and_verify_batch",
@@ -15294,7 +15294,7 @@
       "file_type": "code",
       "norm_label": ".expand_industry_synonyms()",
       "source_file": "backend/app/services/normalizer.py",
-      "source_location": "L264"
+      "source_location": "L265"
     },
     {
       "id": "backend_app_services_normalizer_datanormalizer_normalize_industry",
@@ -15306,7 +15306,7 @@
       "file_type": "code",
       "norm_label": ".normalize_industry()",
       "source_file": "backend/app/services/normalizer.py",
-      "source_location": "L549"
+      "source_location": "L550"
     },
     {
       "id": "backend_app_services_normalizer_datanormalizer_parse_natural_prompt",
@@ -15318,7 +15318,7 @@
       "file_type": "code",
       "norm_label": ".parse_natural_prompt()",
       "source_file": "backend/app/services/normalizer.py",
-      "source_location": "L296"
+      "source_location": "L297"
     },
     {
       "id": "openoutreach_crm_models_lead_lead_embedding_array",
@@ -16866,7 +16866,7 @@
       "file_type": "code",
       "norm_label": ".normalize_country()",
       "source_file": "backend/app/services/normalizer.py",
-      "source_location": "L536"
+      "source_location": "L537"
     },
     {
       "id": "openoutreach_core_logblock_step_line",
@@ -22310,7 +22310,7 @@
       "source_location": "L62"
     },
     {
-      "id": "backend_app_services_normalizer_rationale_512",
+      "id": "backend_app_services_normalizer_rationale_513",
       "label": "Returns (normalized_title, normalized_seniority, normalized_department).",
       "_origin": "ast",
       "community": 101,
@@ -22318,7 +22318,7 @@
       "file_type": "rationale",
       "norm_label": "returns (normalized_title, normalized_seniority, normalized_department).",
       "source_file": "backend/app/services/normalizer.py",
-      "source_location": "L512"
+      "source_location": "L513"
     },
     {
       "id": "docs_csv_upload_copilot_plan",
@@ -23894,7 +23894,7 @@
       "source_location": "L432"
     },
     {
-      "id": "backend_app_services_normalizer_rationale_5",
+      "id": "backend_app_services_normalizer_rationale_6",
       "label": "Deterministic Data Normalization Engine. Maps variations of departments, job\u2026",
       "_origin": "ast",
       "community": 12,
@@ -23902,7 +23902,7 @@
       "file_type": "rationale",
       "norm_label": "deterministic data normalization engine. maps variations of departments, job...",
       "source_file": "backend/app/services/normalizer.py",
-      "source_location": "L5"
+      "source_location": "L6"
     },
     {
       "id": "tests_test_lead_search_rationale_199",
@@ -33036,7 +33036,7 @@
       "source_location": "L80"
     },
     {
-      "id": "backend_app_services_normalizer_rationale_265",
+      "id": "backend_app_services_normalizer_rationale_266",
       "label": "Returns all keyword/phrase synonyms for a given industry string or list of\u2026",
       "_origin": "ast",
       "community": 46,
@@ -33044,10 +33044,10 @@
       "file_type": "rationale",
       "norm_label": "returns all keyword/phrase synonyms for a given industry string or list of...",
       "source_file": "backend/app/services/normalizer.py",
-      "source_location": "L265"
+      "source_location": "L266"
     },
     {
-      "id": "backend_app_services_normalizer_rationale_297",
+      "id": "backend_app_services_normalizer_rationale_298",
       "label": "AI Natural-Language Prompt Interpreter. Parses informal, abbreviated, or multi-\u2026",
       "_origin": "ast",
       "community": 46,
@@ -33055,7 +33055,7 @@
       "file_type": "rationale",
       "norm_label": "ai natural-language prompt interpreter. parses informal, abbreviated, or multi-...",
       "source_file": "backend/app/services/normalizer.py",
-      "source_location": "L297"
+      "source_location": "L298"
     },
     {
       "id": "openoutreach_crm_models_lead_py_ndarray",
@@ -34103,7 +34103,7 @@
       "source_location": "L70"
     },
     {
-      "id": "backend_app_services_normalizer_rationale_537",
+      "id": "backend_app_services_normalizer_rationale_538",
       "label": "Returns (country_name, country_code).",
       "_origin": "ast",
       "community": 55,
@@ -34111,7 +34111,7 @@
       "file_type": "rationale",
       "norm_label": "returns (country_name, country_code).",
       "source_file": "backend/app/services/normalizer.py",
-      "source_location": "L537"
+      "source_location": "L538"
     },
     {
       "id": "openoutreach_core_logblock",
@@ -41532,7 +41532,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "backend/app/services/normalizer.py",
-      "source_location": "L284",
+      "source_location": "L285",
       "weight": 1.0
     },
     {
@@ -41544,7 +41544,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "backend/app/services/normalizer.py",
-      "source_location": "L514",
+      "source_location": "L515",
       "weight": 1.0
     },
     {
@@ -41556,7 +41556,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "backend/app/services/normalizer.py",
-      "source_location": "L341",
+      "source_location": "L342",
       "weight": 1.0
     },
     {
@@ -41568,7 +41568,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "backend/app/services/normalizer.py",
-      "source_location": "L345",
+      "source_location": "L346",
       "weight": 1.0
     },
     {
@@ -67356,7 +67356,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "backend/app/services/normalizer.py",
-      "source_location": "L296",
+      "source_location": "L297",
       "weight": 1.0
     },
     {
@@ -83208,7 +83208,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "backend/app/services/normalizer.py",
-      "source_location": "L264",
+      "source_location": "L265",
       "weight": 1.0
     },
     {
@@ -88282,7 +88282,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/services/normalizer.py",
-      "source_location": "L4",
+      "source_location": "L5",
       "weight": 1.0
     },
     {
@@ -102703,7 +102703,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/services/normalizer.py",
-      "source_location": "L264",
+      "source_location": "L265",
       "weight": 1.0
     },
     {
@@ -102714,7 +102714,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/services/normalizer.py",
-      "source_location": "L296",
+      "source_location": "L297",
       "weight": 1.0
     },
     {
@@ -102725,7 +102725,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/services/normalizer.py",
-      "source_location": "L499",
+      "source_location": "L500",
       "weight": 1.0
     },
     {
@@ -102736,7 +102736,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/services/normalizer.py",
-      "source_location": "L511",
+      "source_location": "L512",
       "weight": 1.0
     },
     {
@@ -102747,7 +102747,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/services/normalizer.py",
-      "source_location": "L536",
+      "source_location": "L537",
       "weight": 1.0
     },
     {
@@ -102758,7 +102758,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/services/normalizer.py",
-      "source_location": "L549",
+      "source_location": "L550",
       "weight": 1.0
     },
     {
@@ -110660,58 +110660,58 @@
       "weight": 1.0
     },
     {
-      "source": "backend_app_services_normalizer_rationale_265",
+      "source": "backend_app_services_normalizer_rationale_266",
       "target": "backend_app_services_normalizer_datanormalizer_expand_industry_synonyms",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/services/normalizer.py",
-      "source_location": "L265",
+      "source_location": "L266",
       "weight": 1.0
     },
     {
-      "source": "backend_app_services_normalizer_rationale_297",
+      "source": "backend_app_services_normalizer_rationale_298",
       "target": "backend_app_services_normalizer_datanormalizer_parse_natural_prompt",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/services/normalizer.py",
-      "source_location": "L297",
+      "source_location": "L298",
       "weight": 1.0
     },
     {
-      "source": "backend_app_services_normalizer_rationale_5",
-      "target": "backend_app_services_normalizer_datanormalizer",
-      "relation": "rationale_for",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "backend/app/services/normalizer.py",
-      "source_location": "L5",
-      "weight": 1.0
-    },
-    {
-      "source": "backend_app_services_normalizer_rationale_512",
+      "source": "backend_app_services_normalizer_rationale_513",
       "target": "backend_app_services_normalizer_datanormalizer_normalize_job_title_and_seniority",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/services/normalizer.py",
-      "source_location": "L512",
+      "source_location": "L513",
       "weight": 1.0
     },
     {
-      "source": "backend_app_services_normalizer_rationale_537",
+      "source": "backend_app_services_normalizer_rationale_538",
       "target": "backend_app_services_normalizer_datanormalizer_normalize_country",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/services/normalizer.py",
-      "source_location": "L537",
+      "source_location": "L538",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_services_normalizer_rationale_6",
+      "target": "backend_app_services_normalizer_datanormalizer",
+      "relation": "rationale_for",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/services/normalizer.py",
+      "source_location": "L6",
       "weight": 1.0
     },
     {
@@ -123783,5 +123783,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "a63d77987b715f841afa32a1a8ec120523ed1731"
+  "built_at_commit": "a161b5ea4382dafb52fd7d7c9eaf0fa9d189ec96"
 }

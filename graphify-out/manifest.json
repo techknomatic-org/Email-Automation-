@@ -306,9 +306,9 @@
     "semantic_hash": "457c6ecb635c4b044f87333aab5d8c25"
   },
   "backend/app/services/normalizer.py": {
-    "mtime": 1788759555.5380101,
-    "seen": 1788759744.7563708,
-    "ast_hash": "11a78866bca473a870dc70ae2c25ebb3",
+    "mtime": 1788871323.8429103,
+    "seen": 1788871388.3768604,
+    "ast_hash": "cf5da55a95d4972a3dbbd6c12776950c",
     "semantic_hash": ""
   },
   "backend/app/services/openrouter_service.py": {
@@ -1470,8 +1470,8 @@
     "semantic_hash": "bd7ea30f3414a105ba4a18d1237cd2e8"
   },
   "tests/conftest.py": {
-    "mtime": 1786947280.3341925,
-    "seen": 1788267653.4531054,
+    "mtime": 1788871310.46258,
+    "seen": 1788871388.377458,
     "ast_hash": "3ffc1ad84d3021a9da7b2076cd716fbd",
     "semantic_hash": "3ffc1ad84d3021a9da7b2076cd716fbd"
   },
@@ -1776,9 +1776,9 @@
     "semantic_hash": ""
   },
   ".github/workflows/tests.yml": {
-    "mtime": 1788870724.8809211,
-    "seen": 1788870772.331542,
-    "ast_hash": "fa127f3a649d67be5ff71ccd185380ae",
+    "mtime": 1788871041.987574,
+    "seen": 1788871388.3776119,
+    "ast_hash": "ba342e67a561cd6bb40070f811f2b4a2",
     "semantic_hash": ""
   },
   "ARCHITECTURE.md": {
@@ -1932,9 +1932,9 @@
     "semantic_hash": ""
   },
   "requirements.txt": {
-    "mtime": 1787647946.3911858,
-    "seen": 1788411760.5379255,
-    "ast_hash": "1ff47513811ddbfc17f78d3641dabd11",
+    "mtime": 1788871016.9084399,
+    "seen": 1788871388.3776858,
+    "ast_hash": "c9cd04e6bc2908f761300defccb3bea7",
     "semantic_hash": ""
   },
   "requirements/base.txt": {

@@ -1,7 +1,7 @@
 # Graph Report - OpenOutreach-main  (2026-09-08)
 
 ## Corpus Check
-- 324 files · ~563,952 words
+- 324 files · ~563,980 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `a63d7798`
+- Built from commit: `a161b5ea`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
