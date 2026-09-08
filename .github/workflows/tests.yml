@@ -25,6 +25,8 @@ jobs:
           pip install pytest pytest-asyncio pytest-django
 
       - name: Run test suite
+        env:
+          PYTHONPATH: .
         run: |
           pytest tests/test_campaign_sequence_timer.py tests/test_sequence_api.py -v
 
