@@ -1,0 +1,79 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# OpenOutreach — Docker Compose (Development + Production)
+# ─────────────────────────────────────────────────────────────────────────────
+# Usage:
+#   Development:  docker-compose up
+#   Production:   docker-compose -f docker-compose.yml -f docker-compose.prod.yml up
+# ─────────────────────────────────────────────────────────────────────────────
+
+version: "3.9"
+
+services:
+  # ── PostgreSQL Database ────────────────────────────────────────────────────
+  db:
+    image: ankane/pgvector:latest
+    container_name: openoutreach_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DB_NAME:-openoutreach}
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-postgres} -d ${DB_NAME:-openoutreach}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── FastAPI Backend ────────────────────────────────────────────────────────
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: openoutreach_backend
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      # Override DB host to use Docker service name
+      DB_HOST: db
+      DATABASE_URL: postgresql+psycopg://${DB_USER:-postgres}:${DB_PASSWORD:-postgres}@db:5432/${DB_NAME:-openoutreach}
+    ports:
+      - "8000:8000"
+    volumes:
+      # Mount data directory for Excel contact lists
+      - ./data:/app/data
+      # Mount logs for persistence
+      - ./backend/logs:/app/backend/logs
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # ── React Frontend (nginx) ─────────────────────────────────────────────────
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: ../Dockerfile.frontend
+      args:
+        VITE_API_BASE_URL: ""   # Empty = use nginx proxy (relative URLs)
+    container_name: openoutreach_frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      backend:
+        condition: service_healthy
+
+volumes:
+  pg_data:
+    driver: local

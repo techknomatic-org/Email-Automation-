@@ -1,0 +1,2054 @@
+{
+  "backend/app/agents/outreach_agent.py": {
+    "mtime": 1788762077.8199894,
+    "seen": 1788762233.0645692,
+    "ast_hash": "33d1b87f36f1f7166e37c392bab69fd5",
+    "semantic_hash": ""
+  },
+  "backend/app/api/ai_copilot.py": {
+    "mtime": 1788759415.697099,
+    "seen": 1788759744.756291,
+    "ast_hash": "2683e2e20633a4be6f7bfa70c7d9e015",
+    "semantic_hash": ""
+  },
+  "backend/app/api/attachments.py": {
+    "mtime": 1787758174.4389584,
+    "seen": 1788267653.4526687,
+    "ast_hash": "c3a47b3ab072cb06322cc5fdb87236f6",
+    "semantic_hash": "c3a47b3ab072cb06322cc5fdb87236f6"
+  },
+  "backend/app/api/auth.py": {
+    "mtime": 1788507339.6443956,
+    "seen": 1788759744.756297,
+    "ast_hash": "99c5d5b3e2b29e99e628b5cae719a525",
+    "semantic_hash": ""
+  },
+  "backend/app/api/campaigns.py": {
+    "mtime": 1787822039.0926037,
+    "seen": 1788267653.4526732,
+    "ast_hash": "346fc3821e85a173d684b68ddf2e7ceb",
+    "semantic_hash": "346fc3821e85a173d684b68ddf2e7ceb"
+  },
+  "backend/app/api/csv_upload.py": {
+    "mtime": 1788239007.2397566,
+    "seen": 1788267653.452675,
+    "ast_hash": "c20f03528a81f3e22fd411c59ede680b",
+    "semantic_hash": "c20f03528a81f3e22fd411c59ede680b"
+  },
+  "backend/app/api/deals.py": {
+    "mtime": 1787744223.6826925,
+    "seen": 1788267653.4526775,
+    "ast_hash": "c1c19a5069350c05cd91688994efdece",
+    "semantic_hash": "c1c19a5069350c05cd91688994efdece"
+  },
+  "backend/app/api/health.py": {
+    "mtime": 1787230173.4891033,
+    "seen": 1788267653.4526794,
+    "ast_hash": "edc6d4e024186ec821da7b14f3e36458",
+    "semantic_hash": "edc6d4e024186ec821da7b14f3e36458"
+  },
+  "backend/app/api/knowledge.py": {
+    "mtime": 1787048855.2359383,
+    "seen": 1788267653.452681,
+    "ast_hash": "bd4a77f88a37c29d178c4aa8f32f3844",
+    "semantic_hash": "bd4a77f88a37c29d178c4aa8f32f3844"
+  },
+  "backend/app/api/leads.py": {
+    "mtime": 1788259624.231851,
+    "seen": 1788267653.4526832,
+    "ast_hash": "3f9ebbc3e04e29cbb41e00dda0b5fbb7",
+    "semantic_hash": "3f9ebbc3e04e29cbb41e00dda0b5fbb7"
+  },
+  "backend/app/api/mailboxes.py": {
+    "mtime": 1787140244.2192016,
+    "seen": 1788267653.4526854,
+    "ast_hash": "56b030aab97102daa4ecad493542e552",
+    "semantic_hash": "56b030aab97102daa4ecad493542e552"
+  },
+  "backend/app/api/pipeline.py": {
+    "mtime": 1788762662.8460827,
+    "seen": 1788762722.0988936,
+    "ast_hash": "ab61a6e0affcdbf7288f1a5ecd5bfa92",
+    "semantic_hash": ""
+  },
+  "backend/app/api/sequences.py": {
+    "mtime": 1786969233.929296,
+    "seen": 1788267653.452689,
+    "ast_hash": "ad25cd2180a2558ffc10b2a5824db55b",
+    "semantic_hash": "ad25cd2180a2558ffc10b2a5824db55b"
+  },
+  "backend/app/api/site_config.py": {
+    "mtime": 1787206884.6805298,
+    "seen": 1788267653.4526913,
+    "ast_hash": "55ac80a5ad123f102b7a0e74fd34736d",
+    "semantic_hash": "55ac80a5ad123f102b7a0e74fd34736d"
+  },
+  "backend/app/api/webhooks.py": {
+    "mtime": 1788500908.500528,
+    "seen": 1788503890.6550071,
+    "ast_hash": "0bb389d63be3e26104405170b3c41284",
+    "semantic_hash": ""
+  },
+  "backend/app/core/config.py": {
+    "mtime": 1787661666.8794374,
+    "seen": 1788267653.452695,
+    "ast_hash": "52d814aa3585a732810dc20894e1ff7a",
+    "semantic_hash": "52d814aa3585a732810dc20894e1ff7a"
+  },
+  "backend/app/core/database.py": {
+    "mtime": 1788505321.9872634,
+    "seen": 1788505559.6713164,
+    "ast_hash": "49c08b1ea0bc328a9a8cc1758acdfa45",
+    "semantic_hash": ""
+  },
+  "backend/app/core/logging_config.py": {
+    "mtime": 1787228861.7471023,
+    "seen": 1788267653.4526987,
+    "ast_hash": "9032ee903c54a0425cbbe3886fa3d940",
+    "semantic_hash": "9032ee903c54a0425cbbe3886fa3d940"
+  },
+  "backend/app/main.py": {
+    "mtime": 1788505265.36192,
+    "seen": 1788505559.6713264,
+    "ast_hash": "bc9ee7cd1394a526d328763a8b409f57",
+    "semantic_hash": ""
+  },
+  "backend/app/models/__init__.py": {
+    "mtime": 1788505210.390226,
+    "seen": 1788505559.6713293,
+    "ast_hash": "ccf0939245bc14f9f75ad47b3109a4b9",
+    "semantic_hash": ""
+  },
+  "backend/app/models/campaign.py": {
+    "mtime": 1787747774.7230492,
+    "seen": 1788267653.452704,
+    "ast_hash": "98fde2d07581ad9845e2a6e11871ed14",
+    "semantic_hash": "98fde2d07581ad9845e2a6e11871ed14"
+  },
+  "backend/app/models/deal.py": {
+    "mtime": 1787030512.9931576,
+    "seen": 1788267653.4527059,
+    "ast_hash": "70b5ec86effed6b1c3be16f0281eb62d",
+    "semantic_hash": "70b5ec86effed6b1c3be16f0281eb62d"
+  },
+  "backend/app/models/email_event.py": {
+    "mtime": 1787030020.3958244,
+    "seen": 1788267653.452708,
+    "ast_hash": "2da0171811eaa6496cc3e26634c2d5a0",
+    "semantic_hash": "2da0171811eaa6496cc3e26634c2d5a0"
+  },
+  "backend/app/models/knowledge.py": {
+    "mtime": 1786969337.6551726,
+    "seen": 1788267653.4527097,
+    "ast_hash": "df814fef2c53e8961c9ef70d5f0f6f70",
+    "semantic_hash": "df814fef2c53e8961c9ef70d5f0f6f70"
+  },
+  "backend/app/models/lead.py": {
+    "mtime": 1788243032.757498,
+    "seen": 1788267653.4527113,
+    "ast_hash": "e04a8472bfacefdbba0fddd40c04a120",
+    "semantic_hash": "e04a8472bfacefdbba0fddd40c04a120"
+  },
+  "backend/app/models/lead_intelligence.py": {
+    "mtime": 1786969332.643835,
+    "seen": 1788267653.452713,
+    "ast_hash": "513cd698324b3184218200fa2b54339a",
+    "semantic_hash": "513cd698324b3184218200fa2b54339a"
+  },
+  "backend/app/models/mailbox.py": {
+    "mtime": 1787132496.564046,
+    "seen": 1788267653.452715,
+    "ast_hash": "8b1a3a6240196e9d9e930cd83ae28a46",
+    "semantic_hash": "8b1a3a6240196e9d9e930cd83ae28a46"
+  },
+  "backend/app/models/sequence.py": {
+    "mtime": 1786969326.923609,
+    "seen": 1788267653.4527166,
+    "ast_hash": "9054f2ed19c96e2b695997aeb19af7a4",
+    "semantic_hash": "9054f2ed19c96e2b695997aeb19af7a4"
+  },
+  "backend/app/models/site_config.py": {
+    "mtime": 1787226669.5230522,
+    "seen": 1788267653.4527183,
+    "ast_hash": "176dc0e13bde80984767d45d9f487480",
+    "semantic_hash": "176dc0e13bde80984767d45d9f487480"
+  },
+  "backend/app/schemas/__init__.py": {
+    "mtime": 1786951308.549955,
+    "seen": 1788267653.4527202,
+    "ast_hash": "77dcf4f5a293734b0013bc563f4e0f7e",
+    "semantic_hash": "77dcf4f5a293734b0013bc563f4e0f7e"
+  },
+  "backend/app/schemas/campaign.py": {
+    "mtime": 1787767866.6915214,
+    "seen": 1788267653.4527216,
+    "ast_hash": "c02bcb6a4110cc41896d63bf7b41f7f5",
+    "semantic_hash": "c02bcb6a4110cc41896d63bf7b41f7f5"
+  },
+  "backend/app/schemas/deal.py": {
+    "mtime": 1787030706.886995,
+    "seen": 1788267653.4527235,
+    "ast_hash": "1d89229adee3592a8f4d67984f1cdc39",
+    "semantic_hash": "1d89229adee3592a8f4d67984f1cdc39"
+  },
+  "backend/app/schemas/lead.py": {
+    "mtime": 1787812194.3013623,
+    "seen": 1788267653.452725,
+    "ast_hash": "10e6627b50b931790576f89221e5507d",
+    "semantic_hash": "10e6627b50b931790576f89221e5507d"
+  },
+  "backend/app/schemas/mailbox.py": {
+    "mtime": 1787132532.324662,
+    "seen": 1788267653.4527268,
+    "ast_hash": "2bfe249d8f2ab477d9629d78fee3cbd2",
+    "semantic_hash": "2bfe249d8f2ab477d9629d78fee3cbd2"
+  },
+  "backend/app/schemas/site_config.py": {
+    "mtime": 1787226666.202195,
+    "seen": 1788267653.4527283,
+    "ast_hash": "5be941b540d744e61304b37d677bf6bf",
+    "semantic_hash": "5be941b540d744e61304b37d677bf6bf"
+  },
+  "backend/app/services/campaign_intelligence.py": {
+    "mtime": 1788759339.754402,
+    "seen": 1788759744.756349,
+    "ast_hash": "e48f7709fc0acd3ee067a92390b74207",
+    "semantic_hash": ""
+  },
+  "backend/app/services/campaign_runner.py": {
+    "mtime": 1787825549.0786147,
+    "seen": 1788267653.4527318,
+    "ast_hash": "3f1a0d23896bb74384f88aa758413dbf",
+    "semantic_hash": "3f1a0d23896bb74384f88aa758413dbf"
+  },
+  "backend/app/services/csv_importer.py": {
+    "mtime": 1788259617.274315,
+    "seen": 1788267653.4527335,
+    "ast_hash": "6480075d657d11a7e17061c822c5075a",
+    "semantic_hash": "6480075d657d11a7e17061c822c5075a"
+  },
+  "backend/app/services/demo_seeder.py": {
+    "mtime": 1787230123.00765,
+    "seen": 1788267653.452735,
+    "ast_hash": "a0cee3a05bc3df710bf4adcc1bf8c983",
+    "semantic_hash": "a0cee3a05bc3df710bf4adcc1bf8c983"
+  },
+  "backend/app/services/email_service.py": {
+    "mtime": 1788762634.764815,
+    "seen": 1788762722.0989695,
+    "ast_hash": "640af634c2c48b686ba79fd5e929c88b",
+    "semantic_hash": ""
+  },
+  "backend/app/services/hybrid_search_engine.py": {
+    "mtime": 1788759383.9628055,
+    "seen": 1788759744.7563555,
+    "ast_hash": "3766a86890fc49168176ca74637ccaf9",
+    "semantic_hash": ""
+  },
+  "backend/app/services/lead_deduplication.py": {
+    "mtime": 1788255140.5519207,
+    "seen": 1788267653.4527402,
+    "ast_hash": "521f47974d17bb235cf333cb595d9d4d",
+    "semantic_hash": "521f47974d17bb235cf333cb595d9d4d"
+  },
+  "backend/app/services/lead_discovery_service.py": {
+    "mtime": 1788759664.0272055,
+    "seen": 1788759744.7563581,
+    "ast_hash": "ee408f4e2ba40cb8d46cb5465b875e96",
+    "semantic_hash": ""
+  },
+  "backend/app/services/lead_providers/__init__.py": {
+    "mtime": 1787562617.3672621,
+    "seen": 1788267653.452744,
+    "ast_hash": "4f06ccae17e3eea954ab1fe02d97ca7e",
+    "semantic_hash": "4f06ccae17e3eea954ab1fe02d97ca7e"
+  },
+  "backend/app/services/lead_providers/apollo_provider.py": {
+    "mtime": 1787204080.4461699,
+    "seen": 1788267653.4527457,
+    "ast_hash": "93e8ae39c646ddc7849e3263ef4eb926",
+    "semantic_hash": "93e8ae39c646ddc7849e3263ef4eb926"
+  },
+  "backend/app/services/lead_providers/base.py": {
+    "mtime": 1787201705.7862234,
+    "seen": 1788267653.4527476,
+    "ast_hash": "4561605b548371f6b8f26df39ff701f1",
+    "semantic_hash": "4561605b548371f6b8f26df39ff701f1"
+  },
+  "backend/app/services/lead_providers/excel_provider.py": {
+    "mtime": 1787566962.9280598,
+    "seen": 1788267653.452749,
+    "ast_hash": "9731e7b38723cdcaf41e06308d886d5a",
+    "semantic_hash": "9731e7b38723cdcaf41e06308d886d5a"
+  },
+  "backend/app/services/lead_providers/factory.py": {
+    "mtime": 1787562611.5507069,
+    "seen": 1788267653.4527507,
+    "ast_hash": "c05f8bf5aab2b6582d870320fc1906a7",
+    "semantic_hash": "c05f8bf5aab2b6582d870320fc1906a7"
+  },
+  "backend/app/services/lead_providers/mock_provider.py": {
+    "mtime": 1787204085.685951,
+    "seen": 1788267653.4527524,
+    "ast_hash": "6890940d4d0708aa918f51db3a962f92",
+    "semantic_hash": "6890940d4d0708aa918f51db3a962f92"
+  },
+  "backend/app/services/lead_providers/web_search_provider.py": {
+    "mtime": 1787571556.9930081,
+    "seen": 1788267653.4527543,
+    "ast_hash": "e6b2213e74bf23c82b20136c31e4a80f",
+    "semantic_hash": "e6b2213e74bf23c82b20136c31e4a80f"
+  },
+  "backend/app/services/lead_verification_service.py": {
+    "mtime": 1787568569.303462,
+    "seen": 1788267653.4527557,
+    "ast_hash": "457c6ecb635c4b044f87333aab5d8c25",
+    "semantic_hash": "457c6ecb635c4b044f87333aab5d8c25"
+  },
+  "backend/app/services/normalizer.py": {
+    "mtime": 1788759555.5380101,
+    "seen": 1788759744.7563708,
+    "ast_hash": "11a78866bca473a870dc70ae2c25ebb3",
+    "semantic_hash": ""
+  },
+  "backend/app/services/openrouter_service.py": {
+    "mtime": 1787661655.175411,
+    "seen": 1788267653.4527588,
+    "ast_hash": "d88669e6da8a1c6391891bcc5b46873f",
+    "semantic_hash": "d88669e6da8a1c6391891bcc5b46873f"
+  },
+  "backend/app/services/rag_service.py": {
+    "mtime": 1787574582.5936968,
+    "seen": 1788267653.4527605,
+    "ast_hash": "dcc4b30269a1827ffcc32da0ac218352",
+    "semantic_hash": "dcc4b30269a1827ffcc32da0ac218352"
+  },
+  "frontend/package.json": {
+    "mtime": 1787808931.3362076,
+    "seen": 1788267653.4527621,
+    "ast_hash": "95a1f53f797fb32b700e138862585636",
+    "semantic_hash": "95a1f53f797fb32b700e138862585636"
+  },
+  "frontend/src/App.jsx": {
+    "mtime": 1788505486.7296822,
+    "seen": 1788505559.6714532,
+    "ast_hash": "5b74002edc8571a3bde6e1f41cea40fd",
+    "semantic_hash": ""
+  },
+  "frontend/src/components/ConfirmModal.jsx": {
+    "mtime": 1788256343.3333635,
+    "seen": 1788267653.4527655,
+    "ast_hash": "c2bc4d9ae90c1ff9a3555f3a3a85ae31",
+    "semantic_hash": "c2bc4d9ae90c1ff9a3555f3a3a85ae31"
+  },
+  "frontend/src/components/CsvUploadModal.jsx": {
+    "mtime": 1788253647.1281877,
+    "seen": 1788267653.452767,
+    "ast_hash": "094c41d466b170b72e7466f1a99aac9e",
+    "semantic_hash": "094c41d466b170b72e7466f1a99aac9e"
+  },
+  "frontend/src/components/DatasetValidationPanel.jsx": {
+    "mtime": 1787639661.024914,
+    "seen": 1788267653.4527688,
+    "ast_hash": "3e6bd7c51c4076abdb137f4f2c5b84c2",
+    "semantic_hash": "3e6bd7c51c4076abdb137f4f2c5b84c2"
+  },
+  "frontend/src/components/ErrorBoundary.jsx": {
+    "mtime": 1787648057.2896059,
+    "seen": 1788267653.4527702,
+    "ast_hash": "dd5d1d99c31b82a9f1bc7bad3578211c",
+    "semantic_hash": "dd5d1d99c31b82a9f1bc7bad3578211c"
+  },
+  "frontend/src/components/ExistingProfileViewModal.jsx": {
+    "mtime": 1788255150.1653109,
+    "seen": 1788267653.452772,
+    "ast_hash": "957b43730964e80888fd1897b7ee079d",
+    "semantic_hash": "957b43730964e80888fd1897b7ee079d"
+  },
+  "frontend/src/components/ImportDatasetModal.jsx": {
+    "mtime": 1788500354.2206943,
+    "seen": 1788503890.6553779,
+    "ast_hash": "1d75bf05ddfc2483aab89bdba938a670",
+    "semantic_hash": ""
+  },
+  "frontend/src/components/ImportSummaryModal.jsx": {
+    "mtime": 1788500377.9576428,
+    "seen": 1788503890.6553845,
+    "ast_hash": "822cf4e849db1c7d0fa02bd9fd5d4c1c",
+    "semantic_hash": ""
+  },
+  "frontend/src/components/Lead360Modal.jsx": {
+    "mtime": 1787129207.4248922,
+    "seen": 1788267653.452777,
+    "ast_hash": "33f9e39a18b7f5b166e49943596b0056",
+    "semantic_hash": "33f9e39a18b7f5b166e49943596b0056"
+  },
+  "frontend/src/components/LoadingSpinner.jsx": {
+    "mtime": 1787648067.9418073,
+    "seen": 1788267653.4527788,
+    "ast_hash": "03c0ddec379970f23e44b1c63b18b6ed",
+    "semantic_hash": "03c0ddec379970f23e44b1c63b18b6ed"
+  },
+  "frontend/src/components/ManualProfileModal.jsx": {
+    "mtime": 1788255189.5475068,
+    "seen": 1788267653.4527802,
+    "ast_hash": "f9b471aa4c80d5d81cc202c12c269cf5",
+    "semantic_hash": "f9b471aa4c80d5d81cc202c12c269cf5"
+  },
+  "frontend/src/components/Sidebar.jsx": {
+    "mtime": 1788505472.726682,
+    "seen": 1788505559.6714816,
+    "ast_hash": "cacea27eb3b80fba63c375a9924854f9",
+    "semantic_hash": ""
+  },
+  "frontend/src/main.jsx": {
+    "mtime": 1786951451.401034,
+    "seen": 1788267653.4527838,
+    "ast_hash": "54a301507dcdfccf4e5565754374b5dc",
+    "semantic_hash": "54a301507dcdfccf4e5565754374b5dc"
+  },
+  "frontend/src/pages/Analytics.jsx": {
+    "mtime": 1786971264.8371859,
+    "seen": 1788267653.4527857,
+    "ast_hash": "9c133dcc7a8c49b6f41e9f408de4c006",
+    "semantic_hash": "9c133dcc7a8c49b6f41e9f408de4c006"
+  },
+  "frontend/src/pages/CampaignWizard.jsx": {
+    "mtime": 1788759451.9284375,
+    "seen": 1788759744.756397,
+    "ast_hash": "9c0c8676bb2aad71fa06d17ed8255279",
+    "semantic_hash": ""
+  },
+  "frontend/src/pages/Campaigns.jsx": {
+    "mtime": 1787833446.5172458,
+    "seen": 1788267653.452789,
+    "ast_hash": "09bf9886dc83a4413970424a8722e023",
+    "semantic_hash": "09bf9886dc83a4413970424a8722e023"
+  },
+  "frontend/src/pages/Dashboard.jsx": {
+    "mtime": 1788157539.3684225,
+    "seen": 1788267653.4527907,
+    "ast_hash": "616128bf8cea7a05defe9a1ce96b041c",
+    "semantic_hash": "616128bf8cea7a05defe9a1ce96b041c"
+  },
+  "frontend/src/pages/Deals.jsx": {
+    "mtime": 1788762157.2934096,
+    "seen": 1788762233.0647829,
+    "ast_hash": "9f25288e4cb04d9d8102a4838fb09a77",
+    "semantic_hash": ""
+  },
+  "frontend/src/pages/KnowledgeBase.jsx": {
+    "mtime": 1787049311.5172255,
+    "seen": 1788267653.452794,
+    "ast_hash": "129eca1e83e09967ee6f855c236a97d6",
+    "semantic_hash": "129eca1e83e09967ee6f855c236a97d6"
+  },
+  "frontend/src/pages/Leads.jsx": {
+    "mtime": 1788253647.2130938,
+    "seen": 1788267653.4527957,
+    "ast_hash": "b3493cb363ee817a82703b4fdf7d69c7",
+    "semantic_hash": "b3493cb363ee817a82703b4fdf7d69c7"
+  },
+  "frontend/src/pages/LiveCampaign.jsx": {
+    "mtime": 1788176565.208169,
+    "seen": 1788267653.4527972,
+    "ast_hash": "05b7c4d083b0d68b37116b5d3da77df5",
+    "semantic_hash": "05b7c4d083b0d68b37116b5d3da77df5"
+  },
+  "frontend/src/pages/Mailboxes.jsx": {
+    "mtime": 1787220807.4207914,
+    "seen": 1788267653.452799,
+    "ast_hash": "a075d3555fd0ff73aa48cf6aec52f335",
+    "semantic_hash": "a075d3555fd0ff73aa48cf6aec52f335"
+  },
+  "frontend/src/pages/MasterDatabase.jsx": {
+    "mtime": 1788267320.8432603,
+    "seen": 1788267653.4528005,
+    "ast_hash": "f4061171e342a692975fec2853521250",
+    "semantic_hash": "f4061171e342a692975fec2853521250"
+  },
+  "frontend/src/pages/Settings.jsx": {
+    "mtime": 1788505501.255298,
+    "seen": 1788505559.671527,
+    "ast_hash": "a4162abc1b23c5e314df89f082a38a23",
+    "semantic_hash": ""
+  },
+  "frontend/src/services/api.js": {
+    "mtime": 1788505411.669394,
+    "seen": 1788505559.6715295,
+    "ast_hash": "44777bfdd455867645f16a51ba226e22",
+    "semantic_hash": ""
+  },
+  "frontend/vite.config.js": {
+    "mtime": 1787116893.4046066,
+    "seen": 1788267653.4528065,
+    "ast_hash": "5098fd355e02472320879b7d5dd74a5f",
+    "semantic_hash": "5098fd355e02472320879b7d5dd74a5f"
+  },
+  "manage.py": {
+    "mtime": 1786947278.5473638,
+    "seen": 1788267653.4528081,
+    "ast_hash": "be25aa197be4cc97d180d0f970744489",
+    "semantic_hash": "be25aa197be4cc97d180d0f970744489"
+  },
+  "openoutreach/__init__.py": {
+    "mtime": 1786947278.751361,
+    "seen": 1788267653.45281,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "openoutreach/chat/__init__.py": {
+    "mtime": 1786947278.787976,
+    "seen": 1788267653.4528115,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "openoutreach/chat/apps.py": {
+    "mtime": 1786947278.787976,
+    "seen": 1788267653.4528134,
+    "ast_hash": "bf59899254ed21809e75c8dd053ea981",
+    "semantic_hash": "bf59899254ed21809e75c8dd053ea981"
+  },
+  "openoutreach/chat/migrations/0001_initial.py": {
+    "mtime": 1786947278.8197587,
+    "seen": 1788267653.4528153,
+    "ast_hash": "1a269c63c5609622972254bc2e4a5143",
+    "semantic_hash": "1a269c63c5609622972254bc2e4a5143"
+  },
+  "openoutreach/chat/migrations/0002_add_sync_fields.py": {
+    "mtime": 1786947278.8271816,
+    "seen": 1788267653.4528184,
+    "ast_hash": "4dc5da659e936fe87c08305b4d0c2aeb",
+    "semantic_hash": "4dc5da659e936fe87c08305b4d0c2aeb"
+  },
+  "openoutreach/chat/migrations/0003_chatmessage_deal_fk.py": {
+    "mtime": 1786947278.8364937,
+    "seen": 1788267653.4528203,
+    "ast_hash": "198b05df19ebd691b43c5332e8111281",
+    "semantic_hash": "198b05df19ebd691b43c5332e8111281"
+  },
+  "openoutreach/chat/migrations/0004_pivot_external_id.py": {
+    "mtime": 1786947278.8445094,
+    "seen": 1788267653.4528215,
+    "ast_hash": "6616c69fe1399d99c6cc392327018287",
+    "semantic_hash": "6616c69fe1399d99c6cc392327018287"
+  },
+  "openoutreach/chat/migrations/0005_alter_chatmessage_external_id.py": {
+    "mtime": 1786947278.8535614,
+    "seen": 1788267653.4528239,
+    "ast_hash": "1ab320ef3dc4aa0015482cab1c97661c",
+    "semantic_hash": "1ab320ef3dc4aa0015482cab1c97661c"
+  },
+  "openoutreach/chat/migrations/0006_remove_chatmessage_uniq_deal_external_id_and_more.py": {
+    "mtime": 1786947278.8602126,
+    "seen": 1788267653.4528253,
+    "ast_hash": "a2bb6dfb668558e2daf70789d7656f79",
+    "semantic_hash": "a2bb6dfb668558e2daf70789d7656f79"
+  },
+  "openoutreach/chat/migrations/__init__.py": {
+    "mtime": 1786947278.867557,
+    "seen": 1788267653.4528272,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "openoutreach/chat/models.py": {
+    "mtime": 1786947278.8058152,
+    "seen": 1788267653.4528286,
+    "ast_hash": "5de76d72c3c750414a5f6c91abea714b",
+    "semantic_hash": "5de76d72c3c750414a5f6c91abea714b"
+  },
+  "openoutreach/contacts/__init__.py": {
+    "mtime": 1786947278.867557,
+    "seen": 1788267653.4528306,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "openoutreach/contacts/service.py": {
+    "mtime": 1786947278.88347,
+    "seen": 1788267653.452832,
+    "ast_hash": "0a369e7aac2c7e9ea522e078ea754dd9",
+    "semantic_hash": "0a369e7aac2c7e9ea522e078ea754dd9"
+  },
+  "openoutreach/core/__init__.py": {
+    "mtime": 1786947278.901009,
+    "seen": 1788267653.4528337,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "openoutreach/core/admin.py": {
+    "mtime": 1786947278.909029,
+    "seen": 1788267653.4528353,
+    "ast_hash": "a812e349c0765abfa1b00242716116ba",
+    "semantic_hash": "a812e349c0765abfa1b00242716116ba"
+  },
+  "openoutreach/core/agents/__init__.py": {
+    "mtime": 1786947279.0422573,
+    "seen": 1788267653.4528372,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "openoutreach/core/agents/outreach.py": {
+    "mtime": 1786947279.0536082,
+    "seen": 1788267653.452839,
+    "ast_hash": "a812b6a0466f91408a63b2d1e294e4b1",
+    "semantic_hash": "a812b6a0466f91408a63b2d1e294e4b1"
+  },
+  "openoutreach/core/agents/prompt.py": {
+    "mtime": 1786947279.0570116,
+    "seen": 1788267653.4528406,
+    "ast_hash": "356fb2fea7a12a62069964809a41fbbf",
+    "semantic_hash": "356fb2fea7a12a62069964809a41fbbf"
+  },
+  "openoutreach/core/apps.py": {
+    "mtime": 1786947278.9168096,
+    "seen": 1788267653.4528422,
+    "ast_hash": "c81dd19adbbcc1b154a09c68de967c81",
+    "semantic_hash": "c81dd19adbbcc1b154a09c68de967c81"
+  },
+  "openoutreach/core/business_time.py": {
+    "mtime": 1786947278.9168096,
+    "seen": 1788267653.4528437,
+    "ast_hash": "8260f330df5677578f1a59545278dbf3",
+    "semantic_hash": "8260f330df5677578f1a59545278dbf3"
+  },
+  "openoutreach/core/conf.py": {
+    "mtime": 1786947278.9346404,
+    "seen": 1788267653.4528456,
+    "ast_hash": "05441ce99ab3cdd46ea6161588abf67c",
+    "semantic_hash": "05441ce99ab3cdd46ea6161588abf67c"
+  },
+  "openoutreach/core/cycle.py": {
+    "mtime": 1786947278.9440243,
+    "seen": 1788267653.4528472,
+    "ast_hash": "a36587c2c8838e83136a2d42875757b1",
+    "semantic_hash": "a36587c2c8838e83136a2d42875757b1"
+  },
+  "openoutreach/core/db/__init__.py": {
+    "mtime": 1786947279.0727034,
+    "seen": 1788267653.452849,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "openoutreach/core/db/deals.py": {
+    "mtime": 1786947279.081679,
+    "seen": 1788267653.4528506,
+    "ast_hash": "e10855de62c5b94cc87ce7dd8e3c3812",
+    "semantic_hash": "e10855de62c5b94cc87ce7dd8e3c3812"
+  },
+  "openoutreach/core/db/leads.py": {
+    "mtime": 1786947279.090086,
+    "seen": 1788267653.4528525,
+    "ast_hash": "80bd238f8bb51e767564e5923a66ee84",
+    "semantic_hash": "80bd238f8bb51e767564e5923a66ee84"
+  },
+  "openoutreach/core/db/summaries.py": {
+    "mtime": 1786947279.0981228,
+    "seen": 1788267653.4528546,
+    "ast_hash": "33cab790177f3a218158093f4bc18055",
+    "semantic_hash": "33cab790177f3a218158093f4bc18055"
+  },
+  "openoutreach/core/geo.py": {
+    "mtime": 1786947278.9520595,
+    "seen": 1788267653.452856,
+    "ast_hash": "7e53646d38e9df36b66061763ec322f2",
+    "semantic_hash": "7e53646d38e9df36b66061763ec322f2"
+  },
+  "openoutreach/core/llm.py": {
+    "mtime": 1786947278.9621253,
+    "seen": 1788267653.4528575,
+    "ast_hash": "3a2601332f8ab1869c2294b2c42e9774",
+    "semantic_hash": "3a2601332f8ab1869c2294b2c42e9774"
+  },
+  "openoutreach/core/logblock.py": {
+    "mtime": 1786947278.9679914,
+    "seen": 1788267653.4528594,
+    "ast_hash": "43f14bf4edcb740c18eb76d4b8107fd8",
+    "semantic_hash": "43f14bf4edcb740c18eb76d4b8107fd8"
+  },
+  "openoutreach/core/logging.py": {
+    "mtime": 1786947278.97814,
+    "seen": 1788267653.452861,
+    "ast_hash": "2967ed097173d3c36d3542b59859af3a",
+    "semantic_hash": "2967ed097173d3c36d3542b59859af3a"
+  },
+  "openoutreach/core/management/__init__.py": {
+    "mtime": 1786947279.1041062,
+    "seen": 1788267653.4528627,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "openoutreach/core/management/commands/__init__.py": {
+    "mtime": 1786947279.120142,
+    "seen": 1788267653.4528642,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "openoutreach/core/management/commands/migrate.py": {
+    "mtime": 1786947279.1286304,
+    "seen": 1788267653.452866,
+    "ast_hash": "401c071e9b305fa858970b49dbe12756",
+    "semantic_hash": "401c071e9b305fa858970b49dbe12756"
+  },
+  "openoutreach/core/management/commands/reset_data.py": {
+    "mtime": 1786947279.1425529,
+    "seen": 1788267653.4528675,
+    "ast_hash": "41558377de5a8213e7e67c0fdbf51f06",
+    "semantic_hash": "41558377de5a8213e7e67c0fdbf51f06"
+  },
+  "openoutreach/core/management/commands/reset_pipeline.py": {
+    "mtime": 1786947279.1465726,
+    "seen": 1788267653.4528694,
+    "ast_hash": "e35932d06b220206b459d215aed25bfa",
+    "semantic_hash": "e35932d06b220206b459d215aed25bfa"
+  },
+  "openoutreach/core/management/commands/rundaemon.py": {
+    "mtime": 1786947279.1591935,
+    "seen": 1788267653.4528708,
+    "ast_hash": "e7270f8cb1c00c0e1f56163625ee7af0",
+    "semantic_hash": "e7270f8cb1c00c0e1f56163625ee7af0"
+  },
+  "openoutreach/core/management/commands/setup_crm.py": {
+    "mtime": 1786947279.1692736,
+    "seen": 1788267653.4528728,
+    "ast_hash": "07e95270b2d408faf8065bfbfc9724c9",
+    "semantic_hash": "07e95270b2d408faf8065bfbfc9724c9"
+  },
+  "openoutreach/core/management/setup_crm.py": {
+    "mtime": 1786947279.1159556,
+    "seen": 1788267653.4528744,
+    "ast_hash": "7810adf03165f0991e9040d9dec69393",
+    "semantic_hash": "7810adf03165f0991e9040d9dec69393"
+  },
+  "openoutreach/core/migration_compat.py": {
+    "mtime": 1786947278.9841626,
+    "seen": 1788267653.4528763,
+    "ast_hash": "2983ff13709214737412899519341aba",
+    "semantic_hash": "2983ff13709214737412899519341aba"
+  },
+  "openoutreach/core/migrations/0001_initial.py": {
+    "mtime": 1786947279.1692736,
+    "seen": 1788267653.452878,
+    "ast_hash": "94b872611f35be13515e8656a1840eee",
+    "semantic_hash": "94b872611f35be13515e8656a1840eee"
+  },
+  "openoutreach/core/migrations/0002_rename_engine_tables.py": {
+    "mtime": 1786947279.183406,
+    "seen": 1788267653.4528797,
+    "ast_hash": "92ef3d36a88cf3be94ae84fa1bf7075a",
+    "semantic_hash": "92ef3d36a88cf3be94ae84fa1bf7075a"
+  },
+  "openoutreach/core/migrations/0003_siteconfig_finder_api_key.py": {
+    "mtime": 1786947279.183406,
+    "seen": 1788267653.452881,
+    "ast_hash": "5610bd56be02d4a21b97599cdd1e92e9",
+    "semantic_hash": "5610bd56be02d4a21b97599cdd1e92e9"
+  },
+  "openoutreach/core/migrations/0004_pivot_email_config.py": {
+    "mtime": 1786947279.1991098,
+    "seen": 1788267653.4528828,
+    "ast_hash": "65cedaf330a32616138b71ff4a1a0959",
+    "semantic_hash": "65cedaf330a32616138b71ff4a1a0959"
+  },
+  "openoutreach/core/migrations/0005_rename_campaign_objective_campaign_campaign_target.py": {
+    "mtime": 1786947279.1991098,
+    "seen": 1788267653.4528844,
+    "ast_hash": "b97170a0c8ab48323ddcc316b96030ec",
+    "semantic_hash": "b97170a0c8ab48323ddcc316b96030ec"
+  },
+  "openoutreach/core/migrations/0006_campaign_country_code_discoveryquery.py": {
+    "mtime": 1786947279.2208328,
+    "seen": 1788267653.452886,
+    "ast_hash": "be54ea6f7d9946837284327f02b7ee9a",
+    "semantic_hash": "be54ea6f7d9946837284327f02b7ee9a"
+  },
+  "openoutreach/core/migrations/0007_seed_frontier_drop_legacy_cursor.py": {
+    "mtime": 1786947279.2272227,
+    "seen": 1788267653.4528875,
+    "ast_hash": "372ae014597b1ab9879e25d72dad3150",
+    "semantic_hash": "372ae014597b1ab9879e25d72dad3150"
+  },
+  "openoutreach/core/migrations/0008_clause_lattice.py": {
+    "mtime": 1786947279.2306712,
+    "seen": 1788267653.4528894,
+    "ast_hash": "0e05c080e1114dc473a9674fc11e4b54",
+    "semantic_hash": "0e05c080e1114dc473a9674fc11e4b54"
+  },
+  "openoutreach/core/migrations/0009_remove_clause_is_live.py": {
+    "mtime": 1786947279.2448523,
+    "seen": 1788267653.4528909,
+    "ast_hash": "12739ec126ea1497645c617496f8492e",
+    "semantic_hash": "12739ec126ea1497645c617496f8492e"
+  },
+  "openoutreach/core/migrations/0010_campaign_discovery_minted_at_qualified.py": {
+    "mtime": 1786947279.2526214,
+    "seen": 1788267653.4528928,
+    "ast_hash": "bb9676b69ecea28f153d6fd194681cab",
+    "semantic_hash": "bb9676b69ecea28f153d6fd194681cab"
+  },
+  "openoutreach/core/migrations/0011_collapse_prescreen_empties.py": {
+    "mtime": 1786947279.2526214,
+    "seen": 1788267653.4528942,
+    "ast_hash": "6c9cc32d2c89728fe4cd940e3c81e485",
+    "semantic_hash": "6c9cc32d2c89728fe4cd940e3c81e485"
+  },
+  "openoutreach/core/migrations/0012_campaign_anchor_embeddings_campaign_anchor_profiles.py": {
+    "mtime": 1786947279.271129,
+    "seen": 1788267653.4528956,
+    "ast_hash": "6398c0beb49cdbf24140946bdbf502d2",
+    "semantic_hash": "6398c0beb49cdbf24140946bdbf502d2"
+  },
+  "openoutreach/core/migrations/0013_keyword_querynode_remove_clause_uniq_clause_and_more.py": {
+    "mtime": 1786947279.278159,
+    "seen": 1788267653.4528973,
+    "ast_hash": "ebe41e44643d266a723fdba9c9faf407",
+    "semantic_hash": "ebe41e44643d266a723fdba9c9faf407"
+  },
+  "openoutreach/core/migrations/0014_delete_discoveryquery.py": {
+    "mtime": 1786947279.2878768,
+    "seen": 1788267653.452899,
+    "ast_hash": "d40d467169084698a6c13dca3bfd3d79",
+    "semantic_hash": "d40d467169084698a6c13dca3bfd3d79"
+  },
+  "openoutreach/core/migrations/0015_delete_task_drop_action_fraction.py": {
+    "mtime": 1786947279.2958262,
+    "seen": 1788267653.4529006,
+    "ast_hash": "80cba19891aeec82dba08955f7a37aa9",
+    "semantic_hash": "80cba19891aeec82dba08955f7a37aa9"
+  },
+  "openoutreach/core/migrations/__init__.py": {
+    "mtime": 1786947279.299845,
+    "seen": 1788267653.4529023,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "openoutreach/core/ml/__init__.py": {
+    "mtime": 1786947279.3099177,
+    "seen": 1788267653.4529207,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "openoutreach/core/ml/embeddings.py": {
+    "mtime": 1786947279.3179133,
+    "seen": 1788267653.452922,
+    "ast_hash": "858fa8005360a53f13e27dce620a5f7f",
+    "semantic_hash": "858fa8005360a53f13e27dce620a5f7f"
+  },
+  "openoutreach/core/ml/hub.py": {
+    "mtime": 1786947279.3288934,
+    "seen": 1788267653.452924,
+    "ast_hash": "5889e4314329662fd67e78e4d8604f77",
+    "semantic_hash": "5889e4314329662fd67e78e4d8604f77"
+  },
+  "openoutreach/core/ml/qualifier.py": {
+    "mtime": 1786947279.3386168,
+    "seen": 1788267653.4529257,
+    "ast_hash": "571e7f31f49168350931db2366910752",
+    "semantic_hash": "571e7f31f49168350931db2366910752"
+  },
+  "openoutreach/core/models.py": {
+    "mtime": 1786947278.9940338,
+    "seen": 1788267653.4529274,
+    "ast_hash": "de3cf164b88b5e9ea4c2f5c18b43a334",
+    "semantic_hash": "de3cf164b88b5e9ea4c2f5c18b43a334"
+  },
+  "openoutreach/core/onboarding.py": {
+    "mtime": 1786947279.0020695,
+    "seen": 1788267653.4529293,
+    "ast_hash": "d0b5a458ff3a6d24345ff39045c00147",
+    "semantic_hash": "d0b5a458ff3a6d24345ff39045c00147"
+  },
+  "openoutreach/core/onboarding_wizard.py": {
+    "mtime": 1786947279.010157,
+    "seen": 1788267653.452931,
+    "ast_hash": "5782237f885c85508c7c95b1d3519370",
+    "semantic_hash": "5782237f885c85508c7c95b1d3519370"
+  },
+  "openoutreach/core/operator.py": {
+    "mtime": 1786947279.010157,
+    "seen": 1788267653.452933,
+    "ast_hash": "0af4ce1a746ff1c4df52a6dad3380d85",
+    "semantic_hash": "0af4ce1a746ff1c4df52a6dad3380d85"
+  },
+  "openoutreach/core/pipeline/__init__.py": {
+    "mtime": 1786947279.3488793,
+    "seen": 1788267653.452935,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "openoutreach/core/pipeline/discover.py": {
+    "mtime": 1786947279.3567681,
+    "seen": 1788267653.4529362,
+    "ast_hash": "9797d1c47ef9d0d09bd39a33241acc42",
+    "semantic_hash": "9797d1c47ef9d0d09bd39a33241acc42"
+  },
+  "openoutreach/core/pipeline/freemium_pool.py": {
+    "mtime": 1786947279.3638053,
+    "seen": 1788267653.452938,
+    "ast_hash": "723be1d98cee59e88702a9920459bf37",
+    "semantic_hash": "723be1d98cee59e88702a9920459bf37"
+  },
+  "openoutreach/core/pipeline/icp.py": {
+    "mtime": 1786947279.373595,
+    "seen": 1788267653.4529397,
+    "ast_hash": "343610068e944fe182095688547d4457",
+    "semantic_hash": "343610068e944fe182095688547d4457"
+  },
+  "openoutreach/core/pipeline/qualify.py": {
+    "mtime": 1786947279.3804426,
+    "seen": 1788267653.4529417,
+    "ast_hash": "25e5261b92f7961d6fa20fd2360e939c",
+    "semantic_hash": "25e5261b92f7961d6fa20fd2360e939c"
+  },
+  "openoutreach/core/pipeline/ready_pool.py": {
+    "mtime": 1786947279.3887737,
+    "seen": 1788267653.452943,
+    "ast_hash": "6ce6a06b746a2c97db86cca489cae135",
+    "semantic_hash": "6ce6a06b746a2c97db86cca489cae135"
+  },
+  "openoutreach/core/pipeline/select.py": {
+    "mtime": 1786947279.3961644,
+    "seen": 1788267653.452945,
+    "ast_hash": "2c4eb9376936a9e8648808e47d7869ea",
+    "semantic_hash": "2c4eb9376936a9e8648808e47d7869ea"
+  },
+  "openoutreach/core/pipeline/top_up.py": {
+    "mtime": 1786947279.4067261,
+    "seen": 1788267653.4529464,
+    "ast_hash": "2318f65bf3b484ec3aa093037e4a0cf3",
+    "semantic_hash": "2318f65bf3b484ec3aa093037e4a0cf3"
+  },
+  "openoutreach/core/pipeline/vocabulary.py": {
+    "mtime": 1786947279.4127643,
+    "seen": 1788267653.4529483,
+    "ast_hash": "98a301dc0e266e975e13a0e8937b4405",
+    "semantic_hash": "98a301dc0e266e975e13a0e8937b4405"
+  },
+  "openoutreach/core/sending_window.py": {
+    "mtime": 1786947279.027496,
+    "seen": 1788267653.4529498,
+    "ast_hash": "760d2aa4efbd9d902d6a54e9abd68b3b",
+    "semantic_hash": "760d2aa4efbd9d902d6a54e9abd68b3b"
+  },
+  "openoutreach/core/setup/__init__.py": {
+    "mtime": 1786947279.4226165,
+    "seen": 1788267653.4529512,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "openoutreach/core/setup/freemium.py": {
+    "mtime": 1786947279.433494,
+    "seen": 1788267653.452953,
+    "ast_hash": "a97a73d29d41148b24546295fd95721e",
+    "semantic_hash": "a97a73d29d41148b24546295fd95721e"
+  },
+  "openoutreach/core/templates/__init__.py": {
+    "mtime": 1786947279.4429085,
+    "seen": 1788267653.4529545,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "openoutreach/core/vendor/__init__.py": {
+    "mtime": 1786947279.484388,
+    "seen": 1788267653.4529564,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "openoutreach/core/vendor/mem0/__init__.py": {
+    "mtime": 1786947279.4992514,
+    "seen": 1788267653.452958,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "openoutreach/core/vendor/mem0/configs/__init__.py": {
+    "mtime": 1786947279.508319,
+    "seen": 1788267653.45296,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "openoutreach/core/vendor/mem0/configs/prompts.py": {
+    "mtime": 1786947279.5160618,
+    "seen": 1788267653.4529614,
+    "ast_hash": "5ee043d4c47c445bbb3b2a2bd8474b73",
+    "semantic_hash": "5ee043d4c47c445bbb3b2a2bd8474b73"
+  },
+  "openoutreach/core/vendor/mem0/memory/__init__.py": {
+    "mtime": 1786947279.5243838,
+    "seen": 1788267653.4529634,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "openoutreach/core/vendor/mem0/memory/utils.py": {
+    "mtime": 1786947279.5363195,
+    "seen": 1788267653.452965,
+    "ast_hash": "0c653188417c307471c00fe5f2e89d3b",
+    "semantic_hash": "0c653188417c307471c00fe5f2e89d3b"
+  },
+  "openoutreach/core/version.py": {
+    "mtime": 1786947279.0355256,
+    "seen": 1788267653.4529667,
+    "ast_hash": "a8a8ae0fd8592e4519901ac9059048e3",
+    "semantic_hash": "a8a8ae0fd8592e4519901ac9059048e3"
+  },
+  "openoutreach/crm/__init__.py": {
+    "mtime": 1786947279.5478787,
+    "seen": 1788267653.4529681,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "openoutreach/crm/apps.py": {
+    "mtime": 1786947279.5537615,
+    "seen": 1788267653.45297,
+    "ast_hash": "cf8454691a53dfd350f34e23da76bbe6",
+    "semantic_hash": "cf8454691a53dfd350f34e23da76bbe6"
+  },
+  "openoutreach/crm/migrations/0001_initial.py": {
+    "mtime": 1786947279.581437,
+    "seen": 1788267653.4529715,
+    "ast_hash": "09ad644ee36a0de1de70154e715029b3",
+    "semantic_hash": "09ad644ee36a0de1de70154e715029b3"
+  },
+  "openoutreach/crm/migrations/0002_rename_description_to_profile_data.py": {
+    "mtime": 1786947279.593887,
+    "seen": 1788267653.4529734,
+    "ast_hash": "702f370423839fa9783ef527a75ed0e5",
+    "semantic_hash": "702f370423839fa9783ef527a75ed0e5"
+  },
+  "openoutreach/crm/migrations/0003_public_identifier_unique.py": {
+    "mtime": 1786947279.5962057,
+    "seen": 1788267653.452975,
+    "ast_hash": "e07ebc49bb9e643b0c4803f984c79c8e",
+    "semantic_hash": "e07ebc49bb9e643b0c4803f984c79c8e"
+  },
+  "openoutreach/crm/migrations/0004_alter_deal_state.py": {
+    "mtime": 1786947279.6108773,
+    "seen": 1788267653.4529767,
+    "ast_hash": "c6eb9ffa88a153d67bc8f307dceca85d",
+    "semantic_hash": "c6eb9ffa88a153d67bc8f307dceca85d"
+  },
+  "openoutreach/crm/migrations/0005_lead_urn.py": {
+    "mtime": 1786947279.6173904,
+    "seen": 1788267653.4529805,
+    "ast_hash": "eb03303c28c25e714f5ec5ecde32add2",
+    "semantic_hash": "eb03303c28c25e714f5ec5ecde32add2"
+  },
+  "openoutreach/crm/migrations/0006_deal_summaries.py": {
+    "mtime": 1786947279.6267326,
+    "seen": 1788267653.4529822,
+    "ast_hash": "fb674317baded97e26cd536154a2e4a7",
+    "semantic_hash": "fb674317baded97e26cd536154a2e4a7"
+  },
+  "openoutreach/crm/migrations/0007_drop_legacy_lead_fields.py": {
+    "mtime": 1786947279.6267326,
+    "seen": 1788267653.452984,
+    "ast_hash": "052d566489f312c388851963739ec805",
+    "semantic_hash": "052d566489f312c388851963739ec805"
+  },
+  "openoutreach/crm/migrations/0008_vacuum.py": {
+    "mtime": 1786947279.6431332,
+    "seen": 1788267653.4529855,
+    "ast_hash": "c23667f1720301f77b513a0b32b1356d",
+    "semantic_hash": "c23667f1720301f77b513a0b32b1356d"
+  },
+  "openoutreach/crm/migrations/0009_outcome.py": {
+    "mtime": 1786947279.6582282,
+    "seen": 1788267653.4529872,
+    "ast_hash": "afd43ffb72050ce0fed0c004f48d48e1",
+    "semantic_hash": "afd43ffb72050ce0fed0c004f48d48e1"
+  },
+  "openoutreach/crm/migrations/0010_deal_next_check_pending_at.py": {
+    "mtime": 1786947279.6582282,
+    "seen": 1788267653.4529889,
+    "ast_hash": "d9491c6097156aad8f0ce1f50e587434",
+    "semantic_hash": "d9491c6097156aad8f0ce1f50e587434"
+  },
+  "openoutreach/crm/migrations/0011_repoint_campaign_fk_to_core.py": {
+    "mtime": 1786947279.679546,
+    "seen": 1788267653.4529905,
+    "ast_hash": "4a6db9f4a75b534335f5557a87c6b50d",
+    "semantic_hash": "4a6db9f4a75b534335f5557a87c6b50d"
+  },
+  "openoutreach/crm/migrations/0012_lead_api_email_lead_contact_info.py": {
+    "mtime": 1786947279.6875117,
+    "seen": 1788267653.452992,
+    "ast_hash": "da2f6c5d78dfb5338cad93c97d8132ec",
+    "semantic_hash": "da2f6c5d78dfb5338cad93c97d8132ec"
+  },
+  "openoutreach/crm/migrations/0013_alter_deal_state.py": {
+    "mtime": 1786947279.6964054,
+    "seen": 1788267653.4529939,
+    "ast_hash": "eb8a4ac1c2ed04b6ffc8ae1bcd82c7ab",
+    "semantic_hash": "eb8a4ac1c2ed04b6ffc8ae1bcd82c7ab"
+  },
+  "openoutreach/crm/migrations/0014_pivot_lead_reshape.py": {
+    "mtime": 1786947279.7052314,
+    "seen": 1788267653.4529955,
+    "ast_hash": "e568c98ea8b0005af26dad7c9c7f4e15",
+    "semantic_hash": "e568c98ea8b0005af26dad7c9c7f4e15"
+  },
+  "openoutreach/crm/migrations/0015_lead_discovered_by.py": {
+    "mtime": 1786947279.7052314,
+    "seen": 1788267653.4529972,
+    "ast_hash": "42359e1a09fdaa60a4351af6c082f3b8",
+    "semantic_hash": "42359e1a09fdaa60a4351af6c082f3b8"
+  },
+  "openoutreach/crm/migrations/0016_alter_deal_state.py": {
+    "mtime": 1786947279.7215703,
+    "seen": 1788267653.4529989,
+    "ast_hash": "7e9aba23315590fa9a28e43f4dc867ac",
+    "semantic_hash": "7e9aba23315590fa9a28e43f4dc867ac"
+  },
+  "openoutreach/crm/migrations/0017_migrate_no_email_failures.py": {
+    "mtime": 1786947279.7367952,
+    "seen": 1788267653.4530008,
+    "ast_hash": "58b5c460672bcdafb4ee463c10ebeee5",
+    "semantic_hash": "58b5c460672bcdafb4ee463c10ebeee5"
+  },
+  "openoutreach/crm/migrations/0018_lead_source_fields_alter_lead_discovered_by.py": {
+    "mtime": 1786947279.7431023,
+    "seen": 1788267653.4530025,
+    "ast_hash": "fb7dbb2686a4996920dbfee257f57a07",
+    "semantic_hash": "fb7dbb2686a4996920dbfee257f57a07"
+  },
+  "openoutreach/crm/migrations/0019_alter_deal_state.py": {
+    "mtime": 1786947279.7527337,
+    "seen": 1788267653.453004,
+    "ast_hash": "1fd82f3ea8c71944a460cae2f1f86ace",
+    "semantic_hash": "1fd82f3ea8c71944a460cae2f1f86ace"
+  },
+  "openoutreach/crm/migrations/0020_deal_not_before_and_lookup_handle.py": {
+    "mtime": 1786947279.7527337,
+    "seen": 1788267653.4530056,
+    "ast_hash": "b786c32ae3bdef562c3962d2e8ce1154",
+    "semantic_hash": "b786c32ae3bdef562c3962d2e8ce1154"
+  },
+  "openoutreach/crm/migrations/0021_remove_deal_email_message_id_deal_thread.py": {
+    "mtime": 1786947279.7739968,
+    "seen": 1788267653.4530072,
+    "ast_hash": "296a31c560570d57925dd075a7c7b3ed",
+    "semantic_hash": "296a31c560570d57925dd075a7c7b3ed"
+  },
+  "openoutreach/crm/migrations/__init__.py": {
+    "mtime": 1786947279.7739968,
+    "seen": 1788267653.453009,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "openoutreach/crm/models/__init__.py": {
+    "mtime": 1786947279.795022,
+    "seen": 1788267653.4530103,
+    "ast_hash": "6bf4662cb1d34a27be90dcb16c1b4b5e",
+    "semantic_hash": "6bf4662cb1d34a27be90dcb16c1b4b5e"
+  },
+  "openoutreach/crm/models/deal.py": {
+    "mtime": 1786947279.803932,
+    "seen": 1788267653.453012,
+    "ast_hash": "3e42526a9d1d4bada871d8f77b1db8b8",
+    "semantic_hash": "3e42526a9d1d4bada871d8f77b1db8b8"
+  },
+  "openoutreach/crm/models/lead.py": {
+    "mtime": 1786947279.8155055,
+    "seen": 1788267653.4530137,
+    "ast_hash": "a2ff32a943d84c53f5b2a532280a9b86",
+    "semantic_hash": "a2ff32a943d84c53f5b2a532280a9b86"
+  },
+  "openoutreach/discovery.py": {
+    "mtime": 1786947278.760281,
+    "seen": 1788267653.4530153,
+    "ast_hash": "8e4fff3506699e34538a8deba774b3cc",
+    "semantic_hash": "8e4fff3506699e34538a8deba774b3cc"
+  },
+  "openoutreach/emails/__init__.py": {
+    "mtime": 1786947279.8311727,
+    "seen": 1788267653.453017,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "openoutreach/emails/admin.py": {
+    "mtime": 1786947279.8469484,
+    "seen": 1788267653.453019,
+    "ast_hash": "3ba73ceade9c169cd3c2c99bdcc71675",
+    "semantic_hash": "3ba73ceade9c169cd3c2c99bdcc71675"
+  },
+  "openoutreach/emails/apps.py": {
+    "mtime": 1786947279.8561954,
+    "seen": 1788267653.4530206,
+    "ast_hash": "a81501e6b5c9001143c49a9c4eb4ffd9",
+    "semantic_hash": "a81501e6b5c9001143c49a9c4eb4ffd9"
+  },
+  "openoutreach/emails/bettercontact.py": {
+    "mtime": 1786947279.8647764,
+    "seen": 1788267653.4530225,
+    "ast_hash": "9955ec7fd23c5c5d61faa9d52d6cb38d",
+    "semantic_hash": "9955ec7fd23c5c5d61faa9d52d6cb38d"
+  },
+  "openoutreach/emails/classify.py": {
+    "mtime": 1786947279.8667872,
+    "seen": 1788267653.453024,
+    "ast_hash": "06d2cb5ae0b854197b1a9bc22a923088",
+    "semantic_hash": "06d2cb5ae0b854197b1a9bc22a923088"
+  },
+  "openoutreach/emails/delivery_policy.py": {
+    "mtime": 1786947279.8784113,
+    "seen": 1788267653.4530258,
+    "ast_hash": "2c2a2a0005e424900e78364c7de2fee4",
+    "semantic_hash": "2c2a2a0005e424900e78364c7de2fee4"
+  },
+  "openoutreach/emails/mail_pass.py": {
+    "mtime": 1786947279.8784113,
+    "seen": 1788267653.4530272,
+    "ast_hash": "dfa8fb31b7e90d21d61f5909d3178343",
+    "semantic_hash": "dfa8fb31b7e90d21d61f5909d3178343"
+  },
+  "openoutreach/emails/migrations/0001_initial.py": {
+    "mtime": 1786947279.9890387,
+    "seen": 1788267653.4530292,
+    "ast_hash": "10ebafd26b63f4ad4f415744bb3ee930",
+    "semantic_hash": "10ebafd26b63f4ad4f415744bb3ee930"
+  },
+  "openoutreach/emails/migrations/0002_mailbox_signature.py": {
+    "mtime": 1786947279.991049,
+    "seen": 1788267653.4530306,
+    "ast_hash": "95445c0e2a688d655a368d58a7e2788a",
+    "semantic_hash": "95445c0e2a688d655a368d58a7e2788a"
+  },
+  "openoutreach/emails/migrations/0003_alter_mailbox_daily_limit.py": {
+    "mtime": 1786947280.0060277,
+    "seen": 1788267653.4530323,
+    "ast_hash": "a8c919a70b1477d99b7a5d5d2ab69f7e",
+    "semantic_hash": "a8c919a70b1477d99b7a5d5d2ab69f7e"
+  },
+  "openoutreach/emails/migrations/0004_alter_mailbox_daily_limit_sendverdict.py": {
+    "mtime": 1786947280.0162306,
+    "seen": 1788267653.4530342,
+    "ast_hash": "74068404e663e0670acd1b1e0f7e6ea7",
+    "semantic_hash": "74068404e663e0670acd1b1e0f7e6ea7"
+  },
+  "openoutreach/emails/migrations/0005_mailbox_unsub_scan_uid_and_more.py": {
+    "mtime": 1786947280.0242627,
+    "seen": 1788267653.4530358,
+    "ast_hash": "7bac85da0170faa6fa5ca667f7739118",
+    "semantic_hash": "7bac85da0170faa6fa5ca667f7739118"
+  },
+  "openoutreach/emails/migrations/0006_mailbox_next_send_at.py": {
+    "mtime": 1786947280.0332346,
+    "seen": 1788267653.4530377,
+    "ast_hash": "a3fac706387893d3f0f7b497a821a963",
+    "semantic_hash": "a3fac706387893d3f0f7b497a821a963"
+  },
+  "openoutreach/emails/migrations/0007_deliveryevent_foldercoverage_message_thread_and_more.py": {
+    "mtime": 1786947280.0431366,
+    "seen": 1788267653.4530394,
+    "ast_hash": "0a687e60b3b0d502e1928daba1a96528",
+    "semantic_hash": "0a687e60b3b0d502e1928daba1a96528"
+  },
+  "openoutreach/emails/migrations/0008_backfill_mail_log.py": {
+    "mtime": 1786947280.0525742,
+    "seen": 1788267653.453041,
+    "ast_hash": "260eabc4feb6fbb43d2e3d587fa8c385",
+    "semantic_hash": "260eabc4feb6fbb43d2e3d587fa8c385"
+  },
+  "openoutreach/emails/migrations/__init__.py": {
+    "mtime": 1786947280.0525742,
+    "seen": 1788267653.453043,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "openoutreach/emails/models/__init__.py": {
+    "mtime": 1786947280.0684638,
+    "seen": 1788267653.4530447,
+    "ast_hash": "3fd2a053279899daf1695d73e16e60d7",
+    "semantic_hash": "3fd2a053279899daf1695d73e16e60d7"
+  },
+  "openoutreach/emails/models/mailbox.py": {
+    "mtime": 1786947280.0758061,
+    "seen": 1788267653.4530463,
+    "ast_hash": "73f89ea1297c0b6c4ff19f5d49f31692",
+    "semantic_hash": "73f89ea1297c0b6c4ff19f5d49f31692"
+  },
+  "openoutreach/emails/models/maillog.py": {
+    "mtime": 1786947280.0917413,
+    "seen": 1788267653.453048,
+    "ast_hash": "e5c7cb57df76d01c36fb59bcdb0cc437",
+    "semantic_hash": "e5c7cb57df76d01c36fb59bcdb0cc437"
+  },
+  "openoutreach/emails/newsletter.py": {
+    "mtime": 1786947279.894153,
+    "seen": 1788267653.4530497,
+    "ast_hash": "ac53e5e5d3515a9e88a9f096b45babf9",
+    "semantic_hash": "ac53e5e5d3515a9e88a9f096b45babf9"
+  },
+  "openoutreach/emails/parsing.py": {
+    "mtime": 1786947279.9118416,
+    "seen": 1788267653.4530513,
+    "ast_hash": "0967b1c356dde9181f2d41e0bc207f99",
+    "semantic_hash": "0967b1c356dde9181f2d41e0bc207f99"
+  },
+  "openoutreach/emails/project.py": {
+    "mtime": 1786947279.9198961,
+    "seen": 1788267653.4530532,
+    "ast_hash": "f73bf1cc4bdea558d945ce3f1b09683a",
+    "semantic_hash": "f73bf1cc4bdea558d945ce3f1b09683a"
+  },
+  "openoutreach/emails/report.py": {
+    "mtime": 1786947279.9313087,
+    "seen": 1788267653.4530547,
+    "ast_hash": "64b60659a2733485157cfbe8ae5a9753",
+    "semantic_hash": "64b60659a2733485157cfbe8ae5a9753"
+  },
+  "openoutreach/emails/sender.py": {
+    "mtime": 1788762653.726174,
+    "seen": 1788762722.09928,
+    "ast_hash": "11b437cec6285dd274a9b5301240666d",
+    "semantic_hash": ""
+  },
+  "openoutreach/emails/smtp.py": {
+    "mtime": 1786947279.943096,
+    "seen": 1788267653.4530582,
+    "ast_hash": "9c56aef082ec334c18b8663d8681f0ab",
+    "semantic_hash": "9c56aef082ec334c18b8663d8681f0ab"
+  },
+  "openoutreach/emails/steps/__init__.py": {
+    "mtime": 1786947280.099418,
+    "seen": 1788267653.4530602,
+    "ast_hash": "1bb8813664c7928da0fc04b1ae6335e5",
+    "semantic_hash": "1bb8813664c7928da0fc04b1ae6335e5"
+  },
+  "openoutreach/emails/steps/lookup.py": {
+    "mtime": 1786947280.1137803,
+    "seen": 1788267653.4530616,
+    "ast_hash": "da1873097a7ad04c96d4cd6829349404",
+    "semantic_hash": "da1873097a7ad04c96d4cd6829349404"
+  },
+  "openoutreach/emails/steps/reply.py": {
+    "mtime": 1786947280.1205542,
+    "seen": 1788267653.4530635,
+    "ast_hash": "5abdbf70736dccbb2279eb36895387b3",
+    "semantic_hash": "5abdbf70736dccbb2279eb36895387b3"
+  },
+  "openoutreach/emails/steps/send.py": {
+    "mtime": 1786947280.1352558,
+    "seen": 1788267653.453065,
+    "ast_hash": "0441c735f29ba622e9426b6d62c99dc5",
+    "semantic_hash": "0441c735f29ba622e9426b6d62c99dc5"
+  },
+  "openoutreach/emails/sync.py": {
+    "mtime": 1786947279.9594684,
+    "seen": 1788267653.4530666,
+    "ast_hash": "50996c970c9284d851ba4e01682f6ea2",
+    "semantic_hash": "50996c970c9284d851ba4e01682f6ea2"
+  },
+  "openoutreach/emails/threads.py": {
+    "mtime": 1786947279.967405,
+    "seen": 1788267653.4530683,
+    "ast_hash": "cf93304660ef43f161f3cff56a8069d7",
+    "semantic_hash": "cf93304660ef43f161f3cff56a8069d7"
+  },
+  "openoutreach/emails/warmth.py": {
+    "mtime": 1786947279.973386,
+    "seen": 1788267653.4530702,
+    "ast_hash": "6a0c34a6c8219f7220e26f3028938d91",
+    "semantic_hash": "6a0c34a6c8219f7220e26f3028938d91"
+  },
+  "openoutreach/legacy/__init__.py": {
+    "mtime": 1786947280.14347,
+    "seen": 1788267653.4530716,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "openoutreach/legacy/apps.py": {
+    "mtime": 1786947280.155587,
+    "seen": 1788267653.4530735,
+    "ast_hash": "f12f887de7149e8e3904548e06510fcd",
+    "semantic_hash": "f12f887de7149e8e3904548e06510fcd"
+  },
+  "openoutreach/legacy/migrations/0001_initial.py": {
+    "mtime": 1786947280.1723049,
+    "seen": 1788267653.4530752,
+    "ast_hash": "4660cb402b15eff30af1f2184a702493",
+    "semantic_hash": "4660cb402b15eff30af1f2184a702493"
+  },
+  "openoutreach/legacy/migrations/0002_profile_self_lead.py": {
+    "mtime": 1786947280.1789827,
+    "seen": 1788267653.453077,
+    "ast_hash": "3eb991a4978d097e6638661d92bdf5d3",
+    "semantic_hash": "3eb991a4978d097e6638661d92bdf5d3"
+  },
+  "openoutreach/legacy/migrations/0003_siteconfig.py": {
+    "mtime": 1786947280.1982186,
+    "seen": 1788267653.4530787,
+    "ast_hash": "e5a2866266b6924f297a43f1955c06e3",
+    "semantic_hash": "e5a2866266b6924f297a43f1955c06e3"
+  },
+  "openoutreach/legacy/migrations/0004_compress_campaign_model_blob.py": {
+    "mtime": 1786947280.2024777,
+    "seen": 1788267653.4530804,
+    "ast_hash": "876bc6f9b8c0612840feca3018e925c4",
+    "semantic_hash": "876bc6f9b8c0612840feca3018e925c4"
+  },
+  "openoutreach/legacy/migrations/0005_remove_task_error.py": {
+    "mtime": 1786947280.2152207,
+    "seen": 1788267653.453082,
+    "ast_hash": "ea7cdf4ad18269d556d9b62dd33ed949",
+    "semantic_hash": "ea7cdf4ad18269d556d9b62dd33ed949"
+  },
+  "openoutreach/legacy/migrations/0006_update_default_limits.py": {
+    "mtime": 1786947280.2197635,
+    "seen": 1788267653.453084,
+    "ast_hash": "1382c42499f8e5bf1fb15b3a13952e2b",
+    "semantic_hash": "1382c42499f8e5bf1fb15b3a13952e2b"
+  },
+  "openoutreach/legacy/migrations/0007_siteconfig_llm_provider.py": {
+    "mtime": 1786947280.2353778,
+    "seen": 1788267653.4530854,
+    "ast_hash": "ca062000d6982638304393698e19569a",
+    "semantic_hash": "ca062000d6982638304393698e19569a"
+  },
+  "openoutreach/legacy/migrations/0008_drop_connect_weekly_limit.py": {
+    "mtime": 1786947280.243499,
+    "seen": 1788267653.4530873,
+    "ast_hash": "519e064297b97883df254f4dc8aabdcd",
+    "semantic_hash": "519e064297b97883df254f4dc8aabdcd"
+  },
+  "openoutreach/legacy/migrations/0009_drop_legacy_pending_tasks.py": {
+    "mtime": 1786947280.2522523,
+    "seen": 1788267653.453089,
+    "ast_hash": "e2e89dc2d8477c4f10ab6bef37fe4fcb",
+    "semantic_hash": "e2e89dc2d8477c4f10ab6bef37fe4fcb"
+  },
+  "openoutreach/legacy/migrations/0010_move_engine_models_to_core.py": {
+    "mtime": 1786947280.262088,
+    "seen": 1788267653.4530907,
+    "ast_hash": "6fd24069c2c89e4e89d57bb1e33d72f4",
+    "semantic_hash": "6fd24069c2c89e4e89d57bb1e33d72f4"
+  },
+  "openoutreach/legacy/migrations/0011_pivot_drop_channel_models.py": {
+    "mtime": 1786947280.270112,
+    "seen": 1788267653.4530923,
+    "ast_hash": "8c1362184b285256335b279a7b5f6101",
+    "semantic_hash": "8c1362184b285256335b279a7b5f6101"
+  },
+  "openoutreach/legacy/migrations/__init__.py": {
+    "mtime": 1786947280.2758787,
+    "seen": 1788267653.4530942,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "openoutreach/legacy/models.py": {
+    "mtime": 1786947280.1629632,
+    "seen": 1788267653.4530957,
+    "ast_hash": "f7f9ed6700e71f524d7c92cd7c0c60de",
+    "semantic_hash": "f7f9ed6700e71f524d7c92cd7c0c60de"
+  },
+  "openoutreach/settings.py": {
+    "mtime": 1786947278.7720914,
+    "seen": 1788267653.453097,
+    "ast_hash": "d1f67e5bada59c3f64b5a72dc17f3b84",
+    "semantic_hash": "d1f67e5bada59c3f64b5a72dc17f3b84"
+  },
+  "openoutreach/urls.py": {
+    "mtime": 1786947278.7794735,
+    "seen": 1788267653.453099,
+    "ast_hash": "6c6eb644d4a1e4eea366dc816fc2fa82",
+    "semantic_hash": "6c6eb644d4a1e4eea366dc816fc2fa82"
+  },
+  "tests/__init__.py": {
+    "mtime": 1786947280.3213046,
+    "seen": 1788267653.4531004,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "tests/agents/__init__.py": {
+    "mtime": 1786947280.5121498,
+    "seen": 1788267653.453102,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "tests/agents/test_outreach.py": {
+    "mtime": 1786947280.531875,
+    "seen": 1788267653.4531038,
+    "ast_hash": "bd7ea30f3414a105ba4a18d1237cd2e8",
+    "semantic_hash": "bd7ea30f3414a105ba4a18d1237cd2e8"
+  },
+  "tests/conftest.py": {
+    "mtime": 1786947280.3341925,
+    "seen": 1788267653.4531054,
+    "ast_hash": "3ffc1ad84d3021a9da7b2076cd716fbd",
+    "semantic_hash": "3ffc1ad84d3021a9da7b2076cd716fbd"
+  },
+  "tests/contacts/__init__.py": {
+    "mtime": 1786947280.5437903,
+    "seen": 1788267653.453107,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "tests/contacts/test_service.py": {
+    "mtime": 1786947280.5437903,
+    "seen": 1788267653.453109,
+    "ast_hash": "19e1e5f8cc2dfb5a6a5e3a03ed7a0b51",
+    "semantic_hash": "19e1e5f8cc2dfb5a6a5e3a03ed7a0b51"
+  },
+  "tests/db/__init__.py": {
+    "mtime": 1786947280.5597541,
+    "seen": 1788267653.4531105,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "tests/db/test_deals.py": {
+    "mtime": 1786947280.573358,
+    "seen": 1788267653.4531124,
+    "ast_hash": "f24729b2fce4267b378e97ca438eed76",
+    "semantic_hash": "f24729b2fce4267b378e97ca438eed76"
+  },
+  "tests/db/test_summaries.py": {
+    "mtime": 1786947280.5846775,
+    "seen": 1788267653.453114,
+    "ast_hash": "9e249fd5cff66bfc37eaa293d4fc34b0",
+    "semantic_hash": "9e249fd5cff66bfc37eaa293d4fc34b0"
+  },
+  "tests/emails/__init__.py": {
+    "mtime": 1786947280.5963447,
+    "seen": 1788267653.4531157,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "tests/emails/fake_imap.py": {
+    "mtime": 1786947280.5963447,
+    "seen": 1788267653.4531171,
+    "ast_hash": "4714ebbb628ef7a7eb87ec60c1bb7a69",
+    "semantic_hash": "4714ebbb628ef7a7eb87ec60c1bb7a69"
+  },
+  "tests/emails/maillog.py": {
+    "mtime": 1786947280.6070206,
+    "seen": 1788267653.453119,
+    "ast_hash": "22c29267cbad5b4a0285cbde5ecfa448",
+    "semantic_hash": "22c29267cbad5b4a0285cbde5ecfa448"
+  },
+  "tests/emails/test_bettercontact.py": {
+    "mtime": 1786947280.6184545,
+    "seen": 1788267653.4531205,
+    "ast_hash": "d7cf4084db8a69ee42c799cf92b9498a",
+    "semantic_hash": "d7cf4084db8a69ee42c799cf92b9498a"
+  },
+  "tests/emails/test_classify.py": {
+    "mtime": 1786947280.6306367,
+    "seen": 1788267653.4531224,
+    "ast_hash": "cab976cb79127de8f29a46a709697bbc",
+    "semantic_hash": "cab976cb79127de8f29a46a709697bbc"
+  },
+  "tests/emails/test_delivery_policy.py": {
+    "mtime": 1786947280.6386833,
+    "seen": 1788267653.4531238,
+    "ast_hash": "bb861e419e53abee903e3aa707c3b66f",
+    "semantic_hash": "bb861e419e53abee903e3aa707c3b66f"
+  },
+  "tests/emails/test_lookup.py": {
+    "mtime": 1786947280.6499393,
+    "seen": 1788267653.4531255,
+    "ast_hash": "e4354db23c89fa56890f2d1bf9fc99bc",
+    "semantic_hash": "e4354db23c89fa56890f2d1bf9fc99bc"
+  },
+  "tests/emails/test_mail_pass.py": {
+    "mtime": 1786947280.6600387,
+    "seen": 1788267653.453127,
+    "ast_hash": "6254ea2e50291c572ef3f76319ab5880",
+    "semantic_hash": "6254ea2e50291c572ef3f76319ab5880"
+  },
+  "tests/emails/test_mailbox.py": {
+    "mtime": 1786947280.6665988,
+    "seen": 1788267653.4531288,
+    "ast_hash": "e01220e68feaf9d0c5864226e879afe4",
+    "semantic_hash": "e01220e68feaf9d0c5864226e879afe4"
+  },
+  "tests/emails/test_project.py": {
+    "mtime": 1786947280.6792698,
+    "seen": 1788267653.4531302,
+    "ast_hash": "c9acc4cdc76d12e1cbf70ba8642df84b",
+    "semantic_hash": "c9acc4cdc76d12e1cbf70ba8642df84b"
+  },
+  "tests/emails/test_reply.py": {
+    "mtime": 1786947280.6885858,
+    "seen": 1788267653.4531317,
+    "ast_hash": "6bdf8a87882845483fbf3cc69cad5517",
+    "semantic_hash": "6bdf8a87882845483fbf3cc69cad5517"
+  },
+  "tests/emails/test_send.py": {
+    "mtime": 1786947280.692604,
+    "seen": 1788267653.4531336,
+    "ast_hash": "db5c5a88b44ce8027d73451fd49068bb",
+    "semantic_hash": "db5c5a88b44ce8027d73451fd49068bb"
+  },
+  "tests/emails/test_smtp.py": {
+    "mtime": 1786947280.7044127,
+    "seen": 1788267653.453135,
+    "ast_hash": "1665c3b281134dc0e1bea5513514824c",
+    "semantic_hash": "1665c3b281134dc0e1bea5513514824c"
+  },
+  "tests/emails/test_sync.py": {
+    "mtime": 1786947280.7183218,
+    "seen": 1788267653.453137,
+    "ast_hash": "bc6b830f7e4b822b3e35ab6be06c876e",
+    "semantic_hash": "bc6b830f7e4b822b3e35ab6be06c876e"
+  },
+  "tests/emails/test_unsubscribe.py": {
+    "mtime": 1786947280.7299817,
+    "seen": 1788267653.4531384,
+    "ast_hash": "1742bb508ac511ec061571a60347e2cb",
+    "semantic_hash": "1742bb508ac511ec061571a60347e2cb"
+  },
+  "tests/emails/test_warmth.py": {
+    "mtime": 1786947280.7340016,
+    "seen": 1788267653.4531403,
+    "ast_hash": "62530f5957b54b64a1d27e60b3c3722b",
+    "semantic_hash": "62530f5957b54b64a1d27e60b3c3722b"
+  },
+  "tests/factories.py": {
+    "mtime": 1786947280.3456059,
+    "seen": 1788267653.453142,
+    "ast_hash": "ed9076b56b8429b0b2fe39ecc1b76450",
+    "semantic_hash": "ed9076b56b8429b0b2fe39ecc1b76450"
+  },
+  "tests/ml/__init__.py": {
+    "mtime": 1786947280.7565694,
+    "seen": 1788267653.4531438,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "tests/ml/test_embeddings.py": {
+    "mtime": 1786947280.7733386,
+    "seen": 1788267653.4531453,
+    "ast_hash": "b6cfbb305ef666653386ca9a9dd04977",
+    "semantic_hash": "b6cfbb305ef666653386ca9a9dd04977"
+  },
+  "tests/ml/test_qualifier.py": {
+    "mtime": 1786947280.7818253,
+    "seen": 1788267653.4531472,
+    "ast_hash": "edb72a49335dd08655f985909e1b2175",
+    "semantic_hash": "edb72a49335dd08655f985909e1b2175"
+  },
+  "tests/test_anchors.py": {
+    "mtime": 1786947280.3552377,
+    "seen": 1788267653.4531486,
+    "ast_hash": "285b30cde28f81d513926887957b7c75",
+    "semantic_hash": "285b30cde28f81d513926887957b7c75"
+  },
+  "tests/test_business_time.py": {
+    "mtime": 1786947280.3552377,
+    "seen": 1788267653.4531505,
+    "ast_hash": "e02fe9549aead7e54d165124b627b54a",
+    "semantic_hash": "e02fe9549aead7e54d165124b627b54a"
+  },
+  "tests/test_cycle.py": {
+    "mtime": 1786947280.3756592,
+    "seen": 1788267653.453152,
+    "ast_hash": "3c4b3ac58f86bcadfcef6a4db20cb95b",
+    "semantic_hash": "3c4b3ac58f86bcadfcef6a4db20cb95b"
+  },
+  "tests/test_db_option.py": {
+    "mtime": 1786947280.385273,
+    "seen": 1788267653.4531538,
+    "ast_hash": "b83954c5fd8f4b916e868e3617a8c2f7",
+    "semantic_hash": "b83954c5fd8f4b916e868e3617a8c2f7"
+  },
+  "tests/test_discovery.py": {
+    "mtime": 1786947280.394208,
+    "seen": 1788267653.4531553,
+    "ast_hash": "0679086b9558f9a9e7aa51335e09b024",
+    "semantic_hash": "0679086b9558f9a9e7aa51335e09b024"
+  },
+  "tests/test_discovery_wiring.py": {
+    "mtime": 1786947280.4049766,
+    "seen": 1788267653.4531572,
+    "ast_hash": "c15ab01fbc8b45c168599a4d743ce727",
+    "semantic_hash": "c15ab01fbc8b45c168599a4d743ce727"
+  },
+  "tests/test_email_attachments.py": {
+    "mtime": 1788760951.44609,
+    "seen": 1788761086.8282614,
+    "ast_hash": "ce054fb79ad356e80d1513a628ca50b1",
+    "semantic_hash": ""
+  },
+  "tests/test_geo.py": {
+    "mtime": 1786947280.41283,
+    "seen": 1788267653.4531605,
+    "ast_hash": "70d553db95cf60dc053926109be3c663",
+    "semantic_hash": "70d553db95cf60dc053926109be3c663"
+  },
+  "tests/test_lead_search.py": {
+    "mtime": 1787816037.3032677,
+    "seen": 1788267653.453162,
+    "ast_hash": "32606a4da432ca360f450947b198fb03",
+    "semantic_hash": "32606a4da432ca360f450947b198fb03"
+  },
+  "tests/test_llm.py": {
+    "mtime": 1786947280.4237533,
+    "seen": 1788267653.4531639,
+    "ast_hash": "0e9161df20a75d6015a04cfb1202c519",
+    "semantic_hash": "0e9161df20a75d6015a04cfb1202c519"
+  },
+  "tests/test_mail_log_backfill.py": {
+    "mtime": 1786947280.432579,
+    "seen": 1788267653.4531653,
+    "ast_hash": "622849116dcce5a2a85d64074296f44a",
+    "semantic_hash": "622849116dcce5a2a85d64074296f44a"
+  },
+  "tests/test_master_lead_database.py": {
+    "mtime": 1787814490.9687834,
+    "seen": 1788267653.4531672,
+    "ast_hash": "889b06477a03f92b6a672743f066aa83",
+    "semantic_hash": "889b06477a03f92b6a672743f066aa83"
+  },
+  "tests/test_migration_compat.py": {
+    "mtime": 1786947280.4436133,
+    "seen": 1788267653.4531686,
+    "ast_hash": "7e22c3b3ae3899f8e81aff75e0914c16",
+    "semantic_hash": "7e22c3b3ae3899f8e81aff75e0914c16"
+  },
+  "tests/test_onboarding.py": {
+    "mtime": 1786947280.453032,
+    "seen": 1788267653.45317,
+    "ast_hash": "45e27d080767c139ee7399f3e49a4551",
+    "semantic_hash": "45e27d080767c139ee7399f3e49a4551"
+  },
+  "tests/test_onboarding_wizard.py": {
+    "mtime": 1786947280.4570577,
+    "seen": 1788267653.453172,
+    "ast_hash": "d652cbb4411a685cc61d83227533c787",
+    "semantic_hash": "d652cbb4411a685cc61d83227533c787"
+  },
+  "tests/test_qualify.py": {
+    "mtime": 1786947280.4674492,
+    "seen": 1788267653.4531734,
+    "ast_hash": "e3f741a85263510cd0b3eb178fb45203",
+    "semantic_hash": "e3f741a85263510cd0b3eb178fb45203"
+  },
+  "tests/test_ready_pool.py": {
+    "mtime": 1786947280.480306,
+    "seen": 1788267653.4531753,
+    "ast_hash": "088c4fb3c02f34b12fa7f3985f026ff2",
+    "semantic_hash": "088c4fb3c02f34b12fa7f3985f026ff2"
+  },
+  "tests/test_reset_pipeline.py": {
+    "mtime": 1786947280.490365,
+    "seen": 1788267653.4531767,
+    "ast_hash": "a44d2f42cc838db3eef3d088274dcab0",
+    "semantic_hash": "a44d2f42cc838db3eef3d088274dcab0"
+  },
+  "tests/test_select.py": {
+    "mtime": 1786947280.4962168,
+    "seen": 1788267653.4531784,
+    "ast_hash": "7b1f9ab8c5a1eabeebb8a55cd10429d6",
+    "semantic_hash": "7b1f9ab8c5a1eabeebb8a55cd10429d6"
+  },
+  "tests/test_sending_window.py": {
+    "mtime": 1786947280.4962168,
+    "seen": 1788267653.45318,
+    "ast_hash": "5c00ee17a7def921eb88ba95a28386ee",
+    "semantic_hash": "5c00ee17a7def921eb88ba95a28386ee"
+  },
+  "tests/test_version.py": {
+    "mtime": 1786947280.5121498,
+    "seen": 1788267653.4531817,
+    "ast_hash": "2d78352ff6946712ce7d569817436a50",
+    "semantic_hash": "2d78352ff6946712ce7d569817436a50"
+  },
+  ".agents/rules/graphify.md": {
+    "mtime": 1788267459.6095536,
+    "seen": 1788411760.537862,
+    "ast_hash": "a0e4d192b9e2e17256124dbfc8e24e6a",
+    "semantic_hash": ""
+  },
+  ".agents/workflows/graphify.md": {
+    "mtime": 1788267459.6095536,
+    "seen": 1788411760.5378652,
+    "ast_hash": "a831cf3669f1e6ab85d8a80ebe655f99",
+    "semantic_hash": ""
+  },
+  ".github/FUNDING.yml": {
+    "mtime": 1786947278.5642328,
+    "seen": 1788411760.5378675,
+    "ast_hash": "5673d74e21521874a0208128928d7e80",
+    "semantic_hash": ""
+  },
+  ".github/workflows/deploy.yml": {
+    "mtime": 1786947278.5702689,
+    "seen": 1788411760.53787,
+    "ast_hash": "f55136c02850aebb1642b781fce5fd50",
+    "semantic_hash": ""
+  },
+  ".github/workflows/tests.yml": {
+    "mtime": 1786947278.5807352,
+    "seen": 1788411760.5378718,
+    "ast_hash": "7b4054311ab9e7d927d1c2d319d48d7d",
+    "semantic_hash": ""
+  },
+  "ARCHITECTURE.md": {
+    "mtime": 1788506239.084895,
+    "seen": 1788759744.7566812,
+    "ast_hash": "77d97177a1e0a4967b19bd05c1bde1b2",
+    "semantic_hash": ""
+  },
+  "CLAUDE.md": {
+    "mtime": 1788506172.5257287,
+    "seen": 1788759744.7566822,
+    "ast_hash": "e0736aaeb9dfce1a4dc6ac791a1fde87",
+    "semantic_hash": ""
+  },
+  "FEATURE_ROADMAP.md": {
+    "mtime": 1788506158.0612586,
+    "seen": 1788759744.7566833,
+    "ast_hash": "82851d39bbaa5abd664d867950a24904",
+    "semantic_hash": ""
+  },
+  "LEGAL_NOTICE.md": {
+    "mtime": 1786947278.5033028,
+    "seen": 1788411760.5378807,
+    "ast_hash": "c441e69f1c4f145a079ea13549db2ed9",
+    "semantic_hash": ""
+  },
+  "LICENCE.md": {
+    "mtime": 1786947278.5095701,
+    "seen": 1788411760.5378826,
+    "ast_hash": "dedcfd78ca4eab2efdf6a4c5be1ab762",
+    "semantic_hash": ""
+  },
+  "PRIVACY_NOTICE.md": {
+    "mtime": 1786947278.5236752,
+    "seen": 1788411760.5378847,
+    "ast_hash": "194185576677f6dec5c2e5f86d67e164",
+    "semantic_hash": ""
+  },
+  "README.md": {
+    "mtime": 1788506071.1675,
+    "seen": 1788759744.756688,
+    "ast_hash": "3d4f7109ef33c94615a2580a4df37da9",
+    "semantic_hash": ""
+  },
+  "docker-compose.yml": {
+    "mtime": 1787647882.031637,
+    "seen": 1788411760.5378888,
+    "ast_hash": "1882f91c5c20175387f4f1eab4c40793",
+    "semantic_hash": ""
+  },
+  "docs/USER_GUIDE_HANDBOOK.md": {
+    "mtime": 1788506085.4722035,
+    "seen": 1788759744.7566905,
+    "ast_hash": "56d8679bd5b11af1db6f6a31953b1271",
+    "semantic_hash": ""
+  },
+  "docs/architecture.md": {
+    "mtime": 1786947278.6173882,
+    "seen": 1788411760.5378926,
+    "ast_hash": "ff6d8aace58ed65a536a30070438bd0c",
+    "semantic_hash": ""
+  },
+  "docs/configuration.md": {
+    "mtime": 1788506213.7491171,
+    "seen": 1788759744.7566926,
+    "ast_hash": "2a8560e06af888bf439ba4e2d922be42",
+    "semantic_hash": ""
+  },
+  "docs/csv_upload_copilot_plan.md": {
+    "mtime": 1788506220.4535437,
+    "seen": 1788759744.7566938,
+    "ast_hash": "edf65d2c31379dc5e506694e0ffa9b50",
+    "semantic_hash": ""
+  },
+  "docs/default_campaign.md": {
+    "mtime": 1786947278.629152,
+    "seen": 1788411760.5378985,
+    "ast_hash": "1335c8afe23713b457a33c5688c5ff77",
+    "semantic_hash": ""
+  },
+  "docs/docker.md": {
+    "mtime": 1786947278.6928816,
+    "seen": 1788411760.5379004,
+    "ast_hash": "5a9d6952919abd8d26724e6cdc542a37",
+    "semantic_hash": ""
+  },
+  "docs/outreach_agent.md": {
+    "mtime": 1786947278.7107692,
+    "seen": 1788411760.5379026,
+    "ast_hash": "5e3d85098b347177f6e81c1cef4fd2b0",
+    "semantic_hash": ""
+  },
+  "docs/profile_lifecycle.md": {
+    "mtime": 1786947278.7176576,
+    "seen": 1788411760.5379045,
+    "ast_hash": "051598ebb022ca2d76311e04858c4c30",
+    "semantic_hash": ""
+  },
+  "docs/roles/DEVELOPER_INTEGRATOR_GUIDE.md": {
+    "mtime": 1788506098.058003,
+    "seen": 1788759744.7567008,
+    "ast_hash": "f07c130c0751f8649e0147f17ed59692",
+    "semantic_hash": ""
+  },
+  "docs/roles/GROWTH_MARKETING_GUIDE.md": {
+    "mtime": 1788506107.8310046,
+    "seen": 1788759744.7567017,
+    "ast_hash": "8238be2d0ffbf8312c6c788cec5faa21",
+    "semantic_hash": ""
+  },
+  "docs/roles/SALES_OPS_ADMIN_GUIDE.md": {
+    "mtime": 1788506116.342057,
+    "seen": 1788759744.756703,
+    "ast_hash": "e328f24ed3b258fd3733662545b5ea42",
+    "semantic_hash": ""
+  },
+  "docs/roles/SDR_BDR_GUIDE.md": {
+    "mtime": 1788506126.1712537,
+    "seen": 1788759744.756704,
+    "ast_hash": "7346b7154748accaf7163e8725db73fc",
+    "semantic_hash": ""
+  },
+  "docs/template-variables.md": {
+    "mtime": 1786947278.7249198,
+    "seen": 1788411760.537915,
+    "ast_hash": "ad7a737c3bdf6107faa7a20065e79a9c",
+    "semantic_hash": ""
+  },
+  "docs/templating.md": {
+    "mtime": 1786947278.7313366,
+    "seen": 1788411760.537917,
+    "ast_hash": "d076d6db165724af1eaa0cd69f65d429",
+    "semantic_hash": ""
+  },
+  "docs/testing.md": {
+    "mtime": 1788506228.1768987,
+    "seen": 1788759744.7567074,
+    "ast_hash": "a74ae82856e40f2334fe84ec9be8beae",
+    "semantic_hash": ""
+  },
+  "frontend/index.html": {
+    "mtime": 1787647957.5213573,
+    "seen": 1788411760.5379212,
+    "ast_hash": "adf2b74981db387dd4cdbf5e665c092c",
+    "semantic_hash": ""
+  },
+  "openoutreach/crm/models/to_translate.txt": {
+    "mtime": 1786947279.8249154,
+    "seen": 1788411760.5379233,
+    "ast_hash": "22df022781ca369e2bbd36d27c850d4d",
+    "semantic_hash": ""
+  },
+  "requirements.txt": {
+    "mtime": 1787647946.3911858,
+    "seen": 1788411760.5379255,
+    "ast_hash": "1ff47513811ddbfc17f78d3641dabd11",
+    "semantic_hash": ""
+  },
+  "requirements/base.txt": {
+    "mtime": 1786947280.2896743,
+    "seen": 1788411760.5379276,
+    "ast_hash": "140227c654b4477eb44004367549c355",
+    "semantic_hash": ""
+  },
+  "requirements/crm.txt": {
+    "mtime": 1786947280.2943776,
+    "seen": 1788411760.5379295,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "requirements/local.txt": {
+    "mtime": 1786947280.3055494,
+    "seen": 1788411760.5379357,
+    "ast_hash": "54ea6ffb425fc7ed1fe38f701ca3dfb5",
+    "semantic_hash": ""
+  },
+  "requirements/production.txt": {
+    "mtime": 1786947280.3137777,
+    "seen": 1788411760.5379446,
+    "ast_hash": "e49c005a183e09ddc3f73c9860492f58",
+    "semantic_hash": ""
+  },
+  "backend/app/static/Corporate_Capabilities_Overview.pdf": {
+    "mtime": 1787765825.6135032,
+    "seen": 1788411760.537947,
+    "ast_hash": "c470055a41533498c40ed8a9f8206bd9",
+    "semantic_hash": ""
+  },
+  "backend/app/static/openoutreach-banner.pdf": {
+    "mtime": 1787765825.6340618,
+    "seen": 1788411760.537949,
+    "ast_hash": "0abd265406cca7ccbccad11bda959bc7",
+    "semantic_hash": ""
+  },
+  "uploads/attachments/4e390afef3814e719ec6d54e9d84f002_Techknomatic-Company-Profile_1__1_.pdf": {
+    "mtime": 1787760343.3176713,
+    "seen": 1788411760.5379512,
+    "ast_hash": "bc9108fa9285412e8a6dd4ea6c7154ec",
+    "semantic_hash": ""
+  },
+  "uploads/attachments/ad01f56af945458fa172ebe0c57cc21e_Techknomatic-Company-Profile_1__1_.pdf": {
+    "mtime": 1787759692.710945,
+    "seen": 1788411760.5379534,
+    "ast_hash": "bc9108fa9285412e8a6dd4ea6c7154ec",
+    "semantic_hash": ""
+  },
+  "backend/app/static/openoutreach-banner.jpg": {
+    "mtime": 1787746414.0727215,
+    "seen": 1788411760.5379553,
+    "ast_hash": "19b3fcd37caf12f5b6bb738bacbc6eb5",
+    "semantic_hash": ""
+  },
+  "docs/demo.gif": {
+    "mtime": 1786947278.6771789,
+    "seen": 1788411760.5379574,
+    "ast_hash": "12d658fde34d007a398e947b44e2dacd",
+    "semantic_hash": ""
+  },
+  "docs/logo.png": {
+    "mtime": 1786947278.703611,
+    "seen": 1788411760.5379593,
+    "ast_hash": "87099f8a9fb32f6f7b93d478fd2656fc",
+    "semantic_hash": ""
+  },
+  "frontend/public/openoutreach-banner.jpg": {
+    "mtime": 1787746414.0727215,
+    "seen": 1788411760.5379615,
+    "ast_hash": "19b3fcd37caf12f5b6bb738bacbc6eb5",
+    "semantic_hash": ""
+  },
+  "uploads/attachments/4c6550c859a946888c54c8c32f04146c_Techknomatic-Company-Profile_1__1__page-0001.jpg": {
+    "mtime": 1787759485.5029056,
+    "seen": 1788411760.5379636,
+    "ast_hash": "5cd9d5ccf479f81cc74e6b3adc4d62f3",
+    "semantic_hash": ""
+  },
+  "uploads/attachments/a9b7344c5f824eb785b1e17dc1244c7b_Techknomatic-Company-Profile_1__1__page-0001.jpg": {
+    "mtime": 1787761642.2704601,
+    "seen": 1788411760.5379653,
+    "ast_hash": "5cd9d5ccf479f81cc74e6b3adc4d62f3",
+    "semantic_hash": ""
+  },
+  "backend/app/core/security.py": {
+    "mtime": 1788505238.1277933,
+    "seen": 1788505559.6713233,
+    "ast_hash": "fd48fe0fc1d566619b9730ee3dad7a27",
+    "semantic_hash": ""
+  },
+  "backend/app/models/user.py": {
+    "mtime": 1788505203.1080623,
+    "seen": 1788505559.671359,
+    "ast_hash": "4809df4f72392ff57cafda37fe610503",
+    "semantic_hash": ""
+  },
+  "backend/app/schemas/user.py": {
+    "mtime": 1788507224.9110765,
+    "seen": 1788759744.756348,
+    "ast_hash": "93d22ea7da5f46e1ddea6fbd5c0f33a9",
+    "semantic_hash": ""
+  },
+  "frontend/src/context/AuthContext.jsx": {
+    "mtime": 1788505417.901535,
+    "seen": 1788505559.6714842,
+    "ast_hash": "9f22fbfe4d2120763bb1f5e6cbd925e4",
+    "semantic_hash": ""
+  },
+  "frontend/src/pages/AuthPage.jsx": {
+    "mtime": 1788505448.0767698,
+    "seen": 1788505559.6714923,
+    "ast_hash": "20729b5e2e19cd3cb147c48577323348",
+    "semantic_hash": ""
+  }
+}
