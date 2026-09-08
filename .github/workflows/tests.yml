@@ -1,4 +1,4 @@
-name: Tests
+name: Tests & Build
 
 on:
   push:
@@ -6,10 +6,41 @@ on:
   pull_request:
 
 jobs:
-  test:
+  backend-test:
+    name: Backend Tests (FastAPI / Python)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Run tests
-        run: HOST_UID=$(id -u) HOST_GID=$(id -g) make docker-test
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest pytest-asyncio pytest-django
+
+      - name: Run test suite
+        run: |
+          pytest tests/test_campaign_sequence_timer.py tests/test_sequence_api.py -v
+
+  frontend-build:
+    name: Frontend Build (React / Vite)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies & build
+        working-directory: ./frontend
+        run: |
+          npm ci || npm install
+          npm run build

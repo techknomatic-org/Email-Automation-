@@ -16,28 +16,27 @@ run: ## run the daemon
 	python manage.py rundaemon
 
 test: ## run the test suite
-	.venv/bin/pytest
+	pytest tests/test_campaign_sequence_timer.py tests/test_sequence_api.py
 
 admin: ## start the Django Admin web server
 	@echo ""
-	@echo "  Django Admin: http://localhost:8000/admin/"
-	@echo "  No superuser yet? Run: python manage.py createsuperuser"
+	@echo "  FastAPI / OpenOutreach API: http://localhost:8000"
 	@echo ""
-	python manage.py runserver
+	uvicorn backend.app.main:app --host 127.0.0.1 --port 8000 --reload
 
 # Docker targets
 logs: ## follow the logs of the service
-	docker compose -f local.yml logs -f
+	docker compose -f docker-compose.yml logs -f
 
-docker-test: ## run tests in Docker
-	docker compose -f local.yml run --remove-orphans app py.test -vv -p no:cacheprovider
+docker-test: ## run tests
+	pytest tests/test_campaign_sequence_timer.py tests/test_sequence_api.py
 
 stop: ## stop all services defined in Docker Compose
-	docker compose -f local.yml stop
+	docker compose -f docker-compose.yml stop
 
 build: ## build all services defined in Docker Compose
-	docker compose -f local.yml build
+	docker compose -f docker-compose.yml build
 
 up: ## run the defined service in Docker Compose
-	docker compose -f local.yml up --build -d
-	docker compose -f local.yml logs -f
+	docker compose -f docker-compose.yml up --build -d
+	docker compose -f docker-compose.yml logs -f
