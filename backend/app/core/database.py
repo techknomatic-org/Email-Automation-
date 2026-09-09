@@ -67,6 +67,9 @@ def init_db():
     import backend.app.models.lead_intelligence
     import backend.app.models.email_event
 
+    # Create all database tables if they do not exist
+    Base.metadata.create_all(bind=engine)
+
     if "postgresql" in str(engine.url):
         with engine.connect() as conn:
             try:
