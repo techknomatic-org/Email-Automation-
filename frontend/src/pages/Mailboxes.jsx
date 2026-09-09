@@ -141,7 +141,7 @@ export default function Mailboxes() {
           <div>
             <button
               className="btn"
-              style={{ backgroundColor: '#4f46e5', color: '#fff', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}
+              style={{ fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}
               onClick={() => openConnectModal()}
             >
               <Key size={16} /> + Connect Gmail (App Password / SMTP)
@@ -152,15 +152,15 @@ export default function Mailboxes() {
 
       {/* SMTP / Gmail App Password Connection Modal */}
       {showModal && (
-        <div className="card" style={{ padding: '1.25rem', backgroundColor: 'var(--bg-card)', border: '1px solid #6366f1' }}>
+        <div className="card" style={{ padding: '1.25rem', backgroundColor: 'var(--bg-card)', border: '1px solid var(--border)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.8rem' }}>
-            <h3 style={{ margin: 0, color: '#818cf8', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <Key size={18} /> Connect Gmail via App Password (SMTP)
+            <h3 style={{ margin: 0, color: 'var(--text-main)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <Key size={18} style={{ color: 'var(--accent)' }} /> Connect Gmail via App Password (SMTP)
             </h3>
-            <button className="btn" style={{ fontSize: '0.75rem', padding: '0.2rem 0.5rem' }} onClick={() => setShowModal(false)}>✕ Close</button>
+            <button className="btn btn-ghost" style={{ fontSize: '0.75rem', padding: '0.2rem 0.5rem' }} onClick={() => setShowModal(false)}>✕ Close</button>
           </div>
 
-          <div style={{ backgroundColor: 'rgba(99, 102, 241, 0.1)', padding: '0.8rem 1rem', borderRadius: '6px', marginBottom: '1rem', border: '1px solid rgba(99, 102, 241, 0.2)', fontSize: '0.82rem' }}>
+          <div style={{ backgroundColor: 'var(--accent-light)', padding: '0.8rem 1rem', borderRadius: '6px', marginBottom: '1rem', border: '1px solid rgba(232, 98, 44, 0.2)', fontSize: '0.82rem', color: 'var(--text-main)' }}>
             <strong>💡 Quick 30-Second Setup:</strong>
             <ol style={{ margin: '0.4rem 0 0 1.2rem', padding: 0 }}>
               <li>Open <strong>myaccount.google.com/apppasswords</strong> in your browser.</li>
@@ -298,22 +298,22 @@ export default function Mailboxes() {
                   <tr key={m.id}>
                     <td>#{m.id}</td>
                     <td>
-                      <div style={{ fontWeight: 700, color: '#e0e7ff', fontSize: '0.9rem' }}>{m.from_address}</div>
-                      <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>{m.username}</div>
+                      <div style={{ fontWeight: 700, color: 'var(--text-main)', fontSize: '0.9rem' }}>{m.from_address}</div>
+                      <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{m.username}</div>
                     </td>
                     <td>
-                      <span style={{ fontWeight: 600, fontSize: '0.82rem', color: '#818cf8' }}>
+                      <span style={{ fontWeight: 600, fontSize: '0.82rem', color: 'var(--text-main)' }}>
                         Gmail / Custom SMTP
                       </span>
                     </td>
                     <td>
-                      <span className="badge" style={{ backgroundColor: 'rgba(99, 102, 241, 0.15)', color: '#818cf8' }}>
+                      <span className="badge" style={{ backgroundColor: 'var(--accent-light)', color: 'var(--accent)', border: '1px solid rgba(232, 98, 44, 0.25)' }}>
                         App Password / SMTP
                       </span>
                     </td>
                     <td>
                       {isDisconnected ? (
-                        <span className="badge" style={{ backgroundColor: 'rgba(239, 68, 68, 0.2)', color: '#f87171' }}>Disconnected</span>
+                        <span className="badge" style={{ backgroundColor: 'var(--danger-light)', color: 'var(--danger)', border: '1px solid rgba(239, 68, 68, 0.25)' }}>Disconnected</span>
                       ) : (
                         <span className="badge badge-emailed">Connected 🟢</span>
                       )}

@@ -578,15 +578,16 @@ export default function LiveCampaign({ setCurrentTab, activeCampaignId, setActiv
 
       {/* ── 1. COMPACT CAMPAIGN HEADER & RUN CONTROLS ───────────────────────────── */}
       <div style={{
-        backgroundColor: 'rgba(15, 23, 42, 0.75)', borderRadius: '12px',
-        border: '1px solid rgba(255, 255, 255, 0.08)', padding: '0.85rem 1.25rem',
-        display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem'
+        backgroundColor: 'var(--bg-card)', borderRadius: '12px',
+        border: '1px solid var(--border)', padding: '0.85rem 1.25rem',
+        display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem',
+        boxShadow: 'var(--shadow-sm)'
       }}>
         {/* Title & Campaign Switcher */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-              <h1 style={{ fontSize: '1.25rem', fontWeight: 800, margin: 0, color: '#f8fafc' }}>
+              <h1 style={{ fontSize: '1.25rem', fontWeight: 800, margin: 0, color: 'var(--text-main)' }}>
                 {selectedCampaign?.name || 'Campaign Execution Workspace'}
               </h1>
               <span style={{
@@ -615,7 +616,7 @@ export default function LiveCampaign({ setCurrentTab, activeCampaignId, setActiv
               }}
               style={{
                 width: '210px', padding: '0.35rem 0.6rem', fontSize: '0.8rem',
-                backgroundColor: 'rgba(0,0,0,0.4)', color: '#fff', border: '1px solid rgba(255,255,255,0.12)', borderRadius: '6px'
+                backgroundColor: 'var(--bg-input)', color: 'var(--text-main)', border: '1px solid var(--border)', borderRadius: '6px'
               }}
             >
               {campaigns.map(c => (
@@ -753,10 +754,10 @@ export default function LiveCampaign({ setCurrentTab, activeCampaignId, setActiv
                 if (matches.length > 0) setSelectedDealId(matches[0].id);
               }}
               style={{
-                backgroundColor: isActive ? `${kpi.color}22` : 'rgba(15, 23, 42, 0.65)',
+                backgroundColor: isActive ? `${kpi.color}22` : 'var(--bg-card)',
                 borderRadius: '10px',
-                border: isActive ? `2px solid ${kpi.color}` : '1px solid rgba(255, 255, 255, 0.08)',
-                boxShadow: isActive ? `0 4px 20px ${kpi.color}44` : 'none',
+                border: isActive ? `2px solid ${kpi.color}` : '1px solid var(--border)',
+                boxShadow: isActive ? `0 4px 20px ${kpi.color}44` : 'var(--shadow-sm)',
                 padding: '0.75rem 1rem',
                 display: 'flex', flexDirection: 'column', gap: '0.3rem',
                 cursor: 'pointer',
@@ -770,12 +771,12 @@ export default function LiveCampaign({ setCurrentTab, activeCampaignId, setActiv
                   FILTERED
                 </div>
               )}
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.7rem', color: isActive ? '#fff' : 'var(--text-muted)', fontWeight: 700 }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.7rem', color: isActive ? kpi.color : 'var(--text-muted)', fontWeight: 700 }}>
                 <span>{kpi.label}</span>
                 <IconComp size={14} style={{ color: kpi.color }} />
               </div>
-              <div style={{ fontSize: '1.4rem', fontWeight: 800, color: isActive ? kpi.color : '#fff' }}>{kpi.value}</div>
-              <div style={{ fontSize: '0.65rem', color: isActive ? '#e0e7ff' : 'var(--text-sub)' }}>
+              <div style={{ fontSize: '1.4rem', fontWeight: 800, color: isActive ? kpi.color : 'var(--text-main)' }}>{kpi.value}</div>
+              <div style={{ fontSize: '0.65rem', color: isActive ? kpi.color : 'var(--text-muted)' }}>
                 {isActive ? '● Active Filter' : 'Click to inspect →'}
               </div>
             </div>
@@ -785,11 +786,12 @@ export default function LiveCampaign({ setCurrentTab, activeCampaignId, setActiv
 
       {/* ── 3. MODERN CLICKABLE HORIZONTAL PIPELINE STEPPER ────────────────────── */}
       <div style={{
-        backgroundColor: 'rgba(15, 23, 42, 0.65)', borderRadius: '10px',
-        border: '1px solid rgba(99, 102, 241, 0.2)', padding: '0.65rem 1rem',
-        display: 'flex', alignItems: 'center', gap: '0.5rem', overflowX: 'auto'
+        backgroundColor: 'var(--bg-card)', borderRadius: '10px',
+        border: '1px solid var(--border)', padding: '0.65rem 1rem',
+        display: 'flex', alignItems: 'center', gap: '0.5rem', overflowX: 'auto',
+        boxShadow: 'var(--shadow-sm)'
       }}>
-        <div style={{ fontSize: '0.72rem', fontWeight: 800, color: '#a5b4fc', textTransform: 'uppercase', letterSpacing: '0.04em', whiteSpace: 'nowrap', marginRight: '0.5rem', display: 'flex', alignItems: 'center', gap: '4px' }}>
+        <div style={{ fontSize: '0.72rem', fontWeight: 800, color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '0.04em', whiteSpace: 'nowrap', marginRight: '0.5rem', display: 'flex', alignItems: 'center', gap: '4px' }}>
           <Layers size={13} /> Pipeline Stage:
         </div>
 
@@ -810,18 +812,18 @@ export default function LiveCampaign({ setCurrentTab, activeCampaignId, setActiv
                 onClick={() => setSelectedPipelineFilter(stage)}
                 style={{
                   fontSize: '0.72rem', padding: '5px 12px', borderRadius: '6px',
-                  border: isActive ? '1.5px solid #6366f1' : '1px solid rgba(255,255,255,0.08)',
-                  backgroundColor: isActive ? 'rgba(99, 102, 241, 0.22)' : 'rgba(0,0,0,0.25)',
-                  color: isActive ? '#fff' : 'var(--text-muted)', fontWeight: isActive ? 700 : 500,
+                  border: isActive ? '1.5px solid var(--accent)' : '1px solid var(--border)',
+                  backgroundColor: isActive ? 'var(--accent-light)' : 'var(--bg-inner)',
+                  color: isActive ? 'var(--accent)' : 'var(--text-muted)', fontWeight: isActive ? 800 : 500,
                   cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', whiteSpace: 'nowrap'
                 }}
               >
                 <span>{stage}</span>
-                <span style={{ fontSize: '0.65rem', padding: '1px 5px', borderRadius: '999px', backgroundColor: isActive ? '#6366f1' : 'rgba(255,255,255,0.1)', color: '#fff', fontWeight: 800 }}>
+                <span style={{ fontSize: '0.65rem', padding: '1px 5px', borderRadius: '999px', backgroundColor: isActive ? 'var(--accent)' : 'var(--border)', color: isActive ? '#fff' : 'var(--text-muted)', fontWeight: 800 }}>
                   {count}
                 </span>
               </button>
-              {idx < arr.length - 1 && <ChevronRight size={12} style={{ color: 'rgba(255,255,255,0.15)', flexShrink: 0 }} />}
+              {idx < arr.length - 1 && <ChevronRight size={12} style={{ color: 'var(--border)', flexShrink: 0 }} />}
             </React.Fragment>
           );
         })}
@@ -832,9 +834,10 @@ export default function LiveCampaign({ setCurrentTab, activeCampaignId, setActiv
 
         {/* ── LEFT COLUMN: SEARCHABLE & FILTERABLE LEAD EXECUTION LIST ────────── */}
         <div style={{
-          backgroundColor: 'rgba(15, 23, 42, 0.7)', borderRadius: '12px',
-          border: '1px solid rgba(255, 255, 255, 0.08)', padding: '1rem',
-          display: 'flex', flexDirection: 'column', gap: '0.85rem'
+          backgroundColor: 'var(--bg-card)', borderRadius: '12px',
+          border: '1px solid var(--border)', padding: '1rem',
+          display: 'flex', flexDirection: 'column', gap: '0.85rem',
+          boxShadow: 'var(--shadow-sm)'
         }}>
           {/* KPI Drill-Down Filter Banner */}
           {selectedPipelineFilter !== 'ALL' && (
@@ -963,21 +966,22 @@ export default function LiveCampaign({ setCurrentTab, activeCampaignId, setActiv
         {/* ── RIGHT COLUMN: SELECTED LEAD INTELLIGENCE & ACTION COMMAND CENTER ── */}
         {selectedDealId && dealDetail ? (
           <div style={{
-            backgroundColor: 'rgba(15, 23, 42, 0.75)', borderRadius: '12px',
-            border: '1.5px solid #6366f1', padding: '1rem',
-            display: 'flex', flexDirection: 'column', gap: '1rem', maxHeight: 'calc(100vh - 120px)', overflowY: 'auto'
+            backgroundColor: 'var(--bg-card)', borderRadius: '12px',
+            border: '1px solid var(--border)', padding: '1.25rem',
+            display: 'flex', flexDirection: 'column', gap: '1rem', maxHeight: 'calc(100vh - 120px)', overflowY: 'auto',
+            boxShadow: 'var(--shadow-sm)'
           }}>
 
             {/* Profile Overview Header */}
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '0.75rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--border)', paddingBottom: '0.75rem' }}>
               <div>
-                <div style={{ fontSize: '1.1rem', fontWeight: 800, color: '#fff', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <div style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-main)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                   <span>{leadName}</span>
-                  <span style={{ fontSize: '0.75rem', fontWeight: 800, padding: '2px 7px', borderRadius: '4px', background: 'rgba(16,185,129,0.2)', color: '#34d399', border: '1px solid #10b981' }}>
+                  <span style={{ fontSize: '0.75rem', fontWeight: 800, padding: '2px 7px', borderRadius: '4px', background: 'var(--success-light)', color: '#059669', border: '1px solid rgba(16,185,129,0.3)' }}>
                     {fitScore}% Fit Match
                   </span>
                 </div>
-                <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '2px' }}>
+                <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '2px' }}>
                   {jobTitle} @ <strong>{company}</strong> · {activeLead.email}
                 </div>
               </div>
@@ -1352,38 +1356,33 @@ export default function LiveCampaign({ setCurrentTab, activeCampaignId, setActiv
 
       {/* ── EDITABLE ACTION DRAFT MODAL ── */}
       {showActionModal && (
-        <div style={{
-          position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
-          backgroundColor: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(5px)',
-          display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 9999, padding: '1rem'
-        }}>
-          <div style={{
-            backgroundColor: '#0f172a', border: '1.5px solid #6366f1', borderRadius: '12px',
-            width: '100%', maxWidth: '650px', padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem',
-            boxShadow: '0 25px 50px -12px rgba(0,0,0,0.7)'
+        <div className="modal-overlay">
+          <div className="modal-box" style={{
+            maxWidth: '650px', display: 'flex', flexDirection: 'column', gap: '1rem'
           }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '0.75rem' }}>
-              <div style={{ fontSize: '1.05rem', fontWeight: 800, color: '#fff', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <Sparkles size={18} color="#6366f1" />
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--border)', paddingBottom: '0.75rem' }}>
+              <div style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--text-main)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <Sparkles size={18} color="var(--accent)" />
                 <span>AI Next-Best Action — Edit Email Plan</span>
               </div>
-              <button onClick={() => setShowActionModal(false)} style={{ background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer', fontSize: '1.2rem' }}>✕</button>
+              <button onClick={() => setShowActionModal(false)} className="modal-close">✕</button>
             </div>
 
             <div>
-              <label style={{ fontSize: '0.75rem', fontWeight: 700, color: '#94a3b8', display: 'block', marginBottom: '4px' }}>
+              <label style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-muted)', display: 'block', marginBottom: '4px' }}>
                 Recipient Email
               </label>
               <input
                 type="text"
                 value={actionDraft.recipient}
                 disabled
-                style={{ width: '100%', padding: '0.55rem', borderRadius: '6px', backgroundColor: 'rgba(255,255,255,0.05)', color: '#94a3b8', border: '1px solid rgba(255,255,255,0.1)', fontSize: '0.85rem' }}
+                className="form-control"
+                style={{ backgroundColor: 'var(--bg-inner)', color: 'var(--text-muted)' }}
               />
             </div>
 
             <div>
-              <label style={{ fontSize: '0.75rem', fontWeight: 700, color: '#e0e7ff', display: 'block', marginBottom: '4px' }}>
+              <label style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-main)', display: 'block', marginBottom: '4px' }}>
                 Email Subject Line
               </label>
               <input
@@ -1391,12 +1390,12 @@ export default function LiveCampaign({ setCurrentTab, activeCampaignId, setActiv
                 value={actionDraft.subject}
                 onChange={(e) => setActionDraft({ ...actionDraft, subject: e.target.value })}
                 placeholder="Enter subject..."
-                style={{ width: '100%', padding: '0.55rem', borderRadius: '6px', backgroundColor: '#1e293b', color: '#fff', border: '1px solid #6366f1', fontSize: '0.88rem' }}
+                className="form-control"
               />
             </div>
 
             <div>
-              <label style={{ fontSize: '0.75rem', fontWeight: 700, color: '#e0e7ff', display: 'block', marginBottom: '4px' }}>
+              <label style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-main)', display: 'block', marginBottom: '4px' }}>
                 Email Body Text (Editable)
               </label>
               <textarea
@@ -1404,12 +1403,13 @@ export default function LiveCampaign({ setCurrentTab, activeCampaignId, setActiv
                 value={actionDraft.body}
                 onChange={(e) => setActionDraft({ ...actionDraft, body: e.target.value })}
                 placeholder="Type or edit email body message..."
-                style={{ width: '100%', padding: '0.65rem', borderRadius: '6px', backgroundColor: '#1e293b', color: '#fff', border: '1px solid #6366f1', fontSize: '0.85rem', fontFamily: 'inherit', resize: 'vertical', lineHeight: '1.5' }}
+                className="form-control"
+                style={{ resize: 'vertical', lineHeight: '1.5' }}
               />
             </div>
 
             <div>
-              <label style={{ fontSize: '0.75rem', fontWeight: 700, color: '#e0e7ff', display: 'block', marginBottom: '4px' }}>
+              <label style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-main)', display: 'block', marginBottom: '4px' }}>
                 🔗 Meeting / Demo Link URL
               </label>
               <input
@@ -1421,7 +1421,7 @@ export default function LiveCampaign({ setCurrentTab, activeCampaignId, setActiv
                   setActionDraft({ ...actionDraft, meetingLink: newLink });
                 }}
                 placeholder="https://meet.google.com/your-meeting-id"
-                style={{ width: '100%', padding: '0.55rem', borderRadius: '6px', backgroundColor: '#1e293b', color: '#fff', border: '1px solid #6366f1', fontSize: '0.85rem' }}
+                className="form-control"
               />
             </div>
 

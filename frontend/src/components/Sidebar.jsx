@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import {
   LayoutDashboard, Target, Users, Mail, Settings, Send,
   Database, BarChart3, Wand2, Play, Zap, Info, LogOut,
-  ChevronLeft, ChevronRight, PanelLeftClose, PanelLeftOpen
+  ChevronLeft, ChevronRight, PanelLeftClose, PanelLeftOpen,
+  Sun, Moon
 } from 'lucide-react';
 import { getSiteConfig } from '../services/api';
 import { useAuth } from '../context/AuthContext';
+import { useTheme } from '../context/ThemeContext';
 
 const MENU_ITEMS = [
   { id: 'dashboard',  label: 'Dashboard',           icon: LayoutDashboard },
@@ -33,6 +35,7 @@ export default function Sidebar({ currentTab, setCurrentTab }) {
   });
 
   const { user, logout } = useAuth();
+  const { theme, toggleTheme, isDark } = useTheme();
 
   useEffect(() => {
     getSiteConfig()
@@ -148,6 +151,67 @@ export default function Sidebar({ currentTab, setCurrentTab }) {
           </div>
         ))}
       </nav>
+
+      {/* ── Theme Mode Toggle (Light / Dark) ────────────────── */}
+      <div style={{
+        margin: isCollapsed ? '0.5rem 0' : '0.5rem 0.75rem',
+        padding: isCollapsed ? '0.4rem 0.2rem' : '0.45rem 0.65rem',
+        backgroundColor: 'var(--bg-main)',
+        border: '1px solid var(--border)',
+        borderRadius: '10px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: isCollapsed ? 'center' : 'space-between',
+        cursor: 'pointer',
+        transition: 'all 0.2s ease'
+      }}
+      onClick={toggleTheme}
+      title={isDark ? "Switch to Crisp Light Theme" : "Switch to Deep Dark Theme"}
+      >
+        {!isCollapsed ? (
+          <>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-main)' }}>
+              {isDark ? (
+                <Moon size={15} style={{ color: '#fbbf24' }} />
+              ) : (
+                <Sun size={15} style={{ color: '#e8622c' }} />
+              )}
+              <span>{isDark ? 'Dark Theme' : 'Light Theme'}</span>
+            </div>
+            <div style={{
+              width: '36px',
+              height: '20px',
+              borderRadius: '12px',
+              backgroundColor: isDark ? '#e8622c' : '#cbd5e1',
+              padding: '2px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: isDark ? 'flex-end' : 'flex-start',
+              transition: 'all 0.2s ease'
+            }}>
+              <div style={{
+                width: '16px',
+                height: '16px',
+                borderRadius: '50%',
+                backgroundColor: '#ffffff',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.2)'
+              }} />
+            </div>
+          </>
+        ) : (
+          <div style={{
+            width: '32px',
+            height: '32px',
+            borderRadius: '8px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: isDark ? '#fbbf24' : '#e8622c'
+          }}>
+            {isDark ? <Moon size={16} /> : <Sun size={16} />}
+          </div>
+        )}
+      </div>
 
       {/* ── User Profile & Logout Card ────────────────────────── */}
       {user && (

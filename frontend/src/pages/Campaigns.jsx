@@ -229,8 +229,8 @@ export default function Campaigns({ setCurrentTab, activeCampaignId, setActiveCa
                   <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap', marginBottom: hasSelectedLead ? '1.2rem' : '0' }}>
                     <div style={{ flex: 1 }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-                        <span style={{ fontWeight: 700, fontSize: '1.05rem', color: '#e0e7ff' }}>{c.name}</span>
-                        <span style={{ fontSize: '0.72rem', padding: '2px 8px', borderRadius: '999px', background: 'rgba(99,102,241,0.15)', color: '#818cf8', fontWeight: 600 }}>#{c.id}</span>
+                        <span style={{ fontWeight: 800, fontSize: '1.05rem', color: 'var(--text-main)' }}>{c.name}</span>
+                        <span style={{ fontSize: '0.72rem', padding: '2px 8px', borderRadius: '999px', background: 'var(--accent-light)', color: 'var(--accent)', fontWeight: 700 }}>#{c.id}</span>
                       </div>
                       <p style={{ color: 'var(--text-muted)', fontSize: '0.8rem', marginTop: '3px' }}>
                         Targeting: {c.campaign_target || 'Target specified personas & role criteria'}
@@ -248,9 +248,9 @@ export default function Campaigns({ setCurrentTab, activeCampaignId, setActiveCa
                               borderRadius: '6px',
                               fontSize: '0.75rem',
                               fontWeight: 600,
-                              backgroundColor: i === 0 || (i === 1 && hasSelectedLead) ? 'rgba(16,185,129,0.15)' : 'rgba(255,255,255,0.06)',
-                              color: i === 0 || (i === 1 && hasSelectedLead) ? '#34d399' : '#e0e7ff',
-                              border: i === 0 || (i === 1 && hasSelectedLead) ? '1px solid rgba(16,185,129,0.3)' : '1px solid rgba(255,255,255,0.1)',
+                              backgroundColor: i === 0 || (i === 1 && hasSelectedLead) ? 'var(--success-light)' : 'var(--bg-inner)',
+                              color: i === 0 || (i === 1 && hasSelectedLead) ? '#059669' : 'var(--text-muted)',
+                              border: i === 0 || (i === 1 && hasSelectedLead) ? '1px solid rgba(16,185,129,0.3)' : '1px solid var(--border)',
                               cursor: 'pointer'
                             }}
                             onClick={() => {
@@ -326,9 +326,9 @@ export default function Campaigns({ setCurrentTab, activeCampaignId, setActiveCa
                             <User size={16} />
                           </div>
                           <div>
-                            <div style={{ fontSize: '0.95rem', fontWeight: 700, color: '#e0e7ff' }}>
+                            <div style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--text-main)' }}>
                               Selected Prospect: {selectedLeadData.name} &nbsp;
-                              <span className="badge badge-qualified" style={{ backgroundColor: 'rgba(16, 185, 129, 0.2)', color: '#34d399', fontSize: '0.72rem' }}>
+                              <span className="badge badge-qualified" style={{ backgroundColor: 'var(--success-light)', color: '#059669', fontSize: '0.72rem' }}>
                                 Fit Score: {selectedLeadData.fit_score}%
                               </span>
                             </div>
@@ -456,7 +456,7 @@ export default function Campaigns({ setCurrentTab, activeCampaignId, setActiveCa
 
             <form onSubmit={handleSaveEdit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               <div>
-                <label style={{ fontSize: '0.78rem', fontWeight: 600, color: '#e0e7ff', display: 'block', marginBottom: '4px' }}>
+                <label style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-main)', display: 'block', marginBottom: '4px' }}>
                   Campaign Name:
                 </label>
                 <input
@@ -465,12 +465,11 @@ export default function Campaigns({ setCurrentTab, activeCampaignId, setActiveCa
                   required
                   value={editFormData.name}
                   onChange={(e) => setEditFormData({ ...editFormData, name: e.target.value })}
-                  style={{ width: '100%', backgroundColor: 'rgba(0,0,0,0.3)', color: '#fff', border: '1px solid rgba(255,255,255,0.12)' }}
                 />
               </div>
 
               <div>
-                <label style={{ fontSize: '0.78rem', fontWeight: 600, color: '#e0e7ff', display: 'block', marginBottom: '4px' }}>
+                <label style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-main)', display: 'block', marginBottom: '4px' }}>
                   Target Personas / Criteria:
                 </label>
                 <input
@@ -479,13 +478,12 @@ export default function Campaigns({ setCurrentTab, activeCampaignId, setActiveCa
                   placeholder="e.g. Finance Managers and Directors in UAE"
                   value={editFormData.campaign_target}
                   onChange={(e) => setEditFormData({ ...editFormData, campaign_target: e.target.value })}
-                  style={{ width: '100%', backgroundColor: 'rgba(0,0,0,0.3)', color: '#fff', border: '1px solid rgba(255,255,255,0.12)' }}
                 />
               </div>
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
                 <div>
-                  <label style={{ fontSize: '0.78rem', fontWeight: 600, color: '#e0e7ff', display: 'block', marginBottom: '4px' }}>
+                  <label style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-main)', display: 'block', marginBottom: '4px' }}>
                     Campaign Objective:
                   </label>
                   <input
@@ -494,11 +492,10 @@ export default function Campaigns({ setCurrentTab, activeCampaignId, setActiveCa
                     placeholder="e.g. Book Demo Meetings"
                     value={editFormData.objective}
                     onChange={(e) => setEditFormData({ ...editFormData, objective: e.target.value })}
-                    style={{ width: '100%', backgroundColor: 'rgba(0,0,0,0.3)', color: '#fff', border: '1px solid rgba(255,255,255,0.12)' }}
                   />
                 </div>
                 <div>
-                  <label style={{ fontSize: '0.78rem', fontWeight: 600, color: '#e0e7ff', display: 'block', marginBottom: '4px' }}>
+                  <label style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-main)', display: 'block', marginBottom: '4px' }}>
                     Target Country Code:
                   </label>
                   <input
@@ -507,13 +504,12 @@ export default function Campaigns({ setCurrentTab, activeCampaignId, setActiveCa
                     placeholder="e.g. UAE, US, IN"
                     value={editFormData.country_code}
                     onChange={(e) => setEditFormData({ ...editFormData, country_code: e.target.value })}
-                    style={{ width: '100%', backgroundColor: 'rgba(0,0,0,0.3)', color: '#fff', border: '1px solid rgba(255,255,255,0.12)' }}
                   />
                 </div>
               </div>
 
               <div>
-                <label style={{ fontSize: '0.78rem', fontWeight: 600, color: '#e0e7ff', display: 'block', marginBottom: '4px' }}>
+                <label style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-main)', display: 'block', marginBottom: '4px' }}>
                   Description & Context:
                 </label>
                 <textarea
@@ -522,7 +518,7 @@ export default function Campaigns({ setCurrentTab, activeCampaignId, setActiveCa
                   placeholder="Provide additional details or persona specifics..."
                   value={editFormData.description}
                   onChange={(e) => setEditFormData({ ...editFormData, description: e.target.value })}
-                  style={{ width: '100%', backgroundColor: 'rgba(0,0,0,0.3)', color: '#fff', border: '1px solid rgba(255,255,255,0.12)', fontSize: '0.82rem' }}
+                  style={{ resize: 'vertical' }}
                 />
               </div>
 

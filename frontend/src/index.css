@@ -4,27 +4,31 @@
    ───────────────────────────────────────────────────────────────────────────── */
 
 /* ── Design Tokens ──────────────────────────────────────────────────────────── */
-:root {
-  /* Backgrounds (Real Estate Clean White & Slate Theme) */
+:root, [data-theme="light"], .light {
+  /* Backgrounds (Clean White & Slate Theme) */
   --bg-main:        #F8FAFC;
   --bg-card:        #FFFFFF;
   --bg-card-hover:  #F8FAFC;
   --bg-card-glass:  rgba(255, 255, 255, 0.95);
   --bg-sidebar:     #FFFFFF;
   --bg-input:       #FFFFFF;
-  --bg-overlay:     rgba(15, 23, 42, 0.5);
+  --bg-input-hover: #F8FAFC;
+  --bg-input-focus: #FFFFFF;
+  --bg-inner:       #F8FAFC;
+  --bg-inner-alt:   #F1F5F9;
+  --bg-overlay:     rgba(15, 23, 42, 0.6);
 
-  /* Typography (Real Estate Inter & Slate Hierarchy) */
+  /* Typography */
   --font-sans:   'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono:   'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
-  /* Text Colors */
+  /* Text Colors (High Contrast for White Theme) */
   --text-main:   #0F172A;
-  --text-sub:    #334155;
-  --text-muted:  #64748B;
-  --text-faint:  #94A3B8;
+  --text-sub:    #1E293B;
+  --text-muted:  #475569;
+  --text-faint:  #64748B;
 
-  /* Brand / Primary Accent (Real Estate Sunset Coral #E8622C) */
+  /* Brand / Primary Accent (Sunset Coral #E8622C) */
   --accent:        #E8622C;
   --accent-hover:  #cf511e;
   --accent-light:  rgba(232, 98, 44, 0.08);
@@ -45,9 +49,11 @@
   --info-light:    rgba(59, 130, 246, 0.12);
 
   /* Borders */
-  --border:       #E2E8F0;
-  --border-light: #F1F5F9;
-  --border-glow:  rgba(232, 98, 44, 0.35);
+  --border:        #CBD5E1;
+  --border-strong: #94A3B8;
+  --border-light:  #E2E8F0;
+  --border-input:  #CBD5E1;
+  --border-glow:   rgba(232, 98, 44, 0.35);
 
   /* Gradients */
   --gradient-accent: linear-gradient(135deg, #E8622C 0%, #F5A623 100%);
@@ -71,15 +77,76 @@
   --radius-full: 9999px;
 
   /* Shadows */
-  --shadow-sm:  0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md:  0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
-  --shadow-lg:  0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+  --shadow-sm:  0 1px 3px 0 rgba(0, 0, 0, 0.08), 0 1px 2px -1px rgba(0, 0, 0, 0.08);
+  --shadow-md:  0 4px 6px -1px rgba(0, 0, 0, 0.09), 0 2px 4px -2px rgba(0, 0, 0, 0.07);
+  --shadow-lg:  0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.06);
   --shadow-glow: 0 0 15px rgba(232, 98, 44, 0.2);
 
   /* Transitions */
   --transition-fast:   all 0.15s ease;
   --transition-base:   all 0.2s ease;
   --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Dark Theme Tokens ──────────────────────────────────────────────────────── */
+[data-theme="dark"], .dark {
+  /* Backgrounds */
+  --bg-main:        #0B0F19;
+  --bg-card:        #111827;
+  --bg-card-hover:  #1E293B;
+  --bg-card-glass:  rgba(17, 24, 39, 0.95);
+  --bg-sidebar:     #0F172A;
+  --bg-input:       #1E293B;
+  --bg-input-hover: #283548;
+  --bg-input-focus: #1E293B;
+  --bg-inner:       #1E293B;
+  --bg-inner-alt:   #161F30;
+  --bg-overlay:     rgba(0, 0, 0, 0.75);
+
+  /* Typography */
+  --text-main:   #F8FAFC;
+  --text-sub:    #E2E8F0;
+  --text-muted:  #94A3B8;
+  --text-faint:  #64748B;
+
+  /* Brand / Primary Accent */
+  --accent:        #F97316;
+  --accent-hover:  #ea580c;
+  --accent-light:  rgba(249, 115, 22, 0.15);
+  --accent-glow:   rgba(249, 115, 22, 0.35);
+
+  /* Secondary Navy & Amber/Gold Accents */
+  --brand-navy:    #1E293B;
+  --brand-gold:    #FBBF24;
+
+  /* Status */
+  --success:       #34D399;
+  --success-light: rgba(52, 211, 153, 0.15);
+  --warning:       #FBBF24;
+  --warning-light: rgba(251, 191, 36, 0.15);
+  --danger:        #F87171;
+  --danger-light:  rgba(248, 113, 113, 0.15);
+  --info:          #60A5FA;
+  --info-light:    rgba(96, 165, 250, 0.15);
+
+  /* Borders */
+  --border:        #2D3748;
+  --border-strong: #4A5568;
+  --border-light:  #1E293B;
+  --border-input:  #374151;
+  --border-glow:   rgba(249, 115, 22, 0.35);
+
+  /* Gradients */
+  --gradient-accent: linear-gradient(135deg, #F97316 0%, #FBBF24 100%);
+  --gradient-brand:  linear-gradient(135deg, #F97316 0%, #FF8A50 100%);
+  --gradient-success: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  --gradient-card:   linear-gradient(135deg, rgba(249,115,22,0.04) 0%, rgba(30,41,59,0.3) 100%);
+
+  /* Shadows */
+  --shadow-sm:  0 1px 3px 0 rgba(0, 0, 0, 0.4);
+  --shadow-md:  0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -2px rgba(0, 0, 0, 0.4);
+  --shadow-lg:  0 10px 15px -3px rgba(0, 0, 0, 0.6), 0 4px 6px -4px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 15px rgba(249, 115, 22, 0.3);
 }
 
 /* ── Reset & Base ───────────────────────────────────────────────────────────── */
@@ -573,7 +640,7 @@ table {
 }
 
 thead tr {
-  background: #F8FAFC;
+  background: var(--bg-inner-alt);
 }
 
 th {
@@ -591,16 +658,17 @@ td {
   padding: 0.85rem 1rem;
   border-bottom: 1px solid var(--border-light);
   font-size: 0.875rem;
-  color: var(--text-sub);
+  color: var(--text-main);
   vertical-align: middle;
 }
 
 tbody tr {
+  background-color: var(--bg-card);
   transition: background 0.15s ease;
 }
 
 tbody tr:hover {
-  background-color: #F8FAFC;
+  background-color: var(--bg-card-hover);
 }
 
 tbody tr:last-child td {
