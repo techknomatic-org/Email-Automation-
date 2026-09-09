@@ -5,7 +5,7 @@ from sqlalchemy import create_engine, text
 from sqlalchemy.orm import declarative_base, sessionmaker
 from backend.app.core.config import settings
 
-def is_postgres_listening(host: str = "127.0.0.1", port: int = 5432, timeout: float = 0.2) -> bool:
+def is_postgres_listening(host: str = "127.0.0.1", port: int = 5432, timeout: float = 1.0) -> bool:
     import socket
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -17,19 +17,20 @@ def is_postgres_listening(host: str = "127.0.0.1", port: int = 5432, timeout: fl
         return False
 
 def create_db_engine():
-    """Smart engine creator: fast socket check for PostgreSQL on port 5432, falls back immediately to SQLite."""
+    """Smart engine creator: connects to remote/local PostgreSQL or falls back to SQLite."""
     db_file = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), "openoutreach.db")
     sqlite_url = f"sqlite:///{db_file}"
 
     pg_url = settings.get_database_url()
-    if "postgresql" in pg_url:
-        if not is_postgres_listening():
-            print(f"[!] PostgreSQL service not listening on port 5432. Operating on local DB: {db_file}")
-            return create_engine(sqlite_url, connect_args={"check_same_thread": False}, pool_pre_ping=True)
+    if pg_url.startswith("postgres://"):
+        pg_url = pg_url.replace("postgres://", "postgresql+psycopg://", 1)
+    elif pg_url.startswith("postgresql://") and "+psycopg" not in pg_url:
+        pg_url = pg_url.replace("postgresql://", "postgresql+psycopg://", 1)
 
+    if "postgresql" in pg_url:
         if "connect_timeout" not in pg_url:
             sep = "&" if "?" in pg_url else "?"
-            pg_url_with_timeout = f"{pg_url}{sep}connect_timeout=2"
+            pg_url_with_timeout = f"{pg_url}{sep}connect_timeout=5"
         else:
             pg_url_with_timeout = pg_url
 

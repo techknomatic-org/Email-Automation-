@@ -80,7 +80,12 @@ class Settings(BaseSettings):
 
     def get_allowed_origins(self) -> List[str]:
         """Return list of allowed CORS origins from the comma-separated env var."""
-        return [origin.strip() for origin in self.ALLOWED_ORIGINS.split(",") if origin.strip()]
+        origins = [origin.strip() for origin in self.ALLOWED_ORIGINS.split(",") if origin.strip()]
+        if self.FRONTEND_URL and self.FRONTEND_URL.strip() not in origins:
+            origins.append(self.FRONTEND_URL.strip())
+        if "*" not in origins and not self.is_production():
+            origins.append("*")
+        return origins
 
     def is_production(self) -> bool:
         return self.APP_ENV.lower() == "production"

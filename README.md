@@ -198,7 +198,9 @@ Configure behavior via Django Admin (`SiteConfig` + `Campaign`).
 
 ## 📚 Documentation
 
+- [Production Deployment](./DEPLOY.md)
 - [Architecture](./docs/architecture.md)
+- [User Guide & Handbook](./docs/USER_GUIDE_HANDBOOK.md)
 - [Configuration](./docs/configuration.md)
 - [Docker Installation](./docs/docker.md)
 - [Follow-up Messaging](./docs/templating.md)

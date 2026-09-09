@@ -8,20 +8,12 @@ import axios from 'axios';
  *   or left empty to rely on the nginx proxy (recommended).
  */
 const API_BASE_URL = (() => {
-  const envUrl = import.meta.env.VITE_API_BASE_URL;
-  // Non-localhost host (ngrok, cloud) → use relative URLs via proxy
-  if (
-    typeof window !== 'undefined' &&
-    window.location.hostname !== 'localhost' &&
-    window.location.hostname !== '127.0.0.1'
-  ) {
-    return '';
-  }
-  // Explicit env override provided and different from default
+  const envUrl = (import.meta.env.VITE_API_BASE_URL || '').trim();
+  // If an explicit backend URL is provided (e.g. Render/Cloud on Vercel), use it
   if (envUrl && envUrl !== 'http://localhost:8000' && envUrl !== 'http://127.0.0.1:8000') {
-    return envUrl;
+    return envUrl.replace(/\/+$/, '');
   }
-  // Default: use Vite proxy → relative paths
+  // Default: use relative path for local proxy or same-domain reverse proxies
   return '';
 })();
 
