@@ -4,7 +4,7 @@ import json
 import asyncio
 import requests
 from pydantic import BaseModel, Field
-from typing import Optional, List
+from typing import Optional, List, Dict, Any, Union, Tuple, Set, Callable
 from backend.app.core.config import settings
 
 # ── Schemas for AI Agents ──────────────────────────────────────────────
