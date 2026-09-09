@@ -296,27 +296,26 @@ export default function CampaignWizard({ onComplete }) {
     <div style={{ maxWidth: '780px', margin: '0 auto' }}>
       {/* Centered Campaign Card */}
       <div className="card" style={{
-        backgroundColor: 'rgba(15, 23, 42, 0.85)',
-        border: '1px solid rgba(99, 102, 241, 0.25)',
+        backgroundColor: 'var(--bg-card)',
+        border: '1px solid var(--border)',
         borderRadius: '16px',
         padding: '2.25rem',
-        boxShadow: '0 20px 40px rgba(0, 0, 0, 0.35)',
-        backdropFilter: 'blur(12px)'
+        boxShadow: 'var(--shadow-md)'
       }}>
         {/* Header Row */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.75rem', borderBottom: '1px solid rgba(255, 255, 255, 0.08)', paddingBottom: '1.25rem' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.75rem', borderBottom: '1px solid var(--border)', paddingBottom: '1.25rem' }}>
           <div>
-            <h2 style={{ fontSize: '1.35rem', fontWeight: 800, margin: 0, color: '#f8fafc', display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-              <Sparkles className="text-indigo-400" size={24} /> ✨ AI Campaign Copilot
+            <h2 style={{ fontSize: '1.35rem', fontWeight: 800, margin: 0, color: 'var(--text-main)', display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+              <Sparkles style={{ color: 'var(--accent)' }} size={24} /> ✨ AI Campaign Copilot
             </h2>
             <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', margin: '0.4rem 0 0 0' }}>
               Create your campaign and let AI identify the right audience from your dataset.
             </p>
           </div>
           <span style={{
-            backgroundColor: 'rgba(99, 102, 241, 0.15)',
-            color: '#818cf8',
-            border: '1px solid rgba(99, 102, 241, 0.3)',
+            backgroundColor: 'var(--accent-light)',
+            color: 'var(--accent)',
+            border: '1px solid var(--border)',
             fontWeight: 700,
             padding: '5px 14px',
             fontSize: '0.75rem',
@@ -338,12 +337,12 @@ export default function CampaignWizard({ onComplete }) {
             display: 'flex',
             alignItems: 'center',
             gap: '0.75rem',
-            color: '#fca5a5',
+            color: '#ef4444',
             fontSize: '0.85rem'
           }}>
             <AlertCircle size={18} style={{ color: '#ef4444', flexShrink: 0 }} />
             <div style={{ flex: 1 }}>{errorMessage}</div>
-            <button onClick={() => setErrorMessage('')} style={{ background: 'none', border: 'none', color: '#fca5a5', cursor: 'pointer', fontWeight: 700 }}>✕</button>
+            <button onClick={() => setErrorMessage('')} style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer', fontWeight: 700 }}>✕</button>
           </div>
         )}
 
@@ -353,8 +352,8 @@ export default function CampaignWizard({ onComplete }) {
             {/* SECTION 01: CAMPAIGN OBJECTIVE */}
             <div style={{ marginBottom: '1.75rem' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.5rem' }}>
-                <span style={{ fontSize: '0.75rem', fontWeight: 800, padding: '2px 8px', borderRadius: '4px', background: 'rgba(99,102,241,0.2)', color: '#818cf8', letterSpacing: '0.5px' }}>01</span>
-                <h3 style={{ fontSize: '0.92rem', fontWeight: 700, margin: 0, color: '#e0e7ff', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                <span style={{ fontSize: '0.75rem', fontWeight: 800, padding: '2px 8px', borderRadius: '4px', background: 'rgba(99,102,241,0.15)', color: '#6366f1', letterSpacing: '0.5px' }}>01</span>
+                <h3 style={{ fontSize: '0.92rem', fontWeight: 700, margin: 0, color: 'var(--text-main)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                   CAMPAIGN OBJECTIVE
                 </h3>
               </div>
@@ -370,11 +369,11 @@ export default function CampaignWizard({ onComplete }) {
                   placeholder="e.g. AI-powered B2B automation platform designed to optimize sales outreach, streamline lead discovery, and boost conversions..."
                   style={{
                     width: '100%',
-                    backgroundColor: 'rgba(15, 23, 42, 0.6)',
-                    border: '1px solid rgba(255, 255, 255, 0.12)',
+                    backgroundColor: 'var(--bg-input)',
+                    border: '1px solid var(--border-input)',
                     borderRadius: '8px',
                     padding: '0.85rem 1rem',
-                    color: '#f8fafc',
+                    color: 'var(--text-main)',
                     fontSize: '0.88rem',
                     lineHeight: '1.5',
                     resize: 'vertical'
@@ -389,8 +388,8 @@ export default function CampaignWizard({ onComplete }) {
             {/* SECTION 02: TARGET AUDIENCE */}
             <div style={{ marginBottom: '1.75rem' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.5rem' }}>
-                <span style={{ fontSize: '0.75rem', fontWeight: 800, padding: '2px 8px', borderRadius: '4px', background: 'rgba(52,211,153,0.2)', color: '#34d399', letterSpacing: '0.5px' }}>02</span>
-                <h3 style={{ fontSize: '0.92rem', fontWeight: 700, margin: 0, color: '#e0e7ff', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                <span style={{ fontSize: '0.75rem', fontWeight: 800, padding: '2px 8px', borderRadius: '4px', background: 'rgba(52,211,153,0.15)', color: '#059669', letterSpacing: '0.5px' }}>02</span>
+                <h3 style={{ fontSize: '0.92rem', fontWeight: 700, margin: 0, color: 'var(--text-main)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                   TARGET AUDIENCE
                 </h3>
               </div>
@@ -406,11 +405,11 @@ export default function CampaignWizard({ onComplete }) {
                   placeholder="e.g. Customer Support Managers and Directors in India..."
                   style={{
                     width: '100%',
-                    backgroundColor: 'rgba(15, 23, 42, 0.6)',
-                    border: '1px solid rgba(255, 255, 255, 0.12)',
+                    backgroundColor: 'var(--bg-input)',
+                    border: '1px solid var(--border-input)',
                     borderRadius: '8px',
                     padding: '0.85rem 1rem',
-                    color: '#f8fafc',
+                    color: 'var(--text-main)',
                     fontSize: '0.88rem',
                     lineHeight: '1.5',
                     resize: 'vertical'
@@ -425,8 +424,8 @@ export default function CampaignWizard({ onComplete }) {
             {/* SECTION 02B: INDUSTRY (OPTIONAL) */}
             <div style={{ marginBottom: '1.75rem' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.5rem' }}>
-                <span style={{ fontSize: '0.75rem', fontWeight: 800, padding: '2px 8px', borderRadius: '4px', background: 'rgba(168,85,247,0.2)', color: '#c084fc', letterSpacing: '0.5px' }}>02B</span>
-                <h3 style={{ fontSize: '0.92rem', fontWeight: 700, margin: 0, color: '#e0e7ff', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                <span style={{ fontSize: '0.75rem', fontWeight: 800, padding: '2px 8px', borderRadius: '4px', background: 'rgba(168,85,247,0.15)', color: '#9333ea', letterSpacing: '0.5px' }}>02B</span>
+                <h3 style={{ fontSize: '0.92rem', fontWeight: 700, margin: 0, color: 'var(--text-main)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                   INDUSTRY
                 </h3>
                 <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontStyle: 'italic' }}>(Optional)</span>
@@ -443,11 +442,11 @@ export default function CampaignWizard({ onComplete }) {
                   placeholder="e.g. Healthcare, BFSI, SaaS, Manufacturing..."
                   style={{
                     width: '100%',
-                    backgroundColor: 'rgba(15, 23, 42, 0.6)',
-                    border: '1px solid rgba(255, 255, 255, 0.12)',
+                    backgroundColor: 'var(--bg-input)',
+                    border: '1px solid var(--border-input)',
                     borderRadius: '8px',
                     padding: '0.75rem 1rem',
-                    color: '#f8fafc',
+                    color: 'var(--text-main)',
                     fontSize: '0.88rem',
                     lineHeight: '1.5'
                   }}
@@ -468,14 +467,13 @@ export default function CampaignWizard({ onComplete }) {
                 marginBottom: '1.25rem',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '0.6rem',
-                color: '#34d399',
-                fontSize: '0.88rem',
-                fontWeight: 600,
-                animation: 'fadeIn 0.2s ease'
+                gap: '0.75rem',
+                color: '#059669',
+                fontSize: '0.85rem'
               }}>
-                <CheckCircle2 size={18} />
-                <span>{toastNotification}</span>
+                <CheckCircle2 size={18} style={{ color: '#059669', flexShrink: 0 }} />
+                <div style={{ flex: 1, fontWeight: 600 }}>{toastNotification}</div>
+                <button onClick={() => setToastNotification('')} style={{ background: 'none', border: 'none', color: '#059669', cursor: 'pointer', fontWeight: 700 }}>✕</button>
               </div>
             )}
 
@@ -498,8 +496,8 @@ export default function CampaignWizard({ onComplete }) {
             {/* SECTION 03: REFERENCE DATASET */}
             <div style={{ marginBottom: '1.75rem' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.8rem' }}>
-                <span style={{ fontSize: '0.75rem', fontWeight: 800, padding: '2px 8px', borderRadius: '4px', background: 'rgba(251,191,36,0.2)', color: '#fbbf24', letterSpacing: '0.5px' }}>03</span>
-                <h3 style={{ fontSize: '0.92rem', fontWeight: 700, margin: 0, color: '#e0e7ff', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                <span style={{ fontSize: '0.75rem', fontWeight: 800, padding: '2px 8px', borderRadius: '4px', background: 'rgba(251,191,36,0.15)', color: '#d97706', letterSpacing: '0.5px' }}>03</span>
+                <h3 style={{ fontSize: '0.92rem', fontWeight: 700, margin: 0, color: 'var(--text-main)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                   REFERENCE DATASET
                 </h3>
               </div>
@@ -509,25 +507,23 @@ export default function CampaignWizard({ onComplete }) {
                 <div
                   onClick={() => handleTriggerFilePicker('append')}
                   style={{
-                    border: '2px dashed rgba(99, 102, 241, 0.4)',
+                    border: '2px dashed var(--accent)',
                     borderRadius: '12px',
                     padding: '1.4rem 1.25rem',
                     textAlign: 'center',
-                    backgroundColor: 'rgba(99, 102, 241, 0.05)',
+                    backgroundColor: 'var(--accent-light)',
                     cursor: 'pointer',
                     transition: 'all 0.2s ease'
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = 'rgba(99, 102, 241, 0.8)';
-                    e.currentTarget.style.backgroundColor = 'rgba(99, 102, 241, 0.12)';
+                    e.currentTarget.style.backgroundColor = 'var(--accent-glow)';
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = 'rgba(99, 102, 241, 0.4)';
-                    e.currentTarget.style.backgroundColor = 'rgba(99, 102, 241, 0.05)';
+                    e.currentTarget.style.backgroundColor = 'var(--accent-light)';
                   }}
                 >
-                  <UploadCloud size={28} style={{ color: '#818cf8', margin: '0 auto 0.5rem auto' }} />
-                  <h4 style={{ margin: '0 0 0.25rem 0', fontSize: '0.95rem', color: '#f8fafc', fontWeight: 700 }}>
+                  <UploadCloud size={28} style={{ color: 'var(--accent)', margin: '0 auto 0.5rem auto' }} />
+                  <h4 style={{ margin: '0 0 0.25rem 0', fontSize: '0.95rem', color: 'var(--text-main)', fontWeight: 700 }}>
                     Upload CSV / Excel
                   </h4>
                   <p style={{ margin: 0, fontSize: '0.78rem', color: 'var(--text-muted)' }}>
@@ -542,7 +538,7 @@ export default function CampaignWizard({ onComplete }) {
                     borderRadius: '12px',
                     padding: '1.4rem 1.25rem',
                     textAlign: 'center',
-                    backgroundColor: 'rgba(16, 185, 129, 0.05)',
+                    backgroundColor: 'rgba(16, 185, 129, 0.06)',
                     cursor: 'pointer',
                     transition: 'all 0.2s ease'
                   }}
@@ -552,11 +548,11 @@ export default function CampaignWizard({ onComplete }) {
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.borderColor = 'rgba(16, 185, 129, 0.4)';
-                    e.currentTarget.style.backgroundColor = 'rgba(16, 185, 129, 0.05)';
+                    e.currentTarget.style.backgroundColor = 'rgba(16, 185, 129, 0.06)';
                   }}
                 >
-                  <Database size={28} style={{ color: '#34d399', margin: '0 auto 0.5rem auto' }} />
-                  <h4 style={{ margin: '0 0 0.25rem 0', fontSize: '0.95rem', color: '#f8fafc', fontWeight: 700 }}>
+                  <Database size={28} style={{ color: '#059669', margin: '0 auto 0.5rem auto' }} />
+                  <h4 style={{ margin: '0 0 0.25rem 0', fontSize: '0.95rem', color: 'var(--text-main)', fontWeight: 700 }}>
                     Add Profile Manually
                   </h4>
                   <p style={{ margin: 0, fontSize: '0.78rem', color: 'var(--text-muted)' }}>
@@ -567,8 +563,8 @@ export default function CampaignWizard({ onComplete }) {
 
               {/* MASTER LEAD DATABASE STATUS & CONTROL PANEL */}
               <div style={{
-                backgroundColor: 'rgba(15, 23, 42, 0.7)',
-                border: '1px solid rgba(99, 102, 241, 0.3)',
+                backgroundColor: 'var(--bg-inner)',
+                border: '1px solid var(--border)',
                 borderRadius: '12px',
                 padding: '1.25rem 1.5rem',
                 display: 'flex',
@@ -578,23 +574,23 @@ export default function CampaignWizard({ onComplete }) {
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                     <div style={{
-                      width: 40, height: 40, borderRadius: 10, background: 'rgba(99, 102, 241, 0.15)',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#818cf8',
-                      border: '1px solid rgba(99, 102, 241, 0.3)'
+                      width: 40, height: 40, borderRadius: 10, background: 'var(--accent-light)',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent)',
+                      border: '1px solid var(--border)'
                     }}>
                       <Database size={20} />
                     </div>
                     <div>
-                      <div style={{ fontSize: '1rem', fontWeight: 700, color: '#f8fafc', display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+                      <div style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-main)', display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
                         <span>Master Lead Database</span>
-                        <span style={{ fontSize: '0.7rem', padding: '2px 8px', borderRadius: 999, background: 'rgba(16, 185, 129, 0.15)', color: '#34d399', border: '1px solid rgba(16, 185, 129, 0.3)', fontWeight: 600 }}>
+                        <span style={{ fontSize: '0.7rem', padding: '2px 8px', borderRadius: 999, background: 'rgba(16, 185, 129, 0.15)', color: '#059669', border: '1px solid rgba(16, 185, 129, 0.3)', fontWeight: 600 }}>
                           Single Source of Truth
                         </span>
                       </div>
                       <div style={{ display: 'flex', gap: '1.4rem', fontSize: '0.82rem', color: 'var(--text-muted)', marginTop: '4px', flexWrap: 'wrap' }}>
-                        <span>Total Profiles: <strong style={{ color: '#34d399' }}>{totalDatasetCount.toLocaleString()}</strong></span>
-                        <span>Dataset Status: <strong style={{ color: totalDatasetCount > 0 ? '#34d399' : '#fbbf24' }}>{totalDatasetCount > 0 ? 'Ready' : 'Empty'}</strong></span>
-                        <span>Last Updated: <strong style={{ color: '#cbd5e1' }}>{lastUpdated}</strong></span>
+                        <span>Total Profiles: <strong style={{ color: '#059669' }}>{totalDatasetCount.toLocaleString()}</strong></span>
+                        <span>Dataset Status: <strong style={{ color: totalDatasetCount > 0 ? '#059669' : '#d97706' }}>{totalDatasetCount > 0 ? 'Ready' : 'Empty'}</strong></span>
+                        <span>Last Updated: <strong style={{ color: 'var(--text-sub)' }}>{lastUpdated}</strong></span>
                       </div>
                     </div>
                   </div>
@@ -604,10 +600,10 @@ export default function CampaignWizard({ onComplete }) {
                 <div style={{
                   display: 'flex',
                   alignItems: 'center',
-                  justify: 'space-between',
+                  justifyContent: 'space-between',
                   gap: '0.75rem',
                   paddingTop: '0.85rem',
-                  borderTop: '1px solid rgba(255, 255, 255, 0.08)',
+                  borderTop: '1px solid var(--border)',
                   flexWrap: 'wrap'
                 }}>
                   <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
@@ -616,9 +612,9 @@ export default function CampaignWizard({ onComplete }) {
                       className="btn"
                       onClick={() => handleTriggerFilePicker('append')}
                       style={{
-                        backgroundColor: 'rgba(99, 102, 241, 0.15)',
-                        border: '1px solid rgba(99, 102, 241, 0.4)',
-                        color: '#818cf8',
+                        backgroundColor: 'var(--bg-card)',
+                        border: '1px solid var(--border)',
+                        color: 'var(--text-main)',
                         fontSize: '0.82rem',
                         fontWeight: 600,
                         padding: '0.55rem 1.1rem',
@@ -637,9 +633,9 @@ export default function CampaignWizard({ onComplete }) {
                       className="btn"
                       onClick={() => handleTriggerFilePicker('reset')}
                       style={{
-                        backgroundColor: 'rgba(245, 158, 11, 0.15)',
-                        border: '1px solid rgba(245, 158, 11, 0.4)',
-                        color: '#fbbf24',
+                        backgroundColor: 'var(--bg-card)',
+                        border: '1px solid var(--border)',
+                        color: 'var(--text-main)',
                         fontSize: '0.82rem',
                         fontWeight: 600,
                         padding: '0.55rem 1.1rem',
@@ -661,9 +657,9 @@ export default function CampaignWizard({ onComplete }) {
                       className="btn"
                       onClick={() => setShowResetMasterDbConfirm(true)}
                       style={{
-                        backgroundColor: 'rgba(239, 68, 68, 0.15)',
-                        border: '1px solid rgba(239, 68, 68, 0.4)',
-                        color: '#f87171',
+                        backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                        border: '1px solid rgba(239, 68, 68, 0.3)',
+                        color: '#ef4444',
                         fontSize: '0.82rem',
                         fontWeight: 600,
                         padding: '0.55rem 1.1rem',
@@ -683,8 +679,8 @@ export default function CampaignWizard({ onComplete }) {
 
             {/* AI INFORMATION PANEL */}
             <div style={{
-              backgroundColor: 'rgba(15, 23, 42, 0.7)',
-              border: '1px solid rgba(99, 102, 241, 0.25)',
+              backgroundColor: 'var(--bg-inner)',
+              border: '1px solid var(--border)',
               borderRadius: '10px',
               padding: '1.1rem 1.3rem',
               marginBottom: '1.5rem',
@@ -692,9 +688,9 @@ export default function CampaignWizard({ onComplete }) {
               gap: '1rem',
               alignItems: 'flex-start'
             }}>
-              <Sparkles size={22} style={{ color: '#818cf8', flexShrink: 0, marginTop: '2px' }} />
+              <Sparkles size={22} style={{ color: 'var(--accent)', flexShrink: 0, marginTop: '2px' }} />
               <div style={{ flex: 1 }}>
-                <h4 style={{ margin: '0 0 0.3rem 0', fontSize: '0.88rem', color: '#e0e7ff', fontWeight: 700 }}>
+                <h4 style={{ margin: '0 0 0.3rem 0', fontSize: '0.88rem', color: 'var(--text-main)', fontWeight: 700 }}>
                   How AI will use your data
                 </h4>
                 <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--text-muted)', lineHeight: '1.5' }}>
@@ -708,17 +704,17 @@ export default function CampaignWizard({ onComplete }) {
               <div style={{
                 padding: '2rem 1.5rem',
                 textAlign: 'center',
-                backgroundColor: 'rgba(15, 23, 42, 0.95)',
+                backgroundColor: 'var(--bg-card)',
                 borderRadius: '12px',
-                border: '1px solid rgba(99, 102, 241, 0.4)',
+                border: '1px solid var(--border)',
                 marginBottom: '1.5rem',
-                boxShadow: '0 10px 30px rgba(0,0,0,0.5)'
+                boxShadow: 'var(--shadow-md)'
               }}>
-                <Sparkles className="text-indigo-400 spinning" size={36} style={{ margin: '0 auto 0.8rem auto' }} />
-                <h4 style={{ color: '#f8fafc', margin: '0 0 0.4rem 0', fontSize: '1.05rem', fontWeight: 700 }}>
+                <Sparkles size={36} style={{ margin: '0 auto 0.8rem auto', color: 'var(--accent)', animation: 'spin 1.5s linear infinite' }} />
+                <h4 style={{ color: 'var(--text-main)', margin: '0 0 0.4rem 0', fontSize: '1.05rem', fontWeight: 700 }}>
                   🤖 AI Copilot is Analyzing Campaign Strategy
                 </h4>
-                <p style={{ color: '#818cf8', fontSize: '0.88rem', fontWeight: 600, margin: 0 }}>
+                <p style={{ color: 'var(--accent)', fontSize: '0.88rem', fontWeight: 600, margin: 0 }}>
                   {loadingStage || 'Processing campaign strategy...'}
                 </p>
               </div>
@@ -732,7 +728,7 @@ export default function CampaignWizard({ onComplete }) {
                 onClick={handleGeneratePlan}
                 disabled={loadingPlan}
                 style={{
-                  backgroundColor: '#6366f1',
+                  backgroundColor: 'var(--accent)',
                   color: '#ffffff',
                   fontWeight: 700,
                   padding: '0.75rem 1.75rem',
@@ -804,8 +800,8 @@ export default function CampaignWizard({ onComplete }) {
         {step === 2 && copilotPlan && (
           <div>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-              <h3 style={{ margin: 0 }}>Step 2: Review & Edit AI Generated Plan</h3>
-              <span style={{ fontSize: '0.78rem', color: '#818cf8', fontWeight: 600 }}>✏️ Manual Editing Enabled</span>
+              <h3 style={{ margin: 0, color: 'var(--text-main)' }}>Step 2: Review & Edit AI Generated Plan</h3>
+              <span style={{ fontSize: '0.78rem', color: 'var(--accent)', fontWeight: 600 }}>✏️ Manual Editing Enabled</span>
             </div>
             <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: '1.25rem' }}>
               Review the AI Copilot's recommended criteria. You can manually edit the campaign name, add/remove seniorities, or adjust keywords below.
@@ -813,40 +809,40 @@ export default function CampaignWizard({ onComplete }) {
 
             {/* 🤖 AI SEMANTIC PROMPT INTERPRETATION MATRIX */}
             <div style={{
-              backgroundColor: 'rgba(15, 23, 42, 0.75)',
-              border: '1px solid rgba(99, 102, 241, 0.35)',
+              backgroundColor: 'var(--bg-inner)',
+              border: '1px solid var(--border)',
               borderRadius: '12px',
               padding: '1.1rem 1.4rem',
               marginBottom: '1.5rem',
-              boxShadow: '0 8px 32px rgba(0,0,0,0.25)'
+              boxShadow: 'var(--shadow-sm)'
             }}>
-              <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#818cf8', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.6rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <Sparkles size={14} color="#818cf8" /> 🤖 AI Prompt Interpretation &amp; Targeting Matrix
+              <div style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.6rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <Sparkles size={14} color="var(--accent)" /> 🤖 AI Prompt Interpretation &amp; Targeting Matrix
               </div>
 
-              <div style={{ fontSize: '0.8rem', color: '#e0e7ff', marginBottom: '0.75rem', lineHeight: '1.4' }}>
+              <div style={{ fontSize: '0.8rem', color: 'var(--text-main)', marginBottom: '0.75rem', lineHeight: '1.4' }}>
                 {copilotPlan.interpretation_summary || 'Analyzed natural language intent and extracted targeting criteria.'}
               </div>
 
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '0.65rem', fontSize: '0.75rem' }}>
                 {copilotPlan.interpreted_department && (
-                  <div style={{ backgroundColor: 'rgba(0,0,0,0.3)', padding: '0.5rem 0.75rem', borderRadius: '6px', border: '1px solid rgba(255,255,255,0.06)' }}>
+                  <div style={{ backgroundColor: 'var(--bg-card)', padding: '0.5rem 0.75rem', borderRadius: '6px', border: '1px solid var(--border)' }}>
                     <span style={{ color: 'var(--text-muted)' }}>Interpreted Department: </span>
-                    <strong style={{ color: '#34d399' }}>{copilotPlan.interpreted_department}</strong>
+                    <strong style={{ color: '#059669' }}>{copilotPlan.interpreted_department}</strong>
                   </div>
                 )}
 
                 {copilotPlan.normalized_abbreviations && copilotPlan.normalized_abbreviations.length > 0 && (
-                  <div style={{ backgroundColor: 'rgba(0,0,0,0.3)', padding: '0.5rem 0.75rem', borderRadius: '6px', border: '1px solid rgba(255,255,255,0.06)' }}>
+                  <div style={{ backgroundColor: 'var(--bg-card)', padding: '0.5rem 0.75rem', borderRadius: '6px', border: '1px solid var(--border)' }}>
                     <span style={{ color: 'var(--text-muted)' }}>Normalized Abbreviations: </span>
-                    <strong style={{ color: '#fbbf24' }}>{copilotPlan.normalized_abbreviations.join(', ')}</strong>
+                    <strong style={{ color: '#d97706' }}>{copilotPlan.normalized_abbreviations.join(', ')}</strong>
                   </div>
                 )}
 
                 {copilotPlan.inferred_technologies && copilotPlan.inferred_technologies.length > 0 && (
-                  <div style={{ backgroundColor: 'rgba(0,0,0,0.3)', padding: '0.5rem 0.75rem', borderRadius: '6px', border: '1px solid rgba(255,255,255,0.06)' }}>
+                  <div style={{ backgroundColor: 'var(--bg-card)', padding: '0.5rem 0.75rem', borderRadius: '6px', border: '1px solid var(--border)' }}>
                     <span style={{ color: 'var(--text-muted)' }}>Technologies &amp; Focus: </span>
-                    <strong style={{ color: '#60a5fa' }}>{copilotPlan.inferred_technologies.join(', ')}</strong>
+                    <strong style={{ color: '#2563eb' }}>{copilotPlan.inferred_technologies.join(', ')}</strong>
                   </div>
                 )}
               </div>
@@ -854,81 +850,80 @@ export default function CampaignWizard({ onComplete }) {
 
             {/* DYNAMIC DATASET MATCH ACCURACY SCORE CARD */}
             <div style={{
-              backgroundColor: 'rgba(15, 23, 42, 0.75)',
-              border: '1px solid rgba(99, 102, 241, 0.35)',
+              backgroundColor: 'var(--bg-inner)',
+              border: '1px solid var(--border)',
               borderRadius: '12px',
               padding: '1.25rem 1.5rem',
               marginBottom: '1.5rem',
-              boxShadow: '0 8px 32px rgba(0,0,0,0.25)',
-              backdropFilter: 'blur(10px)'
+              boxShadow: 'var(--shadow-sm)'
             }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '0.75rem' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', borderBottom: '1px solid var(--border)', paddingBottom: '0.75rem' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-                  <Database size={20} className="text-indigo-400" />
+                  <Database size={20} color="var(--accent)" />
                   <div>
-                    <h4 style={{ margin: 0, color: '#f8fafc', fontSize: '1rem', fontWeight: 700 }}>Dataset Match Accuracy Score</h4>
+                    <h4 style={{ margin: 0, color: 'var(--text-main)', fontSize: '1rem', fontWeight: 700 }}>Dataset Match Accuracy Score</h4>
                     <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Live calculation from actual PostgreSQL lead data</span>
                   </div>
                 </div>
-                <span style={{ fontSize: '0.72rem', padding: '3px 10px', borderRadius: '999px', background: 'rgba(16, 185, 129, 0.15)', color: '#34d399', fontWeight: 600, border: '1px solid rgba(16, 185, 129, 0.3)' }}>
+                <span style={{ fontSize: '0.72rem', padding: '3px 10px', borderRadius: '999px', background: 'rgba(16, 185, 129, 0.15)', color: '#059669', fontWeight: 600, border: '1px solid rgba(16, 185, 129, 0.3)' }}>
                   Source: PostgreSQL Data
                 </span>
               </div>
 
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(105px, 1fr))', gap: '0.75rem', textAlign: 'center' }}>
                 {/* Overall Match */}
-                <div style={{ backgroundColor: 'rgba(99, 102, 241, 0.12)', border: '1px solid rgba(99, 102, 241, 0.3)', borderRadius: '8px', padding: '0.75rem 0.4rem' }}>
-                  <div style={{ fontSize: '0.7rem', color: '#a5b4fc', textTransform: 'uppercase', letterSpacing: '0.5px', fontWeight: 600 }}>Overall Match</div>
-                  <div style={{ fontSize: '1.5rem', fontWeight: 800, color: '#6366f1', marginTop: '0.2rem' }}>
+                <div style={{ backgroundColor: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '8px', padding: '0.75rem 0.4rem' }}>
+                  <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.5px', fontWeight: 600 }}>Overall Match</div>
+                  <div style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--accent)', marginTop: '0.2rem' }}>
                     {loadingAccuracy ? '...' : `${accuracyScores?.overall_match || 87}%`}
                   </div>
                 </div>
 
                 {/* Role Match */}
-                <div style={{ backgroundColor: 'rgba(52, 211, 153, 0.08)', border: '1px solid rgba(52, 211, 153, 0.25)', borderRadius: '8px', padding: '0.75rem 0.4rem' }}>
-                  <div style={{ fontSize: '0.7rem', color: '#6ee7b7', textTransform: 'uppercase', letterSpacing: '0.5px', fontWeight: 600 }}>Role Match</div>
-                  <div style={{ fontSize: '1.3rem', fontWeight: 700, color: '#34d399', marginTop: '0.2rem' }}>
+                <div style={{ backgroundColor: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '8px', padding: '0.75rem 0.4rem' }}>
+                  <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.5px', fontWeight: 600 }}>Role Match</div>
+                  <div style={{ fontSize: '1.3rem', fontWeight: 700, color: '#059669', marginTop: '0.2rem' }}>
                     {loadingAccuracy ? '...' : `${accuracyScores?.role_match || 90}%`}
                   </div>
                 </div>
 
                 {/* Department Match */}
-                <div style={{ backgroundColor: 'rgba(251, 191, 36, 0.08)', border: '1px solid rgba(251, 191, 36, 0.25)', borderRadius: '8px', padding: '0.75rem 0.4rem' }}>
-                  <div style={{ fontSize: '0.7rem', color: '#fde047', textTransform: 'uppercase', letterSpacing: '0.5px', fontWeight: 600 }}>Dept Match</div>
-                  <div style={{ fontSize: '1.3rem', fontWeight: 700, color: '#fbbf24', marginTop: '0.2rem' }}>
+                <div style={{ backgroundColor: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '8px', padding: '0.75rem 0.4rem' }}>
+                  <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.5px', fontWeight: 600 }}>Dept Match</div>
+                  <div style={{ fontSize: '1.3rem', fontWeight: 700, color: '#d97706', marginTop: '0.2rem' }}>
                     {loadingAccuracy ? '...' : `${accuracyScores?.department_match || 94}%`}
                   </div>
                 </div>
 
                 {/* Keyword Match */}
-                <div style={{ backgroundColor: 'rgba(236, 72, 153, 0.08)', border: '1px solid rgba(236, 72, 153, 0.25)', borderRadius: '8px', padding: '0.75rem 0.4rem' }}>
-                  <div style={{ fontSize: '0.7rem', color: '#f472b6', textTransform: 'uppercase', letterSpacing: '0.5px', fontWeight: 600 }}>Keyword Match</div>
-                  <div style={{ fontSize: '1.3rem', fontWeight: 700, color: '#ec4899', marginTop: '0.2rem' }}>
+                <div style={{ backgroundColor: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '8px', padding: '0.75rem 0.4rem' }}>
+                  <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.5px', fontWeight: 600 }}>Keyword Match</div>
+                  <div style={{ fontSize: '1.3rem', fontWeight: 700, color: '#db2777', marginTop: '0.2rem' }}>
                     {loadingAccuracy ? '...' : `${accuracyScores?.keyword_match || accuracyScores?.semantic_match || 85}%`}
                   </div>
                 </div>
 
                 {/* Industry Match */}
-                <div style={{ backgroundColor: 'rgba(168, 85, 247, 0.08)', border: '1px solid rgba(168, 85, 247, 0.25)', borderRadius: '8px', padding: '0.75rem 0.4rem' }}>
-                  <div style={{ fontSize: '0.7rem', color: '#c084fc', textTransform: 'uppercase', letterSpacing: '0.5px', fontWeight: 600 }}>Industry Match</div>
-                  <div style={{ fontSize: '1.3rem', fontWeight: 700, color: '#c084fc', marginTop: '0.2rem' }}>
+                <div style={{ backgroundColor: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '8px', padding: '0.75rem 0.4rem' }}>
+                  <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.5px', fontWeight: 600 }}>Industry Match</div>
+                  <div style={{ fontSize: '1.3rem', fontWeight: 700, color: '#9333ea', marginTop: '0.2rem' }}>
                     {loadingAccuracy ? '...' : `${accuracyScores?.industry_match || 85}%`}
                   </div>
                 </div>
 
                 {/* Location Match */}
-                <div style={{ backgroundColor: 'rgba(56, 189, 248, 0.08)', border: '1px solid rgba(56, 189, 248, 0.25)', borderRadius: '8px', padding: '0.75rem 0.4rem' }}>
-                  <div style={{ fontSize: '0.7rem', color: '#7dd3fc', textTransform: 'uppercase', letterSpacing: '0.5px', fontWeight: 600 }}>Location Match</div>
-                  <div style={{ fontSize: '1.3rem', fontWeight: 700, color: '#38bdf8', marginTop: '0.2rem' }}>
+                <div style={{ backgroundColor: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '8px', padding: '0.75rem 0.4rem' }}>
+                  <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.5px', fontWeight: 600 }}>Location Match</div>
+                  <div style={{ fontSize: '1.3rem', fontWeight: 700, color: '#0284c7', marginTop: '0.2rem' }}>
                     {loadingAccuracy ? '...' : `${accuracyScores?.location_match || 100}%`}
                   </div>
                 </div>
               </div>
 
-              <div style={{ marginTop: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.8rem', color: 'var(--text-muted)', paddingTop: '0.6rem', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+              <div style={{ marginTop: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.8rem', color: 'var(--text-muted)', paddingTop: '0.6rem', borderTop: '1px solid var(--border)' }}>
                 <div>
-                  <span style={{ fontWeight: 600, color: '#e0e7ff' }}>Matching Profiles: </span>
-                  <span style={{ color: '#34d399', fontWeight: 700 }}>{accuracyScores?.matching_profiles || '0 / 0'}</span>
+                  <span style={{ fontWeight: 600, color: 'var(--text-main)' }}>Matching Profiles: </span>
+                  <span style={{ color: '#059669', fontWeight: 700 }}>{accuracyScores?.matching_profiles || '0 / 0'}</span>
                 </div>
                 <div style={{ fontSize: '0.74rem', fontStyle: 'italic' }}>
                   💡 <strong>Dataset Match Score</strong> measures dataset-wide fit. <strong>Lead Fit Score</strong> measures individual lead relevance.
@@ -938,7 +933,7 @@ export default function CampaignWizard({ onComplete }) {
 
             {/* Campaign Name Field */}
             <div className="form-group">
-              <label style={{ fontWeight: 600 }}>Campaign Name</label>
+              <label style={{ fontWeight: 600, color: 'var(--text-main)' }}>Campaign Name</label>
               <input className="form-control" value={name} onChange={(e) => setName(e.target.value)} placeholder="Campaign Title" />
             </div>
 

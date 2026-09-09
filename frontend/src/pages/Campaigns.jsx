@@ -7,6 +7,7 @@ export default function Campaigns({ setCurrentTab, activeCampaignId, setActiveCa
   const [campaigns, setCampaigns] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filterCampaignId, setFilterCampaignId] = useState('ALL');
+  const [searchQuery, setSearchQuery] = useState('');
   const [selectedLeadData, setSelectedLeadData] = useState(null);
   const [leadLoading, setLeadLoading] = useState(false);
   const [actionLoading, setActionLoading] = useState('');
@@ -162,10 +163,21 @@ export default function Campaigns({ setCurrentTab, activeCampaignId, setActiveCa
     { key: 'reply', label: '⑤ Reply' }
   ];
 
-  // Filter displayed campaigns based on Campaign Filter dropdown
-  const displayedCampaigns = filterCampaignId === 'ALL'
+  // Filter displayed campaigns based on Campaign Filter dropdown and search query
+  const displayedCampaigns = (filterCampaignId === 'ALL'
     ? campaigns
-    : campaigns.filter((c) => c.id === Number(filterCampaignId));
+    : campaigns.filter((c) => c.id === Number(filterCampaignId)))
+    .filter((c) => {
+      if (!searchQuery.trim()) return true;
+      const q = searchQuery.toLowerCase();
+      return (
+        (c.name || '').toLowerCase().includes(q) ||
+        (c.campaign_target || '').toLowerCase().includes(q) ||
+        (c.description || '').toLowerCase().includes(q) ||
+        (c.industry || '').toLowerCase().includes(q) ||
+        (c.objective || '').toLowerCase().includes(q)
+      );
+    });
 
   return (
     <div>
@@ -181,10 +193,17 @@ export default function Campaigns({ setCurrentTab, activeCampaignId, setActiveCa
         {/* Campaign Filter Dropdown replacing New AI Campaign button */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
           <Filter size={16} style={{ color: '#818cf8' }} />
-          <label style={{ fontSize: '0.85rem', color: 'var(--text-muted)', fontWeight: 500 }}>Campaign Filter:</label>
+          <input
+            type="text"
+            placeholder="Search campaigns..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="form-control"
+            style={{ width: '260px', backgroundColor: 'var(--bg-card)', color: 'var(--text-main)', border: '1px solid var(--border)', fontWeight: 600 }}
+          />
           <select
             className="form-control"
-            style={{ width: '260px', backgroundColor: 'var(--bg-card)', color: '#fff', border: '1px solid rgba(99,102,241,0.3)', fontWeight: 600 }}
+            style={{ width: '260px', backgroundColor: 'var(--bg-card)', color: 'var(--text-main)', border: '1px solid rgba(99,102,241,0.3)', fontWeight: 600 }}
             value={filterCampaignId}
             onChange={(e) => {
               const newFilter = e.target.value;
@@ -242,16 +261,20 @@ export default function Campaigns({ setCurrentTab, activeCampaignId, setActiveCa
                       {STEPS.map((s, i) => (
                         <React.Fragment key={s.key}>
                           <button
-                            className="btn"
+                            type="button"
                             style={{
                               padding: '4px 10px',
                               borderRadius: '6px',
                               fontSize: '0.75rem',
                               fontWeight: 600,
-                              backgroundColor: i === 0 || (i === 1 && hasSelectedLead) ? 'var(--success-light)' : 'var(--bg-inner)',
+                              backgroundColor: i === 0 || (i === 1 && hasSelectedLead) ? 'rgba(16, 185, 129, 0.12)' : 'var(--bg-inner)',
                               color: i === 0 || (i === 1 && hasSelectedLead) ? '#059669' : 'var(--text-muted)',
-                              border: i === 0 || (i === 1 && hasSelectedLead) ? '1px solid rgba(16,185,129,0.3)' : '1px solid var(--border)',
-                              cursor: 'pointer'
+                              border: i === 0 || (i === 1 && hasSelectedLead) ? '1px solid rgba(16, 185, 129, 0.3)' : '1px solid var(--border)',
+                              cursor: 'pointer',
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: '4px',
+                              outline: 'none'
                             }}
                             onClick={() => {
                               if (setActiveCampaignId) setActiveCampaignId(c.id);
@@ -278,17 +301,17 @@ export default function Campaigns({ setCurrentTab, activeCampaignId, setActiveCa
                     {/* Campaign Action Buttons */}
                     <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
                       <button
-                        className="btn"
-                        style={{ fontSize: '0.78rem', padding: '6px 12px', background: 'rgba(99,102,241,0.18)', color: '#c7d2fe', border: '1px solid rgba(99,102,241,0.4)', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '4px' }}
+                        type="button"
+                        style={{ fontSize: '0.78rem', padding: '6px 12px', background: 'var(--bg-inner)', color: 'var(--text-main)', border: '1px solid var(--border)', borderRadius: '6px', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '4px', cursor: 'pointer' }}
                         onClick={() => setSequenceModalCampaign(c)}
                         title="Configure Campaign Automation Sequence & Timers"
                       >
-                        <Zap size={13} className="text-amber-400" />
+                        <Zap size={13} color="var(--accent)" />
                         Automation Sequence
                       </button>
                       <button
-                        className="btn"
-                        style={{ fontSize: '0.78rem', padding: '6px 12px', background: 'rgba(99,102,241,0.18)', color: '#c7d2fe', border: '1px solid rgba(99,102,241,0.4)', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '4px' }}
+                        type="button"
+                        style={{ fontSize: '0.78rem', padding: '6px 12px', background: 'var(--bg-inner)', color: 'var(--text-main)', border: '1px solid var(--border)', borderRadius: '6px', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '4px', cursor: 'pointer' }}
                         onClick={() => handleOpenEditModal(c)}
                         title="Edit Campaign Details"
                       >
@@ -296,8 +319,8 @@ export default function Campaigns({ setCurrentTab, activeCampaignId, setActiveCa
                         Edit
                       </button>
                       <button
-                        className="btn"
-                        style={{ fontSize: '0.78rem', padding: '6px 14px', background: '#4f46e5', color: '#fff', border: '1px solid #6366f1', fontWeight: 600 }}
+                        type="button"
+                        style={{ fontSize: '0.78rem', padding: '6px 14px', background: 'var(--accent)', color: '#fff', border: 'none', borderRadius: '6px', fontWeight: 600, cursor: 'pointer' }}
                         onClick={() => {
                           if (setActiveCampaignId) setActiveCampaignId(c.id);
                           if (setCurrentTab) setCurrentTab('live');
@@ -307,8 +330,8 @@ export default function Campaigns({ setCurrentTab, activeCampaignId, setActiveCa
                         Open Execution
                       </button>
                       <button
-                        className="btn"
-                        style={{ fontSize: '0.78rem', padding: '6px 10px', background: 'rgba(239,68,68,0.08)', color: '#f87171', border: '1px solid rgba(239,68,68,0.3)' }}
+                        type="button"
+                        style={{ fontSize: '0.78rem', padding: '6px 10px', background: 'rgba(239,68,68,0.1)', color: '#ef4444', border: '1px solid rgba(239,68,68,0.3)', borderRadius: '6px', cursor: 'pointer' }}
                         onClick={() => handleDelete(c.id)}
                         title="Delete Campaign"
                       >

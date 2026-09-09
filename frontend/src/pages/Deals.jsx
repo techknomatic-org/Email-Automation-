@@ -453,7 +453,7 @@ function GmailStyleComposer({
         {activeTab === 'composer' && (
           <>
             {/* Top Toolbar: Revert, Undo, Redo, Version History Stack */}
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'rgba(0,0,0,0.3)', padding: '6px 10px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.08)' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--bg-inner)', padding: '6px 10px', borderRadius: '8px', border: '1px solid var(--border)' }}>
               {/* Undo / Redo / Revert Buttons */}
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                 <button
@@ -462,9 +462,9 @@ function GmailStyleComposer({
                   disabled={historyIndex === 0}
                   title="Undo (Ctrl+Z)"
                   style={{
-                    fontSize: '0.72rem', padding: '3px 8px', borderRadius: '4px', border: '1px solid rgba(255,255,255,0.12)',
-                    backgroundColor: historyIndex > 0 ? 'rgba(255,255,255,0.08)' : 'rgba(255,255,255,0.02)',
-                    color: historyIndex > 0 ? '#fff' : 'rgba(255,255,255,0.25)', cursor: historyIndex > 0 ? 'pointer' : 'not-allowed',
+                    fontSize: '0.72rem', padding: '3px 8px', borderRadius: '4px', border: '1px solid var(--border)',
+                    backgroundColor: historyIndex > 0 ? 'var(--bg-card)' : 'transparent',
+                    color: historyIndex > 0 ? 'var(--text-main)' : 'var(--text-muted)', cursor: historyIndex > 0 ? 'pointer' : 'not-allowed',
                     display: 'inline-flex', alignItems: 'center', gap: '3px', fontWeight: 700
                   }}
                 >
@@ -476,9 +476,9 @@ function GmailStyleComposer({
                   disabled={historyIndex === history.length - 1}
                   title="Redo (Ctrl+Y)"
                   style={{
-                    fontSize: '0.72rem', padding: '3px 8px', borderRadius: '4px', border: '1px solid rgba(255,255,255,0.12)',
-                    backgroundColor: historyIndex < history.length - 1 ? 'rgba(255,255,255,0.08)' : 'rgba(255,255,255,0.02)',
-                    color: historyIndex < history.length - 1 ? '#fff' : 'rgba(255,255,255,0.25)', cursor: historyIndex < history.length - 1 ? 'pointer' : 'not-allowed',
+                    fontSize: '0.72rem', padding: '3px 8px', borderRadius: '4px', border: '1px solid var(--border)',
+                    backgroundColor: historyIndex < history.length - 1 ? 'var(--bg-card)' : 'transparent',
+                    color: historyIndex < history.length - 1 ? 'var(--text-main)' : 'var(--text-muted)', cursor: historyIndex < history.length - 1 ? 'pointer' : 'not-allowed',
                     display: 'inline-flex', alignItems: 'center', gap: '3px', fontWeight: 700
                   }}
                 >
@@ -491,7 +491,7 @@ function GmailStyleComposer({
                   title="Revert to original initial draft"
                   style={{
                     fontSize: '0.72rem', padding: '3px 8px', borderRadius: '4px', border: '1px solid rgba(239,68,68,0.3)',
-                    backgroundColor: 'rgba(239,68,68,0.15)', color: '#f87171', cursor: 'pointer',
+                    backgroundColor: 'rgba(239,68,68,0.1)', color: '#ef4444', cursor: 'pointer',
                     display: 'inline-flex', alignItems: 'center', gap: '3px', fontWeight: 700
                   }}
                 >
@@ -501,7 +501,7 @@ function GmailStyleComposer({
             </div>
 
             {/* Recipients (To, CC, BCC) */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', backgroundColor: 'rgba(0,0,0,0.25)', padding: '0.65rem 0.85rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.08)' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', backgroundColor: 'var(--bg-inner)', padding: '0.65rem 0.85rem', borderRadius: '8px', border: '1px solid var(--border)' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.8rem' }}>
                 <span style={{ color: 'var(--text-muted)', fontWeight: 700, width: '32px', flexShrink: 0 }}>To:</span>
                 <input
@@ -510,7 +510,7 @@ function GmailStyleComposer({
                   value={variant.to_email !== undefined ? variant.to_email : (recipientEmail || '')}
                   onChange={e => setVariant(prev => ({ ...prev, to_email: e.target.value, isDraftSaved: false }))}
                   placeholder="Recipient email address..."
-                  style={{ flex: 1, fontSize: '0.82rem', padding: '4px 8px', backgroundColor: 'rgba(0,0,0,0.3)', color: '#fff', border: '1px solid rgba(255,255,255,0.12)', borderRadius: '6px' }}
+                  style={{ flex: 1, fontSize: '0.82rem', padding: '4px 8px', backgroundColor: 'var(--bg-input)', color: 'var(--text-main)', border: '1px solid var(--border-input)', borderRadius: '6px' }}
                 />
                 <div style={{ display: 'flex', gap: '0.3rem', flexShrink: 0 }}>
                   <button
@@ -518,9 +518,9 @@ function GmailStyleComposer({
                     onClick={() => setShowCc(!showCc)}
                     style={{
                       fontSize: '0.72rem', padding: '2px 8px', borderRadius: '4px',
-                      border: (showCc || variant.cc) ? `1px solid ${themeColor}` : '1px solid rgba(255,255,255,0.15)',
-                      backgroundColor: (showCc || variant.cc) ? `${themeColor}22` : 'rgba(255,255,255,0.05)',
-                      color: (showCc || variant.cc) ? '#fff' : 'var(--text-muted)', cursor: 'pointer', fontWeight: 700
+                      border: (showCc || variant.cc) ? `1px solid ${themeColor}` : '1px solid var(--border)',
+                      backgroundColor: (showCc || variant.cc) ? `${themeColor}22` : 'var(--bg-card)',
+                      color: (showCc || variant.cc) ? themeColor : 'var(--text-muted)', cursor: 'pointer', fontWeight: 700
                     }}
                   >
                     Cc
@@ -530,9 +530,9 @@ function GmailStyleComposer({
                     onClick={() => setShowBcc(!showBcc)}
                     style={{
                       fontSize: '0.72rem', padding: '2px 8px', borderRadius: '4px',
-                      border: (showBcc || variant.bcc) ? `1px solid ${themeColor}` : '1px solid rgba(255,255,255,0.15)',
-                      backgroundColor: (showBcc || variant.bcc) ? `${themeColor}22` : 'rgba(255,255,255,0.05)',
-                      color: (showBcc || variant.bcc) ? '#fff' : 'var(--text-muted)', cursor: 'pointer', fontWeight: 700
+                      border: (showBcc || variant.bcc) ? `1px solid ${themeColor}` : '1px solid var(--border)',
+                      backgroundColor: (showBcc || variant.bcc) ? `${themeColor}22` : 'var(--bg-card)',
+                      color: (showBcc || variant.bcc) ? themeColor : 'var(--text-muted)', cursor: 'pointer', fontWeight: 700
                     }}
                   >
                     Bcc
@@ -549,9 +549,9 @@ function GmailStyleComposer({
                     value={variant.cc || ''}
                     onChange={e => setVariant(prev => ({ ...prev, cc: e.target.value, isDraftSaved: false }))}
                     placeholder="CC email addresses (comma separated)..."
-                    style={{ flex: 1, fontSize: '0.82rem', padding: '4px 8px', backgroundColor: 'rgba(0,0,0,0.3)', color: '#fff', border: '1px solid rgba(255,255,255,0.12)', borderRadius: '6px' }}
+                    style={{ flex: 1, fontSize: '0.82rem', padding: '4px 8px', backgroundColor: 'var(--bg-input)', color: 'var(--text-main)', border: '1px solid var(--border-input)', borderRadius: '6px' }}
                   />
-                  <button type="button" onClick={() => { setVariant(prev => ({ ...prev, cc: '', isDraftSaved: false })); setShowCc(false); }} style={{ background: 'none', border: 'none', color: '#f87171', cursor: 'pointer', padding: '0 4px' }}>✕</button>
+                  <button type="button" onClick={() => { setVariant(prev => ({ ...prev, cc: '', isDraftSaved: false })); setShowCc(false); }} style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer', padding: '0 4px' }}>✕</button>
                 </div>
               )}
 
@@ -564,9 +564,9 @@ function GmailStyleComposer({
                     value={variant.bcc || ''}
                     onChange={e => setVariant(prev => ({ ...prev, bcc: e.target.value, isDraftSaved: false }))}
                     placeholder="BCC email addresses (comma separated)..."
-                    style={{ flex: 1, fontSize: '0.82rem', padding: '4px 8px', backgroundColor: 'rgba(0,0,0,0.3)', color: '#fff', border: '1px solid rgba(255,255,255,0.12)', borderRadius: '6px' }}
+                    style={{ flex: 1, fontSize: '0.82rem', padding: '4px 8px', backgroundColor: 'var(--bg-input)', color: 'var(--text-main)', border: '1px solid var(--border-input)', borderRadius: '6px' }}
                   />
-                  <button type="button" onClick={() => { setVariant(prev => ({ ...prev, bcc: '', isDraftSaved: false })); setShowBcc(false); }} style={{ background: 'none', border: 'none', color: '#f87171', cursor: 'pointer', padding: '0 4px' }}>✕</button>
+                  <button type="button" onClick={() => { setVariant(prev => ({ ...prev, bcc: '', isDraftSaved: false })); setShowBcc(false); }} style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer', padding: '0 4px' }}>✕</button>
                 </div>
               )}
             </div>
@@ -579,7 +579,7 @@ function GmailStyleComposer({
                   type="button"
                   onClick={generateMoreSubjectOptions}
                   disabled={aiLoading}
-                  style={{ background: 'none', border: 'none', color: '#818cf8', fontSize: '0.72rem', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '4px', fontWeight: 700 }}
+                  style={{ background: 'none', border: 'none', color: 'var(--accent)', fontSize: '0.72rem', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '4px', fontWeight: 700 }}
                 >
                   <Sparkles size={11} style={{ animation: aiLoading ? 'spin 1s linear infinite' : 'none' }} />
                   {aiLoading ? 'Generating...' : '✨ More Subject Ideas'}
@@ -592,12 +592,12 @@ function GmailStyleComposer({
                 value={variant.subject}
                 onChange={e => pushToHistory(e.target.value, variant.body, 'Edited Subject')}
                 placeholder="Enter or select email subject line..."
-                style={{ fontSize: '0.86rem', backgroundColor: 'rgba(0,0,0,0.3)', color: '#fff', border: '1px solid rgba(255,255,255,0.14)', borderRadius: '6px', padding: '6px 10px' }}
+                style={{ fontSize: '0.86rem', backgroundColor: 'var(--bg-input)', color: 'var(--text-main)', border: '1px solid var(--border-input)', borderRadius: '6px', padding: '6px 10px' }}
               />
 
               {/* AI-Generated Subject Line Options Chips */}
               {subjectOptions && subjectOptions.length > 0 && (
-                <div style={{ marginTop: '8px', padding: '8px 10px', borderRadius: '8px', backgroundColor: 'rgba(99, 102, 241, 0.08)', border: '1px solid rgba(99, 102, 241, 0.22)' }}>
+                <div style={{ marginTop: '8px', padding: '8px 10px', borderRadius: '8px', backgroundColor: 'var(--bg-inner)', border: '1px solid var(--border)' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
                     <span style={{ fontSize: '0.7rem', fontWeight: 800, color: '#a5b4fc', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                       💡 AI-Generated Subject Line Options
@@ -620,9 +620,9 @@ function GmailStyleComposer({
                             fontSize: '0.75rem',
                             padding: '6px 10px',
                             borderRadius: '6px',
-                            border: isSelected ? '1.5px solid #6366f1' : '1px solid rgba(255,255,255,0.08)',
-                            backgroundColor: isSelected ? 'rgba(99, 102, 241, 0.25)' : 'rgba(0,0,0,0.35)',
-                            color: isSelected ? '#fff' : '#cbd5e1',
+                            border: isSelected ? '1.5px solid var(--accent)' : '1px solid var(--border)',
+                            backgroundColor: isSelected ? 'var(--accent-light)' : 'var(--bg-card)',
+                            color: isSelected ? 'var(--accent)' : 'var(--text-main)',
                             cursor: 'pointer',
                             textAlign: 'left',
                             fontWeight: isSelected ? 700 : 500,
@@ -633,8 +633,8 @@ function GmailStyleComposer({
                           }}
                         >
                           <span style={{
-                            fontSize: '0.68rem', fontWeight: 800, color: isSelected ? '#34d399' : '#818cf8',
-                            backgroundColor: isSelected ? 'rgba(16,185,129,0.2)' : 'rgba(99,102,241,0.2)',
+                            fontSize: '0.68rem', fontWeight: 800, color: isSelected ? '#059669' : 'var(--accent)',
+                            backgroundColor: isSelected ? 'rgba(16,185,129,0.15)' : 'var(--bg-inner)',
                             padding: '1px 6px', borderRadius: '4px', flexShrink: 0
                           }}>
                             {isSelected ? '✓ ACTIVE' : `Option ${oIdx + 1}`}
@@ -651,17 +651,15 @@ function GmailStyleComposer({
             </div>
 
             {/* Formatting, Dynamic Database Insert Tags & Contextual AI Assist Toolbar */}
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem', background: 'rgba(0,0,0,0.2)', padding: '6px 10px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.08)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem', background: 'var(--bg-inner)', padding: '6px 10px', borderRadius: '8px', border: '1px solid var(--border)' }}>
               {/* Formatting buttons */}
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.2rem' }}>
-                <button type="button" onClick={() => applyFormat('b')} title="Bold" style={{ padding: '3px 7px', background: 'none', border: 'none', color: '#fff', cursor: 'pointer', fontWeight: 800, fontSize: '0.75rem' }}>B</button>
-                <button type="button" onClick={() => applyFormat('i')} title="Italic" style={{ padding: '3px 7px', background: 'none', border: 'none', color: '#fff', cursor: 'pointer', fontStyle: 'italic', fontSize: '0.75rem' }}>I</button>
-                <button type="button" onClick={() => applyFormat('u')} title="Underline" style={{ padding: '3px 7px', background: 'none', border: 'none', color: '#fff', cursor: 'pointer', textDecoration: 'underline', fontSize: '0.75rem' }}>U</button>
-                <button type="button" onClick={() => applyFormat('ul')} title="Bullet List" style={{ padding: '3px 7px', background: 'none', border: 'none', color: '#fff', cursor: 'pointer', fontSize: '0.75rem' }}>• List</button>
-                <button type="button" onClick={() => applyFormat('a')} title="Link" style={{ padding: '3px 7px', background: 'none', border: 'none', color: '#fff', cursor: 'pointer', fontSize: '0.75rem' }}>🔗</button>
+                <button type="button" onClick={() => applyFormat('b')} title="Bold" style={{ padding: '3px 7px', background: 'none', border: 'none', color: 'var(--text-main)', cursor: 'pointer', fontWeight: 800, fontSize: '0.75rem' }}>B</button>
+                <button type="button" onClick={() => applyFormat('i')} title="Italic" style={{ padding: '3px 7px', background: 'none', border: 'none', color: 'var(--text-main)', cursor: 'pointer', fontStyle: 'italic', fontSize: '0.75rem' }}>I</button>
+                <button type="button" onClick={() => applyFormat('u')} title="Underline" style={{ padding: '3px 7px', background: 'none', border: 'none', color: 'var(--text-main)', cursor: 'pointer', textDecoration: 'underline', fontSize: '0.75rem' }}>U</button>
+                <button type="button" onClick={() => applyFormat('ul')} title="Bullet List" style={{ padding: '3px 7px', background: 'none', border: 'none', color: 'var(--text-main)', cursor: 'pointer', fontSize: '0.75rem' }}>• List</button>
+                <button type="button" onClick={() => applyFormat('a')} title="Link" style={{ padding: '3px 7px', background: 'none', border: 'none', color: 'var(--text-main)', cursor: 'pointer', fontSize: '0.75rem' }}>🔗</button>
               </div>
-
-
 
               {/* Contextual AI Assist Menu */}
               <div style={{ position: 'relative' }}>
@@ -669,7 +667,7 @@ function GmailStyleComposer({
                   type="button"
                   onClick={() => setShowAiAssist(!showAiAssist)}
                   disabled={aiLoading}
-                  style={{ fontSize: '0.72rem', padding: '4px 10px', background: 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)', color: '#fff', border: 'none', borderRadius: '6px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px', fontWeight: 700 }}
+                  style={{ fontSize: '0.72rem', padding: '4px 10px', background: 'var(--gradient-accent)', color: '#fff', border: 'none', borderRadius: '6px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px', fontWeight: 700 }}
                 >
                   <Sparkles size={12} style={{ animation: aiLoading ? 'spin 1s linear infinite' : 'none' }} />
                   {aiLoading ? 'AI Thinking...' : 'AI Assist Options'} <ChevronDown size={11} />
@@ -677,24 +675,24 @@ function GmailStyleComposer({
 
                 {showAiAssist && (
                   <div style={{
-                    position: 'absolute', top: '100%', right: 0, marginTop: '4px', background: '#090d16',
-                    border: '1px solid rgba(99,102,241,0.4)', borderRadius: '8px', boxShadow: '0 10px 25px rgba(0,0,0,0.6)',
+                    position: 'absolute', top: '100%', right: 0, marginTop: '4px', background: 'var(--bg-card)',
+                    border: '1px solid var(--border)', borderRadius: '8px', boxShadow: 'var(--shadow-lg)',
                     zIndex: 25, width: '240px', padding: '5px'
                   }}>
-                    <button onClick={() => triggerAiAction('improve_writing')} style={{ display: 'block', width: '100%', textAlign: 'left', padding: '6px 10px', background: 'none', border: 'none', color: '#fff', fontSize: '0.75rem', cursor: 'pointer' }}>✨ Improve Writing</button>
-                    <button onClick={() => triggerAiAction('concise')} style={{ display: 'block', width: '100%', textAlign: 'left', padding: '6px 10px', background: 'none', border: 'none', color: '#fff', fontSize: '0.75rem', cursor: 'pointer' }}>✂️ Make More Concise</button>
-                    <button onClick={() => triggerAiAction('persuasive')} style={{ display: 'block', width: '100%', textAlign: 'left', padding: '6px 10px', background: 'none', border: 'none', color: '#fff', fontSize: '0.75rem', cursor: 'pointer' }}>🎯 Make More Persuasive</button>
+                    <button onClick={() => triggerAiAction('improve_writing')} style={{ display: 'block', width: '100%', textAlign: 'left', padding: '6px 10px', background: 'none', border: 'none', color: 'var(--text-main)', fontSize: '0.75rem', cursor: 'pointer' }}>✨ Improve Writing</button>
+                    <button onClick={() => triggerAiAction('concise')} style={{ display: 'block', width: '100%', textAlign: 'left', padding: '6px 10px', background: 'none', border: 'none', color: 'var(--text-main)', fontSize: '0.75rem', cursor: 'pointer' }}>✂️ Make More Concise</button>
+                    <button onClick={() => triggerAiAction('persuasive')} style={{ display: 'block', width: '100%', textAlign: 'left', padding: '6px 10px', background: 'none', border: 'none', color: 'var(--text-main)', fontSize: '0.75rem', cursor: 'pointer' }}>🎯 Make More Persuasive</button>
 
                     {/* Tone Submenu */}
                     <div style={{ position: 'relative' }}>
-                      <button onClick={() => setShowToneMenu(!showToneMenu)} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', textAlign: 'left', padding: '6px 10px', background: 'none', border: 'none', color: '#fff', fontSize: '0.75rem', cursor: 'pointer' }}>
+                      <button onClick={() => setShowToneMenu(!showToneMenu)} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', textAlign: 'left', padding: '6px 10px', background: 'none', border: 'none', color: 'var(--text-main)', fontSize: '0.75rem', cursor: 'pointer' }}>
                         <span>👔 Change Tone</span>
                         <ChevronDown size={11} />
                       </button>
                       {showToneMenu && (
-                        <div style={{ background: 'rgba(255,255,255,0.05)', borderRadius: '4px', margin: '2px 0 2px 10px', padding: '2px' }}>
+                        <div style={{ background: 'var(--bg-inner)', borderRadius: '4px', margin: '2px 0 2px 10px', padding: '2px' }}>
                           {['Professional', 'Friendly', 'Executive', 'Direct'].map(t => (
-                            <button key={t} onClick={() => triggerAiAction('change_tone', t.toLowerCase())} style={{ display: 'block', width: '100%', textAlign: 'left', padding: '4px 8px', background: 'none', border: 'none', color: '#a5b4fc', fontSize: '0.72rem', cursor: 'pointer' }}>
+                            <button key={t} onClick={() => triggerAiAction('change_tone', t.toLowerCase())} style={{ display: 'block', width: '100%', textAlign: 'left', padding: '4px 8px', background: 'none', border: 'none', color: 'var(--text-sub)', fontSize: '0.72rem', cursor: 'pointer' }}>
                               • {t}
                             </button>
                           ))}
@@ -702,8 +700,8 @@ function GmailStyleComposer({
                       )}
                     </div>
 
-                    <button onClick={() => triggerAiAction('rewrite_selection')} style={{ display: 'block', width: '100%', textAlign: 'left', padding: '6px 10px', background: 'none', border: 'none', color: '#fff', fontSize: '0.75rem', cursor: 'pointer' }}>📝 Rewrite Selected Text</button>
-                    <button onClick={() => triggerAiAction('add_personalization')} style={{ display: 'block', width: '100%', textAlign: 'left', padding: '6px 10px', background: 'none', border: 'none', color: '#fff', fontSize: '0.75rem', cursor: 'pointer' }}>🏷️ Add Personalization</button>
+                    <button onClick={() => triggerAiAction('rewrite_selection')} style={{ display: 'block', width: '100%', textAlign: 'left', padding: '6px 10px', background: 'none', border: 'none', color: 'var(--text-main)', fontSize: '0.75rem', cursor: 'pointer' }}>📝 Rewrite Selected Text</button>
+                    <button onClick={() => triggerAiAction('add_personalization')} style={{ display: 'block', width: '100%', textAlign: 'left', padding: '6px 10px', background: 'none', border: 'none', color: 'var(--text-main)', fontSize: '0.75rem', cursor: 'pointer' }}>🏷️ Add Personalization</button>
                   </div>
                 )}
               </div>
@@ -712,11 +710,11 @@ function GmailStyleComposer({
             {/* Email Text Area or Live Resolved Preview */}
             {livePreview ? (
               <div style={{
-                fontSize: '0.84rem', backgroundColor: 'rgba(16,185,129,0.08)', color: '#fff',
+                fontSize: '0.84rem', backgroundColor: 'var(--bg-inner)', color: 'var(--text-main)',
                 fontFamily: 'Inter, sans-serif', lineHeight: 1.6, padding: '10px 12px', borderRadius: '8px',
-                border: '1.5px solid rgba(16,185,129,0.3)', minHeight: '180px', maxHeight: '300px', overflowY: 'auto', whiteSpace: 'pre-wrap'
+                border: '1.5px solid var(--border)', minHeight: '180px', maxHeight: '300px', overflowY: 'auto', whiteSpace: 'pre-wrap'
               }}>
-                <div style={{ fontSize: '0.68rem', fontWeight: 800, color: '#34d399', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                <div style={{ fontSize: '0.68rem', fontWeight: 800, color: '#059669', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                   👁️ Live Resolved Prospect View (Real Values Preview)
                 </div>
                 {renderLivePreviewText(variant.body)}
@@ -729,7 +727,7 @@ function GmailStyleComposer({
                 value={variant.body}
                 onChange={e => pushToHistory(variant.subject, e.target.value, 'Manual Edit')}
                 placeholder="Compose outreach cold email..."
-                style={{ fontSize: '0.84rem', backgroundColor: 'rgba(0,0,0,0.3)', color: '#fff', fontFamily: 'Inter, monospace', lineHeight: 1.6 }}
+                style={{ fontSize: '0.84rem', backgroundColor: 'var(--bg-input)', color: 'var(--text-main)', border: '1px solid var(--border-input)', fontFamily: 'Inter, monospace', lineHeight: 1.6 }}
               />
             )}
 
@@ -742,7 +740,7 @@ function GmailStyleComposer({
                   className="btn btn-sm"
                   onClick={() => fileInputRef.current?.click()}
                   disabled={uploading}
-                  style={{ fontSize: '0.72rem', padding: '4px 10px', background: 'rgba(99,102,241,0.15)', color: '#a5b4fc', border: '1px solid rgba(99,102,241,0.35)', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '5px', borderRadius: '6px' }}
+                  style={{ fontSize: '0.72rem', padding: '4px 10px', background: 'var(--bg-inner)', color: 'var(--text-main)', border: '1px solid var(--border)', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '5px', borderRadius: '6px' }}
                 >
                   <Paperclip size={13} /> {uploading ? 'Uploading...' : 'Attach Files'}
                 </button>
@@ -752,9 +750,9 @@ function GmailStyleComposer({
               {variant.attachments && variant.attachments.length > 0 && (
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginTop: '0.3rem' }}>
                   {variant.attachments.map((att, idx) => (
-                    <div key={idx} style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', padding: '3px 8px', borderRadius: '6px', backgroundColor: 'rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.12)', fontSize: '0.75rem' }}>
-                      <span style={{ color: '#fff', fontWeight: 600 }}>{att.filename}</span>
-                      <button type="button" onClick={() => removeAttachment(idx)} style={{ background: 'none', border: 'none', color: '#f87171', cursor: 'pointer', padding: '0 2px' }}>×</button>
+                    <div key={idx} style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', padding: '3px 8px', borderRadius: '6px', backgroundColor: 'var(--bg-inner)', border: '1px solid var(--border)', fontSize: '0.75rem' }}>
+                      <span style={{ color: 'var(--text-main)', fontWeight: 600 }}>{att.filename}</span>
+                      <button type="button" onClick={() => removeAttachment(idx)} style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer', padding: '0 2px' }}>×</button>
                     </div>
                   ))}
                 </div>
@@ -767,7 +765,7 @@ function GmailStyleComposer({
         {activeTab === 'thread' && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', maxHeight: '420px', overflowY: 'auto' }}>
             <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem' }}>
-              <span>Conversation history for prospect: <strong style={{ color: '#f8fafc' }}>{recipientEmail || leadName}</strong></span>
+              <span>Conversation history for prospect: <strong style={{ color: 'var(--text-main)' }}>{recipientEmail || leadName}</strong></span>
               {threadEvents.length > 0 && (
                 <button
                   type="button"
@@ -778,11 +776,11 @@ function GmailStyleComposer({
                   disabled={aiLoading}
                   style={{
                     fontSize: '0.75rem', padding: '5px 12px',
-                    background: 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)',
+                    background: 'var(--accent)',
                     color: '#fff', border: 'none', borderRadius: '6px',
                     cursor: aiLoading ? 'not-allowed' : 'pointer', fontWeight: 700,
                     display: 'inline-flex', alignItems: 'center', gap: '4px',
-                    boxShadow: '0 4px 12px rgba(99,102,241,0.35)'
+                    boxShadow: '0 4px 12px rgba(232,98,44,0.35)'
                   }}
                 >
                   🔄 Generate AI Follow-Up Mail
@@ -796,19 +794,19 @@ function GmailStyleComposer({
               <div style={{
                 padding: '2.5rem 1.5rem',
                 textAlign: 'center',
-                backgroundColor: 'rgba(15, 23, 42, 0.6)',
+                backgroundColor: 'var(--bg-inner)',
                 borderRadius: '12px',
-                border: '1px dashed rgba(255, 255, 255, 0.12)',
+                border: '1px dashed var(--border)',
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center'
               }}>
-                <Mail size={38} style={{ color: '#475569', marginBottom: '0.75rem' }} />
-                <div style={{ fontSize: '1rem', fontWeight: 700, color: '#f8fafc', marginBottom: '0.35rem' }}>
+                <Mail size={38} style={{ color: 'var(--text-muted)', marginBottom: '0.75rem' }} />
+                <div style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-main)', marginBottom: '0.35rem' }}>
                   No Previously Sent Mail
                 </div>
-                <p style={{ margin: '0 0 1.25rem 0', fontSize: '0.82rem', color: '#94a3b8', maxWidth: '360px' }}>
+                <p style={{ margin: '0 0 1.25rem 0', fontSize: '0.82rem', color: 'var(--text-muted)', maxWidth: '360px' }}>
                   No previous sent or received emails exist for this prospect yet. Start outreach by creating your first message!
                 </p>
                 <button
@@ -837,12 +835,12 @@ function GmailStyleComposer({
                     key={idx}
                     style={{
                       padding: '0.85rem', borderRadius: '10px',
-                      border: isOutbound ? '1px solid rgba(99,102,241,0.3)' : '1px solid rgba(16,185,129,0.3)',
-                      backgroundColor: isOutbound ? 'rgba(99,102,241,0.08)' : 'rgba(16,185,129,0.08)'
+                      border: isOutbound ? '1px solid rgba(232,98,44,0.3)' : '1px solid rgba(16,185,129,0.3)',
+                      backgroundColor: isOutbound ? 'var(--accent-light)' : 'rgba(16,185,129,0.08)'
                     }}
                   >
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
-                      <span style={{ fontSize: '0.72rem', fontWeight: 800, color: isOutbound ? '#818cf8' : '#34d399', textTransform: 'uppercase' }}>
+                      <span style={{ fontSize: '0.72rem', fontWeight: 800, color: isOutbound ? 'var(--accent)' : 'var(--success)', textTransform: 'uppercase' }}>
                         {isOutbound ? '📤 Outbound Campaign Email' : '📥 Inbound Prospect Reply'}
                       </span>
                       <span style={{ fontSize: '0.68rem', color: 'var(--text-muted)' }}>
@@ -850,11 +848,11 @@ function GmailStyleComposer({
                       </span>
                     </div>
 
-                    <div style={{ fontSize: '0.82rem', fontWeight: 700, color: '#fff', marginBottom: '4px' }}>
+                    <div style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--text-main)', marginBottom: '4px' }}>
                       Subject: {subj}
                     </div>
 
-                    <div style={{ fontSize: '0.78rem', color: '#e2e8f0', lineHeight: 1.5, whiteSpace: 'pre-wrap', backgroundColor: 'rgba(0,0,0,0.25)', padding: '0.6rem', borderRadius: '6px' }}>
+                    <div style={{ fontSize: '0.78rem', color: 'var(--text-main)', lineHeight: 1.5, whiteSpace: 'pre-wrap', backgroundColor: 'var(--bg-card)', padding: '0.6rem', borderRadius: '6px', border: '1px solid var(--border)' }}>
                       {bodyTxt}
                     </div>
                   </div>
@@ -865,8 +863,8 @@ function GmailStyleComposer({
         )}
 
         {/* Footer Action Bar */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '0.75rem', marginTop: '0.4rem' }}>
-          <button type="button" onClick={() => { setVariant(prev => ({ ...prev, isDraftSaved: true })); showToast('Draft saved to pipeline'); }} style={{ fontSize: '0.75rem', padding: '6px 12px', background: 'rgba(255,255,255,0.06)', color: '#fff', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '6px', cursor: 'pointer' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px solid var(--border)', paddingTop: '0.75rem', marginTop: '0.4rem' }}>
+          <button type="button" onClick={() => { setVariant(prev => ({ ...prev, isDraftSaved: true })); showToast('Draft saved to pipeline'); }} style={{ fontSize: '0.75rem', padding: '6px 12px', background: 'var(--bg-inner)', color: 'var(--text-main)', border: '1px solid var(--border)', borderRadius: '6px', cursor: 'pointer' }}>
             <Save size={12} style={{ marginRight: '4px' }} /> Save Draft
           </button>
 
@@ -878,7 +876,7 @@ function GmailStyleComposer({
               type="button"
               onClick={() => { onSend(); onClose(); }}
               disabled={sending}
-              style={{ fontSize: '0.8rem', padding: '7px 18px', background: `linear-gradient(135deg, ${themeColor}, #4f46e5)`, color: '#fff', fontWeight: 700, border: 'none', borderRadius: '6px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}
+              style={{ fontSize: '0.8rem', padding: '7px 18px', background: `linear-gradient(135deg, ${themeColor}, #e8622c)`, color: '#fff', fontWeight: 700, border: 'none', borderRadius: '6px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}
             >
               <Send size={13} /> {sending ? 'Sending...' : `Send Option ${variantKey}`}
             </button>
@@ -889,38 +887,38 @@ function GmailStyleComposer({
         {pendingAiPreview && (
           <div style={{
             position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh',
-            backgroundColor: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(10px)',
+            backgroundColor: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(8px)',
             display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 10000
           }}>
             <div style={{
-              width: '90%', maxWidth: '780px', background: '#0b1120', border: '1.5px solid #6366f1',
-              borderRadius: '14px', padding: '1.25rem', boxShadow: '0 25px 60px rgba(0,0,0,0.8)',
+              width: '90%', maxWidth: '780px', background: 'var(--bg-card)', border: '1px solid var(--border)',
+              borderRadius: '14px', padding: '1.25rem', boxShadow: 'var(--shadow-lg)',
               display: 'flex', flexDirection: 'column', gap: '1rem', maxHeight: '90vh', overflowY: 'auto'
             }}>
               {/* Preview Header */}
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(99,102,241,0.3)', paddingBottom: '0.65rem' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--border)', paddingBottom: '0.65rem' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <Sparkles size={16} style={{ color: '#818cf8' }} />
-                  <span style={{ fontSize: '0.95rem', fontWeight: 800, color: '#fff' }}>
+                  <Sparkles size={16} style={{ color: 'var(--accent)' }} />
+                  <span style={{ fontSize: '0.95rem', fontWeight: 800, color: 'var(--text-main)' }}>
                     AI Assist Suggestion Preview ({pendingAiPreview.label})
                   </span>
                 </div>
-                <button onClick={handleRejectAiSuggestion} style={{ background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer' }}>
+                <button onClick={handleRejectAiSuggestion} style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer' }}>
                   <X size={18} />
                 </button>
               </div>
 
               {/* AI Explanation Banner */}
-              <div style={{ backgroundColor: 'rgba(99,102,241,0.15)', border: '1px solid rgba(99,102,241,0.4)', borderRadius: '8px', padding: '0.65rem 0.85rem', fontSize: '0.78rem', color: '#e0e7ff' }}>
+              <div style={{ backgroundColor: 'var(--accent-light)', border: '1px solid var(--accent)', borderRadius: '8px', padding: '0.65rem 0.85rem', fontSize: '0.78rem', color: 'var(--text-main)' }}>
                 <strong>AI Rationale:</strong> {pendingAiPreview.explanation}
               </div>
 
               {/* Subject Comparison */}
               {pendingAiPreview.suggested_subject !== variant.subject && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.3rem' }}>
-                  <div style={{ fontSize: '0.72rem', fontWeight: 700, color: '#818cf8', textTransform: 'uppercase' }}>Subject Line Revision</div>
+                  <div style={{ fontSize: '0.72rem', fontWeight: 700, color: 'var(--accent)', textTransform: 'uppercase' }}>Subject Line Revision</div>
                   <div style={{ fontSize: '0.8rem', color: '#f87171', textDecoration: 'line-through' }}>Original: {variant.subject}</div>
-                  <div style={{ fontSize: '0.82rem', color: '#34d399', fontWeight: 700 }}>AI Suggested: {pendingAiPreview.suggested_subject}</div>
+                  <div style={{ fontSize: '0.82rem', color: 'var(--success)', fontWeight: 700 }}>AI Suggested: {pendingAiPreview.suggested_subject}</div>
                 </div>
               )}
 
@@ -928,41 +926,42 @@ function GmailStyleComposer({
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.85rem' }}>
                 {/* Current Version */}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
-                  <div style={{ fontSize: '0.72rem', fontWeight: 800, color: '#cbd5e1', textTransform: 'uppercase' }}>
+                  <div style={{ fontSize: '0.72rem', fontWeight: 800, color: 'var(--text-main)', textTransform: 'uppercase' }}>
                     Current Draft (v{historyIndex + 1})
                   </div>
-                  <div style={{ fontSize: '0.78rem', color: '#cbd5e1', lineHeight: 1.5, whiteSpace: 'pre-wrap', backgroundColor: 'rgba(0,0,0,0.3)', padding: '0.75rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.1)', maxHeight: '280px', overflowY: 'auto' }}>
+                  <div style={{ fontSize: '0.78rem', color: 'var(--text-main)', lineHeight: 1.5, whiteSpace: 'pre-wrap', backgroundColor: 'var(--bg-inner)', padding: '0.75rem', borderRadius: '8px', border: '1px solid var(--border)', maxHeight: '280px', overflowY: 'auto' }}>
                     {variant.body}
                   </div>
                 </div>
 
                 {/* AI Suggested Version */}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
-                  <div style={{ fontSize: '0.72rem', fontWeight: 800, color: '#34d399', textTransform: 'uppercase' }}>
+                  <div style={{ fontSize: '0.72rem', fontWeight: 800, color: 'var(--success)', textTransform: 'uppercase' }}>
                     AI Suggested Version ✨
                   </div>
-                  <div style={{ fontSize: '0.78rem', color: '#fff', lineHeight: 1.5, whiteSpace: 'pre-wrap', backgroundColor: 'rgba(16,185,129,0.12)', padding: '0.75rem', borderRadius: '8px', border: '1.5px solid rgba(16,185,129,0.4)', maxHeight: '280px', overflowY: 'auto' }}>
+                  <div style={{ fontSize: '0.78rem', color: 'var(--text-main)', lineHeight: 1.5, whiteSpace: 'pre-wrap', backgroundColor: 'rgba(16,185,129,0.08)', padding: '0.75rem', borderRadius: '8px', border: '1.5px solid rgba(16,185,129,0.4)', maxHeight: '280px', overflowY: 'auto' }}>
                     {pendingAiPreview.suggested_body}
                   </div>
                 </div>
               </div>
 
               {/* Preview Footer Action Buttons */}
-              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.65rem', borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '0.75rem' }}>
+              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.65rem', borderTop: '1px solid var(--border)', paddingTop: '0.75rem' }}>
                 <button
                   type="button"
                   onClick={handleRejectAiSuggestion}
-                  style={{ fontSize: '0.78rem', padding: '7px 16px', backgroundColor: 'rgba(239,68,68,0.15)', color: '#f87171', border: '1px solid rgba(239,68,68,0.3)', borderRadius: '6px', cursor: 'pointer', fontWeight: 700 }}
+                  className="btn btn-ghost"
+                  style={{ fontSize: '0.78rem', padding: '7px 16px', color: '#ef4444' }}
                 >
-                  ❌ Reject / Keep Current
+                  Discard Suggestion
                 </button>
-
                 <button
                   type="button"
                   onClick={handleAcceptAiSuggestion}
-                  style={{ fontSize: '0.8rem', padding: '7px 20px', background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)', color: '#fff', border: 'none', borderRadius: '6px', cursor: 'pointer', fontWeight: 800, boxShadow: '0 4px 12px rgba(16,185,129,0.3)' }}
+                  className="btn btn-primary"
+                  style={{ fontSize: '0.78rem', padding: '7px 18px', fontWeight: 700 }}
                 >
-                  ✅ Accept &amp; Apply Suggestion
+                  Apply AI Version ✓
                 </button>
               </div>
             </div>
@@ -982,26 +981,26 @@ function EmailVariantCard({
 
   return (
     <div style={{
-      backgroundColor: 'rgba(15, 23, 42, 0.65)',
+      backgroundColor: 'var(--bg-card)',
       borderRadius: '12px',
-      border: `1.5px solid ${themeColor}44`,
+      border: `1.5px solid var(--border)`,
       overflow: 'hidden',
-      boxShadow: '0 4px 16px rgba(0,0,0,0.25)',
+      boxShadow: 'var(--shadow-sm)',
       transition: 'all 0.2s ease'
     }}>
       {/* Card Header */}
       <div style={{
         padding: '0.75rem 1rem',
-        background: `linear-gradient(90deg, ${badgeBg}22 0%, rgba(15,23,42,0.8) 100%)`,
-        borderBottom: `1px solid ${themeColor}33`,
+        background: `linear-gradient(90deg, ${badgeBg}18 0%, var(--bg-inner) 100%)`,
+        borderBottom: `1px solid var(--border)`,
         display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem'
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
           <span style={{ fontSize: '0.72rem', fontWeight: 800, padding: '3px 8px', borderRadius: '4px', backgroundColor: badgeBg, color: '#fff' }}>
             Option {variantKey}
           </span>
-          <span style={{ fontSize: '0.85rem', fontWeight: 700, color: '#f8fafc' }}>{title}</span>
-          <span style={{ fontSize: '0.68rem', color: '#34d399', background: 'rgba(16,185,129,0.15)', padding: '2px 7px', borderRadius: '999px', border: '1px solid rgba(16,185,129,0.3)', display: 'inline-flex', alignItems: 'center', gap: '3px' }}>
+          <span style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-main)' }}>{title}</span>
+          <span style={{ fontSize: '0.68rem', color: '#059669', background: 'rgba(16,185,129,0.12)', padding: '2px 7px', borderRadius: '999px', border: '1px solid rgba(16,185,129,0.3)', display: 'inline-flex', alignItems: 'center', gap: '3px', fontWeight: 600 }}>
             <Sparkles size={10} /> AI Personalized
           </span>
         </div>
@@ -1009,23 +1008,23 @@ function EmailVariantCard({
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', position: 'relative' }}>
           <button
             onClick={onEdit}
-            style={{ fontSize: '0.72rem', padding: '4px 10px', background: 'rgba(255,255,255,0.06)', color: '#fff', border: '1px solid rgba(255,255,255,0.12)', borderRadius: '6px', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '4px', fontWeight: 600 }}
+            style={{ fontSize: '0.72rem', padding: '4px 10px', background: 'var(--bg-card)', color: 'var(--text-main)', border: '1px solid var(--border)', borderRadius: '6px', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '4px', fontWeight: 600 }}
           >
             ✏️ Edit
           </button>
 
           <button
             onClick={() => setShowMoreMenu(!showMoreMenu)}
-            style={{ background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer', padding: '4px' }}
+            style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', padding: '4px' }}
           >
             <MoreVertical size={16} />
           </button>
 
           {showMoreMenu && (
-            <div style={{ position: 'absolute', top: '100%', right: 0, marginTop: '4px', background: '#090d16', border: '1px solid rgba(255,255,255,0.15)', borderRadius: '8px', boxShadow: '0 10px 25px rgba(0,0,0,0.5)', zIndex: 20, width: '180px', padding: '4px' }}>
-              <button onClick={() => { onEdit(); setShowMoreMenu(false); }} style={{ display: 'block', width: '100%', textAlign: 'left', padding: '6px 10px', background: 'none', border: 'none', color: '#fff', fontSize: '0.75rem', cursor: 'pointer' }}>✏️ Edit in Composer</button>
-              <button onClick={() => { navigator.clipboard.writeText(variant.body); showToast('Body copied to clipboard'); setShowMoreMenu(false); }} style={{ display: 'block', width: '100%', textAlign: 'left', padding: '6px 10px', background: 'none', border: 'none', color: '#fff', fontSize: '0.75rem', cursor: 'pointer' }}>📋 Copy Content</button>
-              <button onClick={() => { showToast('Saved draft variant'); setShowMoreMenu(false); }} style={{ display: 'block', width: '100%', textAlign: 'left', padding: '6px 10px', background: 'none', border: 'none', color: '#fff', fontSize: '0.75rem', cursor: 'pointer' }}>💾 Save Draft</button>
+            <div style={{ position: 'absolute', top: '100%', right: 0, marginTop: '4px', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '8px', boxShadow: 'var(--shadow-lg)', zIndex: 20, width: '180px', padding: '4px' }}>
+              <button onClick={() => { onEdit(); setShowMoreMenu(false); }} style={{ display: 'block', width: '100%', textAlign: 'left', padding: '6px 10px', background: 'none', border: 'none', color: 'var(--text-main)', fontSize: '0.75rem', cursor: 'pointer' }}>✏️ Edit in Composer</button>
+              <button onClick={() => { navigator.clipboard.writeText(variant.body); showToast('Body copied to clipboard'); setShowMoreMenu(false); }} style={{ display: 'block', width: '100%', textAlign: 'left', padding: '6px 10px', background: 'none', border: 'none', color: 'var(--text-main)', fontSize: '0.75rem', cursor: 'pointer' }}>📋 Copy Content</button>
+              <button onClick={() => { showToast('Saved draft variant'); setShowMoreMenu(false); }} style={{ display: 'block', width: '100%', textAlign: 'left', padding: '6px 10px', background: 'none', border: 'none', color: 'var(--text-main)', fontSize: '0.75rem', cursor: 'pointer' }}>💾 Save Draft</button>
             </div>
           )}
         </div>
@@ -1034,26 +1033,26 @@ function EmailVariantCard({
       {/* Card Content */}
       <div style={{ padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
         {/* Recipient & Subject Header */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.3rem', fontSize: '0.78rem', color: 'var(--text-muted)', backgroundColor: 'rgba(0,0,0,0.2)', padding: '0.5rem 0.75rem', borderRadius: '6px', border: '1px solid rgba(255,255,255,0.04)' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.3rem', fontSize: '0.78rem', color: 'var(--text-muted)', backgroundColor: 'var(--bg-inner)', padding: '0.5rem 0.75rem', borderRadius: '6px', border: '1px solid var(--border)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div>
-              <strong style={{ color: '#818cf8' }}>To:</strong>{' '}
-              <span style={{ color: '#fff', fontWeight: 600 }}>{leadName}</span> &lt;{variant.to_email || recipientEmail || 'no-email'}&gt;
+              <strong style={{ color: 'var(--accent)' }}>To:</strong>{' '}
+              <span style={{ color: 'var(--text-main)', fontWeight: 600 }}>{leadName}</span> &lt;{variant.to_email || recipientEmail || 'no-email'}&gt;
             </div>
             <button
               type="button"
               onClick={onEdit}
               title="Edit recipient, CC, BCC"
-              style={{ background: 'none', border: 'none', color: '#a5b4fc', fontSize: '0.7rem', cursor: 'pointer', textDecoration: 'underline' }}
+              style={{ background: 'none', border: 'none', color: 'var(--accent)', fontSize: '0.7rem', cursor: 'pointer', textDecoration: 'underline', fontWeight: 600 }}
             >
               ✏️ Change Email / CC / BCC
             </button>
           </div>
 
           {(variant.cc || variant.bcc) && (
-            <div style={{ display: 'flex', gap: '1rem', fontSize: '0.73rem', borderTop: '1px dashed rgba(255,255,255,0.06)', paddingTop: '0.25rem' }}>
-              {variant.cc && <div><strong style={{ color: '#fbbf24' }}>Cc:</strong> {variant.cc}</div>}
-              {variant.bcc && <div><strong style={{ color: '#f472b6' }}>Bcc:</strong> {variant.bcc}</div>}
+            <div style={{ display: 'flex', gap: '1rem', fontSize: '0.73rem', borderTop: '1px dashed var(--border)', paddingTop: '0.25rem' }}>
+              {variant.cc && <div><strong style={{ color: '#d97706' }}>Cc:</strong> {variant.cc}</div>}
+              {variant.bcc && <div><strong style={{ color: '#db2777' }}>Bcc:</strong> {variant.bcc}</div>}
             </div>
           )}
 
@@ -1061,14 +1060,14 @@ function EmailVariantCard({
           <div>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2px' }}>
               <div>
-                <strong style={{ color: '#fff' }}>Subject:</strong>{' '}
-                <span style={{ color: '#e0e7ff', fontWeight: 600 }}>{variant.subject}</span>
+                <strong style={{ color: 'var(--text-main)' }}>Subject:</strong>{' '}
+                <span style={{ color: 'var(--text-main)', fontWeight: 600 }}>{variant.subject}</span>
               </div>
             </div>
 
             {variant.subject_options && variant.subject_options.length > 0 && (
-              <div style={{ marginTop: '5px', paddingTop: '4px', borderTop: '1px dashed rgba(255,255,255,0.06)' }}>
-                <div style={{ fontSize: '0.67rem', color: '#a5b4fc', fontWeight: 700, marginBottom: '4px', display: 'flex', alignItems: 'center', gap: '3px' }}>
+              <div style={{ marginTop: '5px', paddingTop: '4px', borderTop: '1px dashed var(--border)' }}>
+                <div style={{ fontSize: '0.67rem', color: 'var(--text-muted)', fontWeight: 700, marginBottom: '4px', display: 'flex', alignItems: 'center', gap: '3px' }}>
                   <Sparkles size={9} /> AI Subject Options (Click to select):
                 </div>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
@@ -1083,9 +1082,9 @@ function EmailVariantCard({
                           fontSize: '0.7rem',
                           padding: '3px 8px',
                           borderRadius: '4px',
-                          border: isSelected ? `1.5px solid ${themeColor}` : '1px solid rgba(255,255,255,0.09)',
-                          backgroundColor: isSelected ? `${themeColor}33` : 'rgba(0,0,0,0.3)',
-                          color: isSelected ? '#fff' : '#cbd5e1',
+                          border: isSelected ? `1.5px solid ${themeColor}` : '1px solid var(--border)',
+                          backgroundColor: isSelected ? `${themeColor}18` : 'var(--bg-card)',
+                          color: isSelected ? themeColor : 'var(--text-sub)',
                           cursor: 'pointer',
                           fontWeight: isSelected ? 700 : 500,
                           transition: 'all 0.15s ease',
@@ -1103,40 +1102,45 @@ function EmailVariantCard({
         </div>
 
         <div style={{
-          fontSize: '0.82rem', color: '#e2e8f0', lineHeight: 1.6, whiteSpace: 'pre-wrap',
-          backgroundColor: 'rgba(0,0,0,0.3)', padding: '0.85rem', borderRadius: '8px',
-          border: '1px solid rgba(255,255,255,0.06)', maxHeight: '180px', overflowY: 'auto'
+          fontSize: '0.82rem', color: 'var(--text-main)', lineHeight: 1.6, whiteSpace: 'pre-wrap',
+          backgroundColor: 'var(--bg-inner)', padding: '0.85rem', borderRadius: '8px',
+          border: '1px solid var(--border)', maxHeight: '180px', overflowY: 'auto'
         }}>
           {variant.body}
         </div>
 
         {/* Action Controls */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '0.65rem', marginTop: '0.2rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px solid var(--border)', paddingTop: '0.65rem', marginTop: '0.2rem' }}>
           <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-            <span>📎 PDF Attachment: <strong style={{ color: '#f87171' }}>Corporate_Capabilities_Overview.pdf</strong></span>
+            <span>📎 PDF Attachment: <strong style={{ color: '#ef4444' }}>Corporate_Capabilities_Overview.pdf</strong></span>
           </div>
 
           <button
             type="button"
-            className="btn"
             onClick={onSend}
             disabled={sending}
             style={{
-              fontSize: '0.78rem', padding: '6px 16px',
-              background: `linear-gradient(135deg, ${themeColor}, #4f46e5)`,
-              color: '#fff', fontWeight: 700, border: 'none', borderRadius: '6px',
-              cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '6px',
-              boxShadow: `0 4px 12px ${themeColor}33`
+              fontSize: '0.75rem',
+              padding: '6px 14px',
+              backgroundColor: badgeBg,
+              color: '#fff',
+              border: 'none',
+              borderRadius: '6px',
+              fontWeight: 700,
+              cursor: sending ? 'not-allowed' : 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '4px',
+              boxShadow: `0 2px 8px ${badgeBg}44`
             }}
           >
-            <Send size={12} /> {sending ? 'Sending...' : `🚀 Send Option ${variantKey} (via Gmail)`}
+            <Send size={12} /> {sending ? 'Sending...' : `Send Option ${variantKey} (via Gmail)`}
           </button>
         </div>
       </div>
     </div>
   );
 }
-
 
 // ── MAIN DEALS & PIPELINE PAGE COMPONENT ──────────────────────────────────────
 export default function Deals({ setCurrentTab, activeCampaignId, setActiveCampaignId }) {
@@ -1406,12 +1410,6 @@ export default function Deals({ setCurrentTab, activeCampaignId, setActiveCampai
     }
   };
 
-  const handleUpdateDealState = (newState) => {
-    if (!activeDeal) return;
-    setAllDeals(prev => prev.map(d => d.id === activeDeal.id ? { ...d, state: newState } : d));
-    showToast(`Updated deal stage to "${newState}"`);
-  };
-
   const activeCampaignObj = campaigns.find(c => c.id === (selectedCampaignId ? parseInt(selectedCampaignId) : activeCampaignId)) || campaigns[0] || {};
   const totalLeads = deals.length;
   const qualifiedCount = deals.filter(d => d.state === 'Qualified' || d.state === 'Ready to Email').length;
@@ -1425,19 +1423,19 @@ export default function Deals({ setCurrentTab, activeCampaignId, setActiveCampai
 
       {/* ── TOP CAMPAIGN HEADER BAR ────────────────────────────────────────────── */}
       <div style={{
-        backgroundColor: 'rgba(15, 23, 42, 0.85)', borderRadius: '12px',
-        border: '1px solid rgba(99, 102, 241, 0.25)', padding: '0.85rem 1.25rem',
+        backgroundColor: 'var(--bg-card)', borderRadius: '12px',
+        border: '1px solid var(--border)', padding: '0.85rem 1.25rem',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem',
-        backdropFilter: 'blur(10px)', boxShadow: '0 4px 20px rgba(0,0,0,0.3)'
+        boxShadow: 'var(--shadow-sm)'
       }}>
         {/* Left Info */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-              <h1 style={{ fontSize: '1.15rem', fontWeight: 800, margin: 0, color: '#f8fafc' }}>
+              <h1 style={{ fontSize: '1.15rem', fontWeight: 800, margin: 0, color: 'var(--text-main)' }}>
                 {activeCampaignObj.name || 'All Campaigns Pipeline'}
               </h1>
-              <span style={{ fontSize: '0.68rem', fontWeight: 700, padding: '2px 8px', borderRadius: '999px', background: 'rgba(16, 185, 129, 0.15)', color: '#34d399', border: '1px solid rgba(16, 185, 129, 0.3)' }}>
+              <span style={{ fontSize: '0.68rem', fontWeight: 700, padding: '2px 8px', borderRadius: '999px', background: 'rgba(16, 185, 129, 0.15)', color: '#059669', border: '1px solid rgba(16, 185, 129, 0.3)' }}>
                 ● Active Campaign
               </span>
             </div>
@@ -1450,15 +1448,15 @@ export default function Deals({ setCurrentTab, activeCampaignId, setActiveCampai
         {/* Compact KPI Pills */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
           {[
-            { label: 'Total Leads', val: totalLeads, color: '#818cf8', bg: 'rgba(99,102,241,0.1)' },
-            { label: 'Qualified', val: qualifiedCount, color: '#a5b4fc', bg: 'rgba(99,102,241,0.1)' },
-            { label: 'Emails Sent', val: emailedCount, color: '#60a5fa', bg: 'rgba(59,130,246,0.1)' },
-            { label: 'Replies', val: repliedCount, color: '#f472b6', bg: 'rgba(236,72,153,0.1)' },
-            { label: 'Converted', val: convertedCount, color: '#34d399', bg: 'rgba(16,185,129,0.1)' },
+            { label: 'Total Leads', val: totalLeads, color: 'var(--accent)', bg: 'var(--bg-inner)' },
+            { label: 'Qualified', val: qualifiedCount, color: '#059669', bg: 'var(--bg-inner)' },
+            { label: 'Emails Sent', val: emailedCount, color: '#2563eb', bg: 'var(--bg-inner)' },
+            { label: 'Replies', val: repliedCount, color: '#db2777', bg: 'var(--bg-inner)' },
+            { label: 'Converted', val: convertedCount, color: '#059669', bg: 'var(--bg-inner)' },
           ].map((kpi, idx) => (
             <div key={idx} style={{
               display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '3px 10px',
-              borderRadius: '8px', background: kpi.bg, border: '1px solid rgba(255,255,255,0.06)'
+              borderRadius: '8px', background: kpi.bg, border: '1px solid var(--border)'
             }}>
               <span style={{ fontSize: '0.92rem', fontWeight: 800, color: kpi.color, lineHeight: 1.1 }}>{kpi.val}</span>
               <span style={{ fontSize: '0.62rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>{kpi.label}</span>
@@ -1474,7 +1472,7 @@ export default function Deals({ setCurrentTab, activeCampaignId, setActiveCampai
               setSelectedCampaignId(val);
               if (setActiveCampaignId) setActiveCampaignId(val ? parseInt(val) : null);
             }}
-            style={{ width: '190px', fontSize: '0.78rem', padding: '4px 8px', backgroundColor: 'var(--bg-main)', color: '#fff', border: '1px solid rgba(99,102,241,0.3)', borderRadius: '6px' }}
+            style={{ width: '190px', fontSize: '0.78rem', padding: '4px 8px', backgroundColor: 'var(--bg-card)', color: 'var(--text-main)', border: '1px solid var(--border)', borderRadius: '6px' }}
           >
             <option value="">All Campaigns</option>
             {campaigns.map(c => <option key={c.id} value={c.id}>{c.name} (#{c.id})</option>)}
@@ -1485,8 +1483,8 @@ export default function Deals({ setCurrentTab, activeCampaignId, setActiveCampai
             onClick={() => loadData()}
             disabled={loading}
             style={{
-              fontSize: '0.75rem', padding: '6px 12px', background: 'rgba(99,102,241,0.15)',
-              color: '#818cf8', border: '1px solid rgba(99,102,241,0.3)', borderRadius: '6px',
+              fontSize: '0.75rem', padding: '6px 12px', background: 'var(--bg-inner)',
+              color: 'var(--text-main)', border: '1px solid var(--border)', borderRadius: '6px',
               cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px', fontWeight: 600
             }}
           >
@@ -1503,13 +1501,13 @@ export default function Deals({ setCurrentTab, activeCampaignId, setActiveCampai
 
         {/* ── COLUMN 1: CRM MASTER LEAD & DEAL LIST (LEFT) ────────────────────── */}
         <div style={{
-          backgroundColor: 'rgba(15, 23, 42, 0.7)', borderRadius: '12px',
-          border: '1px solid rgba(255,255,255,0.08)', padding: '1rem',
+          backgroundColor: 'var(--bg-card)', borderRadius: '12px',
+          border: '1px solid var(--border)', padding: '1rem',
           display: 'flex', flexDirection: 'column', gap: '0.75rem', maxHeight: 'calc(100vh - 200px)', overflowY: 'auto'
         }}>
           {/* Header & Controls */}
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            <span style={{ fontSize: '0.82rem', fontWeight: 800, color: '#f8fafc', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+            <span style={{ fontSize: '0.82rem', fontWeight: 800, color: 'var(--text-main)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
               📋 Lead Master List ({deals.length})
             </span>
           </div>
@@ -1524,37 +1522,15 @@ export default function Deals({ setCurrentTab, activeCampaignId, setActiveCampai
               onChange={e => setSearchQuery(e.target.value)}
               style={{
                 width: '100%', padding: '6px 10px 6px 30px', fontSize: '0.78rem',
-                backgroundColor: 'rgba(0,0,0,0.3)', color: '#fff', border: '1px solid rgba(255,255,255,0.1)',
+                backgroundColor: 'var(--bg-input)', color: 'var(--text-main)', border: '1px solid var(--border-input)',
                 borderRadius: '6px', outline: 'none'
               }}
             />
             {searchQuery && (
-              <button onClick={() => setSearchQuery('')} style={{ position: 'absolute', right: 8, top: 8, background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer' }}>
+              <button onClick={() => setSearchQuery('')} style={{ position: 'absolute', right: 8, top: 8, background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer' }}>
                 <X size={12} />
               </button>
             )}
-          </div>
-
-          {/* Filter Toolbar */}
-          <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
-            <select
-              value={stageFilter}
-              onChange={e => setStageFilter(e.target.value)}
-              style={{ fontSize: '0.7rem', padding: '3px 6px', backgroundColor: 'rgba(0,0,0,0.4)', color: 'var(--text-sub)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '4px', flex: 1 }}
-            >
-              <option value="ALL">All Stages</option>
-              {PIPELINE_STAGES.map(s => <option key={s} value={s}>{s}</option>)}
-            </select>
-
-            <select
-              value={scoreFilter}
-              onChange={e => setScoreFilter(e.target.value)}
-              style={{ fontSize: '0.7rem', padding: '3px 6px', backgroundColor: 'rgba(0,0,0,0.4)', color: 'var(--text-sub)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '4px', flex: 1 }}
-            >
-              <option value="ALL">All Scores</option>
-              <option value="HIGH">High Fit 80%+</option>
-              <option value="MED">Mid Fit 50-79%</option>
-            </select>
           </div>
 
           {/* Master List Cards */}
@@ -1581,21 +1557,21 @@ export default function Deals({ setCurrentTab, activeCampaignId, setActiveCampai
                       padding: '0.75rem 0.85rem',
                       borderRadius: '8px',
                       cursor: 'pointer',
-                      border: isSelected ? '1.5px solid #6366f1' : '1px solid rgba(255,255,255,0.06)',
-                      backgroundColor: isSelected ? 'rgba(99, 102, 241, 0.12)' : 'rgba(0,0,0,0.2)',
+                      border: isSelected ? '1.5px solid var(--accent)' : '1px solid var(--border)',
+                      backgroundColor: isSelected ? 'var(--accent-light)' : 'var(--bg-inner)',
                       transition: 'all 0.15s ease',
                       position: 'relative'
                     }}
                   >
                     {isSelected && (
-                      <div style={{ position: 'absolute', top: 0, left: 0, bottom: 0, width: '3px', background: '#6366f1', borderTopLeftRadius: '8px', borderBottomLeftRadius: '8px' }} />
+                      <div style={{ position: 'absolute', top: 0, left: 0, bottom: 0, width: '3px', background: 'var(--accent)', borderTopLeftRadius: '8px', borderBottomLeftRadius: '8px' }} />
                     )}
 
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '3px' }}>
-                      <span style={{ fontWeight: 700, fontSize: '0.82rem', color: isSelected ? '#a5b4fc' : '#f8fafc' }}>
+                      <span style={{ fontWeight: 700, fontSize: '0.82rem', color: isSelected ? 'var(--accent)' : 'var(--text-main)' }}>
                         {cardName}
                       </span>
-                      <span style={{ fontSize: '0.65rem', fontWeight: 800, padding: '1px 5px', borderRadius: '4px', background: 'rgba(16,185,129,0.15)', color: '#34d399', border: '1px solid rgba(16,185,129,0.3)' }}>
+                      <span style={{ fontSize: '0.65rem', fontWeight: 800, padding: '1px 5px', borderRadius: '4px', background: 'rgba(16,185,129,0.15)', color: '#059669', border: '1px solid rgba(16,185,129,0.3)' }}>
                         {score}% Fit
                       </span>
                     </div>
@@ -1604,7 +1580,7 @@ export default function Deals({ setCurrentTab, activeCampaignId, setActiveCampai
                       {cardTitle} @ {cardCompany}
                     </div>
 
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid rgba(255,255,255,0.04)', paddingTop: '0.35rem' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid var(--border)', paddingTop: '0.35rem' }}>
                       <StateBadge state={d.state} />
                       <span style={{ fontSize: '0.65rem', color: 'var(--text-muted)' }}>✓ Verified</span>
                     </div>
@@ -1620,29 +1596,29 @@ export default function Deals({ setCurrentTab, activeCampaignId, setActiveCampai
 
           {/* A/B Comparison Metrics Banner */}
           <div style={{
-            backgroundColor: 'rgba(15, 23, 42, 0.75)', borderRadius: '12px',
-            border: '1px solid rgba(99,102,241,0.25)', padding: '0.75rem 1rem',
+            backgroundColor: 'var(--bg-card)', borderRadius: '12px',
+            border: '1px solid var(--border)', padding: '0.75rem 1rem',
             display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem'
           }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-              <Zap size={16} color="#818cf8" />
-              <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#f8fafc' }}>A/B Variant Performance Comparison</span>
+              <Zap size={16} color="var(--accent)" />
+              <span style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--text-main)' }}>A/B Variant Performance Comparison</span>
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', fontSize: '0.72rem', color: 'var(--text-muted)' }}>
-              <span>Option A Open Rate: <strong style={{ color: '#818cf8' }}>48%</strong></span>
+              <span>Option A Open Rate: <strong style={{ color: 'var(--accent)' }}>48%</strong></span>
               <span>Option B Open Rate: <strong style={{ color: '#fbbf24' }}>62%</strong></span>
-              <span>Reply Benchmark: <strong style={{ color: '#34d399' }}>18%</strong></span>
+              <span>Reply Benchmark: <strong style={{ color: '#059669' }}>18%</strong></span>
             </div>
 
             <button
               className="btn btn-sm"
               onClick={handleRegenerateBoth}
               disabled={regenLoading}
-              style={{ fontSize: '0.75rem', padding: '5px 12px', background: 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)', color: '#fff', border: 'none', borderRadius: '6px', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px' }}
+              style={{ fontSize: '0.75rem', padding: '5px 12px', background: 'var(--bg-inner)', color: 'var(--text-main)', border: '1px solid var(--border)', borderRadius: '6px', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px' }}
             >
               <Sparkles size={12} style={{ animation: regenLoading ? 'spin 1s linear infinite' : 'none' }} />
-              {regenLoading ? 'Regenerating Both...' : '✨ Regenerate Both Options'}
+              {regenLoading ? 'Regenerating...' : '✨ Regenerate Both'}
             </button>
           </div>
 
@@ -1654,8 +1630,8 @@ export default function Deals({ setCurrentTab, activeCampaignId, setActiveCampai
               <EmailVariantCard
                 variantKey="A"
                 title="Direct Value Proposition Pitch"
-                themeColor="#6366f1"
-                badgeBg="#4f46e5"
+                themeColor="var(--accent)"
+                badgeBg="var(--accent)"
                 recipientEmail={activeLead.email}
                 leadName={leadName}
                 company={company}
@@ -1671,7 +1647,7 @@ export default function Deals({ setCurrentTab, activeCampaignId, setActiveCampai
               <EmailVariantCard
                 variantKey="B"
                 title="High Curiosity / Social Proof Pitch"
-                themeColor="#f59e0b"
+                themeColor="#d97706"
                 badgeBg="#d97706"
                 recipientEmail={activeLead.email}
                 leadName={leadName}
@@ -1686,7 +1662,7 @@ export default function Deals({ setCurrentTab, activeCampaignId, setActiveCampai
 
             </div>
           ) : (
-            <div style={{ backgroundColor: 'rgba(15,23,42,0.6)', borderRadius: '12px', padding: '3rem', textAlign: 'center', color: 'var(--text-muted)' }}>
+            <div style={{ backgroundColor: 'var(--bg-card)', borderRadius: '12px', padding: '3rem', textAlign: 'center', color: 'var(--text-muted)' }}>
               Select a lead from the list to view email workspace.
             </div>
           )}
@@ -1702,7 +1678,7 @@ export default function Deals({ setCurrentTab, activeCampaignId, setActiveCampai
           onClose={() => setActiveComposer(null)}
           variantKey={activeComposer}
           title={activeComposer === 'A' ? 'Option A — Direct Value Pitch' : 'Option B — High Curiosity Pitch'}
-          themeColor={activeComposer === 'A' ? '#6366f1' : '#f59e0b'}
+          themeColor={activeComposer === 'A' ? 'var(--accent)' : '#d97706'}
           recipientEmail={activeLead.email}
           leadName={leadName}
           company={company}

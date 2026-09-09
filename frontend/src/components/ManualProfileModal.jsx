@@ -254,51 +254,48 @@ export default function ManualProfileModal({ isOpen, onClose, onSaveSuccess, ini
   };
 
   return (
-    <div style={{
-      position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
-      backgroundColor: 'rgba(15, 23, 42, 0.75)', backdropFilter: 'blur(6px)',
-      display: 'flex', alignItems: 'center', justifyContent: 'center',
-      zIndex: 9999, padding: '20px'
-    }}>
-      <div style={{
-        background: 'var(--surface, #1e293b)', borderRadius: '16px',
-        border: '1px solid var(--border, #334155)', width: '100%', maxWidth: '850px',
-        maxHeight: '90vh', display: 'flex', flexDirection: 'column',
-        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)', overflow: 'hidden'
+    <div className="modal-overlay" style={{ zIndex: 9999 }}>
+      <div className="modal-box" style={{
+        maxWidth: '850px',
+        maxHeight: '90vh',
+        display: 'flex',
+        flexDirection: 'column',
+        padding: 0,
+        overflow: 'hidden'
       }}>
 
         {/* Modal Header */}
         <div style={{
-          padding: '20px 24px', borderBottom: '1px solid var(--border, #334155)',
+          padding: '20px 24px', borderBottom: '1px solid var(--border)',
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-          background: 'rgba(30, 41, 59, 0.8)'
+          background: 'var(--bg-inner)'
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
             <div style={{
-              width: 40, height: 40, borderRadius: 10, background: 'rgba(99, 102, 241, 0.15)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#818cf8',
-              border: '1px solid rgba(99, 102, 241, 0.3)'
+              width: 40, height: 40, borderRadius: 10, background: 'var(--accent-light)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent)',
+              border: '1px solid rgba(232, 98, 44, 0.25)'
             }}>
               <User size={20} />
             </div>
             <div>
-              <h3 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 700, color: 'var(--text-main, #f8fafc)' }}>
+              <h3 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-main)' }}>
                 {isEditMode ? 'Edit Profile' : 'Add Profile Manually'}
               </h3>
-              <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-muted, #94a3b8)' }}>
+              <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-muted)' }}>
                 {isEditMode ? 'Update Master Lead Database profile record' : 'Add a new verified lead profile to the Master Lead Database'}
               </p>
             </div>
           </div>
-          <button onClick={onClose} style={{ background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer', padding: 4 }}>
+          <button onClick={onClose} className="modal-close" style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', padding: 4 }}>
             <X size={20} />
           </button>
         </div>
 
         {/* Navigation Tabs */}
         <div style={{
-          display: 'flex', overflowX: 'auto', borderBottom: '1px solid var(--border, #334155)',
-          background: 'rgba(15, 23, 42, 0.4)', padding: '0 12px'
+          display: 'flex', overflowX: 'auto', borderBottom: '1px solid var(--border)',
+          background: 'var(--bg-inner)', padding: '0 12px'
         }}>
           {tabs.map(tab => {
             const Icon = tab.icon;
@@ -310,9 +307,9 @@ export default function ManualProfileModal({ isOpen, onClose, onSaveSuccess, ini
                 style={{
                   display: 'flex', alignItems: 'center', gap: 8, padding: '14px 16px',
                   background: 'none', border: 'none', cursor: 'pointer',
-                  borderBottom: isActive ? '2px solid #818cf8' : '2px solid transparent',
-                  color: isActive ? '#818cf8' : '#94a3b8', fontWeight: isActive ? 600 : 500,
-                  fontSize: '0.85rem', whitespace: 'nowrap', transition: 'all 0.2s ease'
+                  borderBottom: isActive ? '2px solid var(--accent)' : '2px solid transparent',
+                  color: isActive ? 'var(--accent)' : 'var(--text-muted)', fontWeight: isActive ? 700 : 500,
+                  fontSize: '0.85rem', whiteSpace: 'nowrap', transition: 'all 0.2s ease'
                 }}
               >
                 <Icon size={16} />
@@ -326,10 +323,10 @@ export default function ManualProfileModal({ isOpen, onClose, onSaveSuccess, ini
         {errorMsg && (
           <div style={{
             margin: '16px 24px 0', padding: '12px 16px', borderRadius: 8,
-            background: errorMsg.includes('created') || errorMsg.includes('action') ? 'rgba(16, 185, 129, 0.15)' : 'rgba(239, 68, 68, 0.15)',
-            border: errorMsg.includes('created') || errorMsg.includes('action') ? '1px solid rgba(16, 185, 129, 0.4)' : '1px solid rgba(239, 68, 68, 0.4)',
-            color: errorMsg.includes('created') || errorMsg.includes('action') ? '#34d399' : '#f87171',
-            fontSize: '0.88rem', display: 'flex', alignItems: 'center', gap: 8
+            background: errorMsg.includes('created') || errorMsg.includes('action') ? 'var(--success-light)' : 'rgba(239, 68, 68, 0.1)',
+            border: errorMsg.includes('created') || errorMsg.includes('action') ? '1px solid rgba(16, 185, 129, 0.3)' : '1px solid rgba(239, 68, 68, 0.3)',
+            color: errorMsg.includes('created') || errorMsg.includes('action') ? '#059669' : '#ef4444',
+            fontSize: '0.88rem', display: 'flex', alignItems: 'center', gap: 8, fontWeight: 600
           }}>
             <AlertTriangle size={18} />
             <span>{errorMsg}</span>
@@ -337,7 +334,7 @@ export default function ManualProfileModal({ isOpen, onClose, onSaveSuccess, ini
         )}
 
         {/* Modal Body / Tab Content */}
-        <div style={{ padding: '24px', overflowY: 'auto', flex: 1 }}>
+        <div style={{ padding: '24px', overflowY: 'auto', flex: 1, backgroundColor: 'var(--bg-card)' }}>
 
           {/* TAB 1: Identity & Contact */}
           {activeTab === 'identity' && (
@@ -536,16 +533,16 @@ export default function ManualProfileModal({ isOpen, onClose, onSaveSuccess, ini
 
         {/* Modal Footer */}
         <div style={{
-          padding: '16px 24px', borderTop: '1px solid var(--border, #334155)',
+          padding: '16px 24px', borderTop: '1px solid var(--border)',
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-          background: 'rgba(30, 41, 59, 0.8)'
+          background: 'var(--bg-inner)'
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
             <button
               onClick={onClose}
+              className="btn btn-ghost"
               style={{
-                padding: '10px 18px', borderRadius: 8, border: '1px solid var(--border, #334155)',
-                background: 'transparent', color: '#94a3b8', cursor: 'pointer', fontWeight: 500
+                padding: '10px 18px', borderRadius: 8
               }}
             >
               Cancel
@@ -554,9 +551,9 @@ export default function ManualProfileModal({ isOpen, onClose, onSaveSuccess, ini
             {!isFirstTab && (
               <button
                 onClick={handlePrevTab}
+                className="btn btn-ghost"
                 style={{
-                  padding: '10px 16px', borderRadius: 8, border: '1px solid var(--border, #334155)',
-                  background: 'rgba(15, 23, 42, 0.6)', color: '#cbd5e1', cursor: 'pointer', fontWeight: 500,
+                  padding: '10px 16px', borderRadius: 8,
                   display: 'flex', alignItems: 'center', gap: 6
                 }}
               >
@@ -570,11 +567,10 @@ export default function ManualProfileModal({ isOpen, onClose, onSaveSuccess, ini
             {!isLastTab ? (
               <button
                 onClick={handleNextTab}
+                className="btn btn-primary"
                 style={{
-                  padding: '10px 22px', borderRadius: 8, border: 'none',
-                  background: 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)',
-                  color: '#ffffff', cursor: 'pointer', fontWeight: 600,
-                  display: 'flex', alignItems: 'center', gap: 8, boxShadow: '0 4px 12px rgba(99, 102, 241, 0.3)'
+                  padding: '10px 22px', borderRadius: 8,
+                  display: 'flex', alignItems: 'center', gap: 8
                 }}
               >
                 Next Section
@@ -586,9 +582,10 @@ export default function ManualProfileModal({ isOpen, onClose, onSaveSuccess, ini
                   <button
                     onClick={() => handleSubmit(true)}
                     disabled={saving}
+                    className="btn btn-ghost"
                     style={{
-                      padding: '10px 18px', borderRadius: 8, border: '1px solid rgba(99, 102, 241, 0.3)',
-                      background: 'rgba(99, 102, 241, 0.15)', color: '#818cf8', cursor: 'pointer', fontWeight: 600,
+                      padding: '10px 18px', borderRadius: 8, border: '1px solid var(--accent)',
+                      color: 'var(--accent)',
                       display: 'flex', alignItems: 'center', gap: 8
                     }}
                   >
@@ -600,11 +597,10 @@ export default function ManualProfileModal({ isOpen, onClose, onSaveSuccess, ini
                 <button
                   onClick={() => handleSubmit(false)}
                   disabled={saving}
+                  className="btn btn-primary"
                   style={{
-                    padding: '10px 22px', borderRadius: 8, border: 'none',
-                    background: 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)',
-                    color: '#ffffff', cursor: 'pointer', fontWeight: 600,
-                    display: 'flex', alignItems: 'center', gap: 8, boxShadow: '0 4px 12px rgba(99, 102, 241, 0.3)'
+                    padding: '10px 22px', borderRadius: 8,
+                    display: 'flex', alignItems: 'center', gap: 8
                   }}
                 >
                   <Save size={16} />
@@ -619,50 +615,45 @@ export default function ManualProfileModal({ isOpen, onClose, onSaveSuccess, ini
 
       {/* Duplicate Warning Dialog Overlay */}
       {duplicateWarning && (
-        <div style={{
-          position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
-          backgroundColor: 'rgba(15, 23, 42, 0.85)', backdropFilter: 'blur(8px)',
-          display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10000, padding: 20
-        }}>
-          <div style={{
-            background: '#1e293b', border: '1px solid rgba(245, 158, 11, 0.5)',
-            borderRadius: 16, width: '100%', maxWidth: '480px', padding: '24px',
-            boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.6)'
+        <div className="modal-overlay" style={{ zIndex: 10000 }}>
+          <div className="modal-box" style={{
+            maxWidth: '480px', padding: '24px',
+            border: '1px solid rgba(245, 158, 11, 0.5)'
           }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
               <div style={{
-                width: 44, height: 44, borderRadius: 12, background: 'rgba(245, 158, 11, 0.15)',
-                display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#f59e0b',
+                width: 44, height: 44, borderRadius: 12, background: 'var(--warning-light)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#d97706',
                 border: '1px solid rgba(245, 158, 11, 0.3)', flexShrink: 0
               }}>
                 <AlertTriangle size={24} />
               </div>
               <div>
-                <h4 style={{ margin: 0, color: '#f8fafc', fontSize: '1.1rem', fontWeight: 700 }}>
+                <h4 style={{ margin: 0, color: 'var(--text-main)', fontSize: '1.1rem', fontWeight: 800 }}>
                   Duplicate Profile
                 </h4>
-                <p style={{ margin: '2px 0 0', color: '#fbbf24', fontSize: '0.84rem', fontWeight: 600 }}>
+                <p style={{ margin: '2px 0 0', color: '#d97706', fontSize: '0.84rem', fontWeight: 700 }}>
                   A profile with this email already exists in the Master Database.
                 </p>
               </div>
             </div>
 
             <div style={{
-              background: 'rgba(15, 23, 42, 0.6)', padding: '12px 16px', borderRadius: 8,
-              border: '1px solid #334155', marginBottom: 22, fontSize: '0.88rem'
+              background: 'var(--bg-inner)', padding: '12px 16px', borderRadius: 8,
+              border: '1px solid var(--border)', marginBottom: 22, fontSize: '0.88rem'
             }}>
-              <span style={{ color: '#94a3b8' }}>Matched Record: </span>
-              <strong style={{ color: '#f8fafc' }}>{duplicateWarning.matched_lead_name || 'Existing Lead'}</strong>
-              <span style={{ color: '#94a3b8' }}> (ID #{duplicateWarning.matched_lead_id})</span>
+              <span style={{ color: 'var(--text-muted)' }}>Matched Record: </span>
+              <strong style={{ color: 'var(--text-main)' }}>{duplicateWarning.matched_lead_name || 'Existing Lead'}</strong>
+              <span style={{ color: 'var(--text-muted)' }}> (ID #{duplicateWarning.matched_lead_id})</span>
             </div>
 
             <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.75rem' }}>
               <button
                 type="button"
                 onClick={() => setDuplicateWarning(null)}
+                className="btn btn-ghost"
                 style={{
-                  padding: '0.55rem 1.15rem', borderRadius: 8, border: '1px solid #334155',
-                  background: 'transparent', color: '#94a3b8', cursor: 'pointer', fontWeight: 600, fontSize: '0.85rem'
+                  padding: '0.55rem 1.15rem', borderRadius: 8, fontSize: '0.85rem'
                 }}
               >
                 Cancel
@@ -672,11 +663,10 @@ export default function ManualProfileModal({ isOpen, onClose, onSaveSuccess, ini
                 type="button"
                 onClick={handleFetchViewExisting}
                 disabled={loadingExisting}
+                className="btn btn-primary"
                 style={{
-                  padding: '0.55rem 1.25rem', borderRadius: 8, border: 'none',
-                  background: 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)',
-                  color: '#ffffff', cursor: 'pointer', fontWeight: 700, fontSize: '0.85rem',
-                  boxShadow: '0 4px 12px rgba(99, 102, 241, 0.35)', display: 'flex', alignItems: 'center', gap: '6px'
+                  padding: '0.55rem 1.25rem', borderRadius: 8, fontSize: '0.85rem',
+                  display: 'flex', alignItems: 'center', gap: '6px'
                 }}
               >
                 <Eye size={15} />
@@ -698,20 +688,20 @@ export default function ManualProfileModal({ isOpen, onClose, onSaveSuccess, ini
 }
 
 const labelStyle = {
-  display: 'block', fontSize: '0.82rem', fontWeight: 600, color: 'var(--text-muted, #cbd5e1)',
+  display: 'block', fontSize: '0.82rem', fontWeight: 700, color: 'var(--text-main)',
   marginBottom: '6px'
 };
 
 const inputStyle = {
   width: '100%', padding: '10px 14px', borderRadius: '8px',
-  border: '1px solid var(--border, #334155)', background: 'rgba(15, 23, 42, 0.6)',
-  color: 'var(--text-main, #f8fafc)', fontSize: '0.88rem', outline: 'none',
+  border: '1px solid var(--border)', background: 'var(--bg-input)',
+  color: 'var(--text-main)', fontSize: '0.88rem', outline: 'none',
   boxSizing: 'border-box'
 };
 
 const dupBtnStyle = (color) => ({
   textAlign: 'left', padding: '12px 14px', borderRadius: 8,
   border: `1px solid ${color}40`, background: `${color}15`,
-  color: '#f8fafc', cursor: 'pointer', fontSize: '0.83rem',
+  color: 'var(--text-main)', cursor: 'pointer', fontSize: '0.83rem',
   transition: 'all 0.2s ease'
 });

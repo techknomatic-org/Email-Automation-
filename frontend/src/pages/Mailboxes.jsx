@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getMailboxes, createMailbox } from '../services/api';
+import { getMailboxes, createMailbox, disconnectMailbox, deleteMailbox, testSendMailbox } from '../services/api';
 import { Mail, CheckCircle2, AlertCircle, Send, RefreshCw, LogOut, Trash2, Key } from 'lucide-react';
 
 export default function Mailboxes() {
@@ -42,20 +42,20 @@ export default function Mailboxes() {
   const handleDisconnect = async (id) => {
     if (!window.confirm('Disconnect this mailbox?')) return;
     try {
-      await fetch(`http://127.0.0.1:8000/api/v1/mailboxes/${id}/disconnect`, { method: 'POST' });
+      await disconnectMailbox(id);
       fetchMailboxes();
     } catch (err) {
-      alert('Disconnect error: ' + err.message);
+      alert('Disconnect error: ' + (err.response?.data?.detail || err.message));
     }
   };
 
   const handleDeleteMailbox = async (id) => {
     if (!window.confirm('Delete this mailbox permanently from your sending list?')) return;
     try {
-      await fetch(`http://127.0.0.1:8000/api/v1/mailboxes/${id}`, { method: 'DELETE' });
+      await deleteMailbox(id);
       fetchMailboxes();
     } catch (err) {
-      alert('Delete mailbox error: ' + err.message);
+      alert('Delete mailbox error: ' + (err.response?.data?.detail || err.message));
     }
   };
 
@@ -64,25 +64,16 @@ export default function Mailboxes() {
     if (!selectedMailboxId) return;
     setLoading(true);
     try {
-      const res = await fetch('http://127.0.0.1:8000/api/v1/mailboxes/test-send', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          mailbox_id: selectedMailboxId,
-          to_email: testForm.to_email,
-          subject: testForm.subject,
-          body: testForm.body
-        })
+      const data = await testSendMailbox({
+        mailbox_id: selectedMailboxId,
+        to_email: testForm.to_email,
+        subject: testForm.subject,
+        body: testForm.body
       });
-      const data = await res.json();
-      if (!res.ok) {
-        alert('❌ Sending Failed: ' + (data.detail || 'Failed to send test email'));
-      } else {
-        alert(`🎉 Success! Real Email Sent to ${testForm.to_email}.\nMessage ID: ${data.message_id || 'SMTP Delivered'}`);
-        setShowTestModal(false);
-      }
+      alert(`🎉 Success! Real Email Sent to ${testForm.to_email}.\nMessage ID: ${data.message_id || 'SMTP Delivered'}`);
+      setShowTestModal(false);
     } catch (err) {
-      alert('Send test email error: ' + err.message);
+      alert('❌ Sending Failed: ' + (err.response?.data?.detail || err.message));
     } finally {
       setLoading(false);
     }

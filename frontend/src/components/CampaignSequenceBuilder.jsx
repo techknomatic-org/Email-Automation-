@@ -245,15 +245,15 @@ export default function CampaignSequenceBuilder({ campaignId, campaignName, onSa
         justifyContent: 'space-between',
         alignItems: 'center',
         padding: '1.25rem 1.5rem',
-        backgroundColor: 'rgba(15, 23, 42, 0.75)',
-        border: '1px solid rgba(99, 102, 241, 0.25)',
+        backgroundColor: 'var(--bg-card)',
+        border: '1px solid var(--border)',
         borderRadius: '12px',
-        backdropFilter: 'blur(8px)'
+        boxShadow: 'var(--shadow-sm)'
       }}>
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-            <h3 style={{ margin: 0, fontSize: '1.15rem', fontWeight: 800, color: '#f8fafc', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <Zap size={20} className="text-indigo-400" />
+            <h3 style={{ margin: 0, fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-main)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <Zap size={20} color="var(--accent)" />
               Campaign Automation & Timer Sequence Builder
             </h3>
             <span style={{
@@ -261,15 +261,15 @@ export default function CampaignSequenceBuilder({ campaignId, campaignName, onSa
               padding: '2px 8px',
               borderRadius: '999px',
               backgroundColor: 'rgba(16, 185, 129, 0.15)',
-              color: '#34d399',
+              color: '#059669',
               border: '1px solid rgba(16, 185, 129, 0.3)',
               fontWeight: 700
             }}>
               Campaign Isolated
             </span>
           </div>
-          <p style={{ margin: '0.25rem 0 0 0', fontSize: '0.82rem', color: '#94a3b8' }}>
-            Configure the persistent backend timer workflow for <strong style={{ color: '#e2e8f0' }}>{campaignName || `Campaign #${campaignId}`}</strong>. Timers run server-side even when closed.
+          <p style={{ margin: '0.25rem 0 0 0', fontSize: '0.82rem', color: 'var(--text-muted)' }}>
+            Configure the persistent backend timer workflow for <strong style={{ color: 'var(--text-main)' }}>{campaignName || `Campaign #${campaignId}`}</strong>. Timers run server-side even when closed.
           </p>
         </div>
 
@@ -313,7 +313,7 @@ export default function CampaignSequenceBuilder({ campaignId, campaignName, onSa
           backgroundColor: 'rgba(16, 185, 129, 0.15)',
           border: '1px solid rgba(16, 185, 129, 0.35)',
           borderRadius: '8px',
-          color: '#34d399',
+          color: '#059669',
           fontSize: '0.85rem',
           fontWeight: 600,
           display: 'flex',
@@ -330,7 +330,7 @@ export default function CampaignSequenceBuilder({ campaignId, campaignName, onSa
           backgroundColor: 'rgba(239, 68, 68, 0.15)',
           border: '1px solid rgba(239, 68, 68, 0.35)',
           borderRadius: '8px',
-          color: '#f87171',
+          color: '#ef4444',
           fontSize: '0.85rem',
           fontWeight: 600,
           display: 'flex',
@@ -358,9 +358,9 @@ export default function CampaignSequenceBuilder({ campaignId, campaignName, onSa
                     gap: '0.4rem',
                     padding: '3px 12px',
                     borderRadius: '999px',
-                    backgroundColor: 'rgba(99, 102, 241, 0.12)',
-                    border: '1px solid rgba(99, 102, 241, 0.25)',
-                    color: '#a5b4fc',
+                    backgroundColor: 'var(--accent-light)',
+                    border: '1px solid var(--border)',
+                    color: 'var(--accent)',
                     fontSize: '0.72rem',
                     fontWeight: 700
                   }}>
@@ -372,16 +372,16 @@ export default function CampaignSequenceBuilder({ campaignId, campaignName, onSa
 
               {/* Step Card Container */}
               <div style={{
-                backgroundColor: isInitial ? 'rgba(30, 41, 59, 0.7)' : (isEnabled ? 'rgba(15, 23, 42, 0.85)' : 'rgba(15, 23, 42, 0.4)'),
-                border: isInitial ? '1px solid rgba(99, 102, 241, 0.35)' : (isEnabled ? '1px solid rgba(148, 163, 184, 0.2)' : '1px dashed rgba(148, 163, 184, 0.15)'),
+                backgroundColor: isInitial ? 'var(--bg-card)' : (isEnabled ? 'var(--bg-card)' : 'var(--bg-inner)'),
+                border: isInitial ? '1px solid var(--accent)' : (isEnabled ? '1px solid var(--border)' : '1px dashed var(--border)'),
                 borderRadius: '12px',
                 padding: '1.25rem',
-                boxShadow: isEnabled ? '0 4px 20px rgba(0, 0, 0, 0.25)' : 'none',
+                boxShadow: isEnabled ? 'var(--shadow-sm)' : 'none',
                 opacity: isEnabled ? 1 : 0.65,
                 transition: 'all 0.2s ease'
               }}>
                 {/* Step Header */}
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', borderBottom: '1px solid rgba(255, 255, 255, 0.06)', paddingBottom: '0.65rem' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', borderBottom: '1px solid var(--border)', paddingBottom: '0.65rem' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
                     <span style={{
                       display: 'inline-flex',
@@ -390,7 +390,7 @@ export default function CampaignSequenceBuilder({ campaignId, campaignName, onSa
                       width: '26px',
                       height: '26px',
                       borderRadius: '50%',
-                      backgroundColor: isInitial ? '#6366f1' : '#3b82f6',
+                      backgroundColor: isInitial ? 'var(--accent)' : '#2563eb',
                       color: '#ffffff',
                       fontWeight: 800,
                       fontSize: '0.8rem'
@@ -405,8 +405,8 @@ export default function CampaignSequenceBuilder({ campaignId, campaignName, onSa
                       style={{
                         backgroundColor: 'transparent',
                         border: 'none',
-                        borderBottom: isInitial ? 'none' : '1px dashed rgba(255, 255, 255, 0.2)',
-                        color: '#f8fafc',
+                        borderBottom: isInitial ? 'none' : '1px dashed var(--border)',
+                        color: 'var(--text-main)',
                         fontWeight: 700,
                         fontSize: '0.95rem',
                         padding: '2px 4px',
@@ -415,11 +415,11 @@ export default function CampaignSequenceBuilder({ campaignId, campaignName, onSa
                       }}
                     />
                     {isInitial ? (
-                      <span style={{ fontSize: '0.7rem', padding: '2px 8px', borderRadius: '4px', backgroundColor: 'rgba(99, 102, 241, 0.2)', color: '#a5b4fc', fontWeight: 700 }}>
+                      <span style={{ fontSize: '0.7rem', padding: '2px 8px', borderRadius: '4px', backgroundColor: 'var(--accent-light)', color: 'var(--accent)', fontWeight: 700 }}>
                         Trigger / Outreach Start
                       </span>
                     ) : (
-                      <span style={{ fontSize: '0.7rem', padding: '2px 8px', borderRadius: '4px', backgroundColor: 'rgba(59, 130, 246, 0.2)', color: '#93c5fd', fontWeight: 700 }}>
+                      <span style={{ fontSize: '0.7rem', padding: '2px 8px', borderRadius: '4px', backgroundColor: 'rgba(59, 130, 246, 0.15)', color: '#2563eb', fontWeight: 700 }}>
                         Automated Step
                       </span>
                     )}
@@ -429,7 +429,7 @@ export default function CampaignSequenceBuilder({ campaignId, campaignName, onSa
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                     {!isInitial && (
                       <>
-                        <label style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', fontSize: '0.75rem', color: '#94a3b8', cursor: 'pointer', marginRight: '0.5rem' }}>
+                        <label style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', fontSize: '0.75rem', color: 'var(--text-muted)', cursor: 'pointer', marginRight: '0.5rem' }}>
                           <input
                             type="checkbox"
                             checked={isEnabled}
@@ -461,7 +461,7 @@ export default function CampaignSequenceBuilder({ campaignId, campaignName, onSa
                           type="button"
                           onClick={() => handleRemoveStep(index)}
                           className="btn btn-secondary"
-                          style={{ padding: '3px 6px', fontSize: '0.7rem', color: '#f87171' }}
+                          style={{ padding: '3px 6px', fontSize: '0.7rem', color: '#ef4444' }}
                           title="Remove step"
                         >
                           <Trash2 size={13} />
@@ -475,14 +475,14 @@ export default function CampaignSequenceBuilder({ campaignId, campaignName, onSa
                 {isInitial ? (
                   /* Step 1: Initial Send Info */
                   <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', padding: '0.5rem 0.25rem' }}>
-                    <div style={{ padding: '0.6rem', borderRadius: '8px', backgroundColor: 'rgba(99, 102, 241, 0.15)', color: '#818cf8' }}>
+                    <div style={{ padding: '0.6rem', borderRadius: '8px', backgroundColor: 'var(--accent-light)', color: 'var(--accent)' }}>
                       <Mail size={22} />
                     </div>
                     <div>
-                      <div style={{ fontSize: '0.88rem', fontWeight: 700, color: '#f1f5f9' }}>
+                      <div style={{ fontSize: '0.88rem', fontWeight: 700, color: 'var(--text-main)' }}>
                         ACTION: Send Initial Personalized Outreach Email
                       </div>
-                      <div style={{ fontSize: '0.78rem', color: '#94a3b8', marginTop: '0.15rem' }}>
+                      <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '0.15rem' }}>
                         When outreach begins for a qualified prospect, Step 1 immediately personalizes and dispatches the opening cold email, then starts the Step 2 timer sequence.
                       </div>
                     </div>
@@ -497,11 +497,11 @@ export default function CampaignSequenceBuilder({ campaignId, campaignName, onSa
                       alignItems: 'center',
                       gap: '0.75rem',
                       padding: '0.75rem 1rem',
-                      backgroundColor: 'rgba(30, 41, 59, 0.5)',
+                      backgroundColor: 'var(--bg-inner)',
                       borderRadius: '8px',
-                      border: '1px solid rgba(255, 255, 255, 0.05)'
+                      border: '1px solid var(--border)'
                     }}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#fbbf24', fontSize: '0.82rem', fontWeight: 700 }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#d97706', fontSize: '0.82rem', fontWeight: 700 }}>
                         <Timer size={16} /> WAIT DURATION:
                       </div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
@@ -515,9 +515,9 @@ export default function CampaignSequenceBuilder({ campaignId, campaignName, onSa
                             width: '75px',
                             padding: '0.35rem 0.5rem',
                             borderRadius: '6px',
-                            border: '1px solid rgba(255, 255, 255, 0.15)',
-                            backgroundColor: 'rgba(15, 23, 42, 0.8)',
-                            color: '#f8fafc',
+                            border: '1px solid var(--border-input)',
+                            backgroundColor: 'var(--bg-input)',
+                            color: 'var(--text-main)',
                             fontSize: '0.85rem',
                             fontWeight: 700,
                             textAlign: 'center'
@@ -529,9 +529,9 @@ export default function CampaignSequenceBuilder({ campaignId, campaignName, onSa
                           style={{
                             padding: '0.35rem 0.6rem',
                             borderRadius: '6px',
-                            border: '1px solid rgba(255, 255, 255, 0.15)',
-                            backgroundColor: 'rgba(15, 23, 42, 0.8)',
-                            color: '#f8fafc',
+                            border: '1px solid var(--border-input)',
+                            backgroundColor: 'var(--bg-input)',
+                            color: 'var(--text-main)',
                             fontSize: '0.82rem',
                             fontWeight: 600
                           }}
@@ -541,8 +541,8 @@ export default function CampaignSequenceBuilder({ campaignId, campaignName, onSa
                           ))}
                         </select>
                       </div>
-                      <div style={{ fontSize: '0.75rem', color: '#64748b', marginLeft: 'auto' }}>
-                        ⏱ Normalized backend countdown: <strong style={{ color: '#94a3b8' }}>{st.delay_seconds || (st.delay_value * 60)}s</strong>
+                      <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginLeft: 'auto' }}>
+                        ⏱ Normalized backend countdown: <strong style={{ color: 'var(--text-main)' }}>{st.delay_seconds || (st.delay_value * 60)}s</strong>
                       </div>
                     </div>
 
@@ -555,23 +555,23 @@ export default function CampaignSequenceBuilder({ campaignId, campaignName, onSa
                       {/* Branch IF YES: Replied */}
                       <div style={{
                         padding: '0.9rem',
-                        backgroundColor: 'rgba(6, 78, 59, 0.15)',
+                        backgroundColor: 'rgba(16, 185, 129, 0.08)',
                         border: '1px solid rgba(16, 185, 129, 0.3)',
                         borderRadius: '8px',
                         display: 'flex',
                         flexDirection: 'column',
                         gap: '0.5rem'
                       }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#34d399', fontSize: '0.8rem', fontWeight: 800 }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#059669', fontSize: '0.8rem', fontWeight: 800 }}>
                           <CheckCircle2 size={15} /> IF YES (PROSPECT REPLIED):
                         </div>
-                        <div style={{ fontSize: '0.75rem', color: '#94a3b8' }}>
+                        <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
                           → Active timer immediately stops
                           <br />
                           → Pending follow-up is cancelled
                         </div>
                         <div style={{ marginTop: '0.25rem' }}>
-                          <label style={{ fontSize: '0.72rem', color: '#6ee7b7', fontWeight: 700, display: 'block', marginBottom: '0.2rem' }}>
+                          <label style={{ fontSize: '0.72rem', color: '#059669', fontWeight: 700, display: 'block', marginBottom: '0.2rem' }}>
                             Execute Configured Next Action:
                           </label>
                           <select
@@ -581,9 +581,9 @@ export default function CampaignSequenceBuilder({ campaignId, campaignName, onSa
                               width: '100%',
                               padding: '0.4rem 0.5rem',
                               borderRadius: '6px',
-                              border: '1px solid rgba(16, 185, 129, 0.4)',
-                              backgroundColor: 'rgba(15, 23, 42, 0.9)',
-                              color: '#ecfdf5',
+                              border: '1px solid var(--border-input)',
+                              backgroundColor: 'var(--bg-input)',
+                              color: 'var(--text-main)',
                               fontSize: '0.78rem',
                               fontWeight: 600
                             }}
@@ -598,23 +598,23 @@ export default function CampaignSequenceBuilder({ campaignId, campaignName, onSa
                       {/* Branch IF NO: No Reply (Timer Expired) */}
                       <div style={{
                         padding: '0.9rem',
-                        backgroundColor: 'rgba(30, 58, 138, 0.15)',
-                        border: '1px solid rgba(96, 165, 250, 0.3)',
+                        backgroundColor: 'rgba(37, 99, 235, 0.08)',
+                        border: '1px solid rgba(37, 99, 235, 0.3)',
                         borderRadius: '8px',
                         display: 'flex',
                         flexDirection: 'column',
                         gap: '0.5rem'
                       }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#60a5fa', fontSize: '0.8rem', fontWeight: 800 }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#2563eb', fontSize: '0.8rem', fontWeight: 800 }}>
                           <XCircle size={15} /> IF NO (NO REPLY BEFORE EXPIRY):
                         </div>
-                        <div style={{ fontSize: '0.75rem', color: '#94a3b8' }}>
+                        <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
                           → Final pre-send reply check executes
                           <br />
                           → AI generates contextual message
                         </div>
                         <div style={{ marginTop: '0.25rem' }}>
-                          <label style={{ fontSize: '0.72rem', color: '#93c5fd', fontWeight: 700, display: 'block', marginBottom: '0.2rem' }}>
+                          <label style={{ fontSize: '0.72rem', color: '#2563eb', fontWeight: 700, display: 'block', marginBottom: '0.2rem' }}>
                             Action After Timer Expiry:
                           </label>
                           <select
@@ -624,9 +624,9 @@ export default function CampaignSequenceBuilder({ campaignId, campaignName, onSa
                               width: '100%',
                               padding: '0.4rem 0.5rem',
                               borderRadius: '6px',
-                              border: '1px solid rgba(96, 165, 250, 0.4)',
-                              backgroundColor: 'rgba(15, 23, 42, 0.9)',
-                              color: '#eff6ff',
+                              border: '1px solid var(--border-input)',
+                              backgroundColor: 'var(--bg-input)',
+                              color: 'var(--text-main)',
                               fontSize: '0.78rem',
                               fontWeight: 600
                             }}
@@ -647,7 +647,7 @@ export default function CampaignSequenceBuilder({ campaignId, campaignName, onSa
                         style={{
                           background: 'none',
                           border: 'none',
-                          color: '#818cf8',
+                          color: 'var(--accent)',
                           fontSize: '0.75rem',
                           fontWeight: 700,
                           cursor: 'pointer',
@@ -663,8 +663,8 @@ export default function CampaignSequenceBuilder({ campaignId, campaignName, onSa
                       </button>
 
                       {expandedCustomPrompt[index] && (
-                        <div style={{ marginTop: '0.5rem', padding: '0.75rem', backgroundColor: 'rgba(30, 41, 59, 0.4)', borderRadius: '6px', border: '1px solid rgba(99, 102, 241, 0.15)' }}>
-                          <label style={{ fontSize: '0.72rem', color: '#cbd5e1', fontWeight: 600, display: 'block', marginBottom: '0.3rem' }}>
+                        <div style={{ marginTop: '0.5rem', padding: '0.75rem', backgroundColor: 'var(--bg-inner)', borderRadius: '6px', border: '1px solid var(--border)' }}>
+                          <label style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontWeight: 600, display: 'block', marginBottom: '0.3rem' }}>
                             Step-Specific AI Directives / Angle:
                           </label>
                           <textarea
@@ -676,9 +676,9 @@ export default function CampaignSequenceBuilder({ campaignId, campaignName, onSa
                               width: '100%',
                               padding: '0.45rem 0.6rem',
                               borderRadius: '6px',
-                              border: '1px solid rgba(255, 255, 255, 0.12)',
-                              backgroundColor: 'rgba(15, 23, 42, 0.85)',
-                              color: '#f8fafc',
+                              border: '1px solid var(--border-input)',
+                              backgroundColor: 'var(--bg-input)',
+                              color: 'var(--text-main)',
                               fontSize: '0.78rem',
                               resize: 'vertical'
                             }}
@@ -699,7 +699,6 @@ export default function CampaignSequenceBuilder({ campaignId, campaignName, onSa
         <button
           type="button"
           onClick={handleAddStep}
-          className="btn btn-secondary"
           style={{
             padding: '0.65rem 1.25rem',
             fontSize: '0.85rem',
@@ -707,10 +706,11 @@ export default function CampaignSequenceBuilder({ campaignId, campaignName, onSa
             display: 'flex',
             alignItems: 'center',
             gap: '0.5rem',
-            border: '1px dashed rgba(99, 102, 241, 0.4)',
-            backgroundColor: 'rgba(99, 102, 241, 0.08)',
-            color: '#a5b4fc',
-            borderRadius: '10px'
+            border: '1px dashed var(--accent)',
+            backgroundColor: 'var(--accent-light)',
+            color: 'var(--accent)',
+            borderRadius: '10px',
+            cursor: 'pointer'
           }}
         >
           <Plus size={16} /> + Add Sequence Step (Timer & Follow-up)
@@ -721,25 +721,25 @@ export default function CampaignSequenceBuilder({ campaignId, campaignName, onSa
       <div style={{
         marginTop: '1rem',
         padding: '1.25rem',
-        backgroundColor: 'rgba(15, 23, 42, 0.6)',
-        border: '1px solid rgba(255, 255, 255, 0.08)',
+        backgroundColor: 'var(--bg-inner)',
+        border: '1px solid var(--border)',
         borderRadius: '12px'
       }}>
-        <div style={{ fontSize: '0.82rem', fontWeight: 800, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+        <div style={{ fontSize: '0.82rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
           <Layers size={14} /> Sequence Flow Diagram
         </div>
         <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '0.5rem', fontSize: '0.75rem' }}>
-          <span style={{ padding: '4px 10px', borderRadius: '6px', backgroundColor: 'rgba(99, 102, 241, 0.25)', color: '#c7d2fe', fontWeight: 700 }}>
+          <span style={{ padding: '4px 10px', borderRadius: '6px', backgroundColor: 'var(--accent-light)', color: 'var(--accent)', fontWeight: 700 }}>
             1. Send Initial Email
           </span>
           {steps.slice(1).map((st, i) => (
             <React.Fragment key={`diagram-${i}`}>
-              <span style={{ color: '#64748b' }}>→</span>
-              <span style={{ padding: '4px 10px', borderRadius: '6px', backgroundColor: 'rgba(245, 158, 11, 0.15)', color: '#fbbf24', fontWeight: 700 }}>
+              <span style={{ color: 'var(--text-muted)' }}>→</span>
+              <span style={{ padding: '4px 10px', borderRadius: '6px', backgroundColor: 'rgba(245, 158, 11, 0.15)', color: '#d97706', fontWeight: 700 }}>
                 Wait {formatDelayLabel(st.delay_value, st.delay_unit)}
               </span>
-              <span style={{ color: '#64748b' }}>→</span>
-              <span style={{ padding: '4px 10px', borderRadius: '6px', backgroundColor: 'rgba(59, 130, 246, 0.2)', color: '#93c5fd', fontWeight: 700 }}>
+              <span style={{ color: 'var(--text-muted)' }}>→</span>
+              <span style={{ padding: '4px 10px', borderRadius: '6px', backgroundColor: 'rgba(59, 130, 246, 0.15)', color: '#2563eb', fontWeight: 700 }}>
                 Check Reply → {st.if_no_reply_action === 'send_followup' ? `Send ${st.step_name}` : 'Conclude'}
               </span>
             </React.Fragment>

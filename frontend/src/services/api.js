@@ -111,8 +111,11 @@ export const generateOpener = async (dealId) => (await api.post(`/deals/${dealId
 
 
 // ── Mailboxes ─────────────────────────────────────────────────────────────────
-export const getMailboxes   = async () => (await api.get('/mailboxes')).data;
-export const createMailbox  = async (data) => (await api.post('/mailboxes', data)).data;
+export const getMailboxes       = async () => (await api.get('/mailboxes')).data;
+export const createMailbox      = async (data) => (await api.post('/mailboxes', data)).data;
+export const disconnectMailbox  = async (id) => (await api.post(`/mailboxes/${id}/disconnect`)).data;
+export const deleteMailbox      = async (id) => (await api.delete(`/mailboxes/${id}`)).data;
+export const testSendMailbox    = async (payload) => (await api.post('/mailboxes/test-send', payload)).data;
 
 // ── RAG Knowledge ─────────────────────────────────────────────────────────────
 export const getKnowledgeDocs   = async () => (await api.get('/knowledge')).data;

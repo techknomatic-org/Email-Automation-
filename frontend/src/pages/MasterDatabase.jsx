@@ -178,31 +178,31 @@ export default function MasterDatabase() {
               width: 38,
               height: 38,
               borderRadius: 10,
-              background: 'rgba(99, 102, 241, 0.15)',
-              border: '1px solid rgba(99, 102, 241, 0.3)',
+              background: 'var(--accent-light)',
+              border: '1px solid rgba(232, 98, 44, 0.25)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              color: '#818cf8'
+              color: 'var(--accent)'
             }}>
               <Database size={22} />
             </div>
-            <h1 style={{ margin: 0, fontSize: '1.6rem', fontWeight: 800, color: '#f8fafc' }}>
+            <h1 style={{ margin: 0, fontSize: '1.6rem', fontWeight: 800, color: 'var(--text-main)' }}>
               Master Database
             </h1>
             <span style={{
               fontSize: '0.75rem',
               padding: '2px 10px',
               borderRadius: 999,
-              background: 'rgba(16, 185, 129, 0.15)',
-              color: '#34d399',
+              background: 'var(--success-light)',
+              color: '#059669',
               border: '1px solid rgba(16, 185, 129, 0.3)',
-              fontWeight: 600
+              fontWeight: 700
             }}>
               Single Source of Truth
             </span>
           </div>
-          <p style={{ margin: 0, color: '#94a3b8', fontSize: '0.88rem' }}>
+          <p style={{ margin: 0, color: 'var(--text-muted)', fontSize: '0.88rem' }}>
             Manage unified lead dataset profiles, CSV/Excel ingestion, and profile deduplication.
           </p>
         </div>
@@ -211,17 +211,11 @@ export default function MasterDatabase() {
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
           <button
             type="button"
-            className="btn"
+            className="btn btn-primary"
             onClick={() => handleTriggerFilePicker('append')}
             style={{
-              backgroundColor: '#6366f1',
-              color: '#ffffff',
-              fontWeight: 700,
               padding: '0.65rem 1.25rem',
               fontSize: '0.88rem',
-              borderRadius: '8px',
-              border: 'none',
-              boxShadow: '0 4px 14px rgba(99, 102, 241, 0.35)',
               display: 'flex',
               alignItems: 'center',
               gap: '0.5rem',
@@ -233,20 +227,18 @@ export default function MasterDatabase() {
 
           <button
             type="button"
-            className="btn"
+            className="btn btn-ghost"
             onClick={() => setShowManualModal(true)}
             style={{
-              backgroundColor: 'rgba(99, 102, 241, 0.12)',
-              border: '1px solid rgba(99, 102, 241, 0.35)',
-              color: '#818cf8',
-              fontWeight: 600,
               padding: '0.65rem 1.1rem',
               fontSize: '0.88rem',
               borderRadius: '8px',
               display: 'flex',
               alignItems: 'center',
               gap: '0.5rem',
-              cursor: 'pointer'
+              cursor: 'pointer',
+              color: 'var(--accent)',
+              border: '1px solid var(--border)'
             }}
           >
             <Plus size={16} /> Add Profile Manually
@@ -254,12 +246,11 @@ export default function MasterDatabase() {
 
           <button
             type="button"
-            className="btn"
+            className="btn btn-ghost"
             onClick={() => setShowResetConfirm(true)}
             style={{
-              backgroundColor: 'rgba(239, 68, 68, 0.15)',
-              border: '1px solid rgba(239, 68, 68, 0.4)',
-              color: '#f87171',
+              border: '1px solid rgba(239, 68, 68, 0.35)',
+              color: '#ef4444',
               fontWeight: 600,
               padding: '0.65rem 1.1rem',
               fontSize: '0.88rem',
@@ -275,7 +266,7 @@ export default function MasterDatabase() {
         </div>
       </div>
 
-      {/* Metrics Cards Grid */}
+      {/* Database KPI Metrics Overview Grid */}
       <div style={{
         display: 'grid',
         gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))',
@@ -283,19 +274,20 @@ export default function MasterDatabase() {
         marginBottom: '1.75rem'
       }}>
         <div style={{
-          background: 'rgba(15, 23, 42, 0.65)',
-          border: '1px solid rgba(99, 102, 241, 0.3)',
+          background: 'var(--bg-card)',
+          border: '1px solid var(--border)',
           borderRadius: '12px',
           padding: '1.1rem 1.25rem',
           display: 'flex',
           flexDirection: 'column',
-          justifyContent: 'space-between'
+          justifyContent: 'space-between',
+          boxShadow: 'var(--shadow-sm)'
         }}>
-          <div style={{ fontSize: '0.8rem', color: '#94a3b8', fontWeight: 600, textTransform: 'uppercase', tracking: '0.05em' }}>
+          <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
             Total Profiles
           </div>
           <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginTop: '0.5rem' }}>
-            <span style={{ fontSize: '1.8rem', fontWeight: 800, color: '#f8fafc' }}>
+            <span style={{ fontSize: '1.8rem', fontWeight: 800, color: 'var(--text-main)' }}>
               {totalCount.toLocaleString()}
             </span>
             <span style={{
@@ -303,8 +295,8 @@ export default function MasterDatabase() {
               fontWeight: 700,
               padding: '2px 8px',
               borderRadius: 999,
-              background: totalCount > 0 ? 'rgba(16, 185, 129, 0.18)' : 'rgba(245, 158, 11, 0.18)',
-              color: totalCount > 0 ? '#34d399' : '#fbbf24',
+              background: totalCount > 0 ? 'var(--success-light)' : 'var(--warning-light)',
+              color: totalCount > 0 ? '#059669' : '#d97706',
               border: `1px solid ${totalCount > 0 ? 'rgba(16, 185, 129, 0.3)' : 'rgba(245, 158, 11, 0.3)'}`
             }}>
               {totalCount > 0 ? 'Ready' : 'Empty'}
@@ -313,43 +305,46 @@ export default function MasterDatabase() {
         </div>
 
         <div style={{
-          background: 'rgba(15, 23, 42, 0.65)',
-          border: '1px solid rgba(255, 255, 255, 0.08)',
+          background: 'var(--bg-card)',
+          border: '1px solid var(--border)',
           borderRadius: '12px',
-          padding: '1.1rem 1.25rem'
+          padding: '1.1rem 1.25rem',
+          boxShadow: 'var(--shadow-sm)'
         }}>
-          <div style={{ fontSize: '0.8rem', color: '#94a3b8', fontWeight: 600, textTransform: 'uppercase' }}>
+          <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: 700, textTransform: 'uppercase' }}>
             CSV / Excel Imports
           </div>
-          <div style={{ fontSize: '1.8rem', fontWeight: 800, color: '#818cf8', marginTop: '0.5rem' }}>
+          <div style={{ fontSize: '1.8rem', fontWeight: 800, color: 'var(--accent)', marginTop: '0.5rem' }}>
             {csvCount.toLocaleString()}
           </div>
         </div>
 
         <div style={{
-          background: 'rgba(15, 23, 42, 0.65)',
-          border: '1px solid rgba(255, 255, 255, 0.08)',
+          background: 'var(--bg-card)',
+          border: '1px solid var(--border)',
           borderRadius: '12px',
-          padding: '1.1rem 1.25rem'
+          padding: '1.1rem 1.25rem',
+          boxShadow: 'var(--shadow-sm)'
         }}>
-          <div style={{ fontSize: '0.8rem', color: '#94a3b8', fontWeight: 600, textTransform: 'uppercase' }}>
+          <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: 700, textTransform: 'uppercase' }}>
             Manual Entries
           </div>
-          <div style={{ fontSize: '1.8rem', fontWeight: 800, color: '#fbbf24', marginTop: '0.5rem' }}>
+          <div style={{ fontSize: '1.8rem', fontWeight: 800, color: '#d97706', marginTop: '0.5rem' }}>
             {manualCount.toLocaleString()}
           </div>
         </div>
 
         <div style={{
-          background: 'rgba(15, 23, 42, 0.65)',
-          border: '1px solid rgba(255, 255, 255, 0.08)',
+          background: 'var(--bg-card)',
+          border: '1px solid var(--border)',
           borderRadius: '12px',
-          padding: '1.1rem 1.25rem'
+          padding: '1.1rem 1.25rem',
+          boxShadow: 'var(--shadow-sm)'
         }}>
-          <div style={{ fontSize: '0.8rem', color: '#94a3b8', fontWeight: 600, textTransform: 'uppercase' }}>
+          <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: 700, textTransform: 'uppercase' }}>
             Last Sync / Update
           </div>
-          <div style={{ fontSize: '0.85rem', fontWeight: 600, color: '#cbd5e1', marginTop: '0.75rem' }}>
+          <div style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-sub)', marginTop: '0.75rem' }}>
             {lastUpdated}
           </div>
         </div>
@@ -357,8 +352,8 @@ export default function MasterDatabase() {
 
       {/* Search & Source Filter Bar */}
       <div style={{
-        background: 'rgba(15, 23, 42, 0.65)',
-        border: '1px solid rgba(255, 255, 255, 0.08)',
+        background: 'var(--bg-card)',
+        border: '1px solid var(--border)',
         borderRadius: '12px',
         padding: '1rem 1.25rem',
         marginBottom: '1.25rem',
@@ -366,14 +361,15 @@ export default function MasterDatabase() {
         alignItems: 'center',
         justifyContent: 'space-between',
         gap: '1rem',
-        flexWrap: 'wrap'
+        flexWrap: 'wrap',
+        boxShadow: 'var(--shadow-sm)'
       }}>
         <div style={{
           position: 'relative',
           flex: '1',
           minWidth: '260px'
         }}>
-          <Search size={17} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#94a3b8' }} />
+          <Search size={17} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
           <input
             type="text"
             placeholder="Search Master DB profiles by name, title, company, email, department..."
@@ -381,29 +377,29 @@ export default function MasterDatabase() {
             onChange={(e) => setSearchQuery(e.target.value)}
             style={{
               width: '100%',
-              backgroundColor: 'rgba(5, 10, 25, 0.8)',
-              border: '1px solid #334155',
+              backgroundColor: 'var(--bg-input)',
+              border: '1px solid var(--border-input)',
               borderRadius: '8px',
               padding: '0.55rem 0.85rem 0.55rem 2.4rem',
-              color: '#f8fafc',
+              color: 'var(--text-main)',
               fontSize: '0.88rem'
             }}
           />
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#94a3b8', fontSize: '0.85rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
             <Filter size={15} /> Source:
           </div>
           <select
             value={sourceFilter}
             onChange={(e) => setSourceFilter(e.target.value)}
             style={{
-              backgroundColor: 'rgba(5, 10, 25, 0.8)',
-              border: '1px solid #334155',
+              backgroundColor: 'var(--bg-input)',
+              border: '1px solid var(--border-input)',
               borderRadius: '8px',
               padding: '0.55rem 0.85rem',
-              color: '#f8fafc',
+              color: 'var(--text-main)',
               fontSize: '0.85rem',
               cursor: 'pointer'
             }}
@@ -417,23 +413,24 @@ export default function MasterDatabase() {
 
       {/* Profiles Data Table */}
       <div style={{
-        background: 'rgba(15, 23, 42, 0.65)',
-        border: '1px solid rgba(255, 255, 255, 0.08)',
+        background: 'var(--bg-card)',
+        border: '1px solid var(--border)',
         borderRadius: '12px',
-        overflow: 'hidden'
+        overflow: 'hidden',
+        boxShadow: 'var(--shadow-sm)'
       }}>
         {loading ? (
-          <div style={{ padding: '3rem', textAlign: 'center', color: '#94a3b8' }}>
-            <RefreshCw size={24} className="spin" style={{ marginBottom: '0.5rem', color: '#818cf8' }} />
+          <div style={{ padding: '3rem', textAlign: 'center', color: 'var(--text-muted)' }}>
+            <RefreshCw size={24} className="spin" style={{ marginBottom: '0.5rem', color: 'var(--accent)' }} />
             <div>Loading Master Database profiles...</div>
           </div>
         ) : filteredLeads.length === 0 ? (
           <div style={{ padding: '4rem 2rem', textAlign: 'center' }}>
-            <Database size={48} style={{ color: '#475569', marginBottom: '1rem' }} />
-            <h3 style={{ margin: '0 0 0.5rem 0', color: '#f8fafc', fontWeight: 700 }}>
+            <Database size={48} style={{ color: 'var(--text-muted)', marginBottom: '1rem' }} />
+            <h3 style={{ margin: '0 0 0.5rem 0', color: 'var(--text-main)', fontWeight: 700 }}>
               {totalCount === 0 ? 'Master Database is Empty' : 'No Matching Profiles Found'}
             </h3>
-            <p style={{ margin: '0 0 1.5rem 0', color: '#94a3b8', fontSize: '0.88rem', maxWidth: '420px', marginLeft: 'auto', marginRight: 'auto' }}>
+            <p style={{ margin: '0 0 1.5rem 0', color: 'var(--text-muted)', fontSize: '0.88rem', maxWidth: '420px', marginLeft: 'auto', marginRight: 'auto' }}>
               {totalCount === 0
                 ? 'Upload your first CSV or Excel file to populate the unified Master Database.'
                 : 'Try adjusting your search query or source filter.'}
@@ -444,9 +441,6 @@ export default function MasterDatabase() {
                 className="btn"
                 onClick={() => handleTriggerFilePicker('append')}
                 style={{
-                  backgroundColor: '#6366f1',
-                  color: '#ffffff',
-                  fontWeight: 700,
                   padding: '0.65rem 1.35rem',
                   fontSize: '0.88rem',
                   borderRadius: '8px',
@@ -454,7 +448,10 @@ export default function MasterDatabase() {
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '0.5rem',
-                  cursor: 'pointer'
+                  cursor: 'pointer',
+                  backgroundColor: 'var(--accent)',
+                  color: '#ffffff',
+                  fontWeight: 700
                 }}
               >
                 <UploadCloud size={16} /> Upload First Dataset
@@ -465,7 +462,7 @@ export default function MasterDatabase() {
           <div style={{ overflowX: 'auto' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.85rem' }}>
               <thead>
-                <tr style={{ background: 'rgba(5, 10, 25, 0.75)', borderBottom: '1px solid #334155', color: '#94a3b8' }}>
+                <tr style={{ background: 'var(--bg-inner)', borderBottom: '1px solid var(--border)', color: 'var(--text-muted)' }}>
                   <th style={{ padding: '0.85rem 1rem' }}>Profile Name</th>
                   <th style={{ padding: '0.85rem 1rem' }}>Job Title &amp; Seniority</th>
                   <th style={{ padding: '0.85rem 1rem' }}>Company &amp; Dept</th>
@@ -484,16 +481,16 @@ export default function MasterDatabase() {
                     <tr
                       key={lead.id}
                       style={{
-                        borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
+                        borderBottom: '1px solid var(--border)',
                         transition: 'background 0.15s ease'
                       }}
                     >
-                      <td style={{ padding: '0.85rem 1rem', color: '#f8fafc', fontWeight: 600 }}>
+                      <td style={{ padding: '0.85rem 1rem', color: 'var(--text-main)', fontWeight: 600 }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
                           <div style={{
                             width: 30, height: 30, borderRadius: '50%',
-                            background: isManual ? 'rgba(245, 158, 11, 0.2)' : 'rgba(99, 102, 241, 0.2)',
-                            color: isManual ? '#fbbf24' : '#818cf8',
+                            background: isManual ? 'rgba(245, 158, 11, 0.15)' : 'var(--accent-light)',
+                            color: isManual ? '#d97706' : 'var(--accent)',
                             display: 'flex', alignItems: 'center', justifyContent: 'center',
                             fontSize: '0.78rem', fontWeight: 700
                           }}>
@@ -503,46 +500,46 @@ export default function MasterDatabase() {
                         </div>
                       </td>
 
-                      <td style={{ padding: '0.85rem 1rem', color: '#cbd5e1' }}>
-                        <div>{lead.job_title || '—'}</div>
+                      <td style={{ padding: '0.85rem 1rem', color: 'var(--text-sub)' }}>
+                        <div style={{ fontWeight: 600, color: 'var(--text-main)' }}>{lead.job_title || '—'}</div>
                         {lead.seniority && (
                           <span style={{
-                            fontSize: '0.7rem', color: '#818cf8', background: 'rgba(99, 102, 241, 0.12)',
-                            padding: '1px 6px', borderRadius: 4, display: 'inline-block', marginTop: 2
+                            fontSize: '0.7rem', color: 'var(--accent)', background: 'var(--accent-light)',
+                            padding: '1px 6px', borderRadius: 4, display: 'inline-block', marginTop: 2, fontWeight: 600
                           }}>
                             {lead.seniority}
                           </span>
                         )}
                       </td>
 
-                      <td style={{ padding: '0.85rem 1rem', color: '#cbd5e1' }}>
-                        <div style={{ fontWeight: 600, color: '#f8fafc' }}>{lead.company_name || '—'}</div>
+                      <td style={{ padding: '0.85rem 1rem', color: 'var(--text-sub)' }}>
+                        <div style={{ fontWeight: 600, color: 'var(--text-main)' }}>{lead.company_name || '—'}</div>
                         {lead.department && (
-                          <div style={{ fontSize: '0.75rem', color: '#94a3b8' }}>{lead.department}</div>
+                          <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{lead.department}</div>
                         )}
                       </td>
 
-                      <td style={{ padding: '0.85rem 1rem', color: '#cbd5e1' }}>
+                      <td style={{ padding: '0.85rem 1rem', color: 'var(--text-sub)' }}>
                         {lead.email ? (
                           <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-                            <span style={{ color: '#38bdf8' }}>{lead.email}</span>
+                            <span style={{ color: '#0284c7', fontWeight: 600 }}>{lead.email}</span>
                             <button
                               type="button"
                               onClick={() => handleCopyEmail(lead.email)}
-                              style={{ background: 'none', border: 'none', color: '#64748b', cursor: 'pointer', padding: 2 }}
+                              style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', padding: 2 }}
                               title="Copy Email"
                             >
-                              {copiedEmail === lead.email ? <Check size={13} style={{ color: '#34d399' }} /> : <Copy size={13} />}
+                              {copiedEmail === lead.email ? <Check size={13} style={{ color: '#059669' }} /> : <Copy size={13} />}
                             </button>
                           </div>
                         ) : (
-                          <span style={{ color: '#64748b' }}>No email</span>
+                          <span style={{ color: 'var(--text-muted)' }}>No email</span>
                         )}
                       </td>
 
-                      <td style={{ padding: '0.85rem 1rem', color: '#cbd5e1' }}>
-                        <div>{lead.industry || '—'}</div>
-                        <div style={{ fontSize: '0.75rem', color: '#94a3b8' }}>{lead.country || lead.country_code || 'Global'}</div>
+                      <td style={{ padding: '0.85rem 1rem', color: 'var(--text-sub)' }}>
+                        <div style={{ fontWeight: 600, color: 'var(--text-main)' }}>{lead.industry || '—'}</div>
+                        <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{lead.country || lead.country_code || 'Global'}</div>
                       </td>
 
                       <td style={{ padding: '0.85rem 1rem' }}>
@@ -551,9 +548,9 @@ export default function MasterDatabase() {
                           fontWeight: 600,
                           padding: '2px 8px',
                           borderRadius: '6px',
-                          backgroundColor: isManual ? 'rgba(245, 158, 11, 0.15)' : 'rgba(99, 102, 241, 0.15)',
-                          color: isManual ? '#fbbf24' : '#818cf8',
-                          border: `1px solid ${isManual ? 'rgba(245, 158, 11, 0.3)' : 'rgba(99, 102, 241, 0.3)'}`
+                          backgroundColor: isManual ? 'rgba(245, 158, 11, 0.15)' : 'var(--accent-light)',
+                          color: isManual ? '#d97706' : 'var(--accent)',
+                          border: `1px solid ${isManual ? 'rgba(245, 158, 11, 0.3)' : 'var(--border)'}`
                         }}>
                           {isManual ? 'Manual Entry' : (lead.source_file || lead.source || 'CSV Import')}
                         </span>

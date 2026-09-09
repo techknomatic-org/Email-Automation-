@@ -1327,6 +1327,31 @@ def get_dashboard_analytics(
         elif "Stopped" in evt or "Unsub" in evt:
             act_type = "unsubscribed"
 
+        # Clean human-readable activity details
+        raw_detail = ""
+        if isinstance(ev.metadata_json, dict):
+            raw_detail = str(ev.metadata_json.get("reason") or ev.metadata_json.get("action") or "")
+        
+        if "Master DB Profile Match" in raw_detail:
+            import re
+            m = re.search(r'(\d+%\s+Overall\s+Match)', raw_detail)
+            pct_str = f" ({m.group(1)})" if m else ""
+            clean_details = f"Profile matched from Master Database{pct_str}"
+        elif raw_detail and len(raw_detail) < 120 and not raw_detail.startswith("{") and not "Role Match:" in raw_detail:
+            clean_details = raw_detail
+        elif evt == "Email Sent":
+            clean_details = "Outreach email sent successfully"
+        elif evt == "Email Opened" or "Opened" in evt:
+            clean_details = "Email opened by prospect"
+        elif evt == "Email Replied" or "Replied" in evt:
+            clean_details = "Prospect replied to email"
+        elif "Handoff" in evt or "Converted" in evt:
+            clean_details = "Opportunity converted & handed off"
+        elif "Unsub" in evt:
+            clean_details = "Prospect unsubscribed"
+        else:
+            clean_details = ev.event_type or "Campaign pipeline event"
+
         activities.append({
             "id": ev.id,
             "type": act_type,
@@ -1340,7 +1365,7 @@ def get_dashboard_analytics(
             "campaign_id": ev.campaign_id,
             "lead_id": ev.lead_id,
             "deal_id": ev.deal_id,
-            "details": str(ev.metadata_json.get("reason") or ev.metadata_json.get("action") or ev.event_type) if isinstance(ev.metadata_json, dict) else ev.event_type,
+            "details": clean_details,
         })
 
     # ── Mailbox Capacities & Infrastructure ────────────────────────────────────

@@ -842,18 +842,18 @@ export default function LiveCampaign({ setCurrentTab, activeCampaignId, setActiv
           {/* KPI Drill-Down Filter Banner */}
           {selectedPipelineFilter !== 'ALL' && (
             <div style={{
-              backgroundColor: 'rgba(99, 102, 241, 0.15)', borderRadius: '8px', border: '1px solid rgba(99, 102, 241, 0.4)',
+              backgroundColor: 'var(--accent-light)', borderRadius: '8px', border: '1px solid var(--accent)',
               padding: '0.6rem 0.85rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center'
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <Filter size={14} style={{ color: '#818cf8' }} />
-                <span style={{ fontSize: '0.78rem', fontWeight: 700, color: '#fff' }}>
+                <Filter size={14} style={{ color: 'var(--accent)' }} />
+                <span style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-main)' }}>
                   KPI Drill-Down: <strong>{selectedPipelineFilter}</strong> ({filteredDeals.length} Lead{filteredDeals.length !== 1 ? 's' : ''})
                 </span>
               </div>
               <button
                 onClick={() => setSelectedPipelineFilter('ALL')}
-                style={{ fontSize: '0.7rem', padding: '3px 8px', borderRadius: '4px', backgroundColor: 'rgba(255,255,255,0.1)', color: '#e0e7ff', border: '1px solid rgba(255,255,255,0.15)', cursor: 'pointer', fontWeight: 700 }}
+                style={{ fontSize: '0.7rem', padding: '3px 8px', borderRadius: '4px', backgroundColor: 'var(--bg-card)', color: 'var(--text-main)', border: '1px solid var(--border)', cursor: 'pointer', fontWeight: 700 }}
               >
                 ← Back to All Leads
               </button>
@@ -862,14 +862,14 @@ export default function LiveCampaign({ setCurrentTab, activeCampaignId, setActiv
 
           {/* Search & Filter Bar */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', backgroundColor: 'rgba(0,0,0,0.3)', padding: '0.45rem 0.75rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.08)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', backgroundColor: 'var(--bg-input)', padding: '0.45rem 0.75rem', borderRadius: '8px', border: '1px solid var(--border)' }}>
               <Search size={14} style={{ color: 'var(--text-muted)' }} />
               <input
                 type="text"
                 placeholder="Search lead by name, company, job title..."
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
-                style={{ background: 'transparent', border: 'none', color: '#fff', fontSize: '0.82rem', width: '100%', outline: 'none' }}
+                style={{ background: 'transparent', border: 'none', color: 'var(--text-main)', fontSize: '0.82rem', width: '100%', outline: 'none' }}
               />
               {searchQuery && (
                 <button onClick={() => setSearchQuery('')} style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer' }}>✕</button>
@@ -1057,7 +1057,7 @@ export default function LiveCampaign({ setCurrentTab, activeCampaignId, setActiv
 
               return (
                 <div style={{
-                  background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.18) 0%, rgba(15, 23, 42, 0.9) 100%)',
+                  background: 'var(--bg-inner)',
                   borderRadius: '10px', border: `1.5px solid ${buttonColor}66`, padding: '1rem',
                   display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '1rem', flexWrap: 'wrap'
                 }}>
@@ -1065,7 +1065,7 @@ export default function LiveCampaign({ setCurrentTab, activeCampaignId, setActiv
                     <div style={{ fontSize: '0.7rem', fontWeight: 800, color: buttonColor, textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '3px', display: 'flex', alignItems: 'center', gap: '4px' }}>
                       <Zap size={12} /> AI Next-Best Action Recommendation
                     </div>
-                    <div style={{ fontSize: '0.95rem', fontWeight: 800, color: '#fff' }}>{actionTitle}</div>
+                    <div style={{ fontSize: '0.95rem', fontWeight: 800, color: 'var(--text-main)' }}>{actionTitle}</div>
                     <div style={{ fontSize: '0.73rem', color: 'var(--text-sub)', marginTop: '2px', lineHeight: 1.4 }}>{actionDesc}</div>
                   </div>
 
@@ -1085,7 +1085,7 @@ export default function LiveCampaign({ setCurrentTab, activeCampaignId, setActiv
             })()}
 
             {/* Tab Selector Buttons */}
-            <div style={{ display: 'flex', gap: '0.4rem', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '0.5rem', flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', gap: '0.4rem', borderBottom: '1px solid var(--border)', paddingBottom: '0.5rem', flexWrap: 'wrap' }}>
               {[
                 { id: 'overview', label: 'Overview' },
                 { id: 'sequence', label: '⚡ Automation Sequence & Timers' },
@@ -1097,7 +1097,7 @@ export default function LiveCampaign({ setCurrentTab, activeCampaignId, setActiv
                   onClick={() => setInspectorTab(tab.id)}
                   style={{
                     fontSize: '0.75rem', padding: '4px 10px', borderRadius: '6px',
-                    backgroundColor: inspectorTab === tab.id ? '#4f46e5' : 'transparent',
+                    backgroundColor: inspectorTab === tab.id ? 'var(--accent)' : 'transparent',
                     color: inspectorTab === tab.id ? '#fff' : 'var(--text-muted)',
                     border: 'none', fontWeight: inspectorTab === tab.id ? 700 : 500, cursor: 'pointer'
                   }}
@@ -1113,8 +1113,8 @@ export default function LiveCampaign({ setCurrentTab, activeCampaignId, setActiv
                 {/* Live Sequence & Timer Status Card */}
                 {dealDetail.timer && (
                   <div style={{
-                    backgroundColor: 'rgba(15, 23, 42, 0.85)',
-                    border: '1px solid rgba(99, 102, 241, 0.25)',
+                    backgroundColor: 'var(--bg-inner)',
+                    border: '1px solid var(--border)',
                     borderRadius: '10px',
                     padding: '0.9rem',
                     display: 'flex',
@@ -1122,33 +1122,33 @@ export default function LiveCampaign({ setCurrentTab, activeCampaignId, setActiv
                     gap: '0.65rem'
                   }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <div style={{ fontSize: '0.82rem', fontWeight: 800, color: '#f8fafc', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                        <Zap size={15} className="text-indigo-400" />
+                      <div style={{ fontSize: '0.82rem', fontWeight: 800, color: 'var(--text-main)', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                        <Zap size={15} color="var(--accent)" />
                         Live Campaign Automation Sequence
                       </div>
                       <span style={{
                         fontSize: '0.7rem',
                         padding: '2px 8px',
                         borderRadius: '999px',
-                        backgroundColor: dealDetail.timer.sequence_state === 'REPLIED' ? 'rgba(16, 185, 129, 0.2)' : (dealDetail.timer.sequence_state === 'COMPLETED' ? 'rgba(52, 211, 153, 0.2)' : 'rgba(245, 158, 11, 0.2)'),
-                        color: dealDetail.timer.sequence_state === 'REPLIED' ? '#34d399' : (dealDetail.timer.sequence_state === 'COMPLETED' ? '#34d399' : '#fbbf24'),
+                        backgroundColor: dealDetail.timer.sequence_state === 'REPLIED' ? 'rgba(16, 185, 129, 0.15)' : (dealDetail.timer.sequence_state === 'COMPLETED' ? 'rgba(52, 211, 153, 0.15)' : 'rgba(245, 158, 11, 0.15)'),
+                        color: dealDetail.timer.sequence_state === 'REPLIED' ? '#059669' : (dealDetail.timer.sequence_state === 'COMPLETED' ? '#059669' : '#d97706'),
                         fontWeight: 700
                       }}>
-                        {dealDetail.timer.sequence_state || 'TIMER_RUNNING'}
+                        {dealDetail.timer.sequence_state || 'NOT_STARTED'}
                       </span>
                     </div>
 
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '0.5rem' }}>
-                      <div style={{ padding: '0.5rem', borderRadius: '6px', backgroundColor: 'rgba(0,0,0,0.25)', border: '1px solid rgba(255,255,255,0.04)' }}>
+                      <div style={{ padding: '0.5rem', borderRadius: '6px', backgroundColor: 'var(--bg-card)', border: '1px solid var(--border)' }}>
                         <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)' }}>Current Step</div>
-                        <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#e0e7ff' }}>
+                        <div style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-main)' }}>
                           Step #{dealDetail.timer.current_step_number}: {dealDetail.timer.current_step_name}
                         </div>
                       </div>
 
-                      <div style={{ padding: '0.5rem', borderRadius: '6px', backgroundColor: 'rgba(0,0,0,0.25)', border: '1px solid rgba(255,255,255,0.04)' }}>
+                      <div style={{ padding: '0.5rem', borderRadius: '6px', backgroundColor: 'var(--bg-card)', border: '1px solid var(--border)' }}>
                         <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)' }}>Timer Countdown</div>
-                        <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#fbbf24' }}>
+                        <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#d97706' }}>
                           {dealDetail.timer.is_waiting && dealDetail.timer.timer_expires_at ? (
                             <WaitingCountdownTimer targetIso={dealDetail.timer.timer_expires_at} onExpire={() => loadExecutionData(selectedCampaignId)} />
                           ) : (
@@ -1157,16 +1157,16 @@ export default function LiveCampaign({ setCurrentTab, activeCampaignId, setActiv
                         </div>
                       </div>
 
-                      <div style={{ padding: '0.5rem', borderRadius: '6px', backgroundColor: 'rgba(0,0,0,0.25)', border: '1px solid rgba(255,255,255,0.04)' }}>
+                      <div style={{ padding: '0.5rem', borderRadius: '6px', backgroundColor: 'var(--bg-card)', border: '1px solid var(--border)' }}>
                         <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)' }}>Reply Status</div>
-                        <div style={{ fontSize: '0.8rem', fontWeight: 700, color: dealDetail.timer.sequence_state === 'REPLIED' ? '#34d399' : '#94a3b8' }}>
+                        <div style={{ fontSize: '0.8rem', fontWeight: 700, color: dealDetail.timer.sequence_state === 'REPLIED' ? '#059669' : 'var(--text-muted)' }}>
                           {dealDetail.timer.sequence_state === 'REPLIED' ? 'Replied ✔' : 'Not Received'}
                         </div>
                       </div>
 
-                      <div style={{ padding: '0.5rem', borderRadius: '6px', backgroundColor: 'rgba(0,0,0,0.25)', border: '1px solid rgba(255,255,255,0.04)' }}>
+                      <div style={{ padding: '0.5rem', borderRadius: '6px', backgroundColor: 'var(--bg-card)', border: '1px solid var(--border)' }}>
                         <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)' }}>Follow-ups Sent</div>
-                        <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#60a5fa' }}>
+                        <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#2563eb' }}>
                           {dealDetail.timer.follow_up_count || 0} Sent
                         </div>
                       </div>
@@ -1174,7 +1174,7 @@ export default function LiveCampaign({ setCurrentTab, activeCampaignId, setActiv
 
                     {/* Step Stepper Progression Pills */}
                     {dealDetail.timer.steps_overview && dealDetail.timer.steps_overview.length > 0 && (
-                      <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '0.4rem' }}>
+                      <div style={{ borderTop: '1px solid var(--border)', paddingTop: '0.4rem' }}>
                         <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)', marginBottom: '0.3rem', fontWeight: 600 }}>Sequence Stepper:</div>
                         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.3rem', alignItems: 'center' }}>
                           {dealDetail.timer.steps_overview.map((st, i) => {
@@ -1186,15 +1186,15 @@ export default function LiveCampaign({ setCurrentTab, activeCampaignId, setActiv
                                   fontSize: '0.68rem',
                                   padding: '2px 7px',
                                   borderRadius: '5px',
-                                  backgroundColor: isCurrent ? 'rgba(99, 102, 241, 0.3)' : (isPast ? 'rgba(16, 185, 129, 0.15)' : 'rgba(255, 255, 255, 0.05)'),
-                                  color: isCurrent ? '#c7d2fe' : (isPast ? '#34d399' : '#64748b'),
-                                  border: isCurrent ? '1px solid #6366f1' : (isPast ? '1px solid rgba(16, 185, 129, 0.3)' : '1px solid rgba(255, 255, 255, 0.08)'),
+                                  backgroundColor: isCurrent ? 'var(--accent-light)' : (isPast ? 'rgba(16, 185, 129, 0.15)' : 'var(--bg-card)'),
+                                  color: isCurrent ? 'var(--accent)' : (isPast ? '#059669' : 'var(--text-muted)'),
+                                  border: isCurrent ? '1px solid var(--accent)' : (isPast ? '1px solid rgba(16, 185, 129, 0.3)' : '1px solid var(--border)'),
                                   fontWeight: isCurrent ? 800 : 600
                                 }}>
                                   {isPast ? '✔ ' : ''}{st.step_number}. {st.step_name}
                                 </span>
                                 {i < dealDetail.timer.steps_overview.length - 1 && (
-                                  <span style={{ fontSize: '0.65rem', color: '#475569' }}>→</span>
+                                  <span style={{ fontSize: '0.65rem', color: 'var(--text-muted)' }}>→</span>
                                 )}
                               </React.Fragment>
                             );
@@ -1206,27 +1206,27 @@ export default function LiveCampaign({ setCurrentTab, activeCampaignId, setActiv
                 )}
 
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.65rem' }}>
-                  <div style={{ backgroundColor: 'rgba(0,0,0,0.25)', padding: '0.65rem', borderRadius: '6px', border: '1px solid rgba(255,255,255,0.04)' }}>
+                  <div style={{ backgroundColor: 'var(--bg-inner)', padding: '0.65rem', borderRadius: '6px', border: '1px solid var(--border)' }}>
                     <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)' }}>Email</div>
-                    <div style={{ fontSize: '0.8rem', fontWeight: 600, color: '#fff' }}>{dealDetail.lead?.email}</div>
+                    <div style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-main)' }}>{dealDetail.lead?.email}</div>
                   </div>
-                  <div style={{ backgroundColor: 'rgba(0,0,0,0.25)', padding: '0.65rem', borderRadius: '6px', border: '1px solid rgba(255,255,255,0.04)' }}>
+                  <div style={{ backgroundColor: 'var(--bg-inner)', padding: '0.65rem', borderRadius: '6px', border: '1px solid var(--border)' }}>
                     <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)' }}>Fit Score</div>
-                    <div style={{ fontSize: '0.82rem', fontWeight: 700, color: '#34d399' }}>{fitScore}% Match</div>
+                    <div style={{ fontSize: '0.82rem', fontWeight: 700, color: '#059669' }}>{fitScore}% Match</div>
                   </div>
-                  <div style={{ backgroundColor: 'rgba(0,0,0,0.25)', padding: '0.65rem', borderRadius: '6px', border: '1px solid rgba(255,255,255,0.04)' }}>
+                  <div style={{ backgroundColor: 'var(--bg-inner)', padding: '0.65rem', borderRadius: '6px', border: '1px solid var(--border)' }}>
                     <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)' }}>Location</div>
-                    <div style={{ fontSize: '0.8rem', fontWeight: 600, color: '#fff' }}>{dealDetail.lead?.country_code || 'US'}</div>
+                    <div style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-main)' }}>{dealDetail.lead?.country_code || 'US'}</div>
                   </div>
-                  <div style={{ backgroundColor: 'rgba(0,0,0,0.25)', padding: '0.65rem', borderRadius: '6px', border: '1px solid rgba(255,255,255,0.04)' }}>
+                  <div style={{ backgroundColor: 'var(--bg-inner)', padding: '0.65rem', borderRadius: '6px', border: '1px solid var(--border)' }}>
                     <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)' }}>Current Deal Status</div>
-                    <div style={{ fontSize: '0.82rem', fontWeight: 700, color: '#818cf8' }}>{dealDetail.deal_state}</div>
+                    <div style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--accent)' }}>{dealDetail.deal_state}</div>
                   </div>
                 </div>
 
                 {/* Qualification Rationale */}
                 {dealDetail.qualification_explanation && (
-                  <div style={{ backgroundColor: 'rgba(0,0,0,0.25)', padding: '0.65rem', borderRadius: '6px', border: '1px solid rgba(255,255,255,0.04)' }}>
+                  <div style={{ backgroundColor: 'var(--bg-inner)', padding: '0.65rem', borderRadius: '6px', border: '1px solid var(--border)' }}>
                     <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)', marginBottom: '2px' }}>AI Qualification Rationale</div>
                     <div style={{ fontSize: '0.75rem', fontStyle: 'italic', color: 'var(--text-sub)' }}>
                       "{dealDetail.qualification_explanation}"
@@ -1317,10 +1317,10 @@ export default function LiveCampaign({ setCurrentTab, activeCampaignId, setActiv
                 </div>
 
                 <div style={{ backgroundColor: 'rgba(16, 185, 129, 0.1)', border: '1px solid rgba(16, 185, 129, 0.3)', borderRadius: '8px', padding: '0.85rem' }}>
-                  <div style={{ fontSize: '0.7rem', color: '#34d399', fontWeight: 700, textTransform: 'uppercase', marginBottom: '0.3rem' }}>
+                  <div style={{ fontSize: '0.7rem', color: 'var(--success)', fontWeight: 700, textTransform: 'uppercase', marginBottom: '0.3rem' }}>
                     🎯 Recommended Action
                   </div>
-                  <div style={{ fontSize: '1rem', fontWeight: 800, color: '#e0e7ff' }}>
+                  <div style={{ fontSize: '1rem', fontWeight: 800, color: 'var(--text-main)' }}>
                     {dealDetail.ai_decision?.recommended_action || dealDetail.next_action || 'Continue Sequence'}
                   </div>
                   <p style={{ color: 'var(--text-muted)', fontSize: '0.75rem', fontStyle: 'italic', marginTop: '0.3rem', margin: 0 }}>
@@ -1329,8 +1329,8 @@ export default function LiveCampaign({ setCurrentTab, activeCampaignId, setActiv
                 </div>
 
                 {/* Meeting Link Input Override */}
-                <div style={{ backgroundColor: 'rgba(0,0,0,0.25)', padding: '0.75rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.06)' }}>
-                  <label style={{ fontSize: '0.73rem', fontWeight: 600, color: '#e0e7ff', display: 'block', marginBottom: '0.35rem' }}>
+                <div style={{ backgroundColor: 'var(--bg-inner)', padding: '0.75rem', borderRadius: '8px', border: '1px solid var(--border)' }}>
+                  <label style={{ fontSize: '0.73rem', fontWeight: 600, color: 'var(--text-main)', display: 'block', marginBottom: '0.35rem' }}>
                     🔗 Meeting Link URL to Send:
                   </label>
                   <input
@@ -1339,7 +1339,7 @@ export default function LiveCampaign({ setCurrentTab, activeCampaignId, setActiv
                     value={meetingLink}
                     onChange={(e) => setMeetingLink(e.target.value)}
                     placeholder="https://meet.google.com/your-meeting-id"
-                    style={{ fontSize: '0.8rem', padding: '0.4rem 0.65rem', backgroundColor: 'rgba(0,0,0,0.4)', color: '#fff', border: '1px solid #6366f1' }}
+                    style={{ fontSize: '0.8rem', padding: '0.4rem 0.65rem', backgroundColor: 'var(--bg-input)', color: 'var(--text-main)', border: '1px solid var(--border)' }}
                   />
                 </div>
               </div>
@@ -1347,7 +1347,7 @@ export default function LiveCampaign({ setCurrentTab, activeCampaignId, setActiv
 
           </div>
         ) : (
-          <div style={{ backgroundColor: 'rgba(15,23,42,0.6)', borderRadius: '12px', padding: '3rem', textAlign: 'center', color: 'var(--text-muted)' }}>
+          <div style={{ backgroundColor: 'var(--bg-inner)', borderRadius: '12px', padding: '3rem', textAlign: 'center', color: 'var(--text-muted)', border: '1px solid var(--border)' }}>
             Select a prospect from the execution list to inspect intelligence &amp; run AI actions.
           </div>
         )}

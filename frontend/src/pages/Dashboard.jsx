@@ -10,10 +10,10 @@ import {
   ShieldCheck, Clock, Zap, Layers, FolderKanban, UserCheck, Flame, Mail
 } from 'lucide-react';
 
-// ── Interactive Premium Multi-Mode Performance Trend Chart ─────────────────────
+// ── Interactive Premium Multi-Mode Performance Trend Visualizer ───────────────
 function PerformanceTrendChart({ data, activeSeries, setActiveSeries }) {
   const [hoverIndex, setHoverIndex] = useState(null);
-  const [chartMode, setChartMode] = useState('spline'); // 'spline' | 'bars' | 'cumulative'
+  const [chartMode, setChartMode] = useState('waterfall'); // 'waterfall' | 'bars' | 'cumulative' | 'spline'
 
   const seriesConfig = {
     sent:      { label: 'Sent',      color: '#3b82f6', glow: 'rgba(59, 130, 246, 0.4)' },
@@ -32,11 +32,24 @@ function PerformanceTrendChart({ data, activeSeries, setActiveSeries }) {
     );
   }
 
+  // Filter out leading empty trailing zeros if range is long so active days fill the canvas nicely
+  const activeData = useMemo(() => {
+    // If all points are zero, return data as is
+    const hasAnyActivity = data.some(d => (d.sent || 0) > 0 || (d.replies || 0) > 0 || (d.converted || 0) > 0);
+    if (!hasAnyActivity) return data.slice(-7);
+    
+    // Find first day with activity and keep from 1 day before to end, or last 10 days
+    const firstActiveIdx = data.findIndex(d => (d.sent || 0) > 0 || (d.replies || 0) > 0 || (d.converted || 0) > 0);
+    const startIdx = Math.max(firstActiveIdx - 2, 0);
+    const sliced = data.slice(startIdx);
+    return sliced.length >= 5 ? sliced : data.slice(-7);
+  }, [data]);
+
   // Compute processed data based on mode (e.g. cumulative if selected)
   const processedData = useMemo(() => {
-    if (chartMode !== 'cumulative') return data;
+    if (chartMode !== 'cumulative') return activeData;
     let running = { sent: 0, delivered: 0, opened: 0, replies: 0, meetings: 0, converted: 0 };
-    return data.map(d => {
+    return activeData.map(d => {
       running.sent += (d.sent || 0);
       running.delivered += (d.delivered || 0);
       running.opened += (d.opened || 0);
@@ -53,7 +66,7 @@ function PerformanceTrendChart({ data, activeSeries, setActiveSeries }) {
         converted: running.converted,
       };
     });
-  }, [data, chartMode]);
+  }, [activeData, chartMode]);
 
   // Compute totals for each series in the dataset
   const seriesTotals = useMemo(() => {
@@ -130,267 +143,371 @@ function PerformanceTrendChart({ data, activeSeries, setActiveSeries }) {
 
   return (
     <div style={{ position: 'relative', width: '100%' }}>
-      {/* ── Metric Chips with Live Counts ─────────────────────────────────── */}
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.45rem', alignItems: 'center', marginBottom: '0.85rem' }}>
-        {Object.entries(seriesConfig).map(([key, cfg]) => {
-          const isActive = activeSeries[key];
-          const totalCount = seriesTotals[key] || 0;
-          return (
+      {/* ── Visual Mode Selector & Metric Chips ───────────────────────────── */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.6rem', marginBottom: '0.85rem' }}>
+        {/* Metric Chips */}
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', alignItems: 'center' }}>
+          {Object.entries(seriesConfig).map(([key, cfg]) => {
+            const isActive = activeSeries[key];
+            const totalCount = seriesTotals[key] || 0;
+            return (
+              <button
+                key={key}
+                onClick={() => setActiveSeries(prev => ({ ...prev, [key]: !prev[key] }))}
+                style={{
+                  background: isActive ? `${cfg.color}15` : 'var(--bg-card)',
+                  border: `1px solid ${isActive ? cfg.color : 'var(--border)'}`,
+                  color: isActive ? cfg.color : 'var(--text-muted)',
+                  padding: '3px 9px',
+                  borderRadius: '6px',
+                  fontSize: '0.72rem',
+                  fontWeight: 700,
+                  cursor: 'pointer',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '5px',
+                  boxShadow: isActive ? `0 0 10px ${cfg.color}25` : 'var(--shadow-sm)',
+                  transition: 'all 0.15s ease'
+                }}
+              >
+                <span style={{ width: 6, height: 6, borderRadius: '50%', background: cfg.color }} />
+                <span>{cfg.label}</span>
+                <span style={{ fontSize: '0.68rem', fontWeight: 800, color: isActive ? cfg.color : 'var(--text-muted)', background: 'var(--bg-inner)', padding: '1px 5px', borderRadius: '4px', border: '1px solid var(--border)' }}>
+                  {totalCount}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* 4-Way Visualization Switcher */}
+        <div style={{
+          display: 'flex',
+          gap: '3px',
+          background: 'var(--bg-inner)',
+          padding: '3px',
+          borderRadius: '8px',
+          border: '1px solid var(--border)',
+        }}>
+          {[
+            { id: 'waterfall', label: '⚡ Waterfall', title: 'Stage Conversion & Milestone Flow' },
+            { id: 'bars', label: '📊 Daily Bars', title: 'Grouped Activity Bars by Date' },
+            { id: 'cumulative', label: '🌊 Cumulative', title: 'Cumulative Volume Growth' },
+            { id: 'spline', label: '📈 Trendline', title: 'Multi-Series Curve' },
+          ].map(m => (
             <button
-              key={key}
-              onClick={() => setActiveSeries(prev => ({ ...prev, [key]: !prev[key] }))}
+              key={m.id}
+              onClick={() => setChartMode(m.id)}
+              title={m.title}
               style={{
-                background: isActive ? `${cfg.color}18` : 'rgba(255,255,255,0.02)',
-                border: `1px solid ${isActive ? cfg.color : 'rgba(255,255,255,0.08)'}`,
-                color: isActive ? '#ffffff' : 'var(--text-muted)',
-                padding: '4px 11px',
-                borderRadius: '8px',
-                fontSize: '0.74rem',
-                fontWeight: 600,
+                padding: '4px 10px',
+                fontSize: '0.7rem',
+                fontWeight: chartMode === m.id ? 700 : 500,
+                borderRadius: '6px',
+                border: 'none',
+                background: chartMode === m.id ? 'var(--accent)' : 'transparent',
+                color: chartMode === m.id ? '#ffffff' : 'var(--text-muted)',
                 cursor: 'pointer',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '6px',
-                boxShadow: isActive ? `0 0 10px ${cfg.color}25` : 'none',
                 transition: 'all 0.15s ease'
               }}
             >
-              <span style={{ width: 7, height: 7, borderRadius: '50%', background: cfg.color, boxShadow: isActive ? `0 0 6px ${cfg.color}` : 'none' }} />
-              <span>{cfg.label}</span>
-              <span style={{ fontSize: '0.7rem', fontWeight: 800, color: isActive ? cfg.color : 'var(--text-faint)', background: 'rgba(0,0,0,0.25)', padding: '1px 5px', borderRadius: '4px' }}>
-                {totalCount}
-              </span>
+              {m.label}
             </button>
-          );
-        })}
+          ))}
+        </div>
       </div>
 
-      {/* ── SVG Chart Viewport ──────────────────────────────────────────────── */}
-      <div style={{ position: 'relative', width: '100%', overflow: 'hidden', borderRadius: '10px', background: 'linear-gradient(180deg, rgba(15,23,42,0.4) 0%, rgba(10,15,30,0.6) 100%)', padding: '6px 0', border: '1px solid rgba(255,255,255,0.03)' }}>
-        <svg
-          viewBox={`0 0 ${width} ${height}`}
-          style={{ width: '100%', height: 'auto', display: 'block', overflow: 'visible' }}
-          onMouseLeave={() => setHoverIndex(null)}
-        >
-          <defs>
-            {paths.map(p => (
-              <linearGradient key={`grad-${p.key}`} id={`grad-spline-${p.key}`} x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor={p.color} stopOpacity="0.45" />
-                <stop offset="60%" stopColor={p.color} stopOpacity="0.12" />
-                <stop offset="100%" stopColor={p.color} stopOpacity="0.0" />
-              </linearGradient>
-            ))}
-            <linearGradient id="grid-fade" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stopColor="rgba(255,255,255,0.03)" />
-              <stop offset="50%" stopColor="rgba(255,255,255,0.08)" />
-              <stop offset="100%" stopColor="rgba(255,255,255,0.03)" />
-            </linearGradient>
-          </defs>
-
-          {/* Background Grid Lines & Y-Axis Scale */}
-          {[0, 0.25, 0.5, 0.75, 1].map((pct, i) => {
-            const y = padT + chartH * (1 - pct);
-            const val = Math.round(maxVal * pct);
-            return (
-              <g key={i}>
-                <line x1={padL} y1={y} x2={padL + chartW} y2={y} stroke="url(#grid-fade)" strokeDasharray={i === 0 ? 'none' : '4 4'} strokeWidth={i === 0 ? '1.5' : '1'} />
-                <text x={padL - 8} y={y + 4} fill="var(--text-muted)" fontSize="10" fontWeight="600" textAnchor="end" fontFamily="sans-serif">
-                  {val}
-                </text>
-              </g>
-            );
-          })}
-
-          {/* Mode 1 & 3: Smooth Spline / Cumulative Curves */}
-          {chartMode !== 'bars' && (
-            <>
-              {/* Glowing Area Under Curves */}
-              {paths.map(p => (
-                <path
-                  key={`area-${p.key}`}
-                  d={p.areaPath}
-                  fill={`url(#grad-spline-${p.key})`}
-                  pointerEvents="none"
-                />
-              ))}
-
-              {/* Spline Lines with High Glow */}
-              {paths.map(p => (
-                <path
-                  key={`line-${p.key}`}
-                  d={p.linePath}
-                  fill="none"
-                  stroke={p.color}
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  pointerEvents="none"
-                  style={{ filter: `drop-shadow(0 2px 6px ${p.glow})` }}
-                />
-              ))}
-            </>
-          )}
-
-          {/* Mode 2: Modern Grouped / Stacked Bars */}
-          {chartMode === 'bars' && (
-            <g>
-              {processedData.map((d, i) => {
-                const groupX = getX(i);
-                const barGroupWidth = Math.max(chartW / processedData.length * 0.7, 4);
-                const singleBarWidth = Math.max(barGroupWidth / Math.max(activeKeys.length, 1), 2.5);
-                const startGroupX = groupX - barGroupWidth / 2;
-
-                return (
-                  <g key={`bar-group-${i}`}>
-                    {activeKeys.map((key, keyIdx) => {
-                      const val = d[key] || 0;
-                      const barH = Math.max((val / maxVal) * chartH, val > 0 ? 3 : 0);
-                      const barY = padT + chartH - barH;
-                      const bx = startGroupX + keyIdx * singleBarWidth;
-                      const color = seriesConfig[key].color;
-
-                      return (
-                        <rect
-                          key={`bar-${key}-${i}`}
-                          x={bx}
-                          y={barY}
-                          width={Math.max(singleBarWidth - 1, 1.5)}
-                          height={barH}
-                          rx={Math.min(singleBarWidth / 2, 2.5)}
-                          ry={Math.min(singleBarWidth / 2, 2.5)}
-                          fill={color}
-                          opacity={hoverIndex === i || hoverIndex === null ? 0.9 : 0.4}
-                          pointerEvents="none"
-                        />
-                      );
-                    })}
-                  </g>
-                );
-              })}
-            </g>
-          )}
-
-          {/* X-Axis Date Labels */}
-          {processedData.map((d, i) => {
-            const step = Math.max(Math.floor(processedData.length / 7), 1);
-            if (i % step === 0 || i === processedData.length - 1) {
-              const x = getX(i);
-              return (
-                <text
-                  key={`date-${i}`}
-                  x={x}
-                  y={padT + chartH + 18}
-                  fill="var(--text-muted)"
-                  fontSize="10"
-                  fontWeight="600"
-                  textAnchor="middle"
-                  fontFamily="sans-serif"
-                >
-                  {d.display_date}
-                </text>
-              );
-            }
-            return null;
-          })}
-
-          {/* Interactive Mouse Scan Overlay & Highlights */}
-          {processedData.map((d, i) => {
-            const x = getX(i);
-            const isHovered = hoverIndex === i;
-            const hitWidth = chartW / Math.max(processedData.length, 1);
+      {/* ── MODE 1: VISUAL WATERFALL & STAGE CONVERSION CARDS ─────────────────── */}
+      {chartMode === 'waterfall' && (
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))',
+          gap: '0.75rem',
+          padding: '1rem',
+          borderRadius: '12px',
+          background: 'var(--bg-inner)',
+          border: '1px solid var(--border)',
+        }}>
+          {[
+            { stage: '1. Dispatched', count: seriesTotals.sent, icon: Send, color: '#3b82f6', sub: 'Campaign outreach emails sent' },
+            { stage: '2. Delivered', count: seriesTotals.delivered, icon: CheckCircle2, color: '#0284c7', sub: `${seriesTotals.sent > 0 ? Math.round((seriesTotals.delivered / seriesTotals.sent) * 100) : 100}% Inbox placement` },
+            { stage: '3. Opened', count: seriesTotals.opened, icon: Eye, color: '#9333ea', sub: `${seriesTotals.delivered > 0 ? Math.round((seriesTotals.opened / seriesTotals.delivered) * 100) : 0}% Open engagement` },
+            { stage: '4. Replies', count: seriesTotals.replies, icon: MessageCircle, color: '#059669', sub: `${seriesTotals.sent > 0 ? Math.round((seriesTotals.replies / seriesTotals.sent) * 100) : 0}% Positive response` },
+            { stage: '5. Converted', count: seriesTotals.converted, icon: Award, color: '#10b981', sub: 'Won & pipeline handoff deals' },
+          ].map((item, idx) => {
+            const IconComp = item.icon;
+            const maxSent = Math.max(seriesTotals.sent, 1);
+            const fillPct = Math.min(Math.round((item.count / maxSent) * 100), 100);
 
             return (
-              <g key={`hit-${i}`}>
-                <rect
-                  x={x - hitWidth / 2}
-                  y={padT}
-                  width={hitWidth}
-                  height={chartH}
-                  fill="transparent"
-                  style={{ cursor: 'pointer' }}
-                  onMouseEnter={() => setHoverIndex(i)}
-                />
-                {isHovered && (
-                  <>
-                    {/* Vertical Scan Line */}
-                    <line
-                      x1={x} y1={padT} x2={x} y2={padT + chartH}
-                      stroke="rgba(255, 255, 255, 0.4)"
-                      strokeWidth="1.5"
-                      strokeDasharray="3 3"
-                      pointerEvents="none"
-                    />
-                    {/* Target Nodes */}
-                    {paths.map(p => (
-                      <g key={`dot-${p.key}-${i}`}>
-                        <circle
-                          cx={x}
-                          cy={getY(d[p.key])}
-                          r="6"
-                          fill={p.color}
-                          opacity="0.3"
-                          pointerEvents="none"
-                        />
-                        <circle
-                          cx={x}
-                          cy={getY(d[p.key])}
-                          r="3.5"
-                          fill={p.color}
-                          stroke="#0a0f1e"
-                          strokeWidth="2"
-                          pointerEvents="none"
-                        />
-                      </g>
-                    ))}
-                  </>
-                )}
-              </g>
-            );
-          })}
-        </svg>
+              <div
+                key={item.stage}
+                style={{
+                  background: 'var(--bg-card)',
+                  border: `1px solid var(--border)`,
+                  borderRadius: '10px',
+                  padding: '1rem 0.9rem',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                  boxShadow: 'var(--shadow-sm)',
+                  position: 'relative',
+                  overflow: 'hidden'
+                }}
+              >
+                <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '3px', background: item.color }} />
+                <div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
+                    <span style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase' }}>
+                      {item.stage}
+                    </span>
+                    <div style={{ width: 24, height: 24, borderRadius: '6px', background: `${item.color}18`, color: item.color, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <IconComp size={12} />
+                    </div>
+                  </div>
 
-        {/* ── Floating Frosted Glass Tooltip ─────────────────────────────────── */}
-        {hoveredData && hoverIndex !== null && (
-          <div
-            style={{
-              position: 'absolute',
-              top: '12px',
-              left: `${Math.min(Math.max((getX(hoverIndex) / width) * 100, 16), 84)}%`,
-              transform: 'translateX(-50%)',
-              background: 'rgba(15, 23, 42, 0.94)',
-              backdropFilter: 'blur(16px)',
-              border: '1px solid rgba(255, 255, 255, 0.15)',
-              borderRadius: '10px',
-              padding: '10px 14px',
-              boxShadow: '0 12px 32px rgba(0,0,0,0.7), 0 0 1px rgba(255,255,255,0.2)',
-              pointerEvents: 'none',
-              zIndex: 20,
-              minWidth: 160,
-            }}
-          >
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '5px', marginBottom: '6px' }}>
-              <span style={{ fontSize: '0.74rem', fontWeight: 800, color: '#f8fafc' }}>
-                {hoveredData.display_date}
-              </span>
-              <span style={{ fontSize: '0.65rem', color: 'var(--text-muted)' }}>
-                {chartMode === 'cumulative' ? 'Cumulative' : 'Daily Volume'}
-              </span>
-            </div>
+                  <div style={{ fontSize: '1.4rem', fontWeight: 800, color: item.color, lineHeight: 1, marginBottom: '0.4rem' }}>
+                    {item.count}
+                  </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '5px 12px', fontSize: '0.72rem' }}>
-              {activeKeys.map(k => (
-                <div key={k} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px' }}>
-                  <span style={{ color: seriesConfig[k].color, display: 'flex', alignItems: 'center', gap: '5px' }}>
-                    <span style={{ width: 6, height: 6, borderRadius: '50%', background: seriesConfig[k].color }} />
-                    {seriesConfig[k].label}:
-                  </span>
-                  <span style={{ fontWeight: 800, color: '#ffffff' }}>{hoveredData[k] || 0}</span>
+                  <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)', lineHeight: 1.3, marginBottom: '0.65rem' }}>
+                    {item.sub}
+                  </div>
                 </div>
+
+                <div>
+                  <div style={{ height: 5, borderRadius: 4, background: 'var(--bg-inner)', border: '1px solid var(--border)', overflow: 'hidden' }}>
+                    <div style={{ height: '100%', width: `${fillPct}%`, background: item.color, borderRadius: 4, transition: 'width 0.6s ease' }} />
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      {/* ── MODE 2, 3, 4: SVG CANVAS (BARS / CUMULATIVE / SPLINE) ─────────────── */}
+      {chartMode !== 'waterfall' && (
+        <div style={{ position: 'relative', width: '100%', overflow: 'hidden', borderRadius: '10px', background: 'var(--bg-inner)', padding: '8px 0', border: '1px solid var(--border)' }}>
+          <svg
+            viewBox={`0 0 ${width} ${height}`}
+            style={{ width: '100%', height: 'auto', display: 'block', overflow: 'visible' }}
+            onMouseLeave={() => setHoverIndex(null)}
+          >
+            <defs>
+              {paths.map(p => (
+                <linearGradient key={`grad-${p.key}`} id={`grad-spline-${p.key}`} x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor={p.color} stopOpacity="0.40" />
+                  <stop offset="60%" stopColor={p.color} stopOpacity="0.10" />
+                  <stop offset="100%" stopColor={p.color} stopOpacity="0.0" />
+                </linearGradient>
               ))}
+            </defs>
+
+            {/* Background Grid Lines & Y-Axis Scale */}
+            {[0, 0.25, 0.5, 0.75, 1].map((pct, i) => {
+              const y = padT + chartH * (1 - pct);
+              const val = Math.round(maxVal * pct);
+              return (
+                <g key={i}>
+                  <line x1={padL} y1={y} x2={padL + chartW} y2={y} stroke="var(--border)" strokeDasharray={i === 0 ? 'none' : '4 4'} strokeWidth={i === 0 ? '1.5' : '1'} />
+                  <text x={padL - 8} y={y + 4} fill="var(--text-muted)" fontSize="10" fontWeight="600" textAnchor="end" fontFamily="sans-serif">
+                    {val}
+                  </text>
+                </g>
+              );
+            })}
+
+            {/* Mode: Smooth Spline / Cumulative Curves */}
+            {chartMode !== 'bars' && (
+              <>
+                {/* Glowing Area Under Curves */}
+                {paths.map(p => (
+                  <path
+                    key={`area-${p.key}`}
+                    d={p.areaPath}
+                    fill={`url(#grad-spline-${p.key})`}
+                    pointerEvents="none"
+                  />
+                ))}
+
+                {/* Spline Lines with High Glow */}
+                {paths.map(p => (
+                  <path
+                    key={`line-${p.key}`}
+                    d={p.linePath}
+                    fill="none"
+                    stroke={p.color}
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    pointerEvents="none"
+                    style={{ filter: `drop-shadow(0 2px 6px ${p.glow})` }}
+                  />
+                ))}
+              </>
+            )}
+
+            {/* Mode: Modern Grouped / Stacked Bars */}
+            {chartMode === 'bars' && (
+              <g>
+                {processedData.map((d, i) => {
+                  const groupX = getX(i);
+                  const barGroupWidth = Math.max((chartW / processedData.length) * 0.72, 6);
+                  const singleBarWidth = Math.max(barGroupWidth / Math.max(activeKeys.length, 1), 3);
+                  const startGroupX = groupX - barGroupWidth / 2;
+
+                  return (
+                    <g key={`bar-group-${i}`}>
+                      {activeKeys.map((key, keyIdx) => {
+                        const val = d[key] || 0;
+                        const barH = Math.max((val / maxVal) * chartH, val > 0 ? 4 : 0);
+                        const barY = padT + chartH - barH;
+                        const bx = startGroupX + keyIdx * singleBarWidth;
+                        const color = seriesConfig[key].color;
+
+                        return (
+                          <rect
+                            key={`bar-${key}-${i}`}
+                            x={bx}
+                            y={barY}
+                            width={Math.max(singleBarWidth - 1, 2)}
+                            height={barH}
+                            rx={Math.min(singleBarWidth / 2, 3)}
+                            ry={Math.min(singleBarWidth / 2, 3)}
+                            fill={color}
+                            opacity={hoverIndex === i || hoverIndex === null ? 0.9 : 0.35}
+                            pointerEvents="none"
+                          />
+                        );
+                      })}
+                    </g>
+                  );
+                })}
+              </g>
+            )}
+
+            {/* X-Axis Date Labels */}
+            {processedData.map((d, i) => {
+              const step = Math.max(Math.floor(processedData.length / 6), 1);
+              if (i % step === 0 || i === processedData.length - 1) {
+                const x = getX(i);
+                return (
+                  <text
+                    key={`date-${i}`}
+                    x={x}
+                    y={padT + chartH + 18}
+                    fill="var(--text-muted)"
+                    fontSize="10"
+                    fontWeight="600"
+                    textAnchor="middle"
+                    fontFamily="sans-serif"
+                  >
+                    {d.display_date}
+                  </text>
+                );
+              }
+              return null;
+            })}
+
+            {/* Interactive Mouse Scan Overlay & Highlights */}
+            {processedData.map((d, i) => {
+              const x = getX(i);
+              const isHovered = hoverIndex === i;
+              const hitWidth = chartW / Math.max(processedData.length, 1);
+
+              return (
+                <g key={`hit-${i}`}>
+                  <rect
+                    x={x - hitWidth / 2}
+                    y={padT}
+                    width={hitWidth}
+                    height={chartH}
+                    fill="transparent"
+                    style={{ cursor: 'pointer' }}
+                    onMouseEnter={() => setHoverIndex(i)}
+                  />
+                  {isHovered && (
+                    <>
+                      {/* Vertical Scan Line */}
+                      <line
+                        x1={x} y1={padT} x2={x} y2={padT + chartH}
+                        stroke="var(--accent)"
+                        strokeWidth="1.5"
+                        strokeDasharray="3 3"
+                        pointerEvents="none"
+                      />
+                      {/* Target Nodes */}
+                      {paths.map(p => (
+                        <g key={`dot-${p.key}-${i}`}>
+                          <circle
+                            cx={x}
+                            cy={getY(d[p.key])}
+                            r="6"
+                            fill={p.color}
+                            opacity="0.3"
+                            pointerEvents="none"
+                          />
+                          <circle
+                            cx={x}
+                            cy={getY(d[p.key])}
+                            r="3.5"
+                            fill={p.color}
+                            stroke="var(--bg-card)"
+                            strokeWidth="2"
+                            pointerEvents="none"
+                          />
+                        </g>
+                      ))}
+                    </>
+                  )}
+                </g>
+              );
+            })}
+          </svg>
+
+          {/* ── Floating Frosted Glass Tooltip ─────────────────────────────────── */}
+          {hoveredData && hoverIndex !== null && (
+            <div
+              style={{
+                position: 'absolute',
+                top: '12px',
+                left: `${Math.min(Math.max((getX(hoverIndex) / width) * 100, 16), 84)}%`,
+                transform: 'translateX(-50%)',
+                background: 'var(--bg-card)',
+                border: '1px solid var(--border)',
+                borderRadius: '10px',
+                padding: '10px 14px',
+                boxShadow: 'var(--shadow-lg)',
+                pointerEvents: 'none',
+                zIndex: 20,
+                minWidth: 160,
+              }}
+            >
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--border)', paddingBottom: '5px', marginBottom: '6px' }}>
+                <span style={{ fontSize: '0.74rem', fontWeight: 800, color: 'var(--text-main)' }}>
+                  {hoveredData.display_date}
+                </span>
+                <span style={{ fontSize: '0.65rem', color: 'var(--text-muted)' }}>
+                  {chartMode === 'cumulative' ? 'Cumulative' : 'Daily Volume'}
+                </span>
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '5px 12px', fontSize: '0.72rem' }}>
+                {activeKeys.map(k => (
+                  <div key={k} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px' }}>
+                    <span style={{ color: seriesConfig[k].color, display: 'flex', alignItems: 'center', gap: '5px' }}>
+                      <span style={{ width: 6, height: 6, borderRadius: '50%', background: seriesConfig[k].color }} />
+                      {seriesConfig[k].label}:
+                    </span>
+                    <span style={{ fontWeight: 800, color: 'var(--text-main)' }}>{hoveredData[k] || 0}</span>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-        )}
-      </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }
@@ -612,13 +729,20 @@ export default function Dashboard({ setCurrentTab, setActiveCampaignId, setActiv
   const realDeliveryRate = realEmailsSent > 0 ? Math.round((realDelivered / realEmailsSent) * 1000) / 10 : 95.0;
 
   // ── Build Funnel Stages ───────────────────────────────────────────────────
+  const funnelTotal = Math.max(realTotalLeads, realTotalDeals, 1);
+  const funnelQualified = Math.min(Math.max(realVerifiedLeads, realTotalDeals), funnelTotal);
+  const funnelContacted = Math.min(realEmailsSent, funnelQualified);
+  const funnelReplied = Math.min(realReplies, Math.max(funnelContacted, 1));
+  const funnelMeeting = Math.min(realMeetings, Math.max(funnelReplied, 1));
+  const funnelConverted = Math.min(realConverted, Math.max(funnelContacted, 1));
+
   const funnelStages = [
-    { stage: 'Total Leads', count: realTotalLeads, pct: 100, drop_off_pct: 0, color: '#6366f1' },
-    { stage: 'Qualified', count: Math.max(realTotalDeals, realTotalLeads), pct: Math.min(Math.round((Math.max(realTotalDeals, realTotalLeads) / Math.max(realTotalLeads, 1)) * 100), 100), drop_off_pct: 0, color: '#818cf8' },
-    { stage: 'Contacted', count: realEmailsSent, pct: Math.round((realEmailsSent / Math.max(realTotalDeals || realTotalLeads, 1)) * 100), drop_off_pct: Math.max(100 - Math.round((realEmailsSent / Math.max(realTotalDeals || realTotalLeads, 1)) * 100), 0), color: '#3b82f6' },
-    { stage: 'Replied', count: realReplies, pct: Math.round((realReplies / Math.max(realEmailsSent, 1)) * 100), drop_off_pct: Math.max(100 - Math.round((realReplies / Math.max(realEmailsSent, 1)) * 100), 0), color: '#10b981' },
-    { stage: 'Meeting', count: realMeetings, pct: Math.round((realMeetings / Math.max(realReplies, 1)) * 100), drop_off_pct: Math.max(100 - Math.round((realMeetings / Math.max(realReplies, 1)) * 100), 0), color: '#ec4899' },
-    { stage: 'Converted', count: realConverted, pct: Math.round((realConverted / Math.max(realMeetings || realReplies, 1)) * 100), drop_off_pct: Math.max(100 - Math.round((realConverted / Math.max(realMeetings || realReplies, 1)) * 100), 0), color: '#10b981' },
+    { stage: 'Total Leads', count: funnelTotal, pct: 100, color: '#6366f1' },
+    { stage: 'Qualified', count: funnelQualified, pct: Math.min(Math.round((funnelQualified / funnelTotal) * 100), 100), color: '#818cf8' },
+    { stage: 'Contacted', count: funnelContacted, pct: Math.min(Math.round((funnelContacted / Math.max(funnelQualified, 1)) * 100), 100), color: '#3b82f6' },
+    { stage: 'Replied', count: funnelReplied, pct: Math.min(Math.round((funnelReplied / Math.max(funnelContacted, 1)) * 100), 100), color: '#10b981' },
+    { stage: 'Meeting', count: funnelMeeting, pct: Math.min(Math.round((funnelMeeting / Math.max(funnelReplied, 1)) * 100), 100), color: '#ec4899' },
+    { stage: 'Converted', count: funnelConverted, pct: Math.min(Math.round((funnelConverted / Math.max(funnelContacted, 1)) * 100), 100), color: '#10b981' },
   ];
 
   // ── Build Trend Points (from database dates or daily distribution) ────────
@@ -840,30 +964,6 @@ export default function Dashboard({ setCurrentTab, setActiveCampaignId, setActiv
         </div>
       </div>
 
-      {/* ── Live Application Pulse Banner ────────────────────────────────────── */}
-      <div
-        className="card"
-        style={{
-          padding: '0.85rem 1.25rem',
-          background: 'linear-gradient(135deg, rgba(232, 98, 44, 0.05) 0%, rgba(245, 166, 35, 0.08) 100%)',
-          border: '1px solid rgba(232, 98, 44, 0.25)',
-          boxShadow: '0 2px 8px rgba(0, 0, 0, 0.03)',
-        }}
-      >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '2px' }}>
-          <Flame size={17} color="#E8622C" />
-          <h2 style={{ fontSize: '0.98rem', fontWeight: 800, color: 'var(--text-main)', margin: 0 }}>
-            What's Happening in OpenOutreach
-          </h2>
-          <span style={{ fontSize: '0.68rem', fontWeight: 700, padding: '2px 7px', borderRadius: '999px', background: 'rgba(16, 185, 129, 0.12)', color: '#059669', border: '1px solid rgba(16, 185, 129, 0.25)' }}>
-            ● Active Runtime
-          </span>
-        </div>
-        <p style={{ fontSize: '0.78rem', color: 'var(--text-sub)', margin: 0 }}>
-          Orchestrating <strong style={{ color: 'var(--text-main)' }}>{realTotalCampaigns}</strong> total campaigns (<span style={{ color: '#059669', fontWeight: 600 }}>{realRunningCampaigns} running</span>), <strong style={{ color: 'var(--text-main)' }}>{realTotalLeads}</strong> leads in pool, <strong style={{ color: 'var(--text-main)' }}>{realEmailsSent}</strong> emails dispatched, and <strong style={{ color: 'var(--text-main)' }}>{realReplies}</strong> prospect replies.
-        </p>
-      </div>
-
       {/* ── Top 9 KPI Metric Cards (Executive Overview) ───────────────────────── */}
       <div>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.65rem' }}>
@@ -954,170 +1054,6 @@ export default function Dashboard({ setCurrentTab, setActiveCampaignId, setActiv
         </div>
       </div>
 
-      {/* ── Short Previews (Latest Created Campaigns & Discovered Leads) ─── */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: '1rem' }}>
-        {/* Latest Campaigns Preview */}
-        <div className="card" style={{ padding: '1.25rem' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.85rem' }}>
-            <div>
-              <h3 style={{ fontSize: '0.92rem', fontWeight: 700, color: 'var(--text-main)', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <FolderKanban size={15} color="var(--accent)" />
-                Latest Campaigns Created ({realTotalCampaigns} Total)
-              </h3>
-              <p style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
-                Recently configured autonomous campaigns and targeting rules
-              </p>
-            </div>
-            <button
-              className="btn btn-ghost btn-sm"
-              onClick={() => setCurrentTab && setCurrentTab('campaigns')}
-              style={{ fontSize: '0.72rem', padding: '2px 8px' }}
-            >
-              All Campaigns ({realTotalCampaigns}) <ArrowUpRight size={12} />
-            </button>
-          </div>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-            {campaignsList.slice(0, 5).map((camp) => {
-              const campDealsCount = dealsList.filter(d => d.campaign_id === camp.id).length;
-              return (
-                <div
-                  key={camp.id}
-                  onClick={() => {
-                    if (setActiveCampaignId) setActiveCampaignId(camp.id);
-                    if (setCurrentTab) setCurrentTab('campaigns');
-                  }}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    padding: '0.6rem 0.75rem',
-                    borderRadius: '8px',
-                    background: '#F8FAFC',
-                    border: '1px solid var(--border)',
-                    cursor: 'pointer',
-                    transition: 'all 0.15s ease'
-                  }}
-                  onMouseEnter={(e) => e.currentTarget.style.background = '#F1F5F9'}
-                  onMouseLeave={(e) => e.currentTarget.style.background = '#F8FAFC'}
-                >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', minWidth: 0 }}>
-                    <div style={{ width: 8, height: 8, borderRadius: '50%', background: camp.status === 'running' || !camp.status ? '#10b981' : '#f59e0b', flexShrink: 0 }} />
-                    <div style={{ minWidth: 0 }}>
-                      <div style={{ fontSize: '0.78rem', fontWeight: 600, color: 'var(--text-main)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                        {camp.name}
-                      </div>
-                      <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                        {camp.industry && <span style={{ color: 'var(--accent)', fontWeight: 600 }}>{camp.industry}</span>} {camp.campaign_target && `· ${camp.campaign_target}`}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0, marginLeft: '8px' }}>
-                    <span style={{ fontSize: '0.68rem', fontWeight: 700, padding: '1px 6px', borderRadius: '4px', background: 'rgba(232, 98, 44, 0.08)', color: 'var(--accent)' }}>
-                      {campDealsCount} leads
-                    </span>
-                    <span style={{ fontSize: '0.65rem', textTransform: 'capitalize', color: camp.status === 'running' || !camp.status ? '#059669' : '#d97706' }}>
-                      {camp.status || 'running'}
-                    </span>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Latest Leads Preview */}
-        <div className="card" style={{ padding: '1.25rem' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.85rem' }}>
-            <div>
-              <h3 style={{ fontSize: '0.92rem', fontWeight: 700, color: 'var(--text-main)', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <UserCheck size={15} color="var(--info)" />
-                Latest Discovered Leads ({realTotalLeads} Total in Pool)
-              </h3>
-              <p style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
-                Prospects discovered via AI search & reference imports
-              </p>
-            </div>
-            <button
-              className="btn btn-ghost btn-sm"
-              onClick={() => setCurrentTab && setCurrentTab('leads')}
-              style={{ fontSize: '0.72rem', padding: '2px 8px' }}
-            >
-              All Leads ({realTotalLeads}) <ArrowUpRight size={12} />
-            </button>
-          </div>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-            {leadsList.slice(0, 5).map((lead) => {
-              const leadName = `${lead.first_name || ''} ${lead.last_name || ''}`.trim() || lead.email || 'Lead';
-              return (
-                <div
-                  key={lead.id}
-                  onClick={() => {
-                    if (setActiveLeadId) setActiveLeadId(lead.id);
-                    if (setCurrentTab) setCurrentTab('leads');
-                  }}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    padding: '0.6rem 0.75rem',
-                    borderRadius: '8px',
-                    background: '#F8FAFC',
-                    border: '1px solid var(--border)',
-                    cursor: 'pointer',
-                    transition: 'all 0.15s ease'
-                  }}
-                  onMouseEnter={(e) => e.currentTarget.style.background = '#F1F5F9'}
-                  onMouseLeave={(e) => e.currentTarget.style.background = '#F8FAFC'}
-                >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', minWidth: 0 }}>
-                    <div
-                      style={{
-                        width: 26,
-                        height: 26,
-                        borderRadius: '50%',
-                        background: 'rgba(56, 189, 248, 0.12)',
-                        color: '#0284c7',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        fontSize: '0.72rem',
-                        fontWeight: 700,
-                        flexShrink: 0
-                      }}
-                    >
-                      {leadName.charAt(0) || 'L'}
-                    </div>
-                    <div style={{ minWidth: 0 }}>
-                      <div style={{ fontSize: '0.78rem', fontWeight: 600, color: 'var(--text-main)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                        {leadName}
-                      </div>
-                      <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                        {lead.job_title || 'Decision Maker'} {lead.company_name && `· ${lead.company_name}`}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexShrink: 0 }}>
-                    {lead.email ? (
-                      <span style={{ fontSize: '0.65rem', padding: '1px 6px', borderRadius: '4px', background: 'rgba(16, 185, 129, 0.12)', color: '#059669', border: '1px solid rgba(16, 185, 129, 0.25)' }}>
-                        Verified Email
-                      </span>
-                    ) : (
-                      <span style={{ fontSize: '0.65rem', padding: '1px 6px', borderRadius: '4px', background: 'rgba(148, 163, 184, 0.15)', color: '#64748b' }}>
-                        Profile
-                      </span>
-                    )}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-
       {/* ── Section 1: Campaign Performance Trends & Email Deliverability ───── */}
       <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 2fr) minmax(0, 1fr)', gap: '1rem' }}>
         {/* Trend Chart */}
@@ -1165,7 +1101,7 @@ export default function Dashboard({ setCurrentTab, setActiveCampaignId, setActiv
                   <span style={{ color: 'var(--text-sub)', fontWeight: 600 }}>Open Rate</span>
                   <span style={{ color: '#9333ea', fontWeight: 700 }}>{realOpenRate}%</span>
                 </div>
-                <div style={{ height: 6, borderRadius: 4, background: '#E2E8F0', overflow: 'hidden' }}>
+                <div style={{ height: 6, borderRadius: 4, background: 'var(--bg-inner)', border: '1px solid var(--border)', overflow: 'hidden' }}>
                   <div style={{ height: '100%', width: `${Math.min(realOpenRate, 100)}%`, background: 'linear-gradient(90deg, #a855f7, #c084fc)', borderRadius: 4, transition: 'width 0.5s ease' }} />
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.65rem', color: 'var(--text-muted)', marginTop: '2px' }}>
@@ -1180,7 +1116,7 @@ export default function Dashboard({ setCurrentTab, setActiveCampaignId, setActiv
                   <span style={{ color: 'var(--text-sub)', fontWeight: 600 }}>Reply Rate</span>
                   <span style={{ color: '#059669', fontWeight: 700 }}>{realReplyRate}%</span>
                 </div>
-                <div style={{ height: 6, borderRadius: 4, background: '#E2E8F0', overflow: 'hidden' }}>
+                <div style={{ height: 6, borderRadius: 4, background: 'var(--bg-inner)', border: '1px solid var(--border)', overflow: 'hidden' }}>
                   <div style={{ height: '100%', width: `${Math.min(realReplyRate, 100)}%`, background: 'linear-gradient(90deg, #059669, #34d399)', borderRadius: 4, transition: 'width 0.5s ease' }} />
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.65rem', color: 'var(--text-muted)', marginTop: '2px' }}>
@@ -1195,7 +1131,7 @@ export default function Dashboard({ setCurrentTab, setActiveCampaignId, setActiv
                   <span style={{ color: 'var(--text-sub)', fontWeight: 600 }}>Conversion Rate</span>
                   <span style={{ color: '#16a34a', fontWeight: 700 }}>{realConvRate}%</span>
                 </div>
-                <div style={{ height: 6, borderRadius: 4, background: '#E2E8F0', overflow: 'hidden' }}>
+                <div style={{ height: 6, borderRadius: 4, background: 'var(--bg-inner)', border: '1px solid var(--border)', overflow: 'hidden' }}>
                   <div style={{ height: '100%', width: `${Math.min(realConvRate, 100)}%`, background: 'linear-gradient(90deg, #10b981, #059669)', borderRadius: 4, transition: 'width 0.5s ease' }} />
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.65rem', color: 'var(--text-muted)', marginTop: '2px' }}>
@@ -1215,7 +1151,7 @@ export default function Dashboard({ setCurrentTab, setActiveCampaignId, setActiv
         </div>
       </div>
 
-      {/* ── Section 2: Outreach Lead Funnel & Pipeline Stage Distribution ───── */}
+      {/* ── Section 2: Lead Funnel Conversion Flow & AI Reply Intelligence ──── */}
       <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: '1rem' }}>
         {/* Outreach Funnel */}
         <div className="card" style={{ padding: '1.25rem' }}>
@@ -1229,6 +1165,13 @@ export default function Dashboard({ setCurrentTab, setActiveCampaignId, setActiv
                 Progression from Discovered Lead to Converted Deal
               </p>
             </div>
+            <button
+              className="btn btn-ghost btn-sm"
+              onClick={() => setCurrentTab && setCurrentTab('deals')}
+              style={{ fontSize: '0.72rem', padding: '2px 8px' }}
+            >
+              View Pipeline ({realTotalDeals}) <ArrowUpRight size={12} />
+            </button>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
@@ -1245,14 +1188,14 @@ export default function Dashboard({ setCurrentTab, setActiveCampaignId, setActiv
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                       <span style={{ fontWeight: 800, color: stage.color }}>{stage.count.toLocaleString()}</span>
                       {idx > 0 && (
-                        <span style={{ fontSize: '0.68rem', color: 'var(--text-muted)', background: '#F1F5F9', padding: '1px 5px', borderRadius: '4px' }}>
+                        <span style={{ fontSize: '0.68rem', color: 'var(--text-muted)', background: 'var(--bg-inner)', padding: '1px 5px', borderRadius: '4px', border: '1px solid var(--border)' }}>
                           {stage.pct}% conv.
                         </span>
                       )}
                     </div>
                   </div>
 
-                  <div style={{ height: 7, borderRadius: 999, background: '#E2E8F0', overflow: 'hidden' }}>
+                  <div style={{ height: 7, borderRadius: 999, background: 'var(--bg-inner)', border: '1px solid var(--border)', overflow: 'hidden' }}>
                     <div
                       style={{
                         width: `${barWidth}%`,
@@ -1269,154 +1212,6 @@ export default function Dashboard({ setCurrentTab, setActiveCampaignId, setActiv
           </div>
         </div>
 
-        {/* Lead & Pipeline Overview */}
-        <div className="card" style={{ padding: '1.25rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-          <div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
-              <div>
-                <h3 style={{ fontSize: '0.92rem', fontWeight: 700, color: 'var(--text-main)', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  <Layers size={15} color="var(--accent)" />
-                  Lead & Pipeline Stage Distribution ({realTotalDeals} Deals)
-                </h3>
-                <p style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
-                  Active deal workflow distribution across system states
-                </p>
-              </div>
-              <button
-                className="btn btn-ghost btn-sm"
-                onClick={() => setCurrentTab && setCurrentTab('deals')}
-                style={{ fontSize: '0.72rem', padding: '2px 8px' }}
-              >
-                View Deals ({realTotalDeals}) <ArrowUpRight size={12} />
-              </button>
-            </div>
-
-            {/* Stages Grid */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.6rem', marginTop: '0.5rem' }}>
-              {[
-                { name: 'Lead Created', count: dealsList.filter(d => d.state === 'Lead Created' || !d.state).length || 162, color: '#64748b' },
-                { name: 'Sales Handoff', count: dealsList.filter(d => d.state === 'Sales Handoff').length || 8, color: '#9333ea' },
-                { name: 'Qualified', count: dealsList.filter(d => d.state === 'Qualified').length || 2, color: '#E8622C' },
-                { name: 'Completed', count: dealsList.filter(d => d.state === 'Campaign Completed').length || 2, color: '#16a34a' },
-                { name: 'Waiting Reply', count: dealsList.filter(d => d.state === 'Waiting for Engagement').length || 1, color: '#0284c7' },
-                { name: 'Unsubscribed', count: dealsList.filter(d => d.state === 'Unsubscribed').length || 3, color: '#e11d48' },
-              ].map((st) => (
-                <div
-                  key={st.name}
-                  onClick={() => setCurrentTab && setCurrentTab('deals')}
-                  style={{
-                    padding: '0.65rem 0.75rem',
-                    borderRadius: '8px',
-                    background: '#F8FAFC',
-                    border: '1px solid var(--border)',
-                    cursor: 'pointer',
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    transition: 'all 0.15s ease'
-                  }}
-                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = st.color; e.currentTarget.style.background = '#FFFFFF'; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.background = '#F8FAFC'; }}
-                >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                    <span style={{ width: 8, height: 8, borderRadius: '50%', background: st.color }} />
-                    <span style={{ fontSize: '0.75rem', color: 'var(--text-sub)', fontWeight: 500 }}>{st.name}</span>
-                  </div>
-                  <span style={{ fontSize: '0.85rem', fontWeight: 800, color: st.color }}>{st.count}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* ── Section 3: Campaign Comparison Benchmark (Full Width Table) ────── */}
-      <div className="card" style={{ padding: '1.25rem' }}>
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' }}>
-          <div>
-            <h3 style={{ fontSize: '0.92rem', fontWeight: 700, color: 'var(--text-main)', display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <Target size={15} color="var(--accent)" />
-              Campaign Benchmark Comparison ({comparisonList.length} Campaigns)
-            </h3>
-            <p style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
-              Compare multi-campaign outreach volume, responses, and conversion efficacy
-            </p>
-          </div>
-          <input
-            type="text"
-            placeholder="Search campaigns..."
-            value={campSearch}
-            onChange={(e) => setCampSearch(e.target.value)}
-            className="form-control"
-            style={{ width: 200, padding: '0.35rem 0.65rem', fontSize: '0.75rem' }}
-          />
-        </div>
-
-        <div style={{ overflowX: 'auto', maxHeight: 320, overflowY: 'auto' }}>
-          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.78rem' }}>
-            <thead>
-              <tr style={{ borderBottom: '1px solid var(--border)', background: '#F8FAFC' }}>
-                <th style={{ textAlign: 'left', padding: '0.6rem 0.75rem', color: 'var(--text-muted)', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>Campaign</th>
-                <th style={{ textAlign: 'left', padding: '0.6rem 0.5rem', color: 'var(--text-muted)', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>Industry</th>
-                <th style={{ textAlign: 'center', padding: '0.6rem 0.5rem', color: 'var(--text-muted)', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>Leads</th>
-                <th style={{ textAlign: 'center', padding: '0.6rem 0.5rem', color: 'var(--text-muted)', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>Sent</th>
-                <th style={{ textAlign: 'center', padding: '0.6rem 0.5rem', color: 'var(--text-muted)', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>Replies</th>
-                <th style={{ textAlign: 'center', padding: '0.6rem 0.5rem', color: 'var(--text-muted)', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>Conv.</th>
-                <th style={{ textAlign: 'right', padding: '0.6rem 0.75rem', color: 'var(--text-muted)', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>Conversion Rate</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredCampaigns.slice(0, 15).map((c) => (
-                <tr
-                  key={c.id}
-                  onClick={() => {
-                    if (setActiveCampaignId) setActiveCampaignId(c.id);
-                    if (setCurrentTab) setCurrentTab('campaigns');
-                  }}
-                  style={{
-                    borderBottom: '1px solid var(--border-light)',
-                    cursor: 'pointer',
-                    transition: 'background 0.15s ease'
-                  }}
-                  onMouseEnter={(e) => e.currentTarget.style.background = '#F8FAFC'}
-                  onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
-                >
-                  <td style={{ padding: '0.65rem 0.75rem', fontWeight: 600, color: 'var(--text-main)' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                      <span style={{ width: 6, height: 6, borderRadius: '50%', background: c.status === 'running' || !c.status ? '#10b981' : '#f59e0b' }} />
-                      <span style={{ maxWidth: 260, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{c.name}</span>
-                    </div>
-                  </td>
-                  <td style={{ padding: '0.65rem 0.5rem', color: 'var(--text-muted)', fontSize: '0.72rem' }}>
-                    {c.industry || 'Technology'}
-                  </td>
-                  <td style={{ padding: '0.65rem 0.5rem', textAlign: 'center', color: 'var(--accent)', fontWeight: 600 }}>{c.leads}</td>
-                  <td style={{ padding: '0.65rem 0.5rem', textAlign: 'center', color: '#2563eb' }}>{c.sent}</td>
-                  <td style={{ padding: '0.65rem 0.5rem', textAlign: 'center', color: '#059669', fontWeight: 600 }}>{c.replies}</td>
-                  <td style={{ padding: '0.65rem 0.5rem', textAlign: 'center', color: '#16a34a', fontWeight: 600 }}>{c.converted}</td>
-                  <td style={{ padding: '0.65rem 0.75rem', textAlign: 'right' }}>
-                    <span
-                      style={{
-                        fontWeight: 700,
-                        padding: '2px 8px',
-                        borderRadius: '4px',
-                        fontSize: '0.72rem',
-                        background: c.conversion_rate > 20 ? 'rgba(16, 185, 129, 0.12)' : c.conversion_rate > 0 ? 'rgba(232, 98, 44, 0.08)' : '#F1F5F9',
-                        color: c.conversion_rate > 20 ? '#059669' : c.conversion_rate > 0 ? 'var(--accent)' : 'var(--text-muted)'
-                      }}
-                    >
-                      {c.conversion_rate}%
-                    </span>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      {/* ── Section 4: AI Reply Intelligence & Recent Activity Feed ────────── */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1.4fr)', gap: '1rem' }}>
         {/* AI Reply Intelligence */}
         <div className="card" style={{ padding: '1.25rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
@@ -1450,106 +1245,219 @@ export default function Dashboard({ setCurrentTab, setActiveCampaignId, setActiv
                     <span style={{ color: 'var(--text-muted)' }}>({item.pct}%)</span>
                   </div>
                 </div>
-                <div style={{ height: 6, borderRadius: 999, background: '#E2E8F0', overflow: 'hidden' }}>
+                <div style={{ height: 6, borderRadius: 999, background: 'var(--bg-inner)', border: '1px solid var(--border)', overflow: 'hidden' }}>
                   <div style={{ width: `${Math.min(item.pct, 100)}%`, height: '100%', background: item.color, borderRadius: 999, transition: 'width 0.5s ease' }} />
                 </div>
               </div>
             ))}
           </div>
         </div>
+      </div>
 
-        {/* Recent Activity Audit Stream */}
-        <div className="card" style={{ padding: '1.25rem' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-            <div>
-              <h3 style={{ fontSize: '0.92rem', fontWeight: 700, color: 'var(--text-main)', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <TrendingUp size={15} color="var(--accent)" />
-                Recent Campaign Activity Stream
-              </h3>
-              <p style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
-                Real-time chronological events across campaign pipelines
-              </p>
-            </div>
-            <button
-              className="btn btn-ghost btn-sm"
-              onClick={() => setCurrentTab && setCurrentTab('deals')}
-              style={{ fontSize: '0.72rem', padding: '2px 8px' }}
-            >
-              All Events <ArrowUpRight size={12} />
-            </button>
+      {/* ── Section 3: Campaign Comparison Benchmark (Full Width Table) ────── */}
+      <div className="card" style={{ padding: '1.25rem' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' }}>
+          <div>
+            <h3 style={{ fontSize: '0.92rem', fontWeight: 700, color: 'var(--text-main)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <Target size={15} color="var(--accent)" />
+              Campaign Benchmark Comparison ({comparisonList.length} Campaigns)
+            </h3>
+            <p style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
+              Compare multi-campaign outreach volume, responses, and conversion efficacy
+            </p>
           </div>
+          <input
+            type="text"
+            placeholder="Search campaigns..."
+            value={campSearch}
+            onChange={(e) => setCampSearch(e.target.value)}
+            className="form-control"
+            style={{ width: 200, padding: '0.35rem 0.65rem', fontSize: '0.75rem', background: 'var(--bg-input)', color: 'var(--text-main)', border: '1px solid var(--border)' }}
+          />
+        </div>
 
-          <div style={{ maxHeight: 290, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-            {activityStream.map((act) => {
-              const actIcons = {
-                email_sent: { icon: Send, color: '#2563eb', bg: 'rgba(59, 130, 246, 0.1)' },
-                email_delivered: { icon: CheckCircle2, color: '#0284c7', bg: 'rgba(56, 189, 248, 0.1)' },
-                email_opened: { icon: Eye, color: '#9333ea', bg: 'rgba(192, 132, 252, 0.1)' },
-                reply_received: { icon: MessageCircle, color: '#059669', bg: 'rgba(52, 211, 153, 0.1)' },
-                action_executed: { icon: Award, color: '#16a34a', bg: 'rgba(16, 185, 129, 0.1)' },
-                unsubscribed: { icon: UserX, color: '#dc2626', bg: 'rgba(239, 68, 68, 0.1)' },
-              };
-              const itemCfg = actIcons[act.type] || actIcons.email_sent;
-              const IconComp = itemCfg.icon;
-
-              return (
-                <div
-                  key={act.id}
+        <div style={{ overflowX: 'auto', maxHeight: 320, overflowY: 'auto' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.78rem' }}>
+            <thead>
+              <tr style={{ borderBottom: '1px solid var(--border)', background: 'var(--bg-inner)' }}>
+                <th style={{ textAlign: 'left', padding: '0.6rem 0.75rem', color: 'var(--text-muted)', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>Campaign</th>
+                <th style={{ textAlign: 'left', padding: '0.6rem 0.5rem', color: 'var(--text-muted)', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>Industry</th>
+                <th style={{ textAlign: 'center', padding: '0.6rem 0.5rem', color: 'var(--text-muted)', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>Leads</th>
+                <th style={{ textAlign: 'center', padding: '0.6rem 0.5rem', color: 'var(--text-muted)', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>Sent</th>
+                <th style={{ textAlign: 'center', padding: '0.6rem 0.5rem', color: 'var(--text-muted)', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>Replies</th>
+                <th style={{ textAlign: 'center', padding: '0.6rem 0.5rem', color: 'var(--text-muted)', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>Conv.</th>
+                <th style={{ textAlign: 'right', padding: '0.6rem 0.75rem', color: 'var(--text-muted)', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>Conversion Rate</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredCampaigns.slice(0, 15).map((c) => (
+                <tr
+                  key={c.id}
                   onClick={() => {
-                    if (act.deal_id && setCurrentTab) {
-                      if (setActiveCampaignId && act.campaign_id) setActiveCampaignId(act.campaign_id);
-                      setCurrentTab('deals');
-                    }
+                    if (setActiveCampaignId) setActiveCampaignId(c.id);
+                    if (setCurrentTab) setCurrentTab('campaigns');
                   }}
                   style={{
-                    display: 'flex',
-                    alignItems: 'flex-start',
-                    justifyContent: 'space-between',
-                    gap: '0.75rem',
-                    padding: '0.6rem 0.75rem',
-                    borderRadius: '8px',
-                    background: '#F8FAFC',
-                    border: '1px solid var(--border)',
-                    cursor: act.deal_id ? 'pointer' : 'default',
-                    transition: 'all 0.15s ease'
+                    borderBottom: '1px solid var(--border)',
+                    cursor: 'pointer',
+                    transition: 'background 0.15s ease'
                   }}
-                  onMouseEnter={(e) => { e.currentTarget.style.background = '#F1F5F9'; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.background = '#F8FAFC'; }}
+                  onMouseEnter={(e) => e.currentTarget.style.background = 'var(--bg-inner)'}
+                  onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
                 >
-                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.6rem' }}>
-                    <div
+                  <td style={{ padding: '0.65rem 0.75rem', fontWeight: 600, color: 'var(--text-main)' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <span style={{ width: 6, height: 6, borderRadius: '50%', background: c.status === 'running' || !c.status ? '#10b981' : '#f59e0b' }} />
+                      <span style={{ maxWidth: 260, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{c.name}</span>
+                    </div>
+                  </td>
+                  <td style={{ padding: '0.65rem 0.5rem', color: 'var(--text-muted)', fontSize: '0.72rem' }}>
+                    {c.industry || 'Technology'}
+                  </td>
+                  <td style={{ padding: '0.65rem 0.5rem', textAlign: 'center', color: 'var(--accent)', fontWeight: 600 }}>{c.leads}</td>
+                  <td style={{ padding: '0.65rem 0.5rem', textAlign: 'center', color: '#2563eb' }}>{c.sent}</td>
+                  <td style={{ padding: '0.65rem 0.5rem', textAlign: 'center', color: '#059669', fontWeight: 600 }}>{c.replies}</td>
+                  <td style={{ padding: '0.65rem 0.5rem', textAlign: 'center', color: '#16a34a', fontWeight: 600 }}>{c.converted}</td>
+                  <td style={{ padding: '0.65rem 0.75rem', textAlign: 'right' }}>
+                    <span
                       style={{
-                        width: 26,
-                        height: 26,
-                        borderRadius: '6px',
-                        background: itemCfg.bg,
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        color: itemCfg.color,
-                        flexShrink: 0,
-                        marginTop: 2
+                        fontWeight: 700,
+                        padding: '2px 8px',
+                        borderRadius: '4px',
+                        fontSize: '0.72rem',
+                        background: c.conversion_rate > 20 ? 'var(--success-light)' : c.conversion_rate > 0 ? 'var(--accent-light)' : 'var(--bg-inner)',
+                        color: c.conversion_rate > 20 ? '#059669' : c.conversion_rate > 0 ? 'var(--accent)' : 'var(--text-muted)',
+                        border: '1px solid var(--border)'
                       }}
                     >
-                      <IconComp size={13} />
+                      {c.conversion_rate}%
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* ── Section 4: Recent Campaign Activity Stream ──────────────────────── */}
+      <div className="card" style={{ padding: '1.25rem' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+          <div>
+            <h3 style={{ fontSize: '0.92rem', fontWeight: 700, color: 'var(--text-main)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <TrendingUp size={15} color="var(--accent)" />
+              Recent Campaign Activity Stream
+            </h3>
+            <p style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
+              Real-time chronological events across campaign pipelines
+            </p>
+          </div>
+          <button
+            className="btn btn-ghost btn-sm"
+            onClick={() => setCurrentTab && setCurrentTab('deals')}
+            style={{ fontSize: '0.72rem', padding: '2px 8px' }}
+          >
+            All Events <ArrowUpRight size={12} />
+          </button>
+        </div>
+
+        <div style={{ maxHeight: 310, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+          {activityStream.map((act) => {
+            const actIcons = {
+              email_sent: { icon: Send, label: 'Sent', color: '#2563eb', bg: 'rgba(37, 99, 235, 0.12)' },
+              email_delivered: { icon: CheckCircle2, label: 'Delivered', color: '#0284c7', bg: 'rgba(2, 132, 199, 0.12)' },
+              email_opened: { icon: Eye, label: 'Opened', color: '#9333ea', bg: 'rgba(147, 51, 234, 0.12)' },
+              reply_received: { icon: MessageCircle, label: 'Replied', color: '#059669', bg: 'rgba(5, 150, 105, 0.12)' },
+              action_executed: { icon: Award, label: 'Converted', color: '#16a34a', bg: 'rgba(22, 163, 74, 0.12)' },
+              unsubscribed: { icon: UserX, label: 'Unsubscribed', color: '#dc2626', bg: 'rgba(220, 38, 38, 0.12)' },
+            };
+            const itemCfg = actIcons[act.type] || actIcons.email_sent;
+            const IconComp = itemCfg.icon;
+
+            // Sanitize and format details
+            let displayDetails = act.details || '';
+            if (displayDetails.includes('Master DB Profile Match')) {
+              const m = displayDetails.match(/(\d+%\s+Overall\s+Match)/i);
+              displayDetails = `Profile matched from Master Database ${m ? `(${m[1]})` : ''}`;
+            } else if (displayDetails.includes('Role Match:') || displayDetails.includes('department=') || displayDetails.startsWith('{')) {
+              displayDetails = 'Target profile aligned with campaign parameters';
+            } else if (displayDetails.length > 70) {
+              displayDetails = displayDetails.substring(0, 70) + '...';
+            }
+
+            return (
+              <div
+                key={act.id}
+                onClick={() => {
+                  if (act.deal_id && setCurrentTab) {
+                    if (setActiveCampaignId && act.campaign_id) setActiveCampaignId(act.campaign_id);
+                    setCurrentTab('deals');
+                  }
+                }}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  gap: '0.75rem',
+                  padding: '0.65rem 0.85rem',
+                  borderRadius: '8px',
+                  background: 'var(--bg-inner)',
+                  border: '1px solid var(--border)',
+                  cursor: act.deal_id ? 'pointer' : 'default',
+                  transition: 'all 0.15s ease'
+                }}
+                onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--accent)'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--border)'; }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', minWidth: 0 }}>
+                  <div
+                    style={{
+                      width: 28,
+                      height: 28,
+                      borderRadius: '8px',
+                      background: itemCfg.bg,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: itemCfg.color,
+                      flexShrink: 0,
+                    }}
+                  >
+                    <IconComp size={14} />
+                  </div>
+                  <div style={{ minWidth: 0 }}>
+                    <div style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-main)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <span>{act.lead_name}</span>
+                      {act.company && <span style={{ color: 'var(--text-muted)', fontWeight: 500, fontSize: '0.75rem' }}>· {act.company}</span>}
                     </div>
-                    <div>
-                      <div style={{ fontSize: '0.78rem', fontWeight: 600, color: 'var(--text-main)' }}>
-                        {act.lead_name} {act.company && <span style={{ color: 'var(--text-muted)', fontWeight: 400 }}>· {act.company}</span>}
-                      </div>
-                      <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)', marginTop: '2px' }}>
-                        {act.details} · <span style={{ color: 'var(--accent)', fontWeight: 600 }}>{act.campaign_name}</span>
-                      </div>
+                    <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', marginTop: '2px', display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap' }}>
+                      <span style={{ color: 'var(--text-sub)' }}>{displayDetails}</span>
+                      <span>·</span>
+                      <span style={{ color: 'var(--accent)', fontWeight: 600 }}>{act.campaign_name}</span>
                     </div>
                   </div>
+                </div>
 
-                  <span style={{ fontSize: '0.65rem', color: 'var(--text-muted)', whiteSpace: 'nowrap', flexShrink: 0 }}>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '4px', flexShrink: 0 }}>
+                  <span style={{
+                    fontSize: '0.65rem',
+                    fontWeight: 700,
+                    padding: '1px 6px',
+                    borderRadius: '4px',
+                    background: itemCfg.bg,
+                    color: itemCfg.color,
+                    border: `1px solid ${itemCfg.color}33`,
+                    textTransform: 'uppercase',
+                  }}>
+                    {itemCfg.label}
+                  </span>
+                  <span style={{ fontSize: '0.65rem', color: 'var(--text-muted)', whiteSpace: 'nowrap' }}>
                     {act.relative_time}
                   </span>
                 </div>
-              );
-            })}
-          </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>

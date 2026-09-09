@@ -55,9 +55,9 @@ function DropZone({ onFileSelected }) {
       onDrop={(e) => { e.preventDefault(); setDragging(false); const f = e.dataTransfer.files[0]; if (f) validateAndSelect(f); }}
       onClick={() => inputRef.current.click()}
       style={{
-        border: '2px dashed ' + (dragging ? '#6366f1' : '#334155'),
+        border: '2px dashed ' + (dragging ? 'var(--accent)' : 'var(--border)'),
         borderRadius: '12px', padding: '2.5rem 1.5rem', textAlign: 'center', cursor: 'pointer',
-        backgroundColor: dragging ? 'rgba(99,102,241,0.07)' : 'rgba(15,23,42,0.5)',
+        backgroundColor: dragging ? 'var(--accent-light)' : 'var(--bg-inner)',
         transition: 'all 0.2s ease', marginBottom: '1.25rem',
       }}
     >
@@ -65,8 +65,8 @@ function DropZone({ onFileSelected }) {
         onChange={(e) => { const f = e.target.files[0]; if (f) validateAndSelect(f); e.target.value = ''; }}
         style={{ display: 'none' }}
       />
-      <Upload size={32} style={{ color: dragging ? '#6366f1' : '#475569', display: 'block', margin: '0 auto 0.75rem' }} />
-      <p style={{ fontWeight: '600', marginBottom: '0.4rem', color: dragging ? '#818cf8' : 'var(--text-main)' }}>
+      <Upload size={32} style={{ color: dragging ? 'var(--accent)' : 'var(--text-muted)', display: 'block', margin: '0 auto 0.75rem' }} />
+      <p style={{ fontWeight: '600', marginBottom: '0.4rem', color: dragging ? 'var(--accent)' : 'var(--text-main)' }}>
         {dragging ? 'Drop file here' : 'Drag & drop a file or click to browse'}
       </p>
       <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '1rem' }}>Supported formats:</p>
@@ -84,14 +84,14 @@ function SelectedFilePreview({ file, onRemove }) {
   return (
     <div style={{
       display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '0.85rem 1rem',
-      borderRadius: '10px', backgroundColor: 'rgba(15,23,42,0.6)',
-      border: '1px solid ' + (meta.color || '#334155') + '50', marginBottom: '1.25rem',
+      borderRadius: '10px', backgroundColor: 'var(--bg-inner)',
+      border: '1px solid var(--border)', marginBottom: '1.25rem',
     }}>
-      <IconComp size={22} style={{ color: meta.color || '#94a3b8', flexShrink: 0 }} />
+      <IconComp size={22} style={{ color: meta.color || 'var(--text-muted)', flexShrink: 0 }} />
       <div style={{ flex: 1, minWidth: 0 }}>
-        <p style={{ fontWeight: '600', fontSize: '0.9rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{file.name}</p>
-        <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.15rem' }}>
-          {(file.size / 1024).toFixed(1)} KB · <FileBadge ext={ext} />
+        <p style={{ fontWeight: '600', fontSize: '0.9rem', color: 'var(--text-main)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', margin: 0 }}>{file.name}</p>
+        <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.15rem', margin: 0 }}>
+          {(file.size / 1024).toFixed(1)} KB · <FileBadge ext={ext} />
         </p>
       </div>
       <button type="button" onClick={onRemove}
@@ -195,10 +195,10 @@ export default function KnowledgeBase() {
               <button key={key} type="button" onClick={() => { setUploadMode(key); setUploadResult(null); }}
                 style={{
                   padding: '0.45rem 1rem', borderRadius: '8px',
-                  border: '1px solid ' + (uploadMode === key ? '#6366f1' : '#334155'),
-                  backgroundColor: uploadMode === key ? 'rgba(99,102,241,0.15)' : 'transparent',
-                  color: uploadMode === key ? '#818cf8' : 'var(--text-muted)',
-                  cursor: 'pointer', fontWeight: '600', fontSize: '0.85rem', transition: 'all 0.15s ease',
+                  border: '1px solid ' + (uploadMode === key ? 'var(--accent)' : 'var(--border)'),
+                  backgroundColor: uploadMode === key ? 'var(--accent-light)' : 'transparent',
+                  color: uploadMode === key ? 'var(--accent)' : 'var(--text-muted)',
+                  cursor: 'pointer', fontWeight: '700', fontSize: '0.85rem', transition: 'all 0.15s ease',
                 }}>{label}</button>
             ))}
           </div>

@@ -106,7 +106,6 @@ export default function ConfirmModal({
               padding: '0.55rem 1.15rem',
               fontSize: '0.85rem',
               fontWeight: 600,
-              color: '#94a3b8',
               borderRadius: '8px',
             }}
           >
