@@ -47,13 +47,16 @@ All summary LLM calls go through `core/db/summaries.py` (mem0-style):
 
 The `chat_summary` fact list is where a thread's research value accumulates — free text, not structured fields.
 
-## Prompt
+## Dual-Variant (A/B) Email Generation
 
-One template, `core/templates/prompts/outreach_agent.j2`: `Strategy` / `Actions` / `Capabilities and honesty` / `Rules`, with the context blocks above them.
+The Outreach Agent engine generates dual-pitch variants for each prospect:
+- **Option A (Direct Value Pitch)**: Tailored value proposition highlighting specific pain points, ROI, and core capabilities relevant to the prospect's role and industry.
+- **Option B (Strategic Alignment Pitch)**: High-curiosity, consultative inquiry focusing on organizational challenges, current workflows, and strategic alignment.
 
-`## Strategy` is **two modes**:
-
-- **Discovery** — the default, and where the agent stays. Understand their world without mentioning the product. Carries the standing list of what to steer toward (company/team shape, current workflow, current tooling and its cost, the last thing that broke, the trigger, who else decides), because what we learn here is the point of the thread.
-- **Pitching** — entered only on an explicit pull (they ask what you do, how you could help, or for a call). A problem the product solves is *not* a cue to pitch — it's the cue to dig deeper. When it does happen: one or two plain sentences, then back to discovery.
+### SDR Preview & Controlled Dispatch Controls
+- **Stacked Dual Preview**: Both variants are displayed vertically on screen for side-by-side evaluation.
+- **Customizable Recipient**: Reps can edit the `To`, `Cc`, and `Bcc` recipient email fields directly in the Deals header before dispatching.
+- **100% Controlled Manual Sending**: Dispatch occurs via dedicated `🚀 Send Option A` or `🚀 Send Option B` action buttons, with automatic navigation across the workflow.
+- **Primary Inbox Delivery**: Standard RFC 5322 MIME messages without bulk markers ensure direct delivery to Gmail and Outlook Primary tabs.
 
 See [Template Variables](./template-variables.md).

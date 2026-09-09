@@ -306,9 +306,9 @@
     "semantic_hash": "457c6ecb635c4b044f87333aab5d8c25"
   },
   "backend/app/services/normalizer.py": {
-    "mtime": 1788939599.3605123,
-    "seen": 1788939746.5830913,
-    "ast_hash": "583513b96cad6b14d9e0df38bb53029d",
+    "mtime": 1788939947.139176,
+    "seen": 1788940065.4215388,
+    "ast_hash": "cce36f7aebc284913d9c7f14af18b93f",
     "semantic_hash": ""
   },
   "backend/app/services/openrouter_service.py": {

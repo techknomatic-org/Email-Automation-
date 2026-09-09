@@ -98,6 +98,26 @@ OpenOutreach AI converts natural language prompts into targeted B2B prospect sea
   - *Target Roles*: CISO, Chief Information Security Officer, VP Security, Head of Cybersecurity
   - *Keywords*: cybersecurity, SIEM, SOC, threat detection
 
+##### Scenario C: Typo-Tolerant Multi-Attribute Prompt (Dubai BFSI)
+- **Campaign Name**: `Dubai Customer Support BFSI Outreach`
+- **Target Market**: `customer support mangers in dubai in bfsi indusry`
+- **Country**: `AE` (Auto-extracted from `dubai`)
+- **AI Derived Strategy**:
+  - *Industry*: BFSI (Banking, Financial Services, Insurance)
+  - *Target Roles*: Customer Support Manager, Customer Service Lead
+  - *Department*: Customer Support
+  - *Typo Autocorrection*: `mangers → Manager`, `indusry → Industry`
+
+##### Scenario D: Global Geography & Department Targeting (Japan Operations)
+- **Campaign Name**: `Japan Operations Directors`
+- **Target Market**: `director from japan in oprations dept`
+- **Country**: `JP` (Auto-extracted from `japan`)
+- **AI Derived Strategy**:
+  - *Target Roles*: Operations Director, Director of Operations
+  - *Department*: Operations
+  - *Seniority*: Director
+  - *Strict Disqualification*: Non-Japan candidates receive 0 match score and are automatically excluded.
+
 ---
 
 ## 3. Sales Operations & System Administrators
@@ -151,27 +171,37 @@ OpenOutreach-main/
 │       ├── agents/
 │       │   └── outreach_agent.py     # AI Copilot, Lead Research, Reply Agent, NBA Engine
 │       ├── api/
-│       │   ├── campaigns.py          # Campaign management & lead pool endpoints
+│       │   ├── auth.py               # Authentication & User Management
+│       │   ├── campaigns.py          # Campaign management & real-time lead pool generation
 │       │   ├── mailboxes.py          # SMTP/IMAP mailbox management
 │       │   ├── pipeline.py           # Live Campaign Execution, IMAP sync, execute-action
-│       │   └── site_config.py        # Global settings & meeting_link API
+│       │   ├── site_config.py        # Global settings & meeting_link API
+│       │   └── masterdb.py           # Master Database CRUD & cascade reset
 │       ├── core/
 │       │   ├── config.py             # App settings loader
-│       │   └── database.py           # SQLAlchemy database engine & auto-migrations
+│       │   ├── database.py           # SQLAlchemy database engine & auto-migrations
+│       │   └── security.py           # PBKDF2 hashing & JWT sessions
 │       ├── models/
+│       │   ├── user.py               # User authentication model
 │       │   ├── campaign.py           # Campaign ORM model
 │       │   ├── deal.py               # Deal state machine & EmailEvent ORM models
-│       │   ├── lead.py               # Lead ORM model
+│       │   ├── lead.py               # Lead ORM model (Master Database)
 │       │   ├── mailbox.py            # Mailbox, Thread, Message ORM models
-│       │   └── site_config.py        # SiteConfig model (includes meeting_link column)
+│       │   └── site_config.py        # SiteConfig model
 │       └── services/
+│           ├── normalizer.py         # DataNormalizer: typos, acronyms, global geography
+│           ├── hybrid_search_engine.py # 3-stage SQL + pgvector hybrid search
 │           ├── email_service.py      # SMTP sender, IMAP SSL reply reader, clean_reply_body
-│           └── lead_discovery_service.py # Real AI Web Search discovery engine
+│           └── lead_discovery_service.py # Lead pool generation & stale deal purging
 └── frontend/
     └── src/
+        ├── components/               # Navbar, Sidebar, Modals, CsvUpload, ExistingProfileModal
         ├── pages/
+        │   ├── AuthPage.jsx          # Sign In / Register / Quick Demo
         │   ├── Campaigns.jsx         # Campaign wizard & strategy view
-        │   ├── LiveCampaign.jsx      # Live Execution Control Room & 4-tab Inspector panel
+        │   ├── Leads.jsx             # Lead Discovery Pool & Master DB viewer
+        │   ├── MasterDB.jsx          # Dedicated Master Database management
+        │   ├── LiveCampaign.jsx      # Live Execution Control Room & Inspector
         │   ├── Mailboxes.jsx         # Mailbox connection dashboard
         │   └── Settings.jsx          # AI Model & Global Meeting Link settings
         └── services/

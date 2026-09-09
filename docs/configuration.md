@@ -27,14 +27,15 @@ OpenOutreach features a built-in user authentication and role-based access contr
 
 ## Search Engine & Keyword Matching
 
-Campaign lead discovery and pipeline search employ strict conjunction (`AND` condition) logic:
-- **Multi-Keyword Matching**: When multiple keywords are supplied (e.g., `"CTO, Python, SaaS"`), candidates must strictly match **all** terms across their combined profile text (`headline`, `company_name`, `title`, `industry`).
-- **Hybrid Search Engine**: `backend/app/services/hybrid_search_engine.py` applies chained SQL `.filter()` clauses for exact candidate pruning before Vector Reranking.
+Campaign lead discovery and pipeline search employ strict multi-attribute conjunction logic powered by `DataNormalizer` and `HybridSearchEngine`:
+- **Natural Language Prompt Normalization**: `backend/app/services/normalizer.py` parses free-form text with fuzzy Levenshtein typo correction (`mangers → Manager`), acronym expansion (`PBI → Power BI`, `HR → Human Resources`, `CFO → Chief Financial Officer`, `BDO → Business Development`), title inversion resolution (`VP of HR` ↔ `HR VP`), and global country/city recognition (`Japan → JP`, `China → CN`, `Dubai → AE`, `India → IN`).
+- **3-Stage Hybrid Search & Scoring**: `backend/app/services/hybrid_search_engine.py` applies SQL dimension pre-filtering, pgvector cosine semantic ranking, and weighted scoring (Role 35%, Dept 25%, Seniority 15%, Industry 10%, Location 10%, Vector 5%).
+- **Strict Multi-Attribute Disqualification**: If target location, department, or industry constraints are specified, candidates that do not match receive a `0` score and are strictly excluded from the campaign lead pool. Stale `Deal` records are automatically purged when campaign criteria are updated.
 
 ## Email Deliverability & Anti-Duplicate Sending
 
 OpenOutreach guarantees 100% Primary Inbox deliverability:
-- **Clean RFC Headers**: No bulk precedence flags (`Precedence: bulk` or `List-Unsubscribe`) or default PDF attachments are attached to cold email dispatches.
+- **Clean RFC Headers**: No bulk precedence flags (`Precedence: bulk`) or unwanted attachments are attached to cold email dispatches.
 - **Idempotency Debounce**: `backend/app/api/pipeline.py` maintains an in-memory 15-second debounce window per `(deal_id, recipient, subject)` to prevent accidental duplicate sends.
 
 

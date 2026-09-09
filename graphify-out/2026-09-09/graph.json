@@ -9414,7 +9414,7 @@
       "file_type": "code",
       "norm_label": ".normalize_country()",
       "source_file": "backend/app/services/normalizer.py",
-      "source_location": "L1007"
+      "source_location": "L1012"
     },
     {
       "id": "backend_app_services_normalizer_datanormalizer_normalize_department",
@@ -9426,7 +9426,7 @@
       "file_type": "code",
       "norm_label": ".normalize_department()",
       "source_file": "backend/app/services/normalizer.py",
-      "source_location": "L963"
+      "source_location": "L968"
     },
     {
       "id": "backend_app_services_normalizer_datanormalizer_normalize_industry",
@@ -9438,7 +9438,7 @@
       "file_type": "code",
       "norm_label": ".normalize_industry()",
       "source_file": "backend/app/services/normalizer.py",
-      "source_location": "L1021"
+      "source_location": "L1026"
     },
     {
       "id": "backend_app_services_normalizer_datanormalizer_normalize_job_title_and_seniority",
@@ -9450,7 +9450,7 @@
       "file_type": "code",
       "norm_label": ".normalize_job_title_and_seniority()",
       "source_file": "backend/app/services/normalizer.py",
-      "source_location": "L976"
+      "source_location": "L981"
     },
     {
       "id": "backend_app_services_normalizer_datanormalizer_parse_natural_prompt",
@@ -27224,7 +27224,7 @@
       "source_location": "L88"
     },
     {
-      "id": "backend_app_services_normalizer_rationale_1008",
+      "id": "backend_app_services_normalizer_rationale_1013",
       "label": "Returns (country_name, country_code).",
       "_origin": "ast",
       "community": 223,
@@ -27232,7 +27232,7 @@
       "file_type": "rationale",
       "norm_label": "returns (country_name, country_code).",
       "source_file": "backend/app/services/normalizer.py",
-      "source_location": "L1008"
+      "source_location": "L1013"
     },
     {
       "id": "backend_app_services_normalizer_rationale_613",
@@ -27279,7 +27279,7 @@
       "source_location": "L7"
     },
     {
-      "id": "backend_app_services_normalizer_rationale_977",
+      "id": "backend_app_services_normalizer_rationale_982",
       "label": "Returns (normalized_title, normalized_seniority, normalized_department).",
       "_origin": "ast",
       "community": 223,
@@ -27287,7 +27287,7 @@
       "file_type": "rationale",
       "norm_label": "returns (normalized_title, normalized_seniority, normalized_department).",
       "source_file": "backend/app/services/normalizer.py",
-      "source_location": "L977"
+      "source_location": "L982"
     },
     {
       "id": "docs_roles_growth_marketing_guide",
@@ -41720,7 +41720,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "backend/app/services/normalizer.py",
-      "source_location": "L1012",
+      "source_location": "L1017",
       "weight": 1.0
     },
     {
@@ -41732,7 +41732,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "backend/app/services/normalizer.py",
-      "source_location": "L967",
+      "source_location": "L972",
       "weight": 1.0
     },
     {
@@ -41744,7 +41744,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "backend/app/services/normalizer.py",
-      "source_location": "L1025",
+      "source_location": "L1030",
       "weight": 1.0
     },
     {
@@ -41756,7 +41756,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "backend/app/services/normalizer.py",
-      "source_location": "L979",
+      "source_location": "L984",
       "weight": 1.0
     },
     {
@@ -41768,7 +41768,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "backend/app/services/normalizer.py",
-      "source_location": "L987",
+      "source_location": "L992",
       "weight": 1.0
     },
     {
@@ -103292,7 +103292,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/services/normalizer.py",
-      "source_location": "L1007",
+      "source_location": "L1012",
       "weight": 1.0
     },
     {
@@ -103303,7 +103303,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/services/normalizer.py",
-      "source_location": "L1021",
+      "source_location": "L1026",
       "weight": 1.0
     },
     {
@@ -103347,7 +103347,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/services/normalizer.py",
-      "source_location": "L963",
+      "source_location": "L968",
       "weight": 1.0
     },
     {
@@ -103358,7 +103358,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/services/normalizer.py",
-      "source_location": "L976",
+      "source_location": "L981",
       "weight": 1.0
     },
     {
@@ -111271,14 +111271,14 @@
       "weight": 1.0
     },
     {
-      "source": "backend_app_services_normalizer_rationale_1008",
+      "source": "backend_app_services_normalizer_rationale_1013",
       "target": "backend_app_services_normalizer_datanormalizer_normalize_country",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/services/normalizer.py",
-      "source_location": "L1008",
+      "source_location": "L1013",
       "weight": 1.0
     },
     {
@@ -111326,14 +111326,14 @@
       "weight": 1.0
     },
     {
-      "source": "backend_app_services_normalizer_rationale_977",
+      "source": "backend_app_services_normalizer_rationale_982",
       "target": "backend_app_services_normalizer_datanormalizer_normalize_job_title_and_seniority",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/services/normalizer.py",
-      "source_location": "L977",
+      "source_location": "L982",
       "weight": 1.0
     },
     {

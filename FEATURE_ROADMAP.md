@@ -97,6 +97,12 @@ Automatically tag incoming emails into actionable categories:
 - **15-Second Idempotency**: Automated debounce window prevents accidental double-sends on network latency or double clicks.
 - **Bidirectional Thread Synchronization**: Live conversation view and 1-click AI follow-up draft generation.
 
+### 🧠 AI Prompt Normalization & Global Geography Engine (✅ COMPLETED)
+- **Typo Tolerance & Levenshtein Token Matching**: Robust correction of user typos (e.g. `mangers → Manager`, `oprations → Operations`, `healtcare → Healthcare`).
+- **Acronym & Short-Form Expansion**: Automatic mapping of industry acronyms (`PBI → Power BI`, `HR → Human Resources`, `CFO → Chief Financial Officer`, `BDO → Business Development`).
+- **Worldwide Geography Extraction**: Global recognition of international tech & business centers (Japan, China, UAE, France, Germany, Singapore, India, US, UK, etc.).
+- **Strict Multi-Attribute Disqualification**: Non-matching candidates strictly excluded with 0 match scores, with automatic purging of stale deal records.
+
 ---
 
 ## 5. Implementation Priority Matrix
@@ -106,6 +112,8 @@ Automatically tag incoming emails into actionable categories:
 | **Phase 1** | User Authentication & RBAC (Sign In / Register / Logout) | 🔥 High | ✅ Completed | Enterprise Security |
 | **Phase 1** | Primary Inbox Deliverability & Thread Sync | 🔥 High | ✅ Completed | Max Open Rates |
 | **Phase 1** | Strict Conjunction (`AND` Condition) Keyword Targeting | 🔥 High | ✅ Completed | High Relevance |
+| **Phase 1** | AI Prompt Normalization, Typo Correction & Acronym Expansion | 🔥 High | ✅ Completed | Zero Prompt Friction |
+| **Phase 1** | Global Geography & Country Extraction (Japan, China, UAE, etc.) | 🔥 High | ✅ Completed | Global Lead Reach |
 | **Phase 1** | A/B Testing & Dual Variant Engine (Campaigns Page) | 🔥 High | ✅ Completed | High Reply Rates |
 | **Phase 1** | Reply Sentiment & Intent Classification | 🔥 High | ✅ Completed | Saves Rep Time |
 | **Phase 2** | Calendar Auto-Booking (Cal.com / Google) | ⚡ Medium | ⏳ In Progress | High Conversions |

@@ -1782,21 +1782,21 @@
     "semantic_hash": ""
   },
   "ARCHITECTURE.md": {
-    "mtime": 1788506239.084895,
-    "seen": 1788759744.7566812,
-    "ast_hash": "77d97177a1e0a4967b19bd05c1bde1b2",
+    "mtime": 1788947634.3123248,
+    "seen": 1788948868.8141139,
+    "ast_hash": "ff4f47f8f5c857e11edf3c8e55ec58b9",
     "semantic_hash": ""
   },
   "CLAUDE.md": {
-    "mtime": 1788506172.5257287,
-    "seen": 1788759744.7566822,
-    "ast_hash": "e0736aaeb9dfce1a4dc6ac791a1fde87",
+    "mtime": 1788947643.4763637,
+    "seen": 1788948868.8141153,
+    "ast_hash": "d75d736b34c2e700d22710339dc9ea1a",
     "semantic_hash": ""
   },
   "FEATURE_ROADMAP.md": {
-    "mtime": 1788506158.0612586,
-    "seen": 1788759744.7566833,
-    "ast_hash": "82851d39bbaa5abd664d867950a24904",
+    "mtime": 1788947652.302953,
+    "seen": 1788948868.8141162,
+    "ast_hash": "6f5ca5aa635f0062f1ac4391d589ed0d",
     "semantic_hash": ""
   },
   "LEGAL_NOTICE.md": {
@@ -1818,9 +1818,9 @@
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1788506071.1675,
-    "seen": 1788759744.756688,
-    "ast_hash": "3d4f7109ef33c94615a2580a4df37da9",
+    "mtime": 1788947548.4475737,
+    "seen": 1788948868.8141208,
+    "ast_hash": "f0a182d9b784c22764bac4a901357d31",
     "semantic_hash": ""
   },
   "docker-compose.yml": {
@@ -1830,9 +1830,9 @@
     "semantic_hash": ""
   },
   "docs/USER_GUIDE_HANDBOOK.md": {
-    "mtime": 1788506085.4722035,
-    "seen": 1788759744.7566905,
-    "ast_hash": "56d8679bd5b11af1db6f6a31953b1271",
+    "mtime": 1788947664.9354033,
+    "seen": 1788948868.814123,
+    "ast_hash": "4e7c5a92decadca74574982a2cea7dc4",
     "semantic_hash": ""
   },
   "docs/architecture.md": {
@@ -1842,9 +1842,9 @@
     "semantic_hash": ""
   },
   "docs/configuration.md": {
-    "mtime": 1788506213.7491171,
-    "seen": 1788759744.7566926,
-    "ast_hash": "2a8560e06af888bf439ba4e2d922be42",
+    "mtime": 1788947697.1930983,
+    "seen": 1788948868.814125,
+    "ast_hash": "8cc31de9337142402b04b5ecf3cf154b",
     "semantic_hash": ""
   },
   "docs/csv_upload_copilot_plan.md": {
@@ -1866,9 +1866,9 @@
     "semantic_hash": ""
   },
   "docs/outreach_agent.md": {
-    "mtime": 1786947278.7107692,
-    "seen": 1788411760.5379026,
-    "ast_hash": "5e3d85098b347177f6e81c1cef4fd2b0",
+    "mtime": 1788947688.5407789,
+    "seen": 1788948868.8141294,
+    "ast_hash": "e09431914dfc793fd51d1f51128d5b08",
     "semantic_hash": ""
   },
   "docs/profile_lifecycle.md": {
@@ -1878,15 +1878,15 @@
     "semantic_hash": ""
   },
   "docs/roles/DEVELOPER_INTEGRATOR_GUIDE.md": {
-    "mtime": 1788506098.058003,
-    "seen": 1788759744.7567008,
-    "ast_hash": "f07c130c0751f8649e0147f17ed59692",
+    "mtime": 1788947680.8964813,
+    "seen": 1788948868.8141317,
+    "ast_hash": "9272fe0b5b1500f62fad4fae4ca21213",
     "semantic_hash": ""
   },
   "docs/roles/GROWTH_MARKETING_GUIDE.md": {
-    "mtime": 1788506107.8310046,
-    "seen": 1788759744.7567017,
-    "ast_hash": "8238be2d0ffbf8312c6c788cec5faa21",
+    "mtime": 1788947673.4120061,
+    "seen": 1788948868.8141327,
+    "ast_hash": "edc159a48cefb086a97e22a6924e2c43",
     "semantic_hash": ""
   },
   "docs/roles/SALES_OPS_ADMIN_GUIDE.md": {

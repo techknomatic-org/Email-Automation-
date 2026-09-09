@@ -14,16 +14,15 @@ As a Growth or Demand Gen Manager, you own campaign strategy creation, audience 
 
 OpenOutreach AI uses a ChatGPT-style intelligence layer to convert natural language prompts into structured search strategies.
 
-### 1. Creating a New Campaign with Strict Keyword Conjunction
+### 1. Creating a New Campaign with AI Natural Language Prompt Parsing
 1. Open the UI at `http://localhost:5173` and sign in with your Growth account credentials.
 2. Click **Campaigns** -> **New Campaign** (or launch the **AI Campaign Wizard**).
-3. Provide details:
+3. Provide details in plain natural language:
    - **Campaign Name**: Clear, descriptive title.
-   - **Target Market / Persona**: Describe your target in plain natural language (e.g. *"Find Business Development Officers at financial services companies"*).
-   - **Objective**: Define the call to action (e.g. *"Book product demo calls for B2B analytics platform"*).
-   - **Product Docs**: Briefly describe your product or paste documentation.
-   - **Search Keywords (AND Condition)**: Add specific domain keywords (e.g. `["SaaS", "Director", "Fintech"]`). The engine evaluates these using a **strict `AND` condition** — every discovered prospect profile must match all specified keywords across job title, department, industry, and bio text.
-   - **Country**: Specify 2-letter country code (e.g. `US`, `IN`, `DE`, `UK`).
+   - **Target Market / Persona**: Describe your target in plain natural language with full support for typos and abbreviations (e.g. `"customer support mangers in dubai in bfsi indusry"`, `"director from japan in oprations dept"`, `"pbi finance director in india"`).
+   - **AI Prompt Parsing**: The engine automatically autocorrects spelling mistakes, expands acronyms (`PBI → Power BI`, `HR → Human Resources`, `BDO → Business Development`, `CS → Customer Support`), extracts global countries/cities (`Japan`, `Dubai`, `India`, `Germany`, `France`, `China`), and resolves title inversions (`VP of HR` ↔ `HR VP`).
+   - **Strict Multi-Attribute Disqualification**: Candidate profiles must strictly match the target location, department, and industry. Mismatches receive a 0 score and are completely excluded from the campaign lead pool.
+   - **Country**: Optional manual override or auto-extracted by AI.
 
 ### 2. Configuring Global Meeting / Demo Booking Links
 1. Navigate to **Settings** (`http://localhost:5173/settings`).
@@ -36,11 +35,12 @@ When you trigger **Generate / Refresh Lead Pool** on the **Leads** tab, the AI d
 
 ```
 [ChatGPT AI Campaign Intelligence Strategy]
-Target Roles: Business Development Officer (BDO), Business Development Manager, VP Business Development
-Inferred Sector: Financial Services
-Target Keywords (AND Condition): business development, BDO, growth, financial services
-Target Location: US
-AI Rationale: Strategy derived for targeting BDO decision makers with strict keyword conjunction...
+Target Roles: Operations Director, Director of Operations
+Inferred Department: Operations
+Target Seniority: Director
+Target Location: Japan (JP)
+Strict Disqualification: Candidates without matching location/department are strictly excluded
+AI Rationale: Strategy parsed from natural language prompt with automatic typo resolution and country grounding...
 ```
 
 ---

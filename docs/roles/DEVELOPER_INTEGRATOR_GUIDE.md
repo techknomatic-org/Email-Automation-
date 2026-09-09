@@ -50,8 +50,13 @@ OpenOutreach AI is built with Python (FastAPI + SQLAlchemy + Pydantic AI) on the
 - **`POST /api/v1/csv/upload`**: Accepts `file`, `import_as_leads`, `import_mode` (`"append"` vs `"reset"`). Deduplicates records using `LOWER(TRIM(email))` key and returns `import_stats`.
 
 ### 4. Campaign Discovery & Strict Conjunction Search
-- **`POST /api/v1/campaigns/{campaign_id}/generate-lead-pool`**: Runs `HybridSearchEngine` matching with strict `AND` conjunction across user-specified search keywords.
-- **`POST /api/v1/copilot/dataset-accuracy`**: Live evaluates 5-dimensional dataset alignment against ICP requirements.
+- **`POST /api/v1/campaigns/{campaign_id}/generate-lead-pool`**: Runs `HybridSearchEngine` and `DataNormalizer` matching with strict multi-attribute filtering (Role 35%, Dept 25%, Seniority 15%, Industry 10%, Location 10%, Vector 5%) and automatic stale deal purging.
+- **`POST /api/v1/copilot/dataset-accuracy`**: Live evaluates 6-dimensional dataset alignment against campaign criteria.
+- **`DataNormalizer` Pipeline (`backend/app/services/normalizer.py`)**:
+  - Levenshtein typo autocorrection (`mangers → Manager`, `oprations → Operations`, `indusry → Industry`).
+  - Acronym expansion (`PBI → Power BI`, `HR → Human Resources`, `CFO → Chief Financial Officer`, `BDO → Business Development`).
+  - Global country code & city extraction (`Japan / Tokyo → JP`, `China / Beijing → CN`, `Dubai / UAE → AE`, `India / Mumbai → IN`, `France / Paris → FR`, `Germany / Berlin → DE`, `US → US`, `UK → GB`).
+  - Title inversion normalization (`VP of HR` ↔ `HR VP`).
 
 ### 5. Live Campaign Execution, Thread Sync & Action Dispatch
 - **`GET /api/v1/pipeline/campaigns/{campaign_id}/execution`**: Returns live campaign execution stats, recent audit events, and runner status.
