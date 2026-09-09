@@ -13,46 +13,93 @@ import DatasetValidationPanel from '../components/DatasetValidationPanel';
 import {
   RefreshCw, Filter, Search, Sparkles, AlertCircle, CheckCircle,
   ShieldAlert, XCircle, ArrowRight, Zap, Database, BrainCircuit,
-  ExternalLink, UploadCloud, CheckCircle2, ListChecks, ChevronDown, X, Trash2, Edit3
+  ExternalLink, UploadCloud, CheckCircle2, ListChecks, ChevronDown, X, Trash2,
+  Edit3, Plus, UserPlus, FileSpreadsheet, MapPin, Building, Mail, Check, Layers
 } from 'lucide-react';
 import ConfirmModal from '../components/ConfirmModal';
 
-
-
-// ── small helpers ────────────────────────────────────────────────────────────
-function fitColor(score) {
-  if (score >= 80) return '#10b981';
-  if (score >= 65) return '#818cf8';
-  return '#ef4444';
+// ── Helpers ──────────────────────────────────────────────────────────────────
+function getInitials(name) {
+  if (!name) return '?';
+  const parts = name.trim().split(/\s+/);
+  if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
 }
 
-function FitBar({ score }) {
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-      <span style={{ fontWeight: 700, fontSize: '0.85rem', color: fitColor(score) }}>{score}%</span>
-      <div style={{ height: 4, borderRadius: 3, background: 'var(--border)', width: 60 }}>
-        <div style={{ height: '100%', width: `${score}%`, borderRadius: 3, background: fitColor(score), transition: 'width 0.3s ease' }} />
-      </div>
-    </div>
-  );
+function getAvatarColor(name) {
+  const palette = [
+    { bg: 'rgba(232, 98, 44, 0.12)', text: '#E8622C', border: 'rgba(232, 98, 44, 0.28)' },
+    { bg: 'rgba(16, 185, 129, 0.12)', text: '#10b981', border: 'rgba(16, 185, 129, 0.28)' },
+    { bg: 'rgba(59, 130, 246, 0.12)', text: '#3b82f6', border: 'rgba(59, 130, 246, 0.28)' },
+    { bg: 'rgba(139, 92, 246, 0.12)', text: '#8b5cf6', border: 'rgba(139, 92, 246, 0.28)' },
+    { bg: 'rgba(236, 72, 153, 0.12)', text: '#ec4899', border: 'rgba(236, 72, 153, 0.28)' },
+    { bg: 'rgba(245, 166, 35, 0.12)', text: '#f5a623', border: 'rgba(245, 166, 35, 0.28)' },
+  ];
+  if (!name) return palette[0];
+  let hash = 0;
+  for (let i = 0; i < name.length; i++) hash = name.charCodeAt(i) + ((hash << 5) - hash);
+  return palette[Math.abs(hash) % palette.length];
 }
 
 function SourceBadge({ type, url }) {
-  const label = (type || 'excel').toUpperCase().replace(/_/g, ' ');
-  const inner = (
-    <span style={{
-      fontSize: '0.68rem', fontWeight: 700, padding: '2px 7px', borderRadius: 'var(--radius-full)',
-      background: url ? 'var(--success-light)' : 'var(--accent-light)',
-      color: url ? '#34d399' : '#818cf8',
-      border: `1px solid ${url ? 'rgba(16,185,129,0.3)' : 'rgba(99,102,241,0.3)'}`,
-      display: 'inline-flex', alignItems: 'center', gap: 3, letterSpacing: '0.04em',
-    }}>
-      {label} {url && <ExternalLink size={9} />}
+  const raw = (type || 'Dataset').toString().trim();
+  const lower = raw.toLowerCase();
+
+  let label = 'Dataset';
+  let icon = <Database size={11} />;
+  let isManual = false;
+
+  if (lower.includes('manual')) {
+    label = 'Manual Entry';
+    icon = <Edit3 size={11} />;
+    isManual = true;
+  } else if (lower.includes('xlsx') || lower.includes('excel') || lower.includes('master_contact') || lower.includes('csv') || lower.includes('master')) {
+    label = 'Master Dataset';
+    icon = <FileSpreadsheet size={11} />;
+  } else if (lower.includes('linkedin')) {
+    label = 'LinkedIn';
+    icon = <ExternalLink size={11} />;
+  } else if (lower.includes('apollo')) {
+    label = 'Apollo';
+    icon = <Zap size={11} />;
+  } else if (lower.includes('api')) {
+    label = 'API Feed';
+    icon = <Zap size={11} />;
+  } else {
+    label = raw.replace(/\.[^/.]+$/, '').replace(/[_\-\.]+/g, ' ');
+    if (label.length > 15) label = label.slice(0, 14) + '...';
+  }
+
+  const badgeStyle = {
+    fontSize: '0.7rem',
+    fontWeight: 600,
+    padding: '3px 8px',
+    borderRadius: 'var(--radius-full)',
+    background: isManual ? 'var(--accent-light)' : 'var(--bg-inner)',
+    color: isManual ? 'var(--accent)' : 'var(--text-sub)',
+    border: `1px solid ${isManual ? 'var(--border-glow)' : 'var(--border)'}`,
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: 4,
+    whiteSpace: 'nowrap',
+    letterSpacing: '0.02em',
+    maxWidth: 135,
+    overflow: 'hidden',
+    textOverflow: 'ellipsis'
+  };
+
+  const content = (
+    <span style={badgeStyle} title={`Source: ${raw}`}>
+      {icon} {label}
+      {url && <ExternalLink size={10} style={{ opacity: 0.8 }} />}
     </span>
   );
-  return url
-    ? <a href={url} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>{inner}</a>
-    : inner;
+
+  return url ? (
+    <a href={url} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
+      {content}
+    </a>
+  ) : content;
 }
 
 // Module-level in-memory cache to preserve lead pool data across tab navigation without reloading spinners
@@ -90,7 +137,6 @@ export default function Leads({ activeCampaignId, setCurrentTab, setActiveCampai
     isOpen: false, title: '', message: '', action: null, confirmText: 'Delete', isDanger: true, loading: false
   });
 
-
   // ── Multi-select state ────────────────────────────────────────────────────
   const [selectedIds, setSelectedIds] = useState(new Set());
   const [addingToDeals, setAddingToDeals] = useState(false);
@@ -121,7 +167,7 @@ export default function Leads({ activeCampaignId, setCurrentTab, setActiveCampai
     if (cached && !forceRefresh) {
       setLeads(cached.leads);
       setStatusMetrics(cached.metricsData);
-      setLoading(false); // Instant render from cache! No spinner on navigation!
+      setLoading(false);
     } else if (!cached) {
       setLoading(true);
     }
@@ -234,16 +280,12 @@ export default function Leads({ activeCampaignId, setCurrentTab, setActiveCampai
   const handleAcceptSingleLead = async (leadId) => {
     if (!selectedCampaignId || !leadId) return;
 
-    // Instant UI tab transition to Deals & Pipeline!
     if (setActiveCampaignId) setActiveCampaignId(selectedCampaignId);
     if (setActiveLeadId) setActiveLeadId(leadId);
     if (setCurrentTab) setCurrentTab('deals');
 
     try {
-      // Fast backend update
       await acceptLead(selectedCampaignId, leadId);
-
-      // Update Leads local state & cache
       setLeads(prevLeads =>
         prevLeads.map(l => l.id === leadId ? { ...l, deal_state: 'Qualified' } : l)
       );
@@ -283,7 +325,7 @@ export default function Leads({ activeCampaignId, setCurrentTab, setActiveCampai
     }
   };
 
-  // ── Bulk "Add to Deals & Pipeline" (Instant Navigation + Batch SQL) ───────────
+  // ── Bulk "Add to Deals & Pipeline" ───────────────────────────────────────────
   const handleBulkAddToDeals = async () => {
     if (selectedIds.size === 0 || addingToDeals) return;
     const targetLeadIds = Array.from(selectedIds);
@@ -291,16 +333,12 @@ export default function Leads({ activeCampaignId, setCurrentTab, setActiveCampai
 
     setAddingToDeals(true);
 
-    // Instant UI tab transition to Deals & Pipeline!
     if (setActiveCampaignId) setActiveCampaignId(selectedCampaignId);
     if (setActiveLeadId && targetLeadIds.length > 0) setActiveLeadId(targetLeadIds[0]);
     if (setCurrentTab) setCurrentTab('deals');
 
     try {
-      // 1. Batch backend update
       await acceptBatchLeads(selectedCampaignId, targetLeadIds);
-
-      // 2. Update Leads local state & cache
       setLeads(prevLeads =>
         prevLeads.map(l => acceptedSet.has(l.id) ? { ...l, deal_state: 'Qualified' } : l)
       );
@@ -318,14 +356,6 @@ export default function Leads({ activeCampaignId, setCurrentTab, setActiveCampai
       setAddingToDeals(false);
     }
   };
-
-
-
-
-
-
-
-
 
   // ── Checkbox helpers ──────────────────────────────────────────────────────
   const toggleSelect = (id) => {
@@ -369,65 +399,116 @@ export default function Leads({ activeCampaignId, setCurrentTab, setActiveCampai
   return (
     <div style={{ position: 'relative', paddingBottom: selectedIds.size > 0 ? 90 : 0 }}>
 
-      {/* ── Page Header ─────────────────────────────────────────────────── */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '1rem' }}>
+      {/* ── Page Header & Action Controls ─────────────────────────────────── */}
+      <div style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: '1.25rem',
+        flexWrap: 'wrap',
+        gap: '1rem',
+        paddingBottom: '0.75rem',
+        borderBottom: '1px solid var(--border-light)'
+      }}>
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', marginBottom: '0.25rem' }}>
-            <h1 style={{ fontSize: '1.5rem', fontWeight: 800, letterSpacing: '-0.02em' }}>Lead Discovery Pool</h1>
+            <h1 style={{ fontSize: '1.5rem', fontWeight: 800, letterSpacing: '-0.02em', color: 'var(--text-main)', margin: 0 }}>
+              Lead Discovery Pool
+            </h1>
             <span style={{
-              fontSize: '0.68rem', fontWeight: 700, padding: '2px 9px', borderRadius: 'var(--radius-full)',
-              background: 'var(--success-light)', color: '#34d399', border: '1px solid rgba(16,185,129,0.3)',
-              display: 'flex', alignItems: 'center', gap: 4,
+              fontSize: '0.7rem', fontWeight: 700, padding: '2px 9px', borderRadius: 'var(--radius-full)',
+              background: 'var(--success-light)', color: 'var(--success)', border: '1px solid rgba(16,185,129,0.3)',
+              display: 'inline-flex', alignItems: 'center', gap: 4,
             }}>
-              <Database size={10} /> PostgreSQL Dataset
+              <Database size={11} /> PostgreSQL Dataset
             </span>
           </div>
-          <p style={{ color: 'var(--text-muted)', fontSize: '0.82rem' }}>
-            AI-ranked prospects filtered by campaign targeting rules
+          <p style={{ color: 'var(--text-muted)', fontSize: '0.82rem', margin: 0 }}>
+            AI-ranked prospects filtered by campaign targeting rules and ideal customer profiles
           </p>
         </div>
 
-        {/* Controls */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', flexWrap: 'wrap' }}>
-          {/* Campaign selector */}
-          <select
-            className="form-control"
-            style={{ width: 240, fontSize: '0.85rem', fontWeight: 600, padding: '0.45rem 0.75rem' }}
-            value={selectedCampaignId || ''}
-            onChange={(e) => {
-              const id = Number(e.target.value);
-              setSelectedCampaignId(id);
-              if (setActiveCampaignId) setActiveCampaignId(id);
-            }}
-          >
-            {campaigns.map(c => <option key={c.id} value={c.id}>{c.name} (#{c.id})</option>)}
-          </select>
+        {/* Action Controls Toolbar */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+          {/* Campaign Selector with Styled Wrap */}
+          <div style={{ position: 'relative', minWidth: 230 }}>
+            <select
+              className="form-control"
+              style={{
+                fontSize: '0.82rem',
+                fontWeight: 600,
+                padding: '0.45rem 1.75rem 0.45rem 0.75rem',
+                backgroundColor: 'var(--bg-input)',
+                borderColor: 'var(--border)',
+                color: 'var(--text-main)',
+                width: '100%'
+              }}
+              value={selectedCampaignId || ''}
+              onChange={(e) => {
+                const id = Number(e.target.value);
+                setSelectedCampaignId(id);
+                if (setActiveCampaignId) setActiveCampaignId(id);
+              }}
+            >
+              {campaigns.map(c => <option key={c.id} value={c.id}>{c.name} (#{c.id})</option>)}
+            </select>
+          </div>
 
-          <button className="btn btn-ghost btn-sm" onClick={() => setShowCsvModal(true)}>
+          <button
+            className="btn btn-ghost btn-sm"
+            onClick={() => setShowCsvModal(true)}
+            style={{ fontSize: '0.8rem', padding: '0.45rem 0.75rem', gap: 5 }}
+            title="Import contacts from CSV/Excel"
+          >
             <UploadCloud size={14} /> Upload CSV
           </button>
 
-          <button className="btn btn-ghost btn-sm" onClick={() => { setEditingLead(null); setShowManualModal(true); }}>
-            <Database size={14} /> Add Profile Manually
+          <button
+            className="btn btn-ghost btn-sm"
+            onClick={() => { setEditingLead(null); setShowManualModal(true); }}
+            style={{ fontSize: '0.8rem', padding: '0.45rem 0.75rem', gap: 5 }}
+            title="Add a custom lead directly"
+          >
+            <UserPlus size={14} /> Add Profile
           </button>
 
-          <button className="btn btn-sm" onClick={handleRefresh} disabled={refreshing}
-            style={{ background: 'var(--gradient-accent)' }}>
+          <button
+            className="btn btn-sm"
+            onClick={handleRefresh}
+            disabled={refreshing}
+            style={{
+              background: 'var(--gradient-accent)',
+              color: '#ffffff',
+              fontWeight: 700,
+              fontSize: '0.8rem',
+              padding: '0.45rem 0.9rem',
+              gap: 6,
+              boxShadow: '0 2px 8px rgba(232, 98, 44, 0.25)'
+            }}
+          >
             <RefreshCw size={13} style={{ animation: refreshing ? 'spin 0.7s linear infinite' : 'none' }} />
-            {refreshing ? discoveryStage || 'Discovering...' : 'Discover Leads'}
+            {refreshing ? (discoveryStage || 'Discovering...') : 'Discover Leads'}
           </button>
 
           <button
             className="btn btn-sm"
             onClick={handleAcceptAllLeads}
-            style={{ background: 'var(--success-light)', color: '#34d399', border: '1px solid rgba(16,185,129,0.4)', fontWeight: 700 }}
+            style={{
+              background: 'var(--success-light)',
+              color: '#059669',
+              border: '1px solid rgba(16,185,129,0.35)',
+              fontWeight: 700,
+              fontSize: '0.8rem',
+              padding: '0.45rem 0.9rem',
+              gap: 5
+            }}
           >
             <CheckCircle2 size={14} /> Accept All into Pipeline
           </button>
         </div>
       </div>
 
-      {/* ── Dataset Validation ───────────────────────────────────────────── */}
+      {/* ── Dataset Validation Panel ───────────────────────────────────────── */}
       <DatasetValidationPanel compact={true} />
 
       {/* ── CSV Upload Modal ─────────────────────────────────────────────── */}
@@ -455,49 +536,88 @@ export default function Leads({ activeCampaignId, setCurrentTab, setActiveCampai
         }}
       />
 
+      {/* ── Manual Profile Modal ─────────────────────────────────────────── */}
+      <ManualProfileModal
+        isOpen={showManualModal}
+        initialData={editingLead}
+        onClose={() => { setShowManualModal(false); setEditingLead(null); }}
+        onSaveSuccess={async () => {
+          setShowManualModal(false);
+          setEditingLead(null);
+          await loadCampaignLeadPool(selectedCampaignId, true);
+        }}
+      />
+
       {/* ── Metrics Banner ───────────────────────────────────────────────── */}
       {statusMetrics && (
         <div style={{
-          padding: '1rem 1.25rem', marginBottom: '1.25rem', borderRadius: 'var(--radius-lg)',
-          background: 'rgba(99,102,241,0.06)', border: '1px solid rgba(99,102,241,0.2)',
+          padding: '0.9rem 1.25rem',
+          marginBottom: '1.25rem',
+          borderRadius: 'var(--radius-lg)',
+          background: 'var(--bg-card)',
+          border: '1px solid var(--border)',
+          boxShadow: 'var(--shadow-sm)'
         }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
             <div>
-              <div style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-main)' }}>
-                Showing&nbsp;
-                <span style={{ color: '#34d399' }}>{statusMetrics?.dataset_stats?.matched ?? leads.length}</span>
-                &nbsp;of&nbsp;
-                <span style={{ color: '#818cf8' }}>{statusMetrics?.dataset_stats?.total ?? leads.length}</span>
-                &nbsp;dataset profiles
+              <div style={{ fontSize: '0.98rem', fontWeight: 800, color: 'var(--text-main)', display: 'flex', alignItems: 'center', gap: 6 }}>
+                <span>Showing</span>
+                <span style={{ color: 'var(--success)', background: 'var(--success-light)', padding: '1px 7px', borderRadius: 'var(--radius-sm)' }}>
+                  {statusMetrics?.dataset_stats?.matched ?? leads.length}
+                </span>
+                <span>of</span>
+                <span style={{ color: 'var(--accent)', background: 'var(--accent-light)', padding: '1px 7px', borderRadius: 'var(--radius-sm)' }}>
+                  {statusMetrics?.dataset_stats?.total ?? leads.length}
+                </span>
+                <span>dataset profiles</span>
               </div>
-              <p style={{ color: 'var(--text-muted)', fontSize: '0.78rem', marginTop: 3 }}>
+              <p style={{ color: 'var(--text-muted)', fontSize: '0.78rem', marginTop: 3, marginBottom: 0 }}>
                 Campaign: <strong style={{ color: 'var(--text-sub)' }}>{statusMetrics.campaign_name}</strong>
                 {selectedCampaign?.campaign_target && ` — Target: ${selectedCampaign.campaign_target}`}
               </p>
             </div>
 
-            <div style={{ display: 'flex', gap: '0.65rem', alignItems: 'center', flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', flexWrap: 'wrap' }}>
               {[
-                { label: 'Total', value: statusMetrics?.dataset_stats?.total ?? leads.length, color: 'var(--text-sub)', bg: 'rgba(255,255,255,0.04)' },
-                { label: 'Matched', value: statusMetrics?.dataset_stats?.matched ?? leads.length, color: '#34d399', bg: 'rgba(16,185,129,0.08)' },
-                { label: 'Excluded', value: statusMetrics?.dataset_stats?.excluded ?? 0, color: '#f87171', bg: 'rgba(239,68,68,0.08)' },
-                { label: 'Qualified', value: statusMetrics?.dataset_stats?.qualified ?? statusMetrics.relevant_count, color: '#a5b4fc', bg: 'rgba(129,140,248,0.08)' },
+                { label: 'Total', value: statusMetrics?.dataset_stats?.total ?? leads.length, color: 'var(--text-main)', bg: 'var(--bg-inner)' },
+                { label: 'Matched', value: statusMetrics?.dataset_stats?.matched ?? leads.length, color: 'var(--success)', bg: 'var(--success-light)' },
+                { label: 'Excluded', value: statusMetrics?.dataset_stats?.excluded ?? 0, color: 'var(--danger)', bg: 'var(--danger-light)' },
+                { label: 'Qualified', value: statusMetrics?.dataset_stats?.qualified ?? statusMetrics.relevant_count, color: '#3b82f6', bg: 'var(--info-light)' },
               ].map(({ label, value, color, bg }) => (
-                <div key={label} style={{ textAlign: 'center', padding: '0.4rem 0.8rem', borderRadius: 8, background: bg, border: '1px solid rgba(255,255,255,0.07)' }}>
-                  <div style={{ fontSize: '1.05rem', fontWeight: 800, color }}>{value}</div>
-                  <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{label}</div>
+                <div key={label} style={{
+                  textAlign: 'center',
+                  padding: '0.35rem 0.75rem',
+                  borderRadius: 'var(--radius-md)',
+                  background: bg,
+                  border: '1px solid var(--border-light)',
+                  minWidth: 68
+                }}>
+                  <div style={{ fontSize: '1rem', fontWeight: 800, color }}>{value}</div>
+                  <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.04em', fontWeight: 600 }}>{label}</div>
                 </div>
               ))}
+
+              <div style={{ height: 28, width: 1, backgroundColor: 'var(--border)', margin: '0 0.25rem' }} />
 
               <button
                 className="btn btn-ghost btn-sm"
                 onClick={() => setShowCriteriaModal(true)}
+                style={{ fontSize: '0.78rem', padding: '0.4rem 0.7rem', gap: 5 }}
               >
                 <BrainCircuit size={13} /> Criteria
               </button>
+
               <button
                 className="btn btn-sm"
-                style={{ background: 'var(--warning-light)', color: '#fbbf24', border: '1px solid rgba(245,158,11,0.3)', fontWeight: 600 }}
+                style={{
+                  background: 'var(--warning-light)',
+                  color: '#d97706',
+                  border: '1px solid rgba(245,158,11,0.3)',
+                  fontWeight: 600,
+                  fontSize: '0.78rem',
+                  padding: '0.4rem 0.75rem',
+                  gap: 5
+                }}
                 onClick={triggerRegenerate}
                 disabled={regenerating}
               >
@@ -510,25 +630,61 @@ export default function Leads({ activeCampaignId, setCurrentTab, setActiveCampai
       )}
 
       {/* ── Search + Filter Bar ──────────────────────────────────────────── */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', flexWrap: 'wrap', gap: '0.65rem' }}>
+      <div style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: '1rem',
+        flexWrap: 'wrap',
+        gap: '0.75rem'
+      }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', flex: 1, minWidth: 280 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'var(--bg-card)', padding: '0.45rem 0.85rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)', flex: 1, maxWidth: 380 }}>
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            background: 'var(--bg-input)',
+            padding: '0.45rem 0.85rem',
+            borderRadius: 'var(--radius-md)',
+            border: '1px solid var(--border)',
+            flex: 1,
+            maxWidth: 380
+          }}>
             <Search size={15} style={{ color: 'var(--text-muted)', flexShrink: 0 }} />
             <input
               type="text"
-              placeholder="Search name, company, title, email..."
+              placeholder="Search name, company, title, email, location..."
               value={searchQuery}
               onChange={e => setSearchQuery(e.target.value)}
-              style={{ background: 'transparent', border: 'none', color: 'var(--text-main)', fontSize: '0.85rem', width: '100%', outline: 'none' }}
+              style={{
+                background: 'transparent',
+                border: 'none',
+                color: 'var(--text-main)',
+                fontSize: '0.85rem',
+                width: '100%',
+                outline: 'none'
+              }}
             />
             {searchQuery && (
-              <button onClick={() => setSearchQuery('')} style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', display: 'flex' }}>
+              <button
+                onClick={() => setSearchQuery('')}
+                style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', display: 'flex', padding: 2 }}
+              >
                 <X size={13} />
               </button>
             )}
           </div>
 
-          <span style={{ fontSize: '0.78rem', fontWeight: 600, color: '#34d399', background: 'var(--success-light)', padding: '0.35rem 0.65rem', borderRadius: 'var(--radius-full)', border: '1px solid rgba(16,185,129,0.25)', whiteSpace: 'nowrap' }}>
+          <span style={{
+            fontSize: '0.75rem',
+            fontWeight: 700,
+            color: 'var(--success)',
+            background: 'var(--success-light)',
+            padding: '0.35rem 0.7rem',
+            borderRadius: 'var(--radius-full)',
+            border: '1px solid rgba(16,185,129,0.25)',
+            whiteSpace: 'nowrap'
+          }}>
             {filteredLeads.length} / {leads.length} profiles
           </span>
         </div>
@@ -537,7 +693,14 @@ export default function Leads({ activeCampaignId, setCurrentTab, setActiveCampai
           <Filter size={14} style={{ color: 'var(--text-muted)' }} />
           <select
             className="form-control"
-            style={{ width: 190, fontSize: '0.8rem', padding: '0.4rem 0.65rem' }}
+            style={{
+              width: 200,
+              fontSize: '0.82rem',
+              padding: '0.4rem 0.65rem',
+              backgroundColor: 'var(--bg-input)',
+              borderColor: 'var(--border)',
+              color: 'var(--text-main)'
+            }}
             value={statusFilter}
             onChange={e => setStatusFilter(e.target.value)}
           >
@@ -553,48 +716,64 @@ export default function Leads({ activeCampaignId, setCurrentTab, setActiveCampai
       {/* ── Bulk success toast ────────────────────────────────────────────── */}
       {bulkSuccess && (
         <div style={{
-          display: 'flex', alignItems: 'center', gap: '0.5rem',
-          padding: '0.7rem 1rem', borderRadius: 'var(--radius-md)', marginBottom: '1rem',
-          background: 'var(--success-light)', border: '1px solid rgba(16,185,129,0.3)',
-          color: '#34d399', fontWeight: 600, fontSize: '0.875rem',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '0.5rem',
+          padding: '0.7rem 1rem',
+          borderRadius: 'var(--radius-md)',
+          marginBottom: '1rem',
+          background: 'var(--success-light)',
+          border: '1px solid rgba(16,185,129,0.3)',
+          color: 'var(--success)',
+          fontWeight: 600,
+          fontSize: '0.875rem',
         }}>
           <CheckCircle2 size={16} /> {bulkSuccess}
-          <button onClick={() => setBulkSuccess('')} style={{ marginLeft: 'auto', background: 'none', border: 'none', color: '#34d399', cursor: 'pointer' }}>
+          <button
+            onClick={() => setBulkSuccess('')}
+            style={{ marginLeft: 'auto', background: 'none', border: 'none', color: 'var(--success)', cursor: 'pointer' }}
+          >
             <X size={13} />
           </button>
         </div>
       )}
 
       {/* ── Lead Table ───────────────────────────────────────────────────── */}
-      <div className="table-container">
+      <div className="table-container" style={{
+        background: 'var(--bg-card)',
+        borderRadius: 'var(--radius-lg)',
+        border: '1px solid var(--border)',
+        boxShadow: 'var(--shadow-sm)',
+        overflow: 'hidden'
+      }}>
         <table>
           <thead>
             <tr>
               {/* Checkbox column */}
-              <th style={{ width: 40, textAlign: 'center' }}>
+              <th style={{ width: 44, textAlign: 'center' }}>
                 <input
                   type="checkbox"
                   checked={allSelected}
                   onChange={() => toggleSelectAll(filteredLeads)}
-                  style={{ width: 15, height: 15, accentColor: 'var(--accent)', cursor: 'pointer' }}
+                  style={{ width: 16, height: 16, accentColor: 'var(--accent)', cursor: 'pointer' }}
                   title={allSelected ? 'Deselect all' : 'Select all visible'}
                 />
               </th>
-              <th>Source</th>
+              <th style={{ width: 140 }}>Source</th>
               <th>Lead / Prospect</th>
               <th>Company &amp; Industry</th>
               <th>Email Address</th>
               <th>Location</th>
               <th>Status</th>
               <th>Deal Workflow</th>
-              <th>Intelligence</th>
+              <th style={{ textAlign: 'center' }}>Intelligence</th>
               <th style={{ textAlign: 'right' }}>Action</th>
             </tr>
           </thead>
           <tbody>
             {loading ? (
               <tr>
-                <td colSpan="10" style={{ textAlign: 'center', padding: '3rem' }}>
+                <td colSpan="10" style={{ textAlign: 'center', padding: '3.5rem 1rem' }}>
                   <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem' }}>
                     <div className="spinner spinner-lg" />
                     <span style={{ color: 'var(--text-muted)', fontSize: '0.875rem' }}>
@@ -605,16 +784,16 @@ export default function Leads({ activeCampaignId, setCurrentTab, setActiveCampai
               </tr>
             ) : filteredLeads.length === 0 ? (
               <tr>
-                <td colSpan="10" style={{ textAlign: 'center', padding: '3rem' }}>
-                  <AlertCircle size={32} style={{ color: '#f59e0b', display: 'block', margin: '0 auto 0.6rem' }} />
-                  <div style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--text-main)', marginBottom: '0.4rem' }}>
+                <td colSpan="10" style={{ textAlign: 'center', padding: '3.5rem 1.5rem' }}>
+                  <AlertCircle size={36} style={{ color: 'var(--warning)', display: 'block', margin: '0 auto 0.75rem' }} />
+                  <div style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-main)', marginBottom: '0.4rem' }}>
                     No matching profiles found
                   </div>
-                  <p style={{ color: 'var(--text-muted)', fontSize: '0.82rem', maxWidth: 480, margin: '0 auto 1rem' }}>
+                  <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', maxWidth: 480, margin: '0 auto 1.25rem' }}>
                     Your dataset doesn't contain profiles matching the campaign criteria.
                     Upload a CSV with matching contacts or adjust the campaign target.
                   </p>
-                  <button className="btn btn-sm" onClick={() => setShowCsvModal(true)}>
+                  <button className="btn btn-sm" onClick={() => setShowCsvModal(true)} style={{ background: 'var(--gradient-accent)', color: '#fff' }}>
                     <UploadCloud size={14} /> Upload Matching CSV
                   </button>
                 </td>
@@ -623,6 +802,8 @@ export default function Leads({ activeCampaignId, setCurrentTab, setActiveCampai
               filteredLeads.map((l) => {
                 const isRowSelected = selectedIds.has(l.id);
                 const inPipeline = l.deal_state && !['Lead Created', 'lead_created', 'Discovered', 'LEAD_CREATED'].includes(l.deal_state);
+                const avatarStyle = getAvatarColor(l.name);
+                const initials = getInitials(l.name);
 
                 return (
                   <tr
@@ -630,10 +811,11 @@ export default function Leads({ activeCampaignId, setCurrentTab, setActiveCampai
                     onClick={() => toggleSelect(l.id)}
                     style={{
                       backgroundColor: isRowSelected
-                        ? 'rgba(99,102,241,0.12)'
+                        ? 'var(--accent-light)'
                         : 'transparent',
                       borderLeft: isRowSelected ? '3px solid var(--accent)' : '3px solid transparent',
                       cursor: 'pointer',
+                      transition: 'background 0.15s ease'
                     }}
                   >
                     {/* Checkbox */}
@@ -650,57 +832,90 @@ export default function Leads({ activeCampaignId, setCurrentTab, setActiveCampai
                     </td>
 
                     {/* Source */}
-                    <td>
+                    <td style={{ verticalAlign: 'middle' }}>
                       <SourceBadge type={l.source_type || l.provider || 'excel'} url={l.source_url || l.profile_url} />
                     </td>
 
-                    {/* Lead / Prospect */}
-                    <td>
-                      <div style={{ fontWeight: 600, color: isRowSelected ? '#a5b4fc' : 'var(--text-main)' }}>{l.name}</div>
-                      <div style={{ fontSize: '0.73rem', color: 'var(--text-muted)' }}>{l.title}</div>
+                    {/* Lead / Prospect with Initials Avatar */}
+                    <td style={{ verticalAlign: 'middle' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+                        <div style={{
+                          width: 32,
+                          height: 32,
+                          borderRadius: 'var(--radius-full)',
+                          background: avatarStyle.bg,
+                          color: avatarStyle.text,
+                          border: `1px solid ${avatarStyle.border}`,
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          fontSize: '0.75rem',
+                          fontWeight: 800,
+                          flexShrink: 0
+                        }}>
+                          {initials}
+                        </div>
+                        <div>
+                          <div style={{ fontWeight: 700, color: isRowSelected ? 'var(--accent)' : 'var(--text-main)', fontSize: '0.88rem' }}>
+                            {l.name}
+                          </div>
+                          <div style={{ fontSize: '0.73rem', color: 'var(--text-muted)' }}>
+                            {l.title || 'Professional'}
+                          </div>
+                        </div>
+                      </div>
                     </td>
 
                     {/* Company & Industry */}
-                    <td>
-                      <div style={{ fontWeight: 500, color: 'var(--text-sub)' }}>{l.company}</div>
-                      <div style={{ fontSize: '0.73rem', color: 'var(--text-muted)' }}>{l.industry}</div>
+                    <td style={{ verticalAlign: 'middle' }}>
+                      <div style={{ fontWeight: 600, color: 'var(--text-main)', fontSize: '0.85rem' }}>
+                        {l.company || '—'}
+                      </div>
+                      <div style={{ fontSize: '0.73rem', color: 'var(--text-muted)' }}>
+                        {l.industry || 'General'}
+                      </div>
                     </td>
 
                     {/* Email */}
-                    <td>
+                    <td style={{ verticalAlign: 'middle' }}>
                       {l.email && l.email.toLowerCase() !== 'not found' ? (
-                        <>
-                          <div style={{ fontSize: '0.83rem', color: 'var(--text-sub)' }}>{l.email}</div>
-                          <div style={{ fontSize: '0.68rem', color: 'var(--success)' }}>✓ Verified</div>
-                        </>
+                        <div>
+                          <div style={{ fontSize: '0.82rem', color: 'var(--text-main)', fontWeight: 500 }}>
+                            {l.email}
+                          </div>
+                          <div style={{ fontSize: '0.68rem', color: 'var(--success)', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: 3 }}>
+                            <Check size={10} /> Verified
+                          </div>
+                        </div>
                       ) : (
-                        <span style={{ fontSize: '0.75rem', color: 'var(--warning)' }}>Not verified</span>
+                        <span style={{ fontSize: '0.75rem', color: 'var(--text-faint)' }}>Not available</span>
                       )}
                     </td>
 
                     {/* Location */}
-                    <td style={{ color: 'var(--text-sub)', fontSize: '0.83rem' }}>{l.location || '—'}</td>
+                    <td style={{ color: 'var(--text-muted)', fontSize: '0.82rem', verticalAlign: 'middle' }}>
+                      {l.location || '—'}
+                    </td>
 
                     {/* Status */}
-
-                    <td>
+                    <td style={{ verticalAlign: 'middle' }}>
                       {l.is_suppressed ? (
-                        <span className="badge" style={{ background: 'var(--warning-light)', color: '#f59e0b', border: '1px solid rgba(245,158,11,0.3)' }}>
+                        <span className="badge" style={{ background: 'var(--warning-light)', color: '#d97706', border: '1px solid rgba(245,158,11,0.3)' }}>
                           <ShieldAlert size={11} /> Suppressed
                         </span>
                       ) : l.disqualified ? (
-                        <span className="badge" style={{ background: 'var(--danger-light)', color: '#ef4444', border: '1px solid rgba(239,68,68,0.3)' }}>
+                        <span className="badge" style={{ background: 'var(--danger-light)', color: 'var(--danger)', border: '1px solid rgba(239,68,68,0.3)' }}>
                           <XCircle size={11} /> Disqualified
                         </span>
                       ) : (
-                        <span className="badge" style={{ background: 'var(--success-light)', color: '#10b981', border: '1px solid rgba(16,185,129,0.3)' }}>
+                        <span className="badge" style={{ background: 'var(--success-light)', color: 'var(--success)', border: '1px solid rgba(16,185,129,0.3)' }}>
                           <CheckCircle size={11} /> Qualified
                         </span>
                       )}
                     </td>
 
                     {/* Deal Workflow */}
-                    <td>
+                    <td style={{ verticalAlign: 'middle' }}>
                       {inPipeline ? (
                         <span className="badge badge-emailed">
                           <CheckCircle2 size={11} /> In Pipeline
@@ -711,10 +926,17 @@ export default function Leads({ activeCampaignId, setCurrentTab, setActiveCampai
                     </td>
 
                     {/* Intelligence */}
-                    <td onClick={e => e.stopPropagation()}>
+                    <td style={{ textAlign: 'center', verticalAlign: 'middle' }} onClick={e => e.stopPropagation()}>
                       <button
                         className="btn btn-sm"
-                        style={{ fontSize: '0.73rem', padding: '0.28rem 0.6rem', background: 'var(--accent-light)', color: '#818cf8', border: '1px solid rgba(99,102,241,0.3)', fontWeight: 600 }}
+                        style={{
+                          fontSize: '0.72rem',
+                          padding: '0.3rem 0.65rem',
+                          background: 'var(--accent-light)',
+                          color: 'var(--accent)',
+                          border: '1px solid var(--border-glow)',
+                          fontWeight: 700
+                        }}
                         onClick={() => setSelectedLeadId(l.id)}
                       >
                         ✨ Lead 360°
@@ -722,8 +944,8 @@ export default function Leads({ activeCampaignId, setCurrentTab, setActiveCampai
                     </td>
 
                     {/* Action */}
-                    <td style={{ textAlign: 'right' }} onClick={e => e.stopPropagation()}>
-                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '0.4rem' }}>
+                    <td style={{ textAlign: 'right', verticalAlign: 'middle' }} onClick={e => e.stopPropagation()}>
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '0.35rem' }}>
                         {inPipeline ? (
                           <button
                             className="btn btn-sm btn-ghost"
@@ -732,14 +954,21 @@ export default function Leads({ activeCampaignId, setCurrentTab, setActiveCampai
                               if (setActiveCampaignId) setActiveCampaignId(selectedCampaignId);
                               if (setCurrentTab) setCurrentTab('deals');
                             }}
-                            style={{ fontSize: '0.73rem', color: '#818cf8', fontWeight: 600 }}
+                            style={{ fontSize: '0.73rem', color: 'var(--accent)', fontWeight: 700 }}
                           >
-                            View in Deals →
+                            In Deals →
                           </button>
                         ) : (
                           <button
                             className="btn btn-sm"
-                            style={{ fontSize: '0.73rem', background: 'var(--success-light)', color: '#34d399', border: '1px solid rgba(16,185,129,0.4)', fontWeight: 700 }}
+                            style={{
+                              fontSize: '0.73rem',
+                              background: 'var(--success-light)',
+                              color: 'var(--success)',
+                              border: '1px solid rgba(16,185,129,0.4)',
+                              fontWeight: 700,
+                              padding: '0.3rem 0.65rem'
+                            }}
                             onClick={(e) => {
                               e.stopPropagation();
                               handleAcceptSingleLead(l.id);
@@ -750,12 +979,19 @@ export default function Leads({ activeCampaignId, setCurrentTab, setActiveCampai
                         )}
                         <button
                           className="btn btn-sm"
-                          style={{ fontSize: '0.73rem', background: 'rgba(239,68,68,0.12)', color: '#f87171', border: '1px solid rgba(239,68,68,0.3)', padding: '0.28rem 0.5rem', cursor: 'pointer' }}
+                          style={{
+                            fontSize: '0.73rem',
+                            background: 'var(--danger-light)',
+                            color: 'var(--danger)',
+                            border: '1px solid rgba(239,68,68,0.25)',
+                            padding: '0.3rem 0.5rem',
+                            cursor: 'pointer'
+                          }}
                           onClick={(e) => {
                             e.stopPropagation();
                             triggerSingleDelete(l.id, l.name);
                           }}
-                          title="Delete Lead"
+                          title="Delete Lead Profile"
                         >
                           <Trash2 size={12} />
                         </button>
@@ -785,24 +1021,26 @@ export default function Leads({ activeCampaignId, setCurrentTab, setActiveCampai
               </div>
               <button className="modal-close" onClick={() => setShowCriteriaModal(false)}><X size={18} /></button>
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', padding: '0.5rem 0' }}>
               {[
-                { label: 'Departments', val: statusMetrics?.strategy?.departments || statusMetrics?.strategy?.department, color: '#34d399' },
-                { label: 'Seniority', val: statusMetrics?.strategy?.seniority_levels || statusMetrics?.strategy?.seniority, color: '#fbbf24' },
-                { label: 'Job Titles', val: statusMetrics?.strategy?.job_titles || statusMetrics?.strategy?.job_title_keywords, color: '#c7d2fe' },
-                { label: 'Locations', val: statusMetrics?.strategy?.locations || statusMetrics?.strategy?.country, color: '#a5b4fc' },
-                { label: 'Industries', val: statusMetrics?.strategy?.industries || statusMetrics?.strategy?.industry_list, color: '#f472b6' },
-                { label: 'Keywords', val: statusMetrics?.strategy?.keywords, color: '#38bdf8' },
+                { label: 'Departments', val: statusMetrics?.strategy?.departments || statusMetrics?.strategy?.department, color: 'var(--success)' },
+                { label: 'Seniority', val: statusMetrics?.strategy?.seniority_levels || statusMetrics?.strategy?.seniority, color: '#f59e0b' },
+                { label: 'Job Titles', val: statusMetrics?.strategy?.job_titles || statusMetrics?.strategy?.job_title_keywords, color: 'var(--accent)' },
+                { label: 'Locations', val: statusMetrics?.strategy?.locations || statusMetrics?.strategy?.country, color: '#3b82f6' },
+                { label: 'Industries', val: statusMetrics?.strategy?.industries || statusMetrics?.strategy?.industry_list, color: '#ec4899' },
+                { label: 'Keywords', val: statusMetrics?.strategy?.keywords, color: '#8b5cf6' },
               ].map(({ label, val, color }) => (
-                <div key={label}>
-                  <div style={{ fontSize: '0.73rem', color: 'var(--text-muted)', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '0.05em' }}>{label}</div>
+                <div key={label} style={{ background: 'var(--bg-inner)', padding: '0.65rem 0.85rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-light)' }}>
+                  <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginBottom: 3, textTransform: 'uppercase', letterSpacing: '0.04em', fontWeight: 700 }}>
+                    {label}
+                  </div>
                   <div style={{ fontWeight: 600, color, fontSize: '0.85rem' }}>
                     {(Array.isArray(val) ? val : val ? [val] : []).join(', ') || 'Any'}
                   </div>
                 </div>
               ))}
             </div>
-            <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '1.5rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '1.25rem' }}>
               <button className="btn btn-ghost" onClick={() => setShowCriteriaModal(false)}>Close</button>
             </div>
           </div>
@@ -818,64 +1056,66 @@ export default function Leads({ activeCampaignId, setCurrentTab, setActiveCampai
           transform: 'translateX(-50%)',
           zIndex: 999,
           background: 'var(--bg-card)',
-          border: '1px solid var(--border-light)',
-          borderRadius: 'var(--radius-xl)',
-          boxShadow: 'var(--shadow-lg), 0 0 32px rgba(99,102,241,0.2)',
-          padding: '0.85rem 1.5rem',
+          border: '1px solid var(--border)',
+          borderRadius: 'var(--radius-full)',
+          boxShadow: 'var(--shadow-lg), 0 0 24px rgba(232,98,44,0.18)',
+          padding: '0.65rem 1.25rem',
           display: 'flex',
           alignItems: 'center',
-          gap: '1.25rem',
+          gap: '1rem',
           animation: 'slideUp 0.2s ease',
           backdropFilter: 'blur(12px)',
           minWidth: 420,
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flex: 1 }}>
             <ListChecks size={18} color="var(--accent)" />
-            <span style={{ fontWeight: 700, color: 'var(--text-main)', fontSize: '0.9rem' }}>
+            <span style={{ fontWeight: 700, color: 'var(--text-main)', fontSize: '0.88rem' }}>
               {selectedIds.size} lead{selectedIds.size !== 1 ? 's' : ''} selected
             </span>
-            <span style={{ color: 'var(--text-muted)', fontSize: '0.8rem' }}>· click rows to deselect</span>
           </div>
 
           <button
             className="btn btn-ghost btn-sm"
             onClick={() => setSelectedIds(new Set())}
+            style={{ fontSize: '0.8rem' }}
           >
             <X size={13} /> Clear
           </button>
 
           <button
-            className="btn"
+            className="btn btn-sm"
             disabled={addingToDeals}
             onClick={triggerBulkDelete}
             style={{
-              background: 'rgba(239,68,68,0.15)',
-              color: '#f87171',
-              border: '1px solid rgba(239,68,68,0.4)',
-              fontWeight: 700, fontSize: '0.85rem', padding: '0.55rem 1rem',
-              gap: '0.4rem', display: 'flex', alignItems: 'center'
+              background: 'var(--danger-light)',
+              color: 'var(--danger)',
+              border: '1px solid rgba(239,68,68,0.3)',
+              fontWeight: 700, fontSize: '0.8rem', padding: '0.45rem 0.85rem',
+              gap: '0.35rem', display: 'flex', alignItems: 'center'
             }}
           >
-            <Trash2 size={14} /> Delete Selected ({selectedIds.size})
+            <Trash2 size={13} /> Delete ({selectedIds.size})
           </button>
 
           <button
-            className="btn"
+            className="btn btn-sm"
             disabled={addingToDeals}
             onClick={handleBulkAddToDeals}
             style={{
               background: addingToDeals ? 'var(--accent-light)' : 'var(--gradient-accent)',
-              fontWeight: 700, fontSize: '0.875rem', padding: '0.55rem 1.25rem',
-              gap: '0.5rem',
+              color: '#ffffff',
+              fontWeight: 700, fontSize: '0.82rem', padding: '0.45rem 1rem',
+              gap: '0.4rem',
             }}
           >
             {addingToDeals
-              ? <><div className="spinner" style={{ width: 14, height: 14, borderWidth: 2 }} /> Processing...</>
-              : <><ArrowRight size={15} /> Add to Deals &amp; Pipeline</>
+              ? <><div className="spinner" style={{ width: 13, height: 13, borderWidth: 2 }} /> Processing...</>
+              : <><ArrowRight size={14} /> Add to Deals &amp; Pipeline</>
             }
           </button>
         </div>
       )}
+
       {/* Centered Confirm Modal */}
       <ConfirmModal
         isOpen={confirmModal.isOpen}

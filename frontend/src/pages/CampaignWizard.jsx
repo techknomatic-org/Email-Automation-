@@ -52,10 +52,12 @@ export default function CampaignWizard({ onComplete }) {
   const [seniorities, setSeniorities] = useState([]);
   const [departments, setDepartments] = useState([]);
   const [industries, setIndustries] = useState([]);
+  const [locations, setLocations] = useState([]);
   const [keywords, setKeywords] = useState([]);
   const [newRoleInput, setNewRoleInput] = useState('');
   const [newDeptInput, setNewDeptInput] = useState('');
   const [newIndustryInput, setNewIndustryInput] = useState('');
+  const [newLocationInput, setNewLocationInput] = useState('');
   const [newKeywordInput, setNewKeywordInput] = useState('');
 
   // Fetch live total profile count from Master Lead Database
@@ -117,6 +119,7 @@ export default function CampaignWizard({ onComplete }) {
             seniorities,
             departments,
             industries,
+            locations,
             keywords,
             csv_filename: attachedCsv ? attachedCsv.filename : null
           });
@@ -130,7 +133,7 @@ export default function CampaignWizard({ onComplete }) {
 
       return () => clearTimeout(timer);
     }
-  }, [step, seniorities, departments, industries, keywords, targetPrompt, name, attachedCsv]);
+  }, [step, seniorities, departments, industries, locations, keywords, targetPrompt, name, attachedCsv]);
 
   const handleGeneratePlan = async () => {
     setErrorMessage('');
@@ -159,6 +162,7 @@ export default function CampaignWizard({ onComplete }) {
       setSeniorities(plan.recommended_seniorities || []);
       setDepartments(plan.target_departments || (plan.interpreted_department && plan.interpreted_department !== 'General' ? [plan.interpreted_department] : []));
       setIndustries(plan.target_industries || []);
+      setLocations(plan.target_locations || []);
       setKeywords(plan.search_keywords || []);
 
       // Auto advance to Step 2 without alert popups
@@ -213,6 +217,19 @@ export default function CampaignWizard({ onComplete }) {
     setIndustries(industries.filter((_, i) => i !== index));
   };
 
+  const handleAddLocation = () => {
+    const val = newLocationInput.trim();
+    if (!val) return;
+    if (!locations.includes(val)) {
+      setLocations([...locations, val]);
+    }
+    setNewLocationInput('');
+  };
+
+  const handleRemoveLocation = (index) => {
+    setLocations(locations.filter((_, i) => i !== index));
+  };
+
   const handleAddKeyword = () => {
     const val = newKeywordInput.trim();
     if (!val) return;
@@ -244,6 +261,9 @@ export default function CampaignWizard({ onComplete }) {
       if (industries.length > 0) {
         targetDesc += ` (Industries: ${industries.join(', ')})`;
       }
+      if (locations.length > 0) {
+        targetDesc += ` (Locations: ${locations.join(', ')})`;
+      }
       if (seniorities.length > 0) {
         targetDesc += ` (Target Roles: ${seniorities.join(', ')})`;
       }
@@ -271,6 +291,7 @@ export default function CampaignWizard({ onComplete }) {
           seniority_levels: seniorities,
           departments: departments,
           industries: mergedIndustries,
+          locations: locations,
           keywords: keywords,
           csv_filename: attachedCsv ? attachedCsv.filename : null
         }
@@ -1017,6 +1038,46 @@ export default function CampaignWizard({ onComplete }) {
               </div>
             </div>
 
+            {/* Target Locations & Geographies */}
+            <div style={{ backgroundColor: 'var(--bg-main)', padding: '1.25rem', borderRadius: '8px', marginBottom: '1.25rem', border: '1px solid rgba(2, 132, 199, 0.3)' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
+                <h4 style={{ color: '#0284c7', margin: 0, fontSize: '0.95rem' }}>🌍 Target Locations &amp; Geographies</h4>
+                <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>Click ✕ to remove or type below to add country/city</span>
+              </div>
+
+              <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '0.85rem' }}>
+                {locations.map((loc, i) => (
+                  <span key={i} className="badge" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '5px 10px', fontSize: '0.82rem', backgroundColor: 'rgba(2, 132, 199, 0.15)', color: '#0284c7', border: '1px solid rgba(2, 132, 199, 0.35)' }}>
+                    {loc}
+                    <button
+                      type="button"
+                      onClick={() => handleRemoveLocation(i)}
+                      style={{ background: 'none', border: 'none', color: '#f87171', cursor: 'pointer', fontWeight: 700, padding: 0, marginLeft: '3px', fontSize: '0.95rem', lineHeight: 1 }}
+                      title="Remove location"
+                    >
+                      ×
+                    </button>
+                  </span>
+                ))}
+                {locations.length === 0 && <span style={{ color: 'var(--text-muted)', fontSize: '0.8rem' }}>Global / Any Location (No location restrictions)</span>}
+              </div>
+
+              <div style={{ display: 'flex', gap: '0.5rem' }}>
+                <input
+                  type="text"
+                  className="form-control"
+                  style={{ padding: '0.4rem 0.8rem', fontSize: '0.82rem', flex: 1 }}
+                  placeholder="Add target location (e.g. India, UAE, United States, Germany, Singapore)..."
+                  value={newLocationInput}
+                  onChange={(e) => setNewLocationInput(e.target.value)}
+                  onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); handleAddLocation(); } }}
+                />
+                <button type="button" className="btn" style={{ padding: '0.4rem 0.85rem', fontSize: '0.8rem', backgroundColor: 'rgba(2, 132, 199, 0.2)', color: '#0284c7', border: '1px solid #0284c7', fontWeight: 600 }} onClick={handleAddLocation}>
+                  + Add Location
+                </button>
+              </div>
+            </div>
+
             {/* Target Seniorities & Roles */}
             <div style={{ backgroundColor: 'var(--bg-main)', padding: '1.25rem', borderRadius: '8px', marginBottom: '1.25rem', border: '1px solid rgba(16, 185, 129, 0.25)' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
@@ -1122,6 +1183,7 @@ export default function CampaignWizard({ onComplete }) {
                 <div><strong>Campaign Name:</strong> {name}</div>
                 {industryField.trim() && <div><strong>Campaign Industry:</strong> {industryField}</div>}
                 <div><strong>Target Industries:</strong> {industries.join(', ') || 'Any Industry'}</div>
+                <div><strong>Target Locations:</strong> {locations.join(', ') || 'Global / Any Location'}</div>
                 <div><strong>Target Departments:</strong> {departments.join(', ') || 'Any Department'}</div>
                 <div><strong>Target Personas / Seniorities:</strong> {seniorities.join(', ') || 'Default'}</div>
                 <div><strong>Search Keywords:</strong> {keywords.join(', ') || 'Default'}</div>

@@ -224,9 +224,14 @@ def control_campaign(campaign_id: int, action: str, db: Session = Depends(get_db
 @router.get("/{campaign_id}/leads")
 def get_campaign_leads(campaign_id: int, db: Session = Depends(get_db)):
     """Fetch campaign-specific lead pool with fit scores, research explanation, and deal status."""
+    from backend.app.services.campaign_intelligence import CampaignIntelligenceService
+    from backend.app.services.lead_discovery_service import evaluate_lead_relevance, generate_lead_pool_for_campaign
+
     campaign = db.query(Campaign).filter(Campaign.id == campaign_id).first()
     if not campaign:
         raise HTTPException(status_code=404, detail="Campaign not found")
+
+    strategy = CampaignIntelligenceService.derive_strategy(campaign)
 
     deals = db.query(Deal).filter(Deal.campaign_id == campaign_id).all()
     if not deals:
@@ -239,12 +244,20 @@ def get_campaign_leads(campaign_id: int, db: Session = Depends(get_db)):
 
     results = []
     seen_keys = set()
+    deals_modified = False
 
     for d in deals:
         lead = d.lead
         if not lead:
             continue
         
+        # Verify deal lead relevance against current campaign strategy
+        eval_res = evaluate_lead_relevance(lead, strategy)
+        if not eval_res.get("is_qualified", True) and d.state not in [DealState.EMAIL_SENT, DealState.FOLLOW_UP_SENT, DealState.REPLIED, DealState.SALES_HANDOFF, "Email Sent", "Follow-up Sent", "Replied", "Sales Handoff", "Meeting Booked"]:
+            db.delete(d)
+            deals_modified = True
+            continue
+
         source = lead.source_fields or {}
         lname = (source.get("name") or "").strip().lower()
         lcomp = (source.get("company") or "").strip().lower()
@@ -287,6 +300,12 @@ def get_campaign_leads(campaign_id: int, db: Session = Depends(get_db)):
             "qualification_explanation": (research.qualification_explanation if (research and research.qualification_explanation) else (d.reason if (d.reason and any(str(d.reason).startswith(p) for p in ["Why this lead?", "Why:", "Disqualified:"])) else "Matches campaign persona")),
             "deal_state": d.state
         })
+
+    if deals_modified:
+        try:
+            db.commit()
+        except Exception:
+            db.rollback()
 
     return results
 

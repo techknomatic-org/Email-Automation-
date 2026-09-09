@@ -143,8 +143,19 @@ def evaluate_lead_relevance(lead: Lead, strategy: CampaignSearchStrategy) -> Dic
             matched = False
             for target_i in target_industries:
                 syns = DataNormalizer.expand_industry_synonyms(target_i)
-                if any(s in industry_raw.lower() or s in company_raw.lower() or s in lead_full_text for s in syns):
-                    matched = True
+                for s in syns:
+                    s_clean = s.lower().strip()
+                    if not s_clean: continue
+                    if len(s_clean) <= 3:
+                        pat = r'\b' + re.escape(s_clean) + r'\b'
+                        if re.search(pat, industry_raw.lower()) or re.search(pat, company_raw.lower()):
+                            matched = True
+                            break
+                    else:
+                        if s_clean in industry_raw.lower() or s_clean in company_raw.lower():
+                            matched = True
+                            break
+                if matched:
                     break
             if matched:
                 ind_score = 15
@@ -162,7 +173,17 @@ def evaluate_lead_relevance(lead: Lead, strategy: CampaignSearchStrategy) -> Dic
     loc_matched = False
     if target_countries:
         if country_raw:
-            if any(c == country_raw or c in country_raw for c in target_countries):
+            from backend.app.services.normalizer import DataNormalizer
+            lead_cname, lead_ccode = DataNormalizer.normalize_country(country_raw)
+            matched = False
+            for c in target_countries:
+                t_cname, t_ccode = DataNormalizer.normalize_country(c)
+                if (t_cname and (t_cname.upper() == lead_cname.upper() or t_cname.upper() in country_raw.upper())) or \
+                   (t_ccode and (t_ccode.upper() == lead_ccode.upper() or t_ccode.upper() in country_raw.upper())) or \
+                   (c.upper() == country_raw.upper() or c.upper() in country_raw.upper()):
+                    matched = True
+                    break
+            if matched:
                 loc_score = 10
                 loc_matched = True
                 why_reasons.append(f"✓ {country_raw} location")
@@ -296,6 +317,16 @@ def generate_lead_pool_for_campaign(
     progress_steps.append(f"Mapped matching dimensions to Lead Fact table & SQL filtered candidate pool... ✓ {len(search_results)} relevant lead profiles retrieved")
 
     # Strict Relevance Rule: Return ONLY qualified leads from Master Database
+    valid_lead_ids = {item["lead"].id for item in search_results}
+    existing_deals = db.query(Deal).filter(Deal.campaign_id == campaign.id).all()
+    for d in existing_deals:
+        if d.lead_id not in valid_lead_ids and d.state not in [DealState.EMAIL_SENT, DealState.FOLLOW_UP_SENT, DealState.REPLIED, DealState.SALES_HANDOFF, "Email Sent", "Follow-up Sent", "Replied", "Sales Handoff", "Meeting Booked"]:
+            db.delete(d)
+    try:
+        db.commit()
+    except Exception:
+        db.rollback()
+
     if not search_results:
         no_match_msg = "No matching profiles found in the selected dataset." if csv_fn else "No matching leads found in the Master Database for this campaign."
         no_match_exp = no_match_msg
@@ -317,13 +348,6 @@ def generate_lead_pool_for_campaign(
             "progress_steps": progress_steps,
             "leads": []
         }
-
-    valid_lead_ids = {item["lead"].id for item in search_results}
-    existing_deals = db.query(Deal).filter(Deal.campaign_id == campaign.id).all()
-    for d in existing_deals:
-        if d.lead_id not in valid_lead_ids and d.state in [DealState.LEAD_CREATED, "Lead Created", "Pending", "LEAD_CREATED"]:
-            db.delete(d)
-    db.commit()
 
     total_dataset = db.query(Lead).count()
     total_discovered = len(search_results)

@@ -23,15 +23,21 @@ class HybridSearchEngine:
         t_clean = term.lower().strip()
 
         EXPANSIONS = {
-            "pbi": ["power bi", "powerbi", "pbi", "bi"],
-            "power bi": ["power bi", "powerbi", "pbi", "bi"],
-            "hr": ["human resources", "hr", "people", "talent"],
-            "it": ["information technology", "it", "tech"],
-            "cx": ["customer experience", "customer support", "cx"],
-            "fpa": ["financial planning", "fp&a", "finance", "fpa"],
-            "fp&a": ["financial planning", "fp&a", "finance", "fpa"],
+            "pbi": ["power bi", "powerbi", "pbi", "bi", "developer"],
+            "power bi": ["power bi", "powerbi", "pbi", "bi", "developer"],
+            "hr": ["human resources", "hr", "people", "talent", "recruitment", "staffing"],
+            "it": ["information technology", "it", "tech", "technology", "software", "engineering", "development", "developer", "infrastructure", "devops"],
+            "engineering": ["engineering", "engineer", "software", "developer", "development", "it", "tech", "technology"],
+            "finance": ["finance", "financial", "fin", "accounting", "accounts", "treasury", "fpa", "fp&a"],
+            "sales": ["sales", "business development", "biz dev", "bdo", "bd", "commercial", "revenue", "account executive", "ae", "sdr", "bdr"],
+            "marketing": ["marketing", "mktg", "growth", "demand gen", "branding"],
+            "operations": ["operations", "ops", "operation"],
+            "customer support": ["customer support", "customer service", "customer success", "support", "cs", "cx"],
+            "cx": ["customer experience", "customer support", "customer service", "customer success", "cx", "support"],
+            "fpa": ["financial planning", "fp&a", "finance", "fpa", "accounting"],
+            "fp&a": ["financial planning", "fp&a", "finance", "fpa", "accounting"],
             "ciso": ["ciso", "information security", "cybersecurity", "security"],
-            "bdo": ["bdo", "business development officer", "business development"]
+            "bdo": ["bdo", "business development officer", "business development", "sales"]
         }
 
         search_variations = [t_clean]
@@ -42,20 +48,32 @@ class HybridSearchEngine:
 
         for var in search_variations:
             if not var: continue
-            if var in title_text or var in dept_text or (sen_text and var in sen_text):
-                return True
-            sing_var = re.sub(r's\b', '', var)
-            if sing_var and (sing_var in title_text or sing_var in dept_text or (sen_text and sing_var in sen_text)):
-                return True
+            if len(var) <= 3:
+                pat = r'\b' + re.escape(var) + r'\b'
+                if re.search(pat, title_text) or re.search(pat, dept_text) or (sen_text and re.search(pat, sen_text)):
+                    return True
+            else:
+                if var in title_text or var in dept_text or (sen_text and var in sen_text):
+                    return True
+                sing_var = re.sub(r's\b', '', var)
+                if sing_var and (sing_var in title_text or sing_var in dept_text or (sen_text and sing_var in sen_text)):
+                    return True
 
-        tokens = [w for w in re.findall(r'\b[a-z0-9]{3,}\b', t_clean) if w not in ('and', 'the', 'for', 'with', 'all', 'in', 'at')]
-        if tokens:
+        tokens = [w for w in re.findall(r'\b[a-z0-9]{2,}\b', t_clean) if w not in ('and', 'the', 'for', 'with', 'all', 'in', 'at', 'of', 'to', 'from')]
+        if len(tokens) >= 2:
             matched_count = 0
             for tok in tokens:
                 sing_tok = re.sub(r's\b', '', tok)
-                if tok in title_text or tok in dept_text or (sen_text and tok in sen_text) or sing_tok in title_text or sing_tok in dept_text or (sen_text and sing_tok in sen_text):
-                    matched_count += 1
-            if matched_count >= max(1, len(tokens) - 1):
+                if len(tok) <= 3:
+                    pat = r'\b' + re.escape(tok) + r'\b'
+                    sing_pat = r'\b' + re.escape(sing_tok) + r'\b'
+                    if re.search(pat, title_text) or re.search(pat, dept_text) or (sen_text and re.search(pat, sen_text)) or \
+                       re.search(sing_pat, title_text) or re.search(sing_pat, dept_text) or (sen_text and re.search(sing_pat, sen_text)):
+                        matched_count += 1
+                else:
+                    if tok in title_text or tok in dept_text or (sen_text and tok in sen_text) or sing_tok in title_text or sing_tok in dept_text or (sen_text and sing_tok in sen_text):
+                        matched_count += 1
+            if matched_count == len(tokens):
                 return True
         return False
 
@@ -385,7 +403,7 @@ class HybridSearchEngine:
                     seniority_score = 100
                     why_reasons.append(f"✓ Seniority Match: 100% ({lead.seniority or seniorities[0].title()})")
                 else:
-                    seniority_score = 40
+                    seniority_score = 0
             else:
                 seniority_score = 100
 
@@ -400,44 +418,54 @@ class HybridSearchEngine:
                     role_score = 75
                     why_reasons.append(f"✓ Role Match: 75% ({lead.job_title})")
                 else:
-                    role_score = 30
+                    role_score = 0
             else:
                 role_score = 100
 
-            # HARD CONJUNCTION RULE: Must satisfy Department AND (Seniority or Title)
-            if (seniorities or job_titles) and (seniority_score < 50 and role_score < 50):
+            # HARD CONJUNCTION RULE: If target personas/seniorities/roles were specified, lead MUST match target role or seniority!
+            if (seniorities or job_titles) and (seniority_score == 0 and role_score == 0):
                 continue
 
-            # 4. Location Match Check
+            # 4. Location Match Check (Strict country/city/region verification)
             location_score = 0
             if countries:
+                lead_cname, lead_ccode = DataNormalizer.normalize_country(lead.country or lead.country_code or "")
                 for c in countries:
+                    t_cname, t_ccode = DataNormalizer.normalize_country(c)
                     c_clean = c.lower().strip()
-                    if c_clean in country_text or c_clean in full_lead_text:
+                    if (lead_cname and t_cname and lead_cname.lower() == t_cname.lower()) or \
+                       (lead_ccode and t_ccode and lead_ccode.lower() == t_ccode.lower()) or \
+                       (c_clean == country_text) or (t_cname and t_cname.lower() == country_text) or \
+                       (c_clean and country_text and (c_clean in country_text or country_text in c_clean)):
                         location_score = 100
                         why_reasons.append(f"✓ Location Match: 100% ({lead.country or lead.country_code})")
                         break
-                    cname, ccode = DataNormalizer.normalize_country(c)
-                    if (cname and cname.lower() in country_text) or (ccode and ccode.lower() in country_text):
-                        location_score = 100
-                        why_reasons.append(f"✓ Location Match: 100% ({lead.country or lead.country_code})")
-                        break
-                if location_score == 0:
-                    location_score = 40
-            else:
-                location_score = 100
 
-            # 5. Industry Match Check with Full Synonym Expansion
+            # STRICT LOCATION RULE: If target locations/countries are specified, lead MUST match target location!
+            if countries and location_score == 0:
+                continue
+
+            # 5. Industry Match Check with Full Synonym Expansion (Matched on industry and company)
             industry_score = 0
             if industries:
                 for ind in industries:
                     syns = DataNormalizer.expand_industry_synonyms(ind)
-                    if any(s in ind_text or s in company_text or s in full_lead_text for s in syns):
-                        industry_score = 100
-                        why_reasons.append(f"✓ Industry Match: 100% ({lead.industry or ind.title()})")
+                    for s in syns:
+                        s_clean = s.lower().strip()
+                        if not s_clean: continue
+                        if len(s_clean) <= 3:
+                            pat = r'\b' + re.escape(s_clean) + r'\b'
+                            if re.search(pat, ind_text) or re.search(pat, company_text):
+                                industry_score = 100
+                                why_reasons.append(f"✓ Industry Match: 100% ({lead.industry or ind.title()})")
+                                break
+                        else:
+                            if s_clean in ind_text or s_clean in company_text:
+                                industry_score = 100
+                                why_reasons.append(f"✓ Industry Match: 100% ({lead.industry or ind.title()})")
+                                break
+                    if industry_score > 0:
                         break
-            else:
-                industry_score = 100
 
             # STRICT INDUSTRY RULE: If target industry is specified, lead MUST match target industry!
             if industries and industry_score == 0:
