@@ -2046,9 +2046,9 @@
     "semantic_hash": ""
   },
   "frontend/src/pages/AuthPage.jsx": {
-    "mtime": 1788505448.0767698,
-    "seen": 1788505559.6714923,
-    "ast_hash": "20729b5e2e19cd3cb147c48577323348",
+    "mtime": 1788949877.0183644,
+    "seen": 1788949921.219489,
+    "ast_hash": "d20b6ec2495a7e416bf4428276d29711",
     "semantic_hash": ""
   },
   "frontend/src/components/CampaignSequenceBuilder.jsx": {

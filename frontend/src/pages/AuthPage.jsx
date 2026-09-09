@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import {
   Zap, Mail, Lock, User, Eye, EyeOff, CheckCircle2,
   AlertCircle, ArrowRight, ShieldCheck, Sparkles, Building,
-  Target, Inbox, Activity
+  Target, Inbox, Activity, Sun, Moon
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { useTheme } from '../context/ThemeContext';
 
 export default function AuthPage({ defaultTab = 'login' }) {
   const { login, signup } = useAuth();
+  const { theme, toggleTheme, isDark } = useTheme();
   const [activeTab, setActiveTab] = useState(defaultTab); // 'login' | 'signup'
 
   // Login form state
@@ -115,23 +117,25 @@ export default function AuthPage({ defaultTab = 'login' }) {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      background: 'radial-gradient(ellipse at 50% 20%, rgba(99, 102, 241, 0.15), transparent 70%), radial-gradient(ellipse at 80% 80%, rgba(245, 158, 11, 0.08), transparent 60%), #0b0f19',
-      color: '#f8fafc',
-      fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+      background: isDark
+        ? 'radial-gradient(ellipse at 50% 20%, rgba(232, 98, 44, 0.12), transparent 70%), radial-gradient(ellipse at 80% 80%, rgba(27, 42, 74, 0.25), transparent 60%), #0B0F19'
+        : 'radial-gradient(ellipse at 50% 20%, rgba(232, 98, 44, 0.08), transparent 70%), radial-gradient(ellipse at 80% 80%, rgba(245, 166, 35, 0.06), transparent 60%), #F8FAFC',
+      color: 'var(--text-main, #0F172A)',
+      fontFamily: "var(--font-sans, 'Inter', system-ui, -apple-system, sans-serif)",
       padding: '2rem 1rem',
       boxSizing: 'border-box',
       position: 'relative',
       overflow: 'hidden'
     }}>
-      {/* Subtle background glow effect */}
+      {/* Background ambient accents matching Coral / Gold theme */}
       <div style={{
         position: 'absolute',
         top: '-10%',
-        left: '20%',
+        left: '15%',
         width: '500px',
         height: '500px',
-        background: 'radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, transparent 70%)',
-        filter: 'blur(60px)',
+        background: 'radial-gradient(circle, rgba(232, 98, 44, 0.1) 0%, transparent 70%)',
+        filter: 'blur(70px)',
         pointerEvents: 'none',
       }} />
       <div style={{
@@ -140,56 +144,58 @@ export default function AuthPage({ defaultTab = 'login' }) {
         right: '15%',
         width: '450px',
         height: '450px',
-        background: 'radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, transparent 70%)',
-        filter: 'blur(60px)',
+        background: 'radial-gradient(circle, rgba(245, 166, 35, 0.08) 0%, transparent 70%)',
+        filter: 'blur(70px)',
         pointerEvents: 'none',
       }} />
 
       {/* Main Container Card */}
       <div style={{
         width: '100%',
-        maxWidth: '1000px',
+        maxWidth: '1020px',
         display: 'grid',
         gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
-        background: 'rgba(17, 24, 39, 0.75)',
-        backdropFilter: 'blur(20px)',
-        WebkitBackdropFilter: 'blur(20px)',
-        border: '1px solid rgba(255, 255, 255, 0.1)',
+        background: 'var(--bg-card, #FFFFFF)',
+        border: '1px solid var(--border, #CBD5E1)',
         borderRadius: '20px',
-        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(99, 102, 241, 0.15)',
+        boxShadow: isDark
+          ? '0 25px 50px -12px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(232, 98, 44, 0.15)'
+          : '0 20px 40px -15px rgba(15, 23, 42, 0.08), 0 0 0 1px rgba(203, 213, 225, 0.8)',
         overflow: 'hidden',
-        zIndex: 1
+        zIndex: 1,
+        transition: 'all 0.3s ease'
       }}>
         {/* Left Branding Showcase Column */}
         <div style={{
           padding: '3rem 2.5rem',
-          background: 'linear-gradient(135deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.9) 100%)',
+          background: 'linear-gradient(135deg, #1B2A4A 0%, #0F172A 100%)',
+          color: '#FFFFFF',
           borderRight: '1px solid rgba(255, 255, 255, 0.08)',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
         }}>
           <div>
-            {/* Logo */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '2rem' }}>
+            {/* Logo matching Sidebar */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '2.25rem' }}>
               <div style={{
                 width: '42px',
                 height: '42px',
                 borderRadius: '12px',
-                background: 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)',
+                background: 'linear-gradient(135deg, #E8622C 0%, #F5A623 100%)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                boxShadow: '0 8px 16px rgba(99, 102, 241, 0.35)',
+                boxShadow: '0 8px 16px rgba(232, 98, 44, 0.35)',
                 color: '#ffffff'
               }}>
                 <Zap size={22} />
               </div>
               <div>
-                <h1 style={{ margin: 0, fontSize: '1.4rem', fontWeight: 700, letterSpacing: '-0.02em', color: '#ffffff' }}>
+                <h1 style={{ margin: 0, fontSize: '1.45rem', fontWeight: 700, letterSpacing: '-0.02em', color: '#ffffff' }}>
                   OpenOutreach
                 </h1>
-                <span style={{ fontSize: '0.75rem', color: '#94a3b8', fontWeight: 500 }}>
+                <span style={{ fontSize: '0.76rem', color: '#94a3b8', fontWeight: 500 }}>
                   Autonomous B2B Pipeline & Cold Outreach
                 </span>
               </div>
@@ -204,11 +210,11 @@ export default function AuthPage({ defaultTab = 'login' }) {
             </p>
 
             {/* Feature Highlights */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.1rem' }}>
               {[
-                { icon: Target, title: 'Precision ICP Match', desc: 'Strict AND condition discovery across titles, depts, and skills.' },
-                { icon: Inbox, title: '100% Primary Inbox Reach', desc: 'Clean headers & RFC standards bypass spam and promotions tabs.' },
-                { icon: Activity, title: 'Live Deal Intelligence', desc: 'Full bidirectional thread sync, AI reply classification & NBA.' }
+                { icon: Target, title: 'Precision ICP Match', desc: 'Strict multi-attribute conjunction discovery across titles, depts, and skills.' },
+                { icon: Inbox, title: '100% Primary Inbox Reach', desc: 'Clean RFC MIME standards bypass spam and promotions tabs.' },
+                { icon: Activity, title: 'Live Deal Intelligence', desc: 'Bidirectional thread sync, AI reply classification, and instant actions.' }
               ].map((feat, idx) => {
                 const Icon = feat.icon;
                 return (
@@ -216,15 +222,18 @@ export default function AuthPage({ defaultTab = 'login' }) {
                     <div style={{
                       padding: '7px',
                       borderRadius: '8px',
-                      background: 'rgba(99, 102, 241, 0.15)',
-                      color: '#818cf8',
-                      marginTop: '2px'
+                      background: 'rgba(232, 98, 44, 0.15)',
+                      color: '#FF8A50',
+                      marginTop: '2px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center'
                     }}>
                       <Icon size={16} />
                     </div>
                     <div>
-                      <div style={{ fontSize: '0.86rem', fontWeight: 600, color: '#f1f5f9' }}>{feat.title}</div>
-                      <div style={{ fontSize: '0.78rem', color: '#64748b', lineHeight: 1.4 }}>{feat.desc}</div>
+                      <div style={{ fontSize: '0.88rem', fontWeight: 600, color: '#f1f5f9' }}>{feat.title}</div>
+                      <div style={{ fontSize: '0.78rem', color: '#94a3b8', lineHeight: 1.4 }}>{feat.desc}</div>
                     </div>
                   </div>
                 );
@@ -236,17 +245,17 @@ export default function AuthPage({ defaultTab = 'login' }) {
           <div style={{
             marginTop: '2.5rem',
             padding: '1rem',
-            background: 'rgba(99, 102, 241, 0.08)',
-            border: '1px solid rgba(99, 102, 241, 0.25)',
+            background: 'rgba(232, 98, 44, 0.08)',
+            border: '1px solid rgba(232, 98, 44, 0.25)',
             borderRadius: '12px'
           }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '6px' }}>
-              <span style={{ fontSize: '0.75rem', fontWeight: 600, color: '#a5b4fc', display: 'flex', alignItems: 'center', gap: '5px' }}>
+              <span style={{ fontSize: '0.75rem', fontWeight: 600, color: '#FF8A50', display: 'flex', alignItems: 'center', gap: '5px' }}>
                 <Sparkles size={13} /> Instant Demo Account
               </span>
-              <span style={{ fontSize: '0.7rem', color: '#34d399', backgroundColor: 'rgba(16,185,129,0.15)', padding: '2px 6px', borderRadius: '4px' }}>Ready</span>
+              <span style={{ fontSize: '0.7rem', color: '#10b981', backgroundColor: 'rgba(16,185,129,0.15)', padding: '2px 6px', borderRadius: '4px', fontWeight: 600 }}>Ready</span>
             </div>
-            <div style={{ fontSize: '0.78rem', color: '#94a3b8', marginBottom: '8px' }}>
+            <div style={{ fontSize: '0.78rem', color: '#cbd5e1', marginBottom: '8px' }}>
               Login as <strong>admin@openoutreach.ai</strong> (Pass: <code>Admin123!</code>)
             </div>
             <button
@@ -255,11 +264,11 @@ export default function AuthPage({ defaultTab = 'login' }) {
               disabled={loading}
               style={{
                 width: '100%',
-                padding: '6px 12px',
-                fontSize: '0.78rem',
+                padding: '7px 12px',
+                fontSize: '0.8rem',
                 fontWeight: 600,
                 color: '#ffffff',
-                background: 'linear-gradient(135deg, #4f46e5 0%, #6366f1 100%)',
+                background: 'linear-gradient(135deg, #E8622C 0%, #F5A623 100%)',
                 border: 'none',
                 borderRadius: '6px',
                 cursor: 'pointer',
@@ -267,24 +276,79 @@ export default function AuthPage({ defaultTab = 'login' }) {
                 alignItems: 'center',
                 justifyContent: 'center',
                 gap: '6px',
-                transition: 'opacity 0.2s'
+                transition: 'opacity 0.2s ease',
+                boxShadow: '0 2px 8px rgba(232, 98, 44, 0.3)'
               }}
             >
-              <Zap size={13} /> One-Click Quick Demo Sign In
+              <Zap size={13} /> 1-Click Demo Sign In
             </button>
           </div>
         </div>
 
-        {/* Right Form Column */}
-        <div style={{ padding: '3rem 2.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-          {/* Tab Navigation */}
+        {/* Right Form Interaction Column */}
+        <div style={{
+          padding: '3rem 2.5rem',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          background: 'var(--bg-card, #FFFFFF)',
+          position: 'relative'
+        }}>
+          {/* Header & Theme Toggle */}
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.5rem' }}>
+            <div>
+              <h3 style={{
+                margin: 0,
+                fontSize: '1.45rem',
+                fontWeight: 700,
+                color: 'var(--text-main, #0F172A)',
+                letterSpacing: '-0.02em'
+              }}>
+                {activeTab === 'login' ? 'Welcome Back' : 'Create Account'}
+              </h3>
+              <p style={{
+                margin: '4px 0 0 0',
+                fontSize: '0.85rem',
+                color: 'var(--text-muted, #475569)'
+              }}>
+                {activeTab === 'login'
+                  ? 'Sign in to access your sales deals and outreach campaigns'
+                  : 'Start discovering leads and running autonomous AI outreach'}
+              </p>
+            </div>
+
+            {/* Theme Toggle Button */}
+            <button
+              type="button"
+              onClick={toggleTheme}
+              title={isDark ? "Switch to Light theme" : "Switch to Dark theme"}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: '36px',
+                height: '36px',
+                borderRadius: '10px',
+                border: '1px solid var(--border, #CBD5E1)',
+                background: 'var(--bg-input, #FFFFFF)',
+                color: 'var(--text-main, #0F172A)',
+                cursor: 'pointer',
+                transition: 'all 0.2s ease',
+                boxShadow: 'var(--shadow-sm)'
+              }}
+            >
+              {isDark ? <Sun size={17} color="#F5A623" /> : <Moon size={17} color="#1B2A4A" />}
+            </button>
+          </div>
+
+          {/* Tab Selector Buttons */}
           <div style={{
             display: 'flex',
-            background: 'rgba(30, 41, 59, 0.8)',
-            padding: '4px',
+            backgroundColor: isDark ? 'rgba(30, 41, 59, 0.6)' : 'var(--bg-inner, #F8FAFC)',
+            border: '1px solid var(--border, #CBD5E1)',
             borderRadius: '10px',
-            marginBottom: '2rem',
-            border: '1px solid rgba(255, 255, 255, 0.06)'
+            padding: '4px',
+            marginBottom: '1.5rem'
           }}>
             <button
               type="button"
@@ -298,9 +362,9 @@ export default function AuthPage({ defaultTab = 'login' }) {
                 borderRadius: '8px',
                 cursor: 'pointer',
                 transition: 'all 0.2s ease',
-                background: activeTab === 'login' ? 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)' : 'transparent',
-                color: activeTab === 'login' ? '#ffffff' : '#94a3b8',
-                boxShadow: activeTab === 'login' ? '0 4px 12px rgba(99, 102, 241, 0.3)' : 'none'
+                background: activeTab === 'login' ? 'linear-gradient(135deg, #E8622C 0%, #F5A623 100%)' : 'transparent',
+                color: activeTab === 'login' ? '#ffffff' : 'var(--text-muted, #475569)',
+                boxShadow: activeTab === 'login' ? '0 4px 12px rgba(232, 98, 44, 0.3)' : 'none'
               }}
             >
               Sign In
@@ -317,9 +381,9 @@ export default function AuthPage({ defaultTab = 'login' }) {
                 borderRadius: '8px',
                 cursor: 'pointer',
                 transition: 'all 0.2s ease',
-                background: activeTab === 'signup' ? 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)' : 'transparent',
-                color: activeTab === 'signup' ? '#ffffff' : '#94a3b8',
-                boxShadow: activeTab === 'signup' ? '0 4px 12px rgba(99, 102, 241, 0.3)' : 'none'
+                background: activeTab === 'signup' ? 'linear-gradient(135deg, #E8622C 0%, #F5A623 100%)' : 'transparent',
+                color: activeTab === 'signup' ? '#ffffff' : 'var(--text-muted, #475569)',
+                boxShadow: activeTab === 'signup' ? '0 4px 12px rgba(232, 98, 44, 0.3)' : 'none'
               }}
             >
               Create Account
@@ -333,10 +397,10 @@ export default function AuthPage({ defaultTab = 'login' }) {
               alignItems: 'center',
               gap: '10px',
               padding: '0.75rem 1rem',
-              backgroundColor: 'rgba(239, 68, 68, 0.15)',
+              backgroundColor: isDark ? 'rgba(239, 68, 68, 0.15)' : '#FEF2F2',
               border: '1px solid rgba(239, 68, 68, 0.35)',
               borderRadius: '8px',
-              color: '#fca5a5',
+              color: isDark ? '#fca5a5' : '#B91C1C',
               fontSize: '0.84rem',
               marginBottom: '1.25rem'
             }}>
@@ -351,10 +415,10 @@ export default function AuthPage({ defaultTab = 'login' }) {
               alignItems: 'center',
               gap: '10px',
               padding: '0.75rem 1rem',
-              backgroundColor: 'rgba(16, 185, 129, 0.15)',
+              backgroundColor: isDark ? 'rgba(16, 185, 129, 0.15)' : '#ECFDF5',
               border: '1px solid rgba(16, 185, 129, 0.35)',
               borderRadius: '8px',
-              color: '#6ee7b7',
+              color: isDark ? '#6ee7b7' : '#047857',
               fontSize: '0.84rem',
               marginBottom: '1.25rem'
             }}>
@@ -367,11 +431,17 @@ export default function AuthPage({ defaultTab = 'login' }) {
           {activeTab === 'login' && (
             <form onSubmit={handleLoginSubmit}>
               <div style={{ marginBottom: '1.25rem' }}>
-                <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 600, color: '#cbd5e1', marginBottom: '6px' }}>
+                <label style={{
+                  display: 'block',
+                  fontSize: '0.82rem',
+                  fontWeight: 600,
+                  color: 'var(--text-sub, #1E293B)',
+                  marginBottom: '6px'
+                }}>
                   Work Email Address
                 </label>
                 <div style={{ position: 'relative' }}>
-                  <div style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#64748b' }}>
+                  <div style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-faint, #64748B)' }}>
                     <Mail size={16} />
                   </div>
                   <input
@@ -382,14 +452,23 @@ export default function AuthPage({ defaultTab = 'login' }) {
                     onChange={(e) => setLoginEmail(e.target.value)}
                     style={{
                       width: '100%',
-                      padding: '10px 12px 10px 38px',
-                      backgroundColor: 'rgba(15, 23, 42, 0.6)',
-                      border: '1px solid rgba(255, 255, 255, 0.12)',
+                      padding: '11px 12px 11px 38px',
+                      backgroundColor: 'var(--bg-input, #FFFFFF)',
+                      border: '1px solid var(--border-input, #CBD5E1)',
                       borderRadius: '8px',
-                      color: '#f8fafc',
+                      color: 'var(--text-main, #0F172A)',
                       fontSize: '0.88rem',
                       outline: 'none',
-                      boxSizing: 'border-box'
+                      boxSizing: 'border-box',
+                      transition: 'border-color 0.2s, box-shadow 0.2s'
+                    }}
+                    onFocus={(e) => {
+                      e.target.style.borderColor = '#E8622C';
+                      e.target.style.boxShadow = '0 0 0 3px rgba(232, 98, 44, 0.15)';
+                    }}
+                    onBlur={(e) => {
+                      e.target.style.borderColor = 'var(--border-input, #CBD5E1)';
+                      e.target.style.boxShadow = 'none';
                     }}
                   />
                 </div>
@@ -397,19 +476,23 @@ export default function AuthPage({ defaultTab = 'login' }) {
 
               <div style={{ marginBottom: '1.25rem' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
-                  <label style={{ fontSize: '0.82rem', fontWeight: 600, color: '#cbd5e1' }}>
+                  <label style={{
+                    fontSize: '0.82rem',
+                    fontWeight: 600,
+                    color: 'var(--text-sub, #1E293B)'
+                  }}>
                     Password
                   </label>
                   <button
                     type="button"
                     onClick={() => alert('For the local development instance, default credentials are: admin@openoutreach.ai / Admin123!')}
-                    style={{ background: 'none', border: 'none', color: '#818cf8', fontSize: '0.75rem', cursor: 'pointer', padding: 0 }}
+                    style={{ background: 'none', border: 'none', color: '#E8622C', fontSize: '0.76rem', cursor: 'pointer', padding: 0, fontWeight: 500 }}
                   >
                     Forgot Password?
                   </button>
                 </div>
                 <div style={{ position: 'relative' }}>
-                  <div style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#64748b' }}>
+                  <div style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-faint, #64748B)' }}>
                     <Lock size={16} />
                   </div>
                   <input
@@ -420,14 +503,23 @@ export default function AuthPage({ defaultTab = 'login' }) {
                     onChange={(e) => setLoginPassword(e.target.value)}
                     style={{
                       width: '100%',
-                      padding: '10px 38px 10px 38px',
-                      backgroundColor: 'rgba(15, 23, 42, 0.6)',
-                      border: '1px solid rgba(255, 255, 255, 0.12)',
+                      padding: '11px 38px 11px 38px',
+                      backgroundColor: 'var(--bg-input, #FFFFFF)',
+                      border: '1px solid var(--border-input, #CBD5E1)',
                       borderRadius: '8px',
-                      color: '#f8fafc',
+                      color: 'var(--text-main, #0F172A)',
                       fontSize: '0.88rem',
                       outline: 'none',
-                      boxSizing: 'border-box'
+                      boxSizing: 'border-box',
+                      transition: 'border-color 0.2s, box-shadow 0.2s'
+                    }}
+                    onFocus={(e) => {
+                      e.target.style.borderColor = '#E8622C';
+                      e.target.style.boxShadow = '0 0 0 3px rgba(232, 98, 44, 0.15)';
+                    }}
+                    onBlur={(e) => {
+                      e.target.style.borderColor = 'var(--border-input, #CBD5E1)';
+                      e.target.style.boxShadow = 'none';
                     }}
                   />
                   <button
@@ -440,7 +532,7 @@ export default function AuthPage({ defaultTab = 'login' }) {
                       transform: 'translateY(-50%)',
                       background: 'none',
                       border: 'none',
-                      color: '#64748b',
+                      color: 'var(--text-faint, #64748B)',
                       cursor: 'pointer',
                       padding: 0,
                       display: 'flex'
@@ -452,17 +544,24 @@ export default function AuthPage({ defaultTab = 'login' }) {
               </div>
 
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.75rem' }}>
-                <label style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.8rem', color: '#94a3b8', cursor: 'pointer' }}>
+                <label style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  fontSize: '0.82rem',
+                  color: 'var(--text-muted, #475569)',
+                  cursor: 'pointer'
+                }}>
                   <input
                     type="checkbox"
                     checked={rememberMe}
                     onChange={(e) => setRememberMe(e.target.checked)}
-                    style={{ accentColor: '#6366f1', cursor: 'pointer' }}
+                    style={{ accentColor: '#E8622C', cursor: 'pointer' }}
                   />
                   Remember my session
                 </label>
-                <span style={{ fontSize: '0.75rem', color: '#64748b', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                  <ShieldCheck size={13} color="#34d399" /> 256-bit Encrypted
+                <span style={{ fontSize: '0.75rem', color: 'var(--text-faint, #64748B)', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                  <ShieldCheck size={13} color="#10b981" /> 256-bit Encrypted
                 </span>
               </div>
 
@@ -472,8 +571,7 @@ export default function AuthPage({ defaultTab = 'login' }) {
                 style={{
                   width: '100%',
                   padding: '12px',
-                  backgroundColor: '#6366f1',
-                  background: 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)',
+                  background: 'linear-gradient(135deg, #E8622C 0%, #F5A623 100%)',
                   color: '#ffffff',
                   border: 'none',
                   borderRadius: '8px',
@@ -485,7 +583,7 @@ export default function AuthPage({ defaultTab = 'login' }) {
                   alignItems: 'center',
                   justifyContent: 'center',
                   gap: '8px',
-                  boxShadow: '0 4px 14px rgba(99, 102, 241, 0.4)',
+                  boxShadow: '0 4px 14px rgba(232, 98, 44, 0.35)',
                   transition: 'transform 0.15s ease, box-shadow 0.15s ease'
                 }}
               >
@@ -502,69 +600,103 @@ export default function AuthPage({ defaultTab = 'login' }) {
           {activeTab === 'signup' && (
             <form onSubmit={handleSignupSubmit}>
               <div style={{ marginBottom: '1rem' }}>
-                <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 600, color: '#cbd5e1', marginBottom: '6px' }}>
+                <label style={{
+                  display: 'block',
+                  fontSize: '0.82rem',
+                  fontWeight: 600,
+                  color: 'var(--text-sub, #1E293B)',
+                  marginBottom: '6px'
+                }}>
                   Full Name
                 </label>
                 <div style={{ position: 'relative' }}>
-                  <div style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#64748b' }}>
+                  <div style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-faint, #64748B)' }}>
                     <User size={16} />
                   </div>
                   <input
                     type="text"
                     required
-                    placeholder="Alex Morgan"
+                    placeholder="Pooja Khalekar"
                     value={signupName}
                     onChange={(e) => setSignupName(e.target.value)}
                     style={{
                       width: '100%',
                       padding: '10px 12px 10px 38px',
-                      backgroundColor: 'rgba(15, 23, 42, 0.6)',
-                      border: '1px solid rgba(255, 255, 255, 0.12)',
+                      backgroundColor: 'var(--bg-input, #FFFFFF)',
+                      border: '1px solid var(--border-input, #CBD5E1)',
                       borderRadius: '8px',
-                      color: '#f8fafc',
+                      color: 'var(--text-main, #0F172A)',
                       fontSize: '0.88rem',
                       outline: 'none',
                       boxSizing: 'border-box'
+                    }}
+                    onFocus={(e) => {
+                      e.target.style.borderColor = '#E8622C';
+                      e.target.style.boxShadow = '0 0 0 3px rgba(232, 98, 44, 0.15)';
+                    }}
+                    onBlur={(e) => {
+                      e.target.style.borderColor = 'var(--border-input, #CBD5E1)';
+                      e.target.style.boxShadow = 'none';
                     }}
                   />
                 </div>
               </div>
 
               <div style={{ marginBottom: '1rem' }}>
-                <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 600, color: '#cbd5e1', marginBottom: '6px' }}>
+                <label style={{
+                  display: 'block',
+                  fontSize: '0.82rem',
+                  fontWeight: 600,
+                  color: 'var(--text-sub, #1E293B)',
+                  marginBottom: '6px'
+                }}>
                   Work Email Address
                 </label>
                 <div style={{ position: 'relative' }}>
-                  <div style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#64748b' }}>
+                  <div style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-faint, #64748B)' }}>
                     <Mail size={16} />
                   </div>
                   <input
                     type="email"
                     required
-                    placeholder="alex@company.com"
+                    placeholder="pooja.khalekar@company.com"
                     value={signupEmail}
                     onChange={(e) => setSignupEmail(e.target.value)}
                     style={{
                       width: '100%',
                       padding: '10px 12px 10px 38px',
-                      backgroundColor: 'rgba(15, 23, 42, 0.6)',
-                      border: '1px solid rgba(255, 255, 255, 0.12)',
+                      backgroundColor: 'var(--bg-input, #FFFFFF)',
+                      border: '1px solid var(--border-input, #CBD5E1)',
                       borderRadius: '8px',
-                      color: '#f8fafc',
+                      color: 'var(--text-main, #0F172A)',
                       fontSize: '0.88rem',
                       outline: 'none',
                       boxSizing: 'border-box'
+                    }}
+                    onFocus={(e) => {
+                      e.target.style.borderColor = '#E8622C';
+                      e.target.style.boxShadow = '0 0 0 3px rgba(232, 98, 44, 0.15)';
+                    }}
+                    onBlur={(e) => {
+                      e.target.style.borderColor = 'var(--border-input, #CBD5E1)';
+                      e.target.style.boxShadow = 'none';
                     }}
                   />
                 </div>
               </div>
 
               <div style={{ marginBottom: '1rem' }}>
-                <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 600, color: '#cbd5e1', marginBottom: '6px' }}>
+                <label style={{
+                  display: 'block',
+                  fontSize: '0.82rem',
+                  fontWeight: 600,
+                  color: 'var(--text-sub, #1E293B)',
+                  marginBottom: '6px'
+                }}>
                   Role / Designation
                 </label>
                 <div style={{ position: 'relative' }}>
-                  <div style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#64748b' }}>
+                  <div style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-faint, #64748B)' }}>
                     <Building size={16} />
                   </div>
                   <select
@@ -573,10 +705,10 @@ export default function AuthPage({ defaultTab = 'login' }) {
                     style={{
                       width: '100%',
                       padding: '10px 12px 10px 38px',
-                      backgroundColor: '#0f172a',
-                      border: '1px solid rgba(255, 255, 255, 0.12)',
+                      backgroundColor: 'var(--bg-input, #FFFFFF)',
+                      border: '1px solid var(--border-input, #CBD5E1)',
                       borderRadius: '8px',
-                      color: '#f8fafc',
+                      color: 'var(--text-main, #0F172A)',
                       fontSize: '0.88rem',
                       outline: 'none',
                       boxSizing: 'border-box',
@@ -595,7 +727,13 @@ export default function AuthPage({ defaultTab = 'login' }) {
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', marginBottom: '1.5rem' }}>
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 600, color: '#cbd5e1', marginBottom: '6px' }}>
+                  <label style={{
+                    display: 'block',
+                    fontSize: '0.82rem',
+                    fontWeight: 600,
+                    color: 'var(--text-sub, #1E293B)',
+                    marginBottom: '6px'
+                  }}>
                     Password
                   </label>
                   <div style={{ position: 'relative' }}>
@@ -608,13 +746,21 @@ export default function AuthPage({ defaultTab = 'login' }) {
                       style={{
                         width: '100%',
                         padding: '10px 32px 10px 12px',
-                        backgroundColor: 'rgba(15, 23, 42, 0.6)',
-                        border: '1px solid rgba(255, 255, 255, 0.12)',
+                        backgroundColor: 'var(--bg-input, #FFFFFF)',
+                        border: '1px solid var(--border-input, #CBD5E1)',
                         borderRadius: '8px',
-                        color: '#f8fafc',
+                        color: 'var(--text-main, #0F172A)',
                         fontSize: '0.85rem',
                         outline: 'none',
                         boxSizing: 'border-box'
+                      }}
+                      onFocus={(e) => {
+                        e.target.style.borderColor = '#E8622C';
+                        e.target.style.boxShadow = '0 0 0 3px rgba(232, 98, 44, 0.15)';
+                      }}
+                      onBlur={(e) => {
+                        e.target.style.borderColor = 'var(--border-input, #CBD5E1)';
+                        e.target.style.boxShadow = 'none';
                       }}
                     />
                     <button
@@ -627,7 +773,7 @@ export default function AuthPage({ defaultTab = 'login' }) {
                         transform: 'translateY(-50%)',
                         background: 'none',
                         border: 'none',
-                        color: '#64748b',
+                        color: 'var(--text-faint, #64748B)',
                         cursor: 'pointer',
                         padding: 0
                       }}
@@ -638,7 +784,13 @@ export default function AuthPage({ defaultTab = 'login' }) {
                 </div>
 
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 600, color: '#cbd5e1', marginBottom: '6px' }}>
+                  <label style={{
+                    display: 'block',
+                    fontSize: '0.82rem',
+                    fontWeight: 600,
+                    color: 'var(--text-sub, #1E293B)',
+                    marginBottom: '6px'
+                  }}>
                     Confirm Password
                   </label>
                   <input
@@ -650,13 +802,21 @@ export default function AuthPage({ defaultTab = 'login' }) {
                     style={{
                       width: '100%',
                       padding: '10px 12px',
-                      backgroundColor: 'rgba(15, 23, 42, 0.6)',
-                      border: '1px solid rgba(255, 255, 255, 0.12)',
+                      backgroundColor: 'var(--bg-input, #FFFFFF)',
+                      border: '1px solid var(--border-input, #CBD5E1)',
                       borderRadius: '8px',
-                      color: '#f8fafc',
+                      color: 'var(--text-main, #0F172A)',
                       fontSize: '0.85rem',
                       outline: 'none',
                       boxSizing: 'border-box'
+                    }}
+                    onFocus={(e) => {
+                      e.target.style.borderColor = '#E8622C';
+                      e.target.style.boxShadow = '0 0 0 3px rgba(232, 98, 44, 0.15)';
+                    }}
+                    onBlur={(e) => {
+                      e.target.style.borderColor = 'var(--border-input, #CBD5E1)';
+                      e.target.style.boxShadow = 'none';
                     }}
                   />
                 </div>
@@ -668,8 +828,7 @@ export default function AuthPage({ defaultTab = 'login' }) {
                 style={{
                   width: '100%',
                   padding: '12px',
-                  backgroundColor: '#6366f1',
-                  background: 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)',
+                  background: 'linear-gradient(135deg, #E8622C 0%, #F5A623 100%)',
                   color: '#ffffff',
                   border: 'none',
                   borderRadius: '8px',
@@ -681,7 +840,7 @@ export default function AuthPage({ defaultTab = 'login' }) {
                   alignItems: 'center',
                   justifyContent: 'center',
                   gap: '8px',
-                  boxShadow: '0 4px 14px rgba(99, 102, 241, 0.4)'
+                  boxShadow: '0 4px 14px rgba(232, 98, 44, 0.35)'
                 }}
               >
                 {loading ? 'Creating Account...' : (
